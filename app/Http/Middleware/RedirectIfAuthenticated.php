@@ -12,7 +12,7 @@ class RedirectIfAuthenticated
     /**
      * Handle an incoming request.
      *
-     * @param string|null ...$guards
+     * @param null|string ...$guards
      *
      * @return mixed
      */

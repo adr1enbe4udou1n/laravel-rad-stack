@@ -1,7 +1,7 @@
 <?php
 
 $rules = [
-    '@Symfony' => true,
+    '@PhpCsFixer' => true,
     'no_empty_comment' => false,
     'no_extra_blank_lines' => [
         'tokens' => [
@@ -13,6 +13,9 @@ $rules = [
     ],
     'not_operator_with_successor_space' => true,
     'php_unit_method_casing' => false,
+    'single_line_comment_style' => false,
+    'php_unit_internal_class' => false,
+    'php_unit_test_class_requires_covers' => false,
 ];
 
 $finder = PhpCsFixer\Finder::create()
