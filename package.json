@@ -1,18 +1,20 @@
 {
     "private": true,
     "scripts": {
-        "dev": "npm run development",
-        "development": "mix",
-        "watch": "mix watch",
-        "watch-poll": "mix watch -- --watch-options-poll=1000",
-        "hot": "mix watch --hot",
-        "prod": "npm run production",
-        "production": "mix --production"
+        "dev": "vite",
+        "build": "vite build",
+        "serve": "vite preview"
     },
     "devDependencies": {
+        "@vitejs/plugin-vue": "^1.1.4",
+        "@vue/compiler-sfc": "^3.0.5",
         "axios": "^0.21",
-        "laravel-mix": "^6.0.6",
+        "laravel-vite": "0.0.8",
         "lodash": "^4.17.19",
-        "postcss": "^8.1.14"
+        "postcss": "^8.1.14",
+        "vite": "^2.3.1"
+    },
+    "dependencies": {
+        "vue": "^3.0.5"
     }
 }
