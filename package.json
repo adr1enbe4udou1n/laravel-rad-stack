@@ -1,18 +1,18 @@
 {
     "private": true,
     "scripts": {
-        "dev": "vite",
-        "build": "vite build",
-        "serve": "vite preview",
-        "lint": "eslint resources/**/*.{ts,vue}"
+        "dev": "mix",
+        "serve": "mix watch --hot",
+        "build": "mix --production",
+        "lint": "eslint resources/**/*.{js,vue}"
     },
     "devDependencies": {
-        "@types/jest": "^26.0.23",
-        "@typescript-eslint/eslint-plugin": "^4.23.0",
-        "@typescript-eslint/parser": "^4.23.0",
-        "@vitejs/plugin-vue": "^1.1.4",
+        "@inertiajs/inertia": "^0.8.7",
+        "@inertiajs/inertia-vue3": "^0.3.14",
+        "@inertiajs/progress": "^0.2.4",
+        "@tailwindcss/forms": "^0.3.2",
+        "@tailwindcss/typography": "^0.4.0",
         "@vue/compiler-sfc": "^3.0.5",
-        "@vue/eslint-config-typescript": "^7.0.0",
         "@vue/test-utils": "^1.2.0",
         "autoprefixer": "^10.2.5",
         "axios": "^0.21",
@@ -21,17 +21,13 @@
         "eslint-plugin-prettier": "^3.4.0",
         "eslint-plugin-vue": "^7.9.0",
         "jest": "^26.6.3",
-        "laravel-vite": "0.0.8",
+        "laravel-mix": "^6.0.19",
         "lodash": "^4.17.19",
         "postcss": "^8.2.15",
         "prettier": "^2.3.0",
         "tailwindcss": "^2.1.2",
-        "ts-jest": "^26.5.6",
-        "typescript": "^4.2.4",
-        "vite": "^2.3.1",
-        "vue-jest": "^3.0.7"
-    },
-    "dependencies": {
-        "vue": "^3.0.5"
+        "vue": "^3.0.5",
+        "vue-jest": "^3.0.7",
+        "vue-loader": "16.1.0"
     }
 }

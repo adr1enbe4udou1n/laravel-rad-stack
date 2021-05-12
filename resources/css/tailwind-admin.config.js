@@ -1,7 +1,5 @@
-console.log(process.env)
-
 module.exports = {
-  purge: ['../../views/admin/**/*.{blade.php,vue}'],
+  purge: ['./resources/**/*.{blade.php,js,vue}'],
   darkMode: false, // or 'media' or 'class'
   theme: {
     extend: {},
