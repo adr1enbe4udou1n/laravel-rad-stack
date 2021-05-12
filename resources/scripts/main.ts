@@ -9,9 +9,9 @@
 | -> https://github.com/innocenzi/laravel-vite
 */
 
-import "@/css/app.css";
+import '@/css/app.css'
 
-import { createApp } from "vue";
-import App from "@/views/App.vue";
+import { createApp } from 'vue'
+import App from '@/views/App.vue'
 
-createApp(App).mount("#app");
+createApp(App).mount('#app')

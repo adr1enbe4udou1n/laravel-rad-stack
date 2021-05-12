@@ -1,4 +1,4 @@
-import { defineConfig } from "laravel-vite";
-import vue from "@vitejs/plugin-vue";
+import { defineConfig } from 'laravel-vite'
+import vue from '@vitejs/plugin-vue'
 
-export default defineConfig().withPlugin(vue);
+export default defineConfig().withPlugin(vue)
