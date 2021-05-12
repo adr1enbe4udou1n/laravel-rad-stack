@@ -12,5 +12,6 @@
 import '@/css/app.css'
 
 import { createApp } from 'vue'
+import App from '@/views/admin/App.vue'
 
-createApp({}).mount('#app')
+createApp(App).mount('#app')
