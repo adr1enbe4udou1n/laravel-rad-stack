@@ -9,7 +9,7 @@
   @livewireStyles
 
   @client
-  @vite('main')
+  @vite('front')
 </head>
 <body class="antialiased">
   <div id="app"></div>

@@ -9,7 +9,7 @@
 | -> https://github.com/innocenzi/laravel-vite
 */
 
-import '@/css/app.css'
+import '@/css/admin/app.css'
 
 import { createApp } from 'vue'
 import App from '@/views/admin/App.vue'
