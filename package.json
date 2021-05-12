@@ -8,10 +8,12 @@
     "devDependencies": {
         "@vitejs/plugin-vue": "^1.1.4",
         "@vue/compiler-sfc": "^3.0.5",
+        "autoprefixer": "^10.2.5",
         "axios": "^0.21",
         "laravel-vite": "0.0.8",
         "lodash": "^4.17.19",
-        "postcss": "^8.1.14",
+        "postcss": "^8.2.15",
+        "tailwindcss": "^2.1.2",
         "vite": "^2.3.1"
     },
     "dependencies": {

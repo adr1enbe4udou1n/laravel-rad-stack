@@ -9,6 +9,8 @@
 | -> https://github.com/innocenzi/laravel-vite
 */
 
+import "@/css/app.css";
+
 import { createApp } from "vue";
 import App from "@/views/App.vue";
 

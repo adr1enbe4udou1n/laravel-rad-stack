@@ -2,7 +2,7 @@
     <h1>{{ msg }}</h1>
 
     <p>
-        Recommnded IDE setup:
+        Recommended IDE setup:
         <a href="https://code.visualstudio.com/" target="_blank">VSCode</a>
         +
         <a
