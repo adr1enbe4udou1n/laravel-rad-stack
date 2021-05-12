@@ -1,6 +1,7 @@
 const mix = require('laravel-mix')
 const tailwindcss = require('tailwindcss')
 const path = require('path')
+const tailwindConfig = require('./tailwind.config.js')
 
 /*
  |--------------------------------------------------------------------------
@@ -18,14 +19,28 @@ mix
   .js('resources/front/app.js', 'front.js')
   .js('resources/admin/app.js', 'admin.js')
   .postCss('resources/front/app.css', 'front.css', [
-    tailwindcss('./resources/front/tailwind.config.js'),
+    tailwindcss({
+      purge: [
+        './storage/framework/views/*.php',
+        './resources/front/**/*.{blade.php,js,vue}',
+      ],
+      ...tailwindConfig,
+    }),
   ])
   .postCss('resources/admin/app.css', 'admin.css', [
-    tailwindcss('./resources/admin/tailwind.config.js'),
+    tailwindcss({
+      purge: ['./resources/admin/**/*.{js,vue}'],
+      ...tailwindConfig,
+    }),
   ])
   .setPublicPath('public/build')
   .alias({
     '@': path.resolve('resources'),
+  })
+  .browserSync({
+    proxy: 'localhost:8000',
+    files: ['resources/**/*.blade.php'],
+    open: false,
   })
   .webpackConfig((webpack) => {
     return {
