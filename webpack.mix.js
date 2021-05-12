@@ -15,14 +15,15 @@ const path = require('path')
 
 mix
   .vue()
-  .js('resources/js/admin.js', 'public/build')
-  .js('resources/js/front.js', 'public/build')
-  .postCss('resources/css/front.css', 'public/build', [
-    tailwindcss('./resources/css/tailwind-front.config.js'),
+  .js('resources/front/app.js', 'front.js')
+  .js('resources/admin/app.js', 'admin.js')
+  .postCss('resources/front/app.css', 'front.css', [
+    tailwindcss('./resources/front/tailwind.config.js'),
   ])
-  .postCss('resources/css/admin.css', 'public/build', [
-    tailwindcss('./resources/css/tailwind-admin.config.js'),
+  .postCss('resources/admin/app.css', 'admin.css', [
+    tailwindcss('./resources/admin/tailwind.config.js'),
   ])
+  .setPublicPath('public/build')
   .alias({
     '@': path.resolve('resources'),
   })

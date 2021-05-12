@@ -6,12 +6,12 @@
 
     <title>Laravel</title>
 
-    <link rel="stylesheet" href="{{ mix('build/front.css') }}">
+    <link rel="stylesheet" href="{{ mix('front.css', 'build') }}">
 
     <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.8.2/dist/alpine.min.js" defer></script>
     @livewireStyles
 
-    <script src="{{ mix('build/front.js') }}" defer></script>
+    <script src="{{ mix('front.js', 'build') }}" defer></script>
 </head>
 <body class="antialiased">
     <div id="app"></div>

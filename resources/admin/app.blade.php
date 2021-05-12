@@ -6,10 +6,10 @@
 
     <title>Laravel</title>
 
-    <link rel="stylesheet" href="{{ mix('build/admin.css') }}">
+    <link rel="stylesheet" href="{{ mix('admin.css', 'build') }}">
 
     @routes
-    <script src="{{ mix('build/admin.js') }}" defer></script>
+    <script src="{{ mix('admin.js', 'build') }}" defer></script>
 </head>
 <body class="antialiased">
     <div id="app"></div>

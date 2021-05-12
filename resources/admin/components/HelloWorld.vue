@@ -1,7 +1,7 @@
 <template>
   <h1>{{ msg }}</h1>
 
-  <p class="text-green-500">
+  <p class="text-red-500">
     Recommended IDE setup:
     <a href="https://code.visualstudio.com/" target="_blank">VSCode</a>
     +
