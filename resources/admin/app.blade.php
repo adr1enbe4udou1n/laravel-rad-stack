@@ -6,10 +6,8 @@
 
     <title>Laravel</title>
 
-    <link rel="stylesheet" href="{{ mix('admin.css', 'build') }}">
-
     @routes
-    <script src="{{ mix('admin.js', 'build') }}" defer></script>
+    @vite(admin/app.ts)
 </head>
 <body class="antialiased">
     <div id="app"></div>
