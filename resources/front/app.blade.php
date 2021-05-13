@@ -11,8 +11,14 @@
 
     @vite(front/app.ts)
 </head>
-<body class="antialiased bg-red-500">
-    <div id="app"></div>
+<body class="antialiased">
+    <div id="app">
+        <span v-bind:title="message">
+            Hover your mouse over me for a few seconds to see my dynamically-bound
+            title!
+        </span>
+        <hello-world msg="Hello Vue 3 + TypeScript + Vite"></hello-world>
+    </div>
     @livewireScripts
 </body>
 </html>

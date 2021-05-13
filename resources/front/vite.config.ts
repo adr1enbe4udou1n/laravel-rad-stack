@@ -17,10 +17,14 @@ const laravel = (): Plugin => ({
 })
 
 // https://vitejs.dev/config/
-export default defineConfig({
-  ...config('front', [
-    './storage/framework/views/*.php',
-    './resources/front/**/*.{blade.php,js,vue}',
-  ]),
-  plugins: [laravel()],
-})
+export default defineConfig(
+  config(
+    'front',
+    [
+      './storage/framework/views/*.php',
+      './resources/front/**/*.{blade.php,js,vue}',
+    ],
+    { vue: 'vue/dist/vue.esm-bundler.js' },
+    [laravel()]
+  )
+)

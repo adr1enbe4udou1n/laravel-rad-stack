@@ -1,4 +1,4 @@
-import { UserConfigExport } from 'vite'
+import { UserConfigExport, Plugin } from 'vite'
 import vue from '@vitejs/plugin-vue'
 import tailwindcss from 'tailwindcss'
 import autoprefixer from 'autoprefixer'
@@ -8,7 +8,12 @@ import Dotenv from 'dotenv'
 Dotenv.config()
 
 // https://vitejs.dev/config/
-export default (entry: string, purge: string[]): UserConfigExport => {
+export default (
+  entry: string,
+  purge: string[] = [],
+  alias = {},
+  plugins: Plugin[] = []
+): UserConfigExport => {
   return {
     base: `${process.env.ASSET_URL || ''}/dist/`,
     root: 'resources',
@@ -37,8 +42,9 @@ export default (entry: string, purge: string[]): UserConfigExport => {
     resolve: {
       alias: {
         '@': 'resources',
+        ...alias,
       },
     },
-    plugins: [vue()],
+    plugins: [vue(), ...plugins],
   }
 }
