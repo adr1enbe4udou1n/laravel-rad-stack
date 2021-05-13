@@ -11,7 +11,7 @@
 
     @vite(front/app.ts)
 </head>
-<body class="antialiased">
+<body class="antialiased bg-red-500">
     <div id="app"></div>
     @livewireScripts
 </body>

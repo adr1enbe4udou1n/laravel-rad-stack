@@ -2,6 +2,9 @@
 
 namespace App\Providers;
 
+use App\Facades\ViteManifest;
+use App\Support\LaravelViteManifest;
+use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -11,7 +14,9 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        //
+        $this->app->singleton('laravel-vite-manifest', function () {
+            return new LaravelViteManifest();
+        });
     }
 
     /**
@@ -19,6 +24,10 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        //
+        Blade::directive('vite', function ($expression) {
+            $facade = ViteManifest::class;
+
+            return sprintf("<?php echo {$facade}::embed(e('%s')); ?>", $expression);
+        });
     }
 }
