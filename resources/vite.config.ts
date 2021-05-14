@@ -2,7 +2,7 @@ import { UserConfigExport, Plugin } from 'vite'
 import vue from '@vitejs/plugin-vue'
 import tailwindcss from 'tailwindcss'
 import autoprefixer from 'autoprefixer'
-import tailwindConfig from '../tailwind.config.js'
+import tailwindConfig from './tailwind.config.js'
 import Dotenv from 'dotenv'
 
 Dotenv.config()
