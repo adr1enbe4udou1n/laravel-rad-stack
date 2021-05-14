@@ -11,34 +11,31 @@
 
     <form @submit.prevent="submit">
       <div>
-        <base-label for="email" value="Email" />
         <base-input
-          id="email"
           v-model="form.email"
+          label="Email"
           type="email"
-          class="mt-1 block w-full"
           required
           autofocus
         />
       </div>
 
       <div class="mt-4">
-        <base-label for="password" value="Password" />
         <base-input
-          id="password"
           v-model="form.password"
+          label="Password"
           type="password"
-          class="mt-1 block w-full"
           required
           autocomplete="current-password"
         />
       </div>
 
-      <div class="block mt-4">
-        <label class="flex items-center">
-          <base-checkbox v-model:checked="form.remember" name="remember" />
-          <span class="ml-2 text-sm text-gray-600">Remember me</span>
-        </label>
+      <div class="mt-4">
+        <base-checkbox
+          v-model:checked="form.remember"
+          name="remember"
+          label="Remember me"
+        />
       </div>
 
       <div class="flex items-center justify-end mt-4">

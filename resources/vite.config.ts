@@ -40,8 +40,8 @@ export default (
     },
     resolve: {
       alias: {
-        '@': 'resources',
         ...alias,
+        '@': 'resources',
       },
     },
     plugins: [vue(), ...plugins],
