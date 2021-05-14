@@ -43,7 +43,6 @@
         sm:rounded-lg
       "
     >
-      <h1>test</h1>
       <slot />
     </div>
   </div>
