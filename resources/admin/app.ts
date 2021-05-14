@@ -10,7 +10,7 @@ import { InertiaProgress } from '@inertiajs/progress'
 import AppLayout from './Layouts/AppLayout.vue'
 
 import autoRegister from './Plugins/AutoRegister'
-import Helpers from './Plugins/Helperss'
+import Helpers from './Plugins/Helpers'
 
 // Global Ziggy route function
 declare const route: string
