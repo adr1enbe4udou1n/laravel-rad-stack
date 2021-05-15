@@ -1,11 +1,12 @@
 import { App } from 'vue'
 
-import { __, trans, transChoice } from 'matice'
+import { __, transChoice } from 'matice'
+
+export { __ as useTrans }
 
 export default {
   install: (app: App): void => {
-    app.config.globalProperties.$__ = __
-    app.config.globalProperties.$t = trans
+    app.config.globalProperties.$t = __
     app.config.globalProperties.$tc = transChoice
   },
 }

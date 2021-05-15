@@ -21,6 +21,8 @@
       disabled:opacity-25
       transition
     "
+    :class="{ 'opacity-25': loading }"
+    :disabled="loading"
   >
     <slot></slot>
   </button>
@@ -35,6 +37,7 @@
         type: String,
         default: 'submit',
       },
+      loading: Boolean,
     },
   })
 </script>
