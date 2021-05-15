@@ -9,10 +9,10 @@ import { InertiaProgress } from '@inertiajs/progress'
 
 import AppLayout from './Layouts/AppLayout.vue'
 
-import AutoRegister from './Plugins/AutoRegister'
-import Route from './Plugins/Route'
-import Translations from './Plugins/Translations'
-import Helpers from './Plugins/Helpers'
+import AutoRegister from './pPlugins/AutoRegister'
+import Route from './pPlugins/Route'
+import Translations from './pPlugins/Translations'
+import Helpers from './pPlugins/Helpers'
 
 const el = document.getElementById('app')
 
@@ -21,7 +21,7 @@ const app = createApp({
     h(InertiaApp, {
       initialPage: JSON.parse(el.dataset.page),
       resolveComponent: (name) =>
-        import(`./Pages/${name}.vue`).then(({ default: page }) => {
+        import(`./pages/${name}.vue`).then(({ default: page }) => {
           if (page.layout === undefined && !name.startsWith('Auth/')) {
             page.layout = AppLayout
           }
