@@ -19,8 +19,8 @@
 </template>
 
 <script lang="ts">
+  import { useUniqueId } from '@admin/features/unique-id'
   import { defineComponent, ref } from 'vue'
-  import uniqueId from '../../Features/UniqueId'
 
   export default defineComponent({
     props: {
@@ -30,7 +30,7 @@
     emits: ['update:modelValue'],
     setup() {
       const input = ref(null)
-      const id = uniqueId()
+      const id = useUniqueId()
 
       const focus = () => {
         input.value.focus()

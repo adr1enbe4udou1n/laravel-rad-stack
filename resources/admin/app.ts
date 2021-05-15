@@ -7,12 +7,12 @@ import {
 } from '@inertiajs/inertia-vue3'
 import { InertiaProgress } from '@inertiajs/progress'
 
-import AppLayout from './Layouts/AppLayout.vue'
+import AppLayout from './layouts/AppLayout.vue'
 
-import AutoRegister from './pPlugins/AutoRegister'
-import Route from './pPlugins/Route'
-import Translations from './pPlugins/Translations'
-import Helpers from './pPlugins/Helpers'
+import AutoRegister from './plugins/auto-register'
+import Route from './plugins/route'
+import Translations from './plugins/translations'
+import Helpers from './plugins/helpers'
 
 const el = document.getElementById('app')
 
@@ -22,7 +22,7 @@ const app = createApp({
       initialPage: JSON.parse(el.dataset.page),
       resolveComponent: (name) =>
         import(`./pages/${name}.vue`).then(({ default: page }) => {
-          if (page.layout === undefined && !name.startsWith('Auth/')) {
+          if (page.layout === undefined && !name.startsWith('auth/')) {
             page.layout = AppLayout
           }
 
@@ -30,12 +30,12 @@ const app = createApp({
         }),
     }),
 })
+  .use(AutoRegister)
   .use(Route)
   .use(Translations)
   .use(Helpers)
   .use(InertiaPlugin)
 
-AutoRegister(app)
 app.mount(el)
 
 InertiaProgress.init({ color: '#4B5563' })

@@ -62,7 +62,7 @@
 </template>
 
 <script lang="ts">
-  import { useRoute } from '@admin/Plugins/Route'
+  import { useRoute } from '@admin/plugins/route'
   import { useForm } from '@inertiajs/inertia-vue3'
   import { defineComponent } from 'vue'
 

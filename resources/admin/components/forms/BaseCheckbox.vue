@@ -18,8 +18,8 @@
 </template>
 
 <script lang="ts">
+  import { useUniqueId } from '@admin/features/unique-id'
   import { computed, defineComponent } from 'vue'
-  import uniqueId from '../../Features/UniqueId'
 
   export default defineComponent({
     props: {
@@ -29,7 +29,7 @@
     },
     emits: ['update:checked'],
     setup(props, { emit }) {
-      const id = uniqueId()
+      const id = useUniqueId()
 
       const proxyChecked = computed({
         get() {
