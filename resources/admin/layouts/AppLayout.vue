@@ -97,7 +97,9 @@
 
                     <!-- Authentication -->
                     <form @submit.prevent="logout">
-                      <dropdown-link as="button"> Log Out </dropdown-link>
+                      <dropdown-link as="button">
+                        {{ $t('Log Out') }}
+                      </dropdown-link>
                     </form>
                   </template>
                 </dropdown>
