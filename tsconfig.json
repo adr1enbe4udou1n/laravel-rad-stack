@@ -14,7 +14,8 @@
         "strictNullChecks": false,
         "baseUrl": ".",
         "paths": {
-            "@/*": ["resources/*"]
+            "@admin/*": ["resources/admin/*"],
+            "@front/*": ["resources/front/*"]
         }
     },
     "include": [

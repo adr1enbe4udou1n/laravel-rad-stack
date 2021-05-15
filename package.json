@@ -21,6 +21,7 @@
         "@types/jest": "^26.0.23",
         "@types/lodash": "^4.14.169",
         "@types/tailwindcss": "^2.0.3",
+        "@types/ziggy-js": "^1.0.1",
         "@typescript-eslint/eslint-plugin": "^4.23.0",
         "@typescript-eslint/parser": "^4.23.0",
         "@vitejs/plugin-vue": "^1.2.2",
@@ -36,6 +37,7 @@
         "eslint-plugin-vue": "^7.9.0",
         "jest": "^26.6.3",
         "lodash": "^4.17.19",
+        "matice": "^1.1.4",
         "postcss": "^8.2.15",
         "prettier": "^2.3.0",
         "tailwindcss": "^2.1.2",
@@ -44,7 +46,8 @@
         "vite": "^2.3.2",
         "vue": "^3.0.5",
         "vue-jest": "^3.0.7",
-        "vue-tsc": "^0.1.2"
+        "vue-tsc": "^0.1.2",
+        "ziggy-js": "^1.1.0"
     },
     "dependencies": {}
 }

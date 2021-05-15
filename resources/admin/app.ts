@@ -9,11 +9,10 @@ import { InertiaProgress } from '@inertiajs/progress'
 
 import AppLayout from './Layouts/AppLayout.vue'
 
-import autoRegister from './Plugins/AutoRegister'
+import AutoRegister from './Plugins/AutoRegister'
+import Route from './Plugins/Route'
+import Translations from './Plugins/Translations'
 import Helpers from './Plugins/Helpers'
-
-// Global Ziggy route function
-declare const route: string
 
 const el = document.getElementById('app')
 
@@ -31,11 +30,12 @@ const app = createApp({
         }),
     }),
 })
-  .mixin({ methods: { route } })
+  .use(Route)
+  .use(Translations)
   .use(Helpers)
   .use(InertiaPlugin)
 
-autoRegister(app)
+AutoRegister(app)
 app.mount(el)
 
 InertiaProgress.init({ color: '#4B5563' })

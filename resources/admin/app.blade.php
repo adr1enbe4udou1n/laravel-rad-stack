@@ -6,6 +6,7 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
     @routes
+    @translations
     @vite(admin/app.ts)
 </head>
 <body class="font-sans antialiased">

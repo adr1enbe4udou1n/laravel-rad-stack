@@ -4,6 +4,7 @@ import tailwindcss from 'tailwindcss'
 import autoprefixer from 'autoprefixer'
 import tailwindConfig from './tailwind.config.js'
 import Dotenv from 'dotenv'
+import path from 'path'
 
 Dotenv.config()
 
@@ -41,7 +42,7 @@ export default (
     resolve: {
       alias: {
         ...alias,
-        '@': 'resources',
+        '/@': path.resolve(__dirname, '/resources'),
       },
     },
     plugins: [vue(), ...plugins],

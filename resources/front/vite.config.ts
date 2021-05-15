@@ -24,7 +24,10 @@ export default defineConfig(
       './storage/framework/views/*.php',
       './resources/front/**/*.{blade.php,js,vue}',
     ],
-    { vue: 'vue/dist/vue.esm-bundler.js' },
+    {
+      vue: 'vue/dist/vue.esm-bundler.js',
+      '@front': __dirname,
+    },
     [laravel()]
   )
 )
