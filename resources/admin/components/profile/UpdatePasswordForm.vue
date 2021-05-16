@@ -85,12 +85,12 @@
           onError: () => {
             if (form.errors.password) {
               form.reset('password', 'password_confirmation')
-              password.value.focus()
+              password.value?.focus()
             }
 
             if (form.errors.current_password) {
               form.reset('current_password')
-              current_password.value.focus()
+              current_password.value?.focus()
             }
           },
         })

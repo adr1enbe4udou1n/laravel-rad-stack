@@ -36,7 +36,7 @@
       const id = useUniqueId()
 
       const focus = () => {
-        input.value.focus()
+        input.value?.focus()
       }
 
       return { id, focus, input }
