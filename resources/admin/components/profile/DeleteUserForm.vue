@@ -67,7 +67,7 @@
 </template>
 
 <script lang="ts">
-  import { useRoute } from '@admin/plugins/route'
+  import { route } from '@admin/plugins/route'
   import { useForm } from '@inertiajs/inertia-vue3'
   import { defineComponent, ref } from 'vue'
 
@@ -93,7 +93,7 @@
       }
 
       const submit = () => {
-        form.delete(useRoute('current-user.destroy'), {
+        form.delete(route('current-user.destroy'), {
           preserveScroll: true,
           onSuccess: () => closeModal(),
           onError: () => password.value.focus(),

@@ -42,7 +42,7 @@
 </template>
 
 <script lang="ts">
-  import { useRoute } from '@admin/plugins/route'
+  import { route } from '@admin/plugins/route'
   import { useForm } from '@inertiajs/inertia-vue3'
   import { defineComponent } from 'vue'
 
@@ -57,7 +57,7 @@
       })
 
       const submit = () => {
-        form.put(useRoute('user-profile-information.update'), {
+        form.put(route('user-profile-information.update'), {
           errorBag: 'updateProfileInformation',
           preserveScroll: true,
         })

@@ -60,7 +60,7 @@
 </template>
 
 <script lang="ts">
-  import { useRoute } from '@admin/plugins/route'
+  import { route } from '@admin/plugins/route'
   import { useForm } from '@inertiajs/inertia-vue3'
   import { defineComponent, ref } from 'vue'
 
@@ -76,7 +76,7 @@
       })
 
       const submit = () => {
-        form.put(useRoute('user-password.update'), {
+        form.put(route('user-password.update'), {
           errorBag: 'updatePassword',
           preserveScroll: true,
           onSuccess: () => {

@@ -1,7 +1,7 @@
 import { App } from 'vue'
 import route from 'ziggy-js'
 
-export { route as useRoute }
+export { route }
 
 export default {
   install: (app: App): void => {

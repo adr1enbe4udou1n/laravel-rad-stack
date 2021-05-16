@@ -57,7 +57,7 @@
 </template>
 
 <script lang="ts">
-  import { useRoute } from '@admin/plugins/route'
+  import { route } from '@admin/plugins/route'
   import { useForm } from '@inertiajs/inertia-vue3'
   import { defineComponent } from 'vue'
 
@@ -79,7 +79,7 @@
             ...data,
             remember: data.remember ? 'on' : '',
           }))
-          .post(useRoute('login'))
+          .post(route('login'))
       }
 
       return { form, submit }

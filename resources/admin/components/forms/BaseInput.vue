@@ -4,16 +4,8 @@
     v-bind="$attrs"
     :id="id"
     ref="input"
-    class="
-      border-gray-300
-      focus:border-indigo-300
-      focus:ring focus:ring-indigo-200 focus:ring-opacity-50
-      rounded-md
-      shadow-sm
-      block
-      w-full
-    "
-    :class="{ 'border-red-500': !!error }"
+    class="focus:ring focus:ring-opacity-50 rounded-md shadow-sm block w-full"
+    :class="stateClasses"
     :value="modelValue"
     @input="$emit('update:modelValue', $event.target.value)"
   />
@@ -22,7 +14,7 @@
 
 <script lang="ts">
   import { useUniqueId } from '@admin/features/unique-id'
-  import { defineComponent, ref } from 'vue'
+  import { computed, defineComponent, ref } from 'vue'
 
   export default defineComponent({
     props: {
@@ -31,7 +23,7 @@
       error: String,
     },
     emits: ['update:modelValue'],
-    setup() {
+    setup(props) {
       const input = ref(null)
       const id = useUniqueId()
 
@@ -39,7 +31,13 @@
         input.value?.focus()
       }
 
-      return { id, focus, input }
+      const stateClasses = computed(() => {
+        return props.error
+          ? 'border-red-500 focus:border-red-300 focus:ring-red-200'
+          : 'border-gray-300 focus:border-indigo-300 focus:ring-indigo-200'
+      })
+
+      return { id, focus, input, stateClasses }
     },
   })
 </script>

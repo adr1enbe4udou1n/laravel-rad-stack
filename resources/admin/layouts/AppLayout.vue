@@ -220,7 +220,7 @@
 </template>
 
 <script lang="ts">
-  import { useRoute } from '@admin/plugins/route'
+  import { route } from '@admin/plugins/route'
   import { defineComponent, ref } from 'vue'
   import { Inertia } from '@inertiajs/inertia'
 
@@ -229,7 +229,7 @@
       const showingNavigationDropdown = ref(false)
 
       const logout = () => {
-        Inertia.post(useRoute('logout'))
+        Inertia.post(route('logout'))
       }
 
       return { showingNavigationDropdown, logout }
