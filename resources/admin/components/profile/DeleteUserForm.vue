@@ -36,13 +36,12 @@
             )
           }}
 
-          <div class="mt-4">
+          <div class="mt-4 w-3/4">
             <base-input
               ref="password"
               v-model="form.password"
               :error="form.errors.password"
               type="password"
-              class="w-3/4"
               :placeholder="$t('Password')"
             />
           </div>
