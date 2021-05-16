@@ -18,6 +18,7 @@ class LogoutResponse implements LogoutResponseContract
     {
         return $request->wantsJson()
                     ? new JsonResponse('', 204)
-                    : Inertia::location('/');
+                    : redirect()->route('login');
+                    // : Inertia::location('/');
     }
 }

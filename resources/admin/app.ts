@@ -21,13 +21,7 @@ const app = createApp({
     h(InertiaApp, {
       initialPage: JSON.parse(el.dataset.page),
       resolveComponent: (name) =>
-        import(`./pages/${name}.vue`).then(({ default: page }) => {
-          if (page.layout === undefined && !name.startsWith('auth/')) {
-            page.layout = AppLayout
-          }
-
-          return page
-        }),
+        import(`./pages/${name}.vue`).then((component) => component.default),
     }),
 })
   .use(AutoRegister)

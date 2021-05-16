@@ -1,67 +1,66 @@
 <template>
-  <div>
+  <auth-layout>
     <teleport to="head">
       <title>{{ $title('Register') }}</title>
     </teleport>
-    <auth-card>
-      <validation-errors class="mb-4" />
 
-      <form @submit.prevent="submit">
-        <div>
-          <base-input
-            v-model="form.name"
-            :label="$t('Name')"
-            type="text"
-            required
-            autofocus
-            autocomplete="name"
-          />
-        </div>
+    <validation-errors class="mb-4" />
 
-        <div class="mt-4">
-          <base-input
-            v-model="form.email"
-            :label="$t('Email')"
-            type="email"
-            required
-          />
-        </div>
+    <form @submit.prevent="submit">
+      <div>
+        <base-input
+          v-model="form.name"
+          :label="$t('Name')"
+          type="text"
+          required
+          autofocus
+          autocomplete="name"
+        />
+      </div>
 
-        <div class="mt-4">
-          <base-input
-            v-model="form.password"
-            :label="$t('Password')"
-            type="password"
-            required
-            autocomplete="new-password"
-          />
-        </div>
+      <div class="mt-4">
+        <base-input
+          v-model="form.email"
+          :label="$t('Email')"
+          type="email"
+          required
+        />
+      </div>
 
-        <div class="mt-4">
-          <base-input
-            v-model="form.password_confirmation"
-            :label="$t('Confirm Password')"
-            type="password"
-            required
-            autocomplete="new-password"
-          />
-        </div>
+      <div class="mt-4">
+        <base-input
+          v-model="form.password"
+          :label="$t('Password')"
+          type="password"
+          required
+          autocomplete="new-password"
+        />
+      </div>
 
-        <div class="flex items-center justify-end mt-4">
-          <inertia-link
-            :href="route('login')"
-            class="underline text-sm text-gray-600 hover:text-gray-900"
-          >
-            {{ $t('Already registered?') }}
-          </inertia-link>
+      <div class="mt-4">
+        <base-input
+          v-model="form.password_confirmation"
+          :label="$t('Confirm Password')"
+          type="password"
+          required
+          autocomplete="new-password"
+        />
+      </div>
 
-          <base-button class="ml-4" :loading="form.processing">
-            {{ $t('Register') }}
-          </base-button>
-        </div>
-      </form>
-    </auth-card>
-  </div>
+      <div class="flex items-center justify-end mt-4">
+        <inertia-link
+          :href="route('login')"
+          class="underline text-sm text-gray-600 hover:text-gray-900"
+        >
+          {{ $t('Already registered?') }}
+        </inertia-link>
+
+        <base-button class="ml-4" :loading="form.processing">
+          {{ $t('Register') }}
+        </base-button>
+      </div>
+    </form>
+  </auth-layout>
 </template>
 
 <script lang="ts">
