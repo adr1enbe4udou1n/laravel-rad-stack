@@ -21,13 +21,12 @@ const laravel = (): Plugin => ({
 export default defineConfig({
   ...baseConfig('front', [
     './storage/framework/views/*.php',
-    './resources/front/**/*.{blade.php,js,vue}',
+    './resources/front/**/*.{blade.php,ts,vue}',
   ]),
   resolve: {
     alias: {
-      vue: 'vue/dist/vue.esm-bundler.js',
       '@front': __dirname,
     },
   },
-  plugins: [vue(), laravel()],
+  plugins: [laravel()],
 })

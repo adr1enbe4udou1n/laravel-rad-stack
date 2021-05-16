@@ -5,7 +5,7 @@ import baseConfig from '../vite.config'
 
 // https://vitejs.dev/config/
 export default defineConfig({
-  ...baseConfig('admin', ['./resources/admin/**/*.{blade.php,js,vue}']),
+  ...baseConfig('admin', ['./resources/admin/**/*.{blade.php,ts,vue}']),
   resolve: {
     alias: {
       '@admin': __dirname,

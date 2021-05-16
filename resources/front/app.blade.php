@@ -6,15 +6,11 @@
 
     <title>Laravel</title>
 
-    <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.8.2/dist/alpine.min.js" defer></script>
     @livewireStyles
 
     @vite(front/app.ts)
 </head>
 <body class="antialiased">
-    <div id="app">
-        <hello-world msg="Hello Vue 3 + TypeScript + Vite"></hello-world>
-    </div>
     @livewireScripts
 </body>
 </html>
