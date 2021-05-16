@@ -1,19 +1,20 @@
 import { defineConfig } from 'vite'
+import vue from '@vitejs/plugin-vue'
 import components from 'vite-plugin-components'
-import config from '../vite.config'
+import baseConfig from '../vite.config'
 
 // https://vitejs.dev/config/
-export default defineConfig(
-  config(
-    'admin',
-    ['./resources/admin/**/*.{blade.php,js,vue}'],
-    {
+export default defineConfig({
+  ...baseConfig('admin', ['./resources/admin/**/*.{blade.php,js,vue}']),
+  resolve: {
+    alias: {
       '@admin': __dirname,
     },
-    [
-      components({
-        dirs: ['admin/components', 'admin/layouts'],
-      }),
-    ]
-  )
-)
+  },
+  plugins: [
+    vue(),
+    components({
+      dirs: ['admin/components', 'admin/layouts'],
+    }),
+  ],
+})

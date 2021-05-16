@@ -1,5 +1,6 @@
 import { defineConfig, Plugin } from 'vite'
-import config from '../vite.config'
+import vue from '@vitejs/plugin-vue'
+import baseConfig from '../vite.config'
 
 /**
  * Enable full reload for blade file
@@ -17,17 +18,16 @@ const laravel = (): Plugin => ({
 })
 
 // https://vitejs.dev/config/
-export default defineConfig(
-  config(
-    'front',
-    [
-      './storage/framework/views/*.php',
-      './resources/front/**/*.{blade.php,js,vue}',
-    ],
-    {
+export default defineConfig({
+  ...baseConfig('front', [
+    './storage/framework/views/*.php',
+    './resources/front/**/*.{blade.php,js,vue}',
+  ]),
+  resolve: {
+    alias: {
       vue: 'vue/dist/vue.esm-bundler.js',
       '@front': __dirname,
     },
-    [laravel()]
-  )
-)
+  },
+  plugins: [vue(), laravel()],
+})

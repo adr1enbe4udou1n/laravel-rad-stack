@@ -7,9 +7,4 @@ createApp({
   components: {
     HelloWorld,
   },
-  data() {
-    return {
-      message: 'You loaded this page on ' + new Date().toLocaleString(),
-    }
-  },
 }).mount('#app')
