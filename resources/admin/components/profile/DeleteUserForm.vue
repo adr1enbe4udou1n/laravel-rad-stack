@@ -83,7 +83,7 @@
       const confirmUserDeletion = () => {
         confirmingUserDeletion.value = true
 
-        setTimeout(() => password.value.focus(), 250)
+        setTimeout(() => password.value?.focus(), 250)
       }
 
       const closeModal = () => {
