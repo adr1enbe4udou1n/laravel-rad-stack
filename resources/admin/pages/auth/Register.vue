@@ -55,7 +55,7 @@
           {{ $t('Already registered?') }}
         </inertia-link>
 
-        <base-button class="ml-4" :loading="form.processing">
+        <base-button type="submit" class="ml-4" :loading="form.processing">
           {{ $t('Register') }}
         </base-button>
       </div>

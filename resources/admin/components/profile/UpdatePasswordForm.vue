@@ -52,7 +52,7 @@
         {{ $t('Saved.') }}
       </action-message>
 
-      <base-button :loading="form.processing">
+      <base-button type="submit" :loading="form.processing">
         {{ $t('Save') }}
       </base-button>
     </template>

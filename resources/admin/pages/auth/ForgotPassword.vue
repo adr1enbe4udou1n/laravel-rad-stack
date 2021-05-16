@@ -30,7 +30,7 @@
       </div>
 
       <div class="flex items-center justify-end mt-4">
-        <base-button class="ml-4" :loading="form.processing">
+        <base-button type="submit" class="ml-4" :loading="form.processing">
           {{ $t('Email Password Reset Link') }}
         </base-button>
       </div>

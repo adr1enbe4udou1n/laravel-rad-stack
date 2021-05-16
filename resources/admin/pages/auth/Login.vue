@@ -48,7 +48,7 @@
           {{ $t('Forgot your password?') }}
         </inertia-link>
 
-        <base-button class="ml-4" :loading="form.processing">
+        <base-button type="submit" class="ml-4" :loading="form.processing">
           {{ $t('Log in') }}
         </base-button>
       </div>
