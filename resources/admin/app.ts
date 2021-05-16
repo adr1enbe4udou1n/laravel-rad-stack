@@ -7,9 +7,6 @@ import {
 } from '@inertiajs/inertia-vue3'
 import { InertiaProgress } from '@inertiajs/progress'
 
-import AppLayout from './layouts/AppLayout.vue'
-
-import AutoRegister from './plugins/auto-register'
 import Route from './plugins/route'
 import Translations from './plugins/translations'
 import Helpers from './plugins/helpers'
@@ -24,7 +21,6 @@ const app = createApp({
         import(`./pages/${name}.vue`).then((component) => component.default),
     }),
 })
-  .use(AutoRegister)
   .use(Route)
   .use(Translations)
   .use(Helpers)

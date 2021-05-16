@@ -21,8 +21,6 @@
         <section-border />
 
         <delete-user-form class="mt-10 sm:mt-0" />
-        <delete-user-form-test class="mt-10 sm:mt-0" />
-        <delete-user-form-test-2 class="mt-10 sm:mt-0" />
       </div>
     </div>
   </app-layout>

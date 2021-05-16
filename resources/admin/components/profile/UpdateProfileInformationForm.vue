@@ -1,1 +1,69 @@
-<template><h2>Update Profile Form !</h2></template>
+<template>
+  <form-section @submitted="submit">
+    <template #title> {{ $t('Profile Information') }} </template>
+
+    <template #description>
+      {{ $t("Update your account's profile information and email address.") }}
+    </template>
+
+    <template #form>
+      <!-- Name -->
+      <div class="col-span-6 sm:col-span-4">
+        <base-input
+          v-model="form.name"
+          :error="form.errors.name"
+          :label="$t('Name')"
+          type="text"
+          autocomplete="name"
+        />
+      </div>
+
+      <!-- Email -->
+      <div class="col-span-6 sm:col-span-4">
+        <base-input
+          v-model="form.email"
+          :error="form.errors.email"
+          :label="$t('Email')"
+          type="text"
+        />
+      </div>
+    </template>
+
+    <template #actions>
+      <action-message :on="form.recentlySuccessful" class="mr-3">
+        {{ $t('Saved.') }}
+      </action-message>
+
+      <base-button :loading="form.processing">
+        {{ $t('Save') }}
+      </base-button>
+    </template>
+  </form-section>
+</template>
+
+<script lang="ts">
+  import { useRoute } from '@admin/plugins/route'
+  import { useForm } from '@inertiajs/inertia-vue3'
+  import { defineComponent } from 'vue'
+
+  export default defineComponent({
+    props: {
+      user: Object,
+    },
+    setup(props) {
+      const form = useForm({
+        name: props.user.name,
+        email: props.user.email,
+      })
+
+      const submit = () => {
+        form.put(useRoute('user-profile-information.update'), {
+          errorBag: 'updateProfileInformation',
+          preserveScroll: true,
+        })
+      }
+
+      return { form, submit }
+    },
+  })
+</script>

@@ -13,9 +13,11 @@
       block
       w-full
     "
+    :class="{ 'border-red-500': !!error }"
     :value="modelValue"
     @input="$emit('update:modelValue', $event.target.value)"
   />
+  <input-error :message="error" class="mt-2" />
 </template>
 
 <script lang="ts">
@@ -26,6 +28,7 @@
     props: {
       label: String,
       modelValue: String,
+      error: String,
     },
     emits: ['update:modelValue'],
     setup() {
