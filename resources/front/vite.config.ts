@@ -29,4 +29,7 @@ export default defineConfig({
     },
   },
   plugins: [laravel()],
+  optimizeDeps: {
+    include: ['alpinejs'],
+  },
 })

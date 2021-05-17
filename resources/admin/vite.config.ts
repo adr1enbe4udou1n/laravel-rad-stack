@@ -17,4 +17,15 @@ export default defineConfig({
       dirs: ['admin/components', 'admin/layouts'],
     }),
   ],
+  optimizeDeps: {
+    include: [
+      'vue',
+      '@inertiajs/inertia',
+      '@inertiajs/inertia-vue3',
+      '@inertiajs/progress',
+      'ziggy-js',
+      'matice',
+      '@vueuse/core',
+    ],
+  },
 })
