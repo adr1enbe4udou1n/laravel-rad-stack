@@ -2,10 +2,10 @@
     "private": true,
     "scripts": {
         "dev:front": "vite --config resources/front/vite.config.ts",
-        "build:front": "vite build --config resources/front/vite.config.ts",
+        "build:front": "vue-tsc --noEmit && vite build --config resources/front/vite.config.ts",
         "serve:front": "vite preview --config resources/front/vite.config.ts",
         "dev:admin": "vite --config resources/admin/vite.config.ts",
-        "build:admin": "vite build --config resources/admin/vite.config.ts",
+        "build:admin": "vue-tsc --noEmit && vite build --config resources/admin/vite.config.ts",
         "serve:admin": "vite preview --config resources/admin/vite.config.ts",
         "test:unit": "jest src",
         "lint": "eslint resources/**/*.{js,ts,vue}"
@@ -49,6 +49,7 @@
         "vite-plugin-components": "^0.9.1",
         "vue": "^3.0.5",
         "vue-jest": "^3.0.7",
+        "vue-tsc": "^0.1.2",
         "ziggy-js": "^1.1.0"
     },
     "dependencies": {}

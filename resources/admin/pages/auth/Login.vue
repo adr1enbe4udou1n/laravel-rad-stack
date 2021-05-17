@@ -29,7 +29,7 @@
 
       <div class="mt-4">
         <base-checkbox
-          v-model:checked="form.remember"
+          v-model="form.remember"
           name="remember"
           :label="$t('Remember me')"
         />

@@ -12,7 +12,7 @@
 
   export default defineComponent({
     setup() {
-      const errors = computed(() => (usePage().props.value as any).errors)
+      const errors = computed(() => usePage().props.value.errors)
       const hasErrors = computed(() => Object.keys(errors.value).length > 0)
 
       return {

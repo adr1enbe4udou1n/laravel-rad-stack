@@ -105,12 +105,10 @@
       const show = ref(true)
 
       const style = computed(
-        () => (usePage().props.value as any).flash?.bannerStyle || 'success'
+        () => usePage().props.value.flash?.bannerStyle || 'success'
       )
 
-      const message = computed(
-        () => (usePage().props.value as any).flash?.banner || ''
-      )
+      const message = computed(() => usePage().props.value.flash?.banner || '')
 
       return { show, style, message }
     },

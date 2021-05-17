@@ -13,7 +13,7 @@
 </template>
 
 <script lang="ts">
-  import { useUniqueId } from '@admin/features/unique-id'
+  import { useUniqueId } from '@admin/features/helpers'
   import { computed, defineComponent, ref } from 'vue'
 
   export default defineComponent({
