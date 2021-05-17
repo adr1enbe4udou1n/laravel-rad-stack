@@ -28,13 +28,11 @@
     },
     emits: ['update:modelValue'],
     setup(props, { emit }) {
-      const id = useUniqueId()
-
       const change = (e: Event) => {
         emit('update:modelValue', (e.target as HTMLInputElement).checked)
       }
 
-      return { id, change }
+      return { change }
     },
   })
 </script>
