@@ -18,7 +18,6 @@
 </template>
 
 <script lang="ts">
-  import { useUniqueId } from '@admin/features/helpers'
   import { defineComponent } from 'vue'
 
   export default defineComponent({
