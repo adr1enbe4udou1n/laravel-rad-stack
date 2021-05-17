@@ -30,6 +30,6 @@ export default defineConfig({
   },
   plugins: [laravel()],
   optimizeDeps: {
-    include: ['alpinejs'],
+    include: ['vue', 'alpinejs'],
   },
 })
