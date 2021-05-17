@@ -1,9 +1,5 @@
 <template>
   <app-layout>
-    <teleport to="head">
-      <title>{{ $title('Profile') }}</title>
-    </teleport>
-
     <template #header>
       <h2 class="font-semibold text-xl text-gray-800 leading-tight">
         {{ $t('Profile') }}
@@ -25,3 +21,14 @@
     </div>
   </app-layout>
 </template>
+
+<script lang="ts">
+  import { useTitle } from '@admin/features/helpers'
+  import { defineComponent } from 'vue'
+
+  export default defineComponent({
+    setup() {
+      useTitle('Profile')
+    },
+  })
+</script>

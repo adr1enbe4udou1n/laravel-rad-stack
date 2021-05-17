@@ -1,9 +1,5 @@
 <template>
   <auth-layout>
-    <teleport to="head">
-      <title>{{ $title('Login') }}</title>
-    </teleport>
-
     <div class="mb-4 text-sm text-gray-600">
       {{
         $t(
@@ -39,6 +35,7 @@
 </template>
 
 <script lang="ts">
+  import { useTitle } from '@admin/features/helpers'
   import { route } from '@admin/plugins/route'
   import { useForm } from '@inertiajs/inertia-vue3'
   import { defineComponent } from 'vue'
@@ -48,6 +45,8 @@
       status: String,
     },
     setup() {
+      useTitle('Login')
+
       const form = useForm({
         email: '',
       })

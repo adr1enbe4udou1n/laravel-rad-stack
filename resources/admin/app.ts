@@ -9,7 +9,6 @@ import { InertiaProgress } from '@inertiajs/progress'
 
 import Route from './plugins/route'
 import Translations from './plugins/translations'
-import Helpers from './plugins/helpers'
 
 const el = document.getElementById('app')
 
@@ -23,7 +22,6 @@ const app = createApp({
 })
   .use(Route)
   .use(Translations)
-  .use(Helpers)
   .use(InertiaPlugin)
 
 app.mount(el)

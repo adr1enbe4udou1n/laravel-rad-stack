@@ -1,9 +1,5 @@
 <template>
   <auth-layout>
-    <teleport to="head">
-      <title>{{ $title('Register') }}</title>
-    </teleport>
-
     <validation-errors class="mb-4" />
 
     <form @submit.prevent="submit">
@@ -64,12 +60,15 @@
 </template>
 
 <script lang="ts">
+  import { useTitle } from '@admin/features/helpers'
   import { route } from '@admin/plugins/route'
   import { useForm } from '@inertiajs/inertia-vue3'
   import { defineComponent } from 'vue'
 
   export default defineComponent({
     setup() {
+      useTitle('Register')
+
       const form = useForm({
         name: '',
         email: '',
