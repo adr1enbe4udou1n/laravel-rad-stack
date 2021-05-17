@@ -11,7 +11,7 @@
         focus:border-indigo-300
         focus:ring focus:ring-indigo-200 focus:ring-opacity-50
       "
-      @change="$emit('update:modelValue', $event.target.checked)"
+      @change="change"
     />
     <span class="ml-2 text-sm text-gray-600">{{ label }}</span>
   </label>
@@ -27,10 +27,14 @@
       modelValue: Boolean,
     },
     emits: ['update:modelValue'],
-    setup() {
+    setup(props, { emit }) {
       const id = useUniqueId()
 
-      return { id }
+      const change = (e: Event) => {
+        emit('update:modelValue', (e.target as HTMLInputElement).checked)
+      }
+
+      return { id, change }
     },
   })
 </script>
