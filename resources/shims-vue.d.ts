@@ -1,5 +1,5 @@
 import { __ } from 'matice'
-import { ComponentCustomProperties, DefineComponent } from 'vue'
+import { DefineComponent } from 'vue'
 import route from 'ziggy-js'
 
 declare module '*.vue' {
