@@ -55,6 +55,7 @@ class RouteServiceProvider extends ServiceProvider
             ->registerDirectory(app_path('Http/Controllers/Front'));
 
         Route::prefix('admin')
+            ->name('admin.')
             ->group(
                 function () {
                     (new RouteRegistrar(app()->router))

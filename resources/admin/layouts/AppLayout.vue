@@ -10,7 +10,7 @@
             <div class="flex">
               <!-- Logo -->
               <div class="flex-shrink-0 flex items-center">
-                <inertia-link :href="route('dashboard')">
+                <inertia-link :href="route('admin.dashboard')">
                   <svg
                     class="block h-9 w-auto"
                     viewBox="0 0 48 48"
@@ -32,10 +32,16 @@
               <!-- Navigation Links -->
               <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
                 <nav-link
-                  :href="route('dashboard')"
-                  :active="route().current('dashboard')"
+                  :href="route('admin.dashboard')"
+                  :active="route().current('admin.dashboard')"
                 >
                   {{ $t('Dashboard') }}
+                </nav-link>
+                <nav-link
+                  :href="route('admin.users')"
+                  :active="route().current('admin.users')"
+                >
+                  {{ $t('Users') }}
                 </nav-link>
               </div>
             </div>
@@ -89,7 +95,7 @@
                       {{ $t('Manage Account') }}
                     </div>
 
-                    <dropdown-link :href="route('profile.show')">
+                    <dropdown-link :href="route('admin.profile.show')">
                       {{ $t('Profile') }}
                     </dropdown-link>
 
@@ -167,10 +173,16 @@
         >
           <div class="pt-2 pb-3 space-y-1">
             <responsive-nav-link
-              :href="route('dashboard')"
-              :active="route().current('dashboard')"
+              :href="route('admin.dashboard')"
+              :active="route().current('admin.dashboard')"
             >
               {{ $t('Dashboard') }}
+            </responsive-nav-link>
+            <responsive-nav-link
+              :href="route('admin.users')"
+              :active="route().current('admin.users')"
+            >
+              {{ $t('Users') }}
             </responsive-nav-link>
           </div>
 
@@ -189,8 +201,8 @@
 
             <div class="mt-3 space-y-1">
               <responsive-nav-link
-                :href="route('profile.show')"
-                :active="route().current('profile.show')"
+                :href="route('admin.profile.show')"
+                :active="route().current('admin.profile.show')"
               >
                 {{ $t('Profile') }}
               </responsive-nav-link>

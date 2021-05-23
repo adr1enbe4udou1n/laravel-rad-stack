@@ -93,7 +93,7 @@
       }
 
       const submit = () => {
-        form.delete(route('current-user.destroy'), {
+        form.delete(route('admin.current-user.destroy'), {
           preserveScroll: true,
           onSuccess: () => closeModal(),
           onError: () => password.value.focus(),

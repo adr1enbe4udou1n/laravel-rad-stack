@@ -34,11 +34,7 @@
       </div>
 
       <div class="mt-4">
-        <base-button
-          type="submit"
-          class="w-full text-center"
-          :loading="form.processing"
-        >
+        <base-button type="submit" class="w-full" :loading="form.processing">
           {{ $t('Reset Password') }}
         </base-button>
       </div>

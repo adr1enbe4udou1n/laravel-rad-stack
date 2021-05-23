@@ -11,7 +11,7 @@ class DashboardController extends Controller
     #[Get('/')]
     public function redirect()
     {
-        return redirect()->route('dashboard');
+        return redirect()->route('admin.dashboard');
     }
 
     #[Get('dashboard', name: "dashboard")]
