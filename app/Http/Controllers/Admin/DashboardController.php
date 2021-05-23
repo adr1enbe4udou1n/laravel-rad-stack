@@ -14,7 +14,7 @@ class DashboardController extends Controller
         return redirect()->route('admin.dashboard');
     }
 
-    #[Get('dashboard', name: "dashboard")]
+    #[Get('dashboard', name: 'dashboard')]
     public function index()
     {
         return Inertia::render('Dashboard');

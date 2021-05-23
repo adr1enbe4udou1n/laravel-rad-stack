@@ -2,8 +2,8 @@
 
 namespace App\Support;
 
-use Illuminate\Support\Str;
 use Illuminate\Support\Facades\App;
+use Illuminate\Support\Str;
 
 class LaravelViteManifest
 {
@@ -16,7 +16,7 @@ class LaravelViteManifest
                 ? Str::of($serverUrl)->rtrim('/')
                 : 'http://localhost:3000';
 
-            return $this->jsImports("$serverUrl/$entry");
+            return $this->jsImports("{$serverUrl}/{$entry}");
         }
 
         [$manifestKey] = explode('/', $entry);
@@ -99,6 +99,6 @@ class LaravelViteManifest
             return '';
         }
 
-        return asset("/dist/$manifestKey/".$manifest[$entry]['file']);
+        return asset("/dist/{$manifestKey}/".$manifest[$entry]['file']);
     }
 }

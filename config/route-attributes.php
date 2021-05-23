@@ -14,10 +14,10 @@ return [
         app_path('Http/Controllers'),
     ],
 
-    /**
+    /*
      * This middleware will be applied to all routes.
      */
     'middleware' => [
         'web',
-    ]
+    ],
 ];

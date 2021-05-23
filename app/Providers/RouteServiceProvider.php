@@ -52,7 +52,8 @@ class RouteServiceProvider extends ServiceProvider
         (new RouteRegistrar(app()->router))
             ->useRootNamespace(app()->getNamespace())
             ->useMiddleware(['web'])
-            ->registerDirectory(app_path('Http/Controllers/Front'));
+            ->registerDirectory(app_path('Http/Controllers/Front'))
+        ;
 
         Route::prefix('admin')
             ->name('admin.')
@@ -61,9 +62,11 @@ class RouteServiceProvider extends ServiceProvider
                     (new RouteRegistrar(app()->router))
                         ->useRootNamespace(app()->getNamespace())
                         ->useMiddleware(['web', 'auth:sanctum'])
-                        ->registerDirectory(app_path('Http/Controllers/Admin'));
+                        ->registerDirectory(app_path('Http/Controllers/Admin'))
+                    ;
                 }
-            );
+            )
+        ;
     }
 
     /**
