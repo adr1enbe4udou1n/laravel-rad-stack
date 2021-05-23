@@ -12,7 +12,7 @@
     @vite("front/app.ts", "http://localhost:3100")
 </head>
 
-<body class="antialiased">
+<body class="antialiased bg-green-500">
     @livewireScripts
 </body>
 

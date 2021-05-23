@@ -1,2 +1,2 @@
-import './app.css'
+import 'virtual:windi.css'
 import 'alpinejs'
