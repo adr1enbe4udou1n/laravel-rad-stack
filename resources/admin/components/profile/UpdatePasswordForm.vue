@@ -18,6 +18,7 @@
           v-model="form.current_password"
           :label="$t('Current Password')"
           type="password"
+          required
           autocomplete="current-password"
           :error="form.errors.current_password"
         />
@@ -30,6 +31,7 @@
           v-model="form.password"
           :label="$t('New Password')"
           type="password"
+          required
           autocomplete="new-password"
           :error="form.errors.password"
         />
@@ -41,6 +43,7 @@
           v-model="form.password_confirmation"
           :label="$t('Confirm Password')"
           type="password"
+          required
           autocomplete="new-password"
           :error="form.errors.password_confirmation"
         />

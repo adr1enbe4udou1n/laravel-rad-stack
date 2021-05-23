@@ -25,8 +25,12 @@
         />
       </div>
 
-      <div class="flex items-center justify-end mt-4">
-        <base-button type="submit" class="ml-4" :loading="form.processing">
+      <div class="mt-4">
+        <base-button
+          type="submit"
+          class="w-full text-center"
+          :loading="form.processing"
+        >
           {{ $t('Email Password Reset Link') }}
         </base-button>
       </div>
@@ -45,7 +49,7 @@
       status: String,
     },
     setup() {
-      useTitle('Login')
+      useTitle('Email Password Reset Link')
 
       const form = useForm({
         email: '',

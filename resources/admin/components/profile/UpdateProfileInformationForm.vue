@@ -14,6 +14,7 @@
           :error="form.errors.name"
           :label="$t('Name')"
           type="text"
+          required
           autocomplete="name"
         />
       </div>
@@ -25,6 +26,7 @@
           :error="form.errors.email"
           :label="$t('Email')"
           type="text"
+          required
         />
       </div>
     </template>
