@@ -27,7 +27,9 @@ class AppServiceProvider extends ServiceProvider
         Blade::directive('vite', function ($expression) {
             $facade = ViteManifest::class;
 
-            return sprintf("<?php echo {$facade}::embed(e('%s')); ?>", $expression);
+            [$entry, $serverUrl] = explode(', ', $expression);
+
+            return sprintf("<?php echo {$facade}::embed(%s, %s); ?>", $entry, $serverUrl);
         });
     }
 }

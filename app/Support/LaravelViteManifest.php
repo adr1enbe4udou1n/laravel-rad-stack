@@ -2,16 +2,21 @@
 
 namespace App\Support;
 
+use Illuminate\Support\Str;
 use Illuminate\Support\Facades\App;
 
 class LaravelViteManifest
 {
     private $manifestCache = [];
 
-    public function embed(string $entry): string
+    public function embed(string $entry, ?string $serverUrl): string
     {
         if (App::environment('local')) {
-            return $this->jsImports(asset($entry));
+            $serverUrl = $serverUrl
+                ? Str::of($serverUrl)->rtrim('/')
+                : 'http://localhost:3000';
+
+            return $this->jsImports("$serverUrl/$entry");
         }
 
         [$manifestKey] = explode('/', $entry);
