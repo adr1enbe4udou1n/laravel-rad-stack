@@ -2,7 +2,6 @@
 
 namespace App\Providers;
 
-use App\Facades\ViteManifest;
 use App\Support\LaravelViteManifest;
 use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\ServiceProvider;
@@ -25,11 +24,7 @@ class AppServiceProvider extends ServiceProvider
     public function boot()
     {
         Blade::directive('vite', function ($expression) {
-            $facade = ViteManifest::class;
-
-            [$entry, $serverUrl] = explode(', ', $expression);
-
-            return sprintf("<?php echo {$facade}::embed(%s, %s); ?>", $entry, $serverUrl);
+            return '{!! App\Facades\ViteManifest::embed('.$expression.') !!}';
         });
     }
 }

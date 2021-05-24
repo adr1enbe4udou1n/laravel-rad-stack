@@ -57,9 +57,11 @@
       href: String,
       variant: {
         type: String,
-        default: 'dark',
+        default: 'primary',
         validator: (v: string) =>
-          ['success', 'danger', 'warning', 'info', 'dark'].includes(v),
+          ['primary', 'success', 'danger', 'warning', 'info', 'dark'].includes(
+            v
+          ),
       },
     },
     setup(props) {
@@ -69,14 +71,17 @@
             ? 'bg-white shadow-sm focus:border-blue-300 focus:ring-blue-200'
             : '',
           {
+            primary: props.outlined
+              ? 'border-primary-500 text-primary-500 hover:text-primary-500 active:text-primary-800 active:bg-primary-50'
+              : 'bg-primary-500 hover:bg-primary-700 focus:border-primary-900 focus:ring-primary-300 active:bg-primary-900 text-white',
             dark: props.outlined
-              ? 'border-gray-300 text-gray-500 hover:text-gray-500   active:text-gray-800 active:bg-gray-50'
+              ? 'border-gray-300 text-gray-500 hover:text-gray-500 active:text-gray-800 active:bg-gray-50'
               : 'bg-gray-800 hover:bg-gray-700 focus:border-gray-900 focus:ring-gray-300 active:bg-gray-900 text-white',
             success: props.outlined
-              ? 'border-green-300 text-green-500 hover:text-green-500   active:text-green-800 active:bg-green-50'
+              ? 'border-green-300 text-green-500 hover:text-green-500 active:text-green-800 active:bg-green-50'
               : 'bg-green-600 hover:bg-green-500 focus:border-green-700 focus:ring-green-200 active:bg-green-600 text-white',
             danger: props.outlined
-              ? 'border-red-300 text-red-500 hover:text-red-500   active:text-red-800 active:bg-red-50'
+              ? 'border-red-300 text-red-500 hover:text-red-500 active:text-red-800 active:bg-red-50'
               : 'bg-red-600 hover:bg-red-500 focus:border-red-700 focus:ring-red-200 active:bg-red-600 text-white',
             warning: props.outlined
               ? 'border-yellow-300 text-yellow-500 hover:text-yellow-500 active:text-yellow-800 active:bg-yellow-50'
