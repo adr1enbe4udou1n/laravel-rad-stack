@@ -1,30 +1,11 @@
 <template>
   <div>
-    <button
-      v-if="as === 'button'"
-      type="submit"
-      class="
-        block
-        w-full
-        px-4
-        py-2
-        text-sm
-        leading-5
-        text-gray-700 text-left
-        hover:bg-gray-100
-        focus:outline-none
-        focus:bg-gray-100
-        transition
-      "
-    >
-      <slot></slot>
-    </button>
-
-    <a
-      v-else-if="as === 'a'"
+    <component
+      :is="href ? 'inertia-link' : 'button'"
       :href="href"
       class="
-        block
+        flex
+        items-center
         px-4
         py-2
         text-sm
@@ -35,28 +16,10 @@
         focus:bg-gray-100
         transition
       "
+      :class="href ? '' : 'text-left w-full'"
     >
       <slot></slot>
-    </a>
-
-    <inertia-link
-      v-else
-      :href="href"
-      class="
-        block
-        px-4
-        py-2
-        text-sm
-        leading-5
-        text-gray-700
-        hover:bg-gray-100
-        focus:outline-none
-        focus:bg-gray-100
-        transition
-      "
-    >
-      <slot></slot>
-    </inertia-link>
+    </component>
   </div>
 </template>
 
@@ -66,7 +29,6 @@
   export default defineComponent({
     props: {
       href: String,
-      as: String,
     },
   })
 </script>

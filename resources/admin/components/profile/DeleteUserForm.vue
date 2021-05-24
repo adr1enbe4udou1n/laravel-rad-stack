@@ -16,7 +16,11 @@
       </div>
 
       <div class="mt-5">
-        <base-button color="danger" type="button" @click="confirmUserDeletion">
+        <base-button
+          variant="danger"
+          type="button"
+          @click="confirmUserDeletion"
+        >
           {{ $t('Delete Account') }}
         </base-button>
       </div>
@@ -48,12 +52,12 @@
         </template>
 
         <template #footer>
-          <base-button color="secondary" type="button" @click="closeModal">
+          <base-button outlined type="button" @click="closeModal">
             {{ $t('Cancel') }}
           </base-button>
 
           <base-button
-            color="danger"
+            variant="danger"
             type="submit"
             class="ml-2"
             :loading="form.processing"
