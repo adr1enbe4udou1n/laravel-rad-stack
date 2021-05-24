@@ -1,26 +1,41 @@
 import { __ } from 'matice'
 import route from 'ziggy-js'
 
-interface SidebarLink {
+interface NavLink {
   href: string
-  active: boolean
+  active: () => boolean
   icon: string
   text: string
 }
 
-const nav: SidebarLink[] = [
+const mainNav: NavLink[] = [
   {
     href: route('admin.dashboard'),
-    active: route().current('admin.dashboard'),
+    active: () => route().current('admin.dashboard'),
     icon: 'chart-bar',
     text: __('Dashboard'),
   },
   {
     href: route('admin.users.index'),
-    active: route().current('admin.users.*'),
+    active: () => route().current('admin.users.*'),
     icon: 'users',
     text: __('Users'),
   },
 ]
 
-export default nav
+const headerNav: NavLink[] = [
+  {
+    href: route('admin.dashboard'),
+    active: () => route().current('admin.dashboard'),
+    icon: 'chart-bar',
+    text: __('Dashboard'),
+  },
+  {
+    href: route('admin.users.index'),
+    active: () => route().current('admin.users.*'),
+    icon: 'users',
+    text: __('Users'),
+  },
+]
+
+export { mainNav, headerNav }

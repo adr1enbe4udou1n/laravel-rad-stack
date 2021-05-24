@@ -13,7 +13,7 @@
     @vite("admin/app.ts", "http://localhost:3200")
 </head>
 
-<body class="font-sans antialiased">
+<body class="antialiased">
     @inertia
 </body>
 

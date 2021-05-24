@@ -1,5 +1,6 @@
 <template>
   <inertia-link :href="href" :class="classes">
+    <component :is="`${icon}-icon`" v-if="icon" class="w-4 h-4 mr-2" />
     <slot></slot>
   </inertia-link>
 </template>
@@ -10,6 +11,7 @@
   export default defineComponent({
     props: {
       href: String,
+      icon: String,
       active: Boolean,
     },
     setup(props) {

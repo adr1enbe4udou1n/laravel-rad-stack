@@ -1,4 +1,5 @@
 import {
+  MenuIcon,
   ChartBarIcon,
   ExclamationIcon,
   CheckCircleIcon,
@@ -15,12 +16,21 @@ import {
   AdjustmentsIcon,
   XIcon,
   XCircleIcon,
+  ChevronDoubleDownIcon,
+  ChevronDoubleLeftIcon,
+  ChevronDoubleRightIcon,
+  ChevronDoubleUpIcon,
+  ChevronDownIcon,
+  ChevronLeftIcon,
+  ChevronRightIcon,
+  ChevronUpIcon,
 } from 'heroicons-vue3/outline'
 
 import { App } from 'vue'
 
 export default {
   install: (app: App): void => {
+    app.component('MenuIcon', MenuIcon)
     app.component('ChartBarIcon', ChartBarIcon)
     app.component('ExclamationIcon', ExclamationIcon)
     app.component('CheckCircleIcon', CheckCircleIcon)
@@ -37,5 +47,13 @@ export default {
     app.component('AdjustmentsIcon', AdjustmentsIcon)
     app.component('XIcon', XIcon)
     app.component('XCircleIcon', XCircleIcon)
+    app.component('ChevronDoubleDownIcon', ChevronDoubleDownIcon)
+    app.component('ChevronDoubleLeftIcon', ChevronDoubleLeftIcon)
+    app.component('ChevronDoubleRightIcon', ChevronDoubleRightIcon)
+    app.component('ChevronDoubleUpIcon', ChevronDoubleUpIcon)
+    app.component('ChevronDownIcon', ChevronDownIcon)
+    app.component('ChevronLeftIcon', ChevronLeftIcon)
+    app.component('ChevronRightIcon', ChevronRightIcon)
+    app.component('ChevronUpIcon', ChevronUpIcon)
   },
 }

@@ -15,10 +15,10 @@ const primary = {
 
 export default defineConfig({
   theme: {
+    fontFamily: {
+      sans: ['Open Sans', ...defaultTheme.fontFamily.sans],
+    },
     extend: {
-      fontFamily: {
-        sans: ['Cerebri Sans', ...defaultTheme.fontFamily.sans],
-      },
       colors: {
         primary,
       },
