@@ -32,16 +32,12 @@
               <!-- Navigation Links -->
               <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
                 <nav-link
-                  :href="route('admin.dashboard')"
-                  :active="route().current('admin.dashboard')"
+                  v-for="(link, i) in nav"
+                  :key="i"
+                  :href="route(link.routeName)"
+                  :active="route().current(link.routeName)"
                 >
-                  {{ $t('Dashboard') }}
-                </nav-link>
-                <nav-link
-                  :href="route('admin.users')"
-                  :active="route().current('admin.users')"
-                >
-                  {{ $t('Users') }}
+                  {{ link.text }}
                 </nav-link>
               </div>
             </div>
@@ -105,11 +101,9 @@
                     <div class="border-t border-gray-100"></div>
 
                     <!-- Authentication -->
-                    <form @submit.prevent="logout">
-                      <dropdown-link icon="logout">
-                        {{ $t('Log Out') }}
-                      </dropdown-link>
-                    </form>
+                    <dropdown-link icon="logout" @click="logout">
+                      {{ $t('Log Out') }}
+                    </dropdown-link>
                   </template>
                 </dropdown>
               </div>
@@ -176,16 +170,12 @@
         >
           <div class="pt-2 pb-3 space-y-1">
             <responsive-nav-link
-              :href="route('admin.dashboard')"
-              :active="route().current('admin.dashboard')"
+              v-for="(link, i) in nav"
+              :key="i"
+              :href="route(link.routeName)"
+              :active="route().current(link.routeName)"
             >
-              {{ $t('Dashboard') }}
-            </responsive-nav-link>
-            <responsive-nav-link
-              :href="route('admin.users')"
-              :active="route().current('admin.users')"
-            >
-              {{ $t('Users') }}
+              {{ link.text }}
             </responsive-nav-link>
           </div>
 
@@ -236,6 +226,7 @@
 
 <script lang="ts">
   import { route } from '@admin/plugins/route'
+  import nav from '@admin/_nav'
   import { defineComponent, ref } from 'vue'
   import { Inertia } from '@inertiajs/inertia'
 
@@ -247,7 +238,7 @@
         Inertia.post(route('logout'))
       }
 
-      return { showingNavigationDropdown, logout }
+      return { showingNavigationDropdown, logout, nav }
     },
   })
 </script>
