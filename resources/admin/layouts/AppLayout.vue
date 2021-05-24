@@ -32,8 +32,8 @@
                 <nav-link
                   v-for="(link, i) in nav"
                   :key="i"
-                  :href="route(link.routeName)"
-                  :active="route().current(link.routeName)"
+                  :href="link.href"
+                  :active="link.active"
                 >
                   {{ link.text }}
                 </nav-link>
@@ -170,8 +170,8 @@
             <responsive-nav-link
               v-for="(link, i) in nav"
               :key="i"
-              :href="route(link.routeName)"
-              :active="route().current(link.routeName)"
+              :href="link.href"
+              :active="link.active"
             >
               {{ link.text }}
             </responsive-nav-link>
@@ -224,7 +224,7 @@
 </template>
 
 <script lang="ts">
-  import { route } from '@admin/plugins/route'
+  import route from 'ziggy-js'
   import nav from '@admin/_nav'
   import { defineComponent, ref } from 'vue'
   import { Inertia } from '@inertiajs/inertia'

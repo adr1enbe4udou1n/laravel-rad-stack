@@ -72,7 +72,7 @@
 </template>
 
 <script lang="ts">
-  import { route } from '@admin/plugins/route'
+  import route from 'ziggy-js'
   import { useForm } from '@inertiajs/inertia-vue3'
   import { defineComponent, ref } from 'vue'
 
