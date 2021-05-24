@@ -1,17 +1,7 @@
 <template>
   <nav class="bg-white sm:border-b sm:border-gray-100">
     <!-- Primary Navigation Menu -->
-    <div
-      class="
-        max-w-7xl
-        mx-auto
-        px-4
-        sm:px-6
-        lg:px-8
-        bg-primary-500
-        sm:bg-transparent
-      "
-    >
+    <div class="px-4 sm:px-6 lg:px-8 bg-primary-500 sm:bg-transparent">
       <div class="flex justify-between h-16">
         <div class="flex">
           <!-- Logo -->
