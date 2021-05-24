@@ -1,7 +1,5 @@
 <template>
   <div>
-    <banner />
-
     <div class="min-h-screen bg-gray-100">
       <nav class="bg-white border-b border-gray-100">
         <!-- Primary Navigation Menu -->
@@ -218,6 +216,7 @@
 
       <!-- Page Content -->
       <main>
+        <flash-messages />
         <slot></slot>
       </main>
     </div>

@@ -4,6 +4,7 @@
       v-if="show && message"
       :class="{
         'bg-green-500': style == 'success',
+        'bg-yellow-500': style == 'warning',
         'bg-red-700': style == 'danger',
       }"
     >
@@ -14,6 +15,7 @@
               class="flex p-2 rounded-lg"
               :class="{
                 'bg-green-600': style == 'success',
+                'bg-yellow-600': style == 'warning',
                 'bg-red-600': style == 'danger',
               }"
             >
@@ -39,6 +41,7 @@
               "
               :class="{
                 'hover:bg-green-600 focus:bg-green-600': style == 'success',
+                'hover:bg-yellow-600 focus:bg-yellow-600': style == 'warning',
                 'hover:bg-red-600 focus:bg-red-600': style == 'danger',
               }"
               aria-label="Dismiss"
@@ -60,21 +63,23 @@
   export default defineComponent({
     setup() {
       const show = ref(true)
+      const flash = usePage().props.value.flash
 
-      const style = computed(
-        () => usePage().props.value.flash?.bannerStyle || 'success'
+      const style = computed(() =>
+        flash?.danger ? 'danger' : flash?.warning ? 'warning' : 'success'
       )
 
       const icon = computed(() => {
-        const v: 'success' | 'danger' = style.value
+        const v: 'success' | 'warning' | 'danger' = style.value
 
         return {
           success: 'check-circle',
-          danger: 'exclamation',
+          warning: 'exclamation',
+          danger: 'x-circle',
         }[v]
       })
 
-      const message = computed(() => usePage().props.value.flash?.banner || '')
+      const message = computed(() => flash[style.value])
 
       return { show, style, message, icon }
     },

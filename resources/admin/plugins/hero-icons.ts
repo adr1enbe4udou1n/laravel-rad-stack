@@ -14,6 +14,7 @@ import {
   CogIcon,
   AdjustmentsIcon,
   XIcon,
+  XCircleIcon,
 } from 'heroicons-vue3/outline'
 
 import { App } from 'vue'
@@ -35,5 +36,6 @@ export default {
     app.component('CogIcon', CogIcon)
     app.component('AdjustmentsIcon', AdjustmentsIcon)
     app.component('XIcon', XIcon)
+    app.component('XCircleIcon', XCircleIcon)
   },
 }
