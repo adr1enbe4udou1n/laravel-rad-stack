@@ -34,6 +34,8 @@ export default defineConfig({
       'ziggy-js',
       'matice',
       '@vueuse/core',
+      'heroicons-vue3/solid',
+      'heroicons-vue3/outline',
     ],
   },
 })
