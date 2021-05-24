@@ -1,5 +1,7 @@
 import {
   ChartBarIcon,
+  ExclamationIcon,
+  CheckCircleIcon,
   UserIcon,
   UsersIcon,
   LoginIcon,
@@ -19,6 +21,8 @@ import { App } from 'vue'
 export default {
   install: (app: App): void => {
     app.component('ChartBarIcon', ChartBarIcon)
+    app.component('ExclamationIcon', ExclamationIcon)
+    app.component('CheckCircleIcon', CheckCircleIcon)
     app.component('UserIcon', UserIcon)
     app.component('UsersIcon', UsersIcon)
     app.component('LoginIcon', LoginIcon)
