@@ -18,6 +18,7 @@
       "
       :class="href ? '' : 'text-left w-full'"
     >
+      <component :is="`${icon}-icon`" v-if="icon" class="w-4 h-4 mr-2" />
       <slot></slot>
     </component>
   </div>
@@ -29,6 +30,7 @@
   export default defineComponent({
     props: {
       href: String,
+      icon: String,
     },
   })
 </script>

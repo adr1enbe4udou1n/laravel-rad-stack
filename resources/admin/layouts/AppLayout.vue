@@ -95,8 +95,10 @@
                       {{ $t('Manage Account') }}
                     </div>
 
-                    <dropdown-link :href="route('admin.profile.show')">
-                      <user-icon class="w-4 h-4 mr-2" />
+                    <dropdown-link
+                      :href="route('admin.profile.show')"
+                      icon="user"
+                    >
                       {{ $t('Profile') }}
                     </dropdown-link>
 
@@ -104,8 +106,7 @@
 
                     <!-- Authentication -->
                     <form @submit.prevent="logout">
-                      <dropdown-link>
-                        <logout-icon class="w-4 h-4 mr-2" />
+                      <dropdown-link icon="logout">
                         {{ $t('Log Out') }}
                       </dropdown-link>
                     </form>
@@ -237,10 +238,8 @@
   import { route } from '@admin/plugins/route'
   import { defineComponent, ref } from 'vue'
   import { Inertia } from '@inertiajs/inertia'
-  import { UserIcon, LogoutIcon } from 'heroicons-vue3/outline'
 
   export default defineComponent({
-    components: { UserIcon, LogoutIcon },
     setup() {
       const showingNavigationDropdown = ref(false)
 

@@ -18,6 +18,7 @@
       <div class="mt-5">
         <base-button
           variant="danger"
+          icon="trash"
           type="button"
           @click="confirmUserDeletion"
         >
