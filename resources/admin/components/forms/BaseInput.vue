@@ -34,7 +34,7 @@
       const stateClasses = computed(() => {
         return props.error
           ? 'border-red-500 focus:border-red-300 focus:ring-red-200'
-          : 'border-gray-300 focus:border-indigo-300 focus:ring-indigo-200'
+          : 'border-gray-300 focus:border-primary-300 focus:ring-primary-200'
       })
 
       return { id, focus, input, stateClasses }

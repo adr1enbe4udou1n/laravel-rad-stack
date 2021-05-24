@@ -1,23 +1,24 @@
 import { defineConfig } from 'windicss/helpers'
+import defaultTheme from 'windicss/defaultTheme'
 import formsPlugin from 'windicss/plugin/forms'
 import typographyPlugin from 'windicss/plugin/typography'
 
 const primary = {
-  '50': '#FFFFFF',
-  '100': '#FFEDEC',
-  '200': '#FFBDB9',
-  '300': '#FF8D86',
-  '400': '#FF5D53',
-  '500': '#FF2D20',
-  '600': '#EC0E00',
-  '700': '#B90B00',
-  '800': '#860800',
-  '900': '#530500',
+  100: '#e6e8ff',
+  300: '#b2b7ff',
+  400: '#7886d7',
+  500: '#6574cd',
+  600: '#5661b3',
+  800: '#2f365f',
+  900: '#191e38',
 }
 
 export default defineConfig({
   theme: {
     extend: {
+      fontFamily: {
+        sans: ['Cerebri Sans', ...defaultTheme.fontFamily.sans],
+      },
       colors: {
         primary,
       },
