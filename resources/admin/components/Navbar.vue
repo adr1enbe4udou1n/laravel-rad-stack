@@ -1,7 +1,7 @@
 <template>
   <nav class="bg-white sm:border-b sm:border-gray-100">
     <!-- Primary Navigation Menu -->
-    <div class="px-4 sm:px-6 lg:px-8 bg-primary-500 sm:bg-transparent">
+    <div class="px-4 sm:px-6 lg:px-8 bg-primary-900 sm:bg-transparent">
       <div class="flex justify-between h-16">
         <div class="flex">
           <!-- Logo -->
@@ -157,7 +157,7 @@
 
 <script lang="ts">
   import route from 'ziggy-js'
-  import { mainNav, headerNav } from '@admin/_nav'
+  import { NavLink, mainNav, headerNav, isLink } from '@admin/_nav'
   import { defineComponent, ref } from 'vue'
   import { Inertia } from '@inertiajs/inertia'
 
@@ -169,7 +169,12 @@
         Inertia.post(route('logout'))
       }
 
-      return { showingNavigationDropdown, logout, mainNav, headerNav }
+      return {
+        showingNavigationDropdown,
+        logout,
+        mainNav: mainNav.filter((l) => isLink(l)) as NavLink[],
+        headerNav,
+      }
     },
   })
 </script>

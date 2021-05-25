@@ -33,10 +33,11 @@
 </script>
 
 <style lang="postcss" scoped>
-  .active {
-    @apply border-primary-400 text-primary-700 bg-primary-50 focus:text-primary-800 focus:bg-primary-100 focus:border-primary-700;
-  }
-  :not(.active) {
+  a {
     @apply border-transparent text-gray-600 hover:text-gray-800 hover:bg-gray-50 hover:border-gray-300 focus:text-gray-800 focus:bg-gray-50 focus:border-gray-300;
+
+    &.active {
+      @apply border-primary-400 text-primary-700 bg-primary-50 focus:text-primary-800 focus:bg-primary-100 focus:border-primary-700;
+    }
   }
 </style>

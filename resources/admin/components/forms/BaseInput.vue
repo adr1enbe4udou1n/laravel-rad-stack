@@ -37,10 +37,11 @@
 </script>
 
 <style lang="postcss" scoped>
-  .form-invalid {
-    @apply border-red-500 focus:border-red-300 focus:ring-red-200;
-  }
-  :not(.form-invalid) {
+  input {
     @apply border-gray-300 focus:border-indigo-300 focus:ring-indigo-200;
+
+    &.form-invalid {
+      @apply border-red-500 focus:border-red-300 focus:ring-red-200;
+    }
   }
 </style>

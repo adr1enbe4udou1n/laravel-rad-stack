@@ -84,7 +84,4 @@
   .right {
     @apply origin-top-right right-0;
   }
-  :not(.left):not(.right) {
-    @apply origin-top;
-  }
 </style>

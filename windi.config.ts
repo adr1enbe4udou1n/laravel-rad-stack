@@ -2,6 +2,7 @@ import { defineConfig } from 'windicss/helpers'
 import defaultTheme from 'windicss/defaultTheme'
 import formsPlugin from 'windicss/plugin/forms'
 import typographyPlugin from 'windicss/plugin/typography'
+import scrollbarPlugin from '@windicss/plugin-scrollbar'
 
 const primary = {
   DEFAULT: '#6574CD',
@@ -34,5 +35,5 @@ export default defineConfig({
       },
     },
   },
-  plugins: [formsPlugin, typographyPlugin],
+  plugins: [formsPlugin, typographyPlugin, scrollbarPlugin],
 })

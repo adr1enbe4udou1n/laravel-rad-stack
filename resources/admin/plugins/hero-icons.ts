@@ -10,6 +10,9 @@ import {
   LockClosedIcon,
   LockOpenIcon,
   PlusIcon,
+  PencilIcon,
+  PencilAltIcon,
+  EyeIcon,
   TrashIcon,
   ArchiveIcon,
   CogIcon,
@@ -26,16 +29,26 @@ import {
   ChevronUpIcon,
 } from 'heroicons-vue3/outline'
 
+import {
+  ChartBarIcon as ChartBarIconSolid,
+  UsersIcon as UsersIconSolid,
+} from 'heroicons-vue3/solid'
+
 import { App } from 'vue'
 
 export default {
   install: (app: App): void => {
+    app.component('ChartBarIconSolid', ChartBarIconSolid)
+    app.component('UsersIconSolid', UsersIconSolid)
     app.component('MenuIcon', MenuIcon)
     app.component('ChartBarIcon', ChartBarIcon)
     app.component('ExclamationIcon', ExclamationIcon)
     app.component('CheckCircleIcon', CheckCircleIcon)
     app.component('UserIcon', UserIcon)
     app.component('UsersIcon', UsersIcon)
+    app.component('PencilIcon', PencilIcon)
+    app.component('PencilAltIcon', PencilAltIcon)
+    app.component('EyeIcon', EyeIcon)
     app.component('LoginIcon', LoginIcon)
     app.component('LogoutIcon', LogoutIcon)
     app.component('LockClosedIcon', LockClosedIcon)
