@@ -1,7 +1,7 @@
 <template>
   <app-layout>
     <template #header>
-      <h1>{{ $t('Users') }}</h1>
+      <h1>{{ $t('crud.users.create.title') }}</h1>
     </template>
 
     Hello from create user !
@@ -9,12 +9,12 @@
 </template>
 
 <script lang="ts">
+  import { useTitle } from '@admin/features/helpers'
   import { defineComponent } from 'vue'
 
   export default defineComponent({
-    props: {
-      user: Object,
+    setup() {
+      useTitle('crud.users.create.title')
     },
-    //setup() {},
   })
 </script>

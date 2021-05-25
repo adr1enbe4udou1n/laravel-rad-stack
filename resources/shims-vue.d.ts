@@ -20,12 +20,17 @@ declare module '@vue/runtime-core' {
 
 declare module '@inertiajs/inertia' {
   namespace Inertia {
+    interface enumTypes {
+      roles: { [key: string]: string }
+    }
+
     interface PagePropsBeforeTransform extends PageProps {}
     interface PageProps {
       appName: string
       user: { name: string; email: string }
       flash: any
       errors: { [key: string]: string }
+      enums: enumTypes
     }
   }
 }

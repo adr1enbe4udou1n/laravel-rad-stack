@@ -2,6 +2,7 @@
 
 namespace App\Http\Middleware;
 
+use App\Enums\RoleEnum;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
 use Inertia\Middleware;
@@ -43,6 +44,11 @@ class HandleInertiaRequests extends Middleware
             'flash' => function () use ($request) {
                 return $request->session()->get('flash', []);
             },
+            'errorBags' => function () {
+                return collect(optional(Session::get('errors'))->getBags() ?: [])->mapWithKeys(function ($bag, $key) {
+                    return [$key => $bag->messages()];
+                })->all();
+            },
             'user' => function () use ($request) {
                 if (! $request->user()) {
                     return;
@@ -50,10 +56,12 @@ class HandleInertiaRequests extends Middleware
 
                 return $request->user();
             },
-            'errorBags' => function () {
-                return collect(optional(Session::get('errors'))->getBags() ?: [])->mapWithKeys(function ($bag, $key) {
-                    return [$key => $bag->messages()];
-                })->all();
+            'enums' => function () {
+                return collect([
+                    'roles' => RoleEnum::class,
+                ])
+                    ->mapWithKeys(fn ($enum, $key) => [$key => $enum::toArray()])
+                ;
             },
         ]);
     }

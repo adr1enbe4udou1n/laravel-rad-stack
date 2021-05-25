@@ -1,7 +1,7 @@
 <template>
   <app-layout>
     <template #header>
-      <h1>{{ $t('Users') }}</h1>
+      <h1>{{ $t('crud.users.index.title') }}</h1>
     </template>
 
     Hello from users !
@@ -9,9 +9,15 @@
 </template>
 
 <script lang="ts">
+  import { useTitle } from '@admin/features/helpers'
   import { defineComponent } from 'vue'
 
   export default defineComponent({
-    //setup() {},
+    props: {
+      users: Object,
+    },
+    setup() {
+      useTitle('crud.users.index.title')
+    },
   })
 </script>
