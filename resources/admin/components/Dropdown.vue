@@ -18,7 +18,7 @@
       <div
         v-show="open"
         class="absolute z-50 mt-2 rounded-md shadow-lg"
-        :class="[widthClass, alignmentClasses]"
+        :class="[widthClass, [align]]"
         style="display: none"
         @click="open = false"
       >
@@ -69,21 +69,22 @@
         }[props.width.toString()]
       })
 
-      const alignmentClasses = computed(() => {
-        if (props.align === 'left') {
-          return 'origin-top-left left-0'
-        } else if (props.align === 'right') {
-          return 'origin-top-right right-0'
-        } else {
-          return 'origin-top'
-        }
-      })
-
       return {
         open,
         widthClass,
-        alignmentClasses,
       }
     },
   })
 </script>
+
+<style lang="postcss" scoped>
+  .left {
+    @apply origin-top-left left-0;
+  }
+  .right {
+    @apply origin-top-right right-0;
+  }
+  :not(.left):not(.right) {
+    @apply origin-top;
+  }
+</style>

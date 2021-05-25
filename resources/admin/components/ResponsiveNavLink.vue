@@ -3,7 +3,18 @@
     <component
       :is="href ? 'inertia-link' : 'button'"
       :href="href"
-      :class="[...classes]"
+      class="
+        block
+        pl-3
+        pr-4
+        py-2
+        border-l-4
+        text-base
+        font-medium
+        focus:outline-none
+        transition
+      "
+      :class="{ 'text-left w-full': !!href, active }"
     >
       <slot></slot>
     </component>
@@ -11,22 +22,21 @@
 </template>
 
 <script lang="ts">
-  import { computed, defineComponent } from 'vue'
+  import { defineComponent } from 'vue'
 
   export default defineComponent({
     props: {
       active: Boolean,
       href: String,
     },
-    setup(props) {
-      const classes = computed(() => [
-        props.href ? '' : 'text-left w-full',
-        props.active
-          ? 'block pl-3 pr-4 py-2 border-l-4 border-primary-400 text-base font-medium text-primary-700 bg-primary-50 focus:outline-none focus:text-primary-800 focus:bg-primary-100 focus:border-primary-700 transition'
-          : 'block pl-3 pr-4 py-2 border-l-4 border-transparent text-base font-medium text-gray-600 hover:text-gray-800 hover:bg-gray-50 hover:border-gray-300 focus:outline-none focus:text-gray-800 focus:bg-gray-50 focus:border-gray-300 transition',
-      ])
-
-      return { classes }
-    },
   })
 </script>
+
+<style lang="postcss" scoped>
+  .active {
+    @apply border-primary-400 text-primary-700 bg-primary-50 focus:text-primary-800 focus:bg-primary-100 focus:border-primary-700;
+  }
+  :not(.active) {
+    @apply border-transparent text-gray-600 hover:text-gray-800 hover:bg-gray-50 hover:border-gray-300 focus:text-gray-800 focus:bg-gray-50 focus:border-gray-300;
+  }
+</style>

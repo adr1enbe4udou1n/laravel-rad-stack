@@ -5,7 +5,7 @@
     :id="id"
     ref="input"
     class="focus:ring focus:ring-opacity-50 rounded-md shadow-sm block w-full"
-    :class="stateClasses"
+    :class="{ 'form-invalid': !!error }"
     :value="modelValue"
     @input="$emit('update:modelValue', $event.target.value)"
   />
@@ -14,7 +14,7 @@
 
 <script lang="ts">
   import { useUniqueId } from '@admin/features/helpers'
-  import { computed, defineComponent, ref } from 'vue'
+  import { defineComponent, ref } from 'vue'
 
   export default defineComponent({
     props: {
@@ -23,7 +23,7 @@
       error: String,
     },
     emits: ['update:modelValue'],
-    setup(props) {
+    setup() {
       const input = ref(null)
       const id = useUniqueId()
 
@@ -31,13 +31,16 @@
         input.value?.focus()
       }
 
-      const stateClasses = computed(() => {
-        return props.error
-          ? 'border-red-500 focus:border-red-300 focus:ring-red-200'
-          : 'border-gray-300 focus:border-indigo-300 focus:ring-indigo-200'
-      })
-
-      return { id, focus, input, stateClasses }
+      return { id, focus, input }
     },
   })
 </script>
+
+<style lang="postcss" scoped>
+  .form-invalid {
+    @apply border-red-500 focus:border-red-300 focus:ring-red-200;
+  }
+  :not(.form-invalid) {
+    @apply border-gray-300 focus:border-indigo-300 focus:ring-indigo-200;
+  }
+</style>
