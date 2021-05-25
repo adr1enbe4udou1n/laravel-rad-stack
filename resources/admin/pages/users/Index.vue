@@ -1,7 +1,7 @@
 <template>
   <app-layout>
     <template #header>
-      <h1>{{ $t('crud.users.index.title') }}</h1>
+      <h1>{{ title }}</h1>
     </template>
 
     Hello from users !
@@ -17,7 +17,9 @@
       users: Object,
     },
     setup() {
-      useTitle('crud.users.index.title')
+      const title = useTitle('crud.users.index.title')
+
+      return { title }
     },
   })
 </script>

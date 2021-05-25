@@ -1,7 +1,7 @@
 <template>
   <app-layout>
     <template #header>
-      <h1>{{ $t('crud.users.create.title') }}</h1>
+      <h1>{{ title }}</h1>
     </template>
 
     Hello from create user !
@@ -14,7 +14,9 @@
 
   export default defineComponent({
     setup() {
-      useTitle('crud.users.create.title')
+      const title = useTitle('crud.users.create.title')
+
+      return { title }
     },
   })
 </script>

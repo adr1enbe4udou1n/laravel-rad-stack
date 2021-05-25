@@ -3,11 +3,10 @@ import { __, TranslationOptions } from 'matice'
 import { useTitle as vueUsetitle } from '@vueuse/core'
 import { Ref } from 'vue'
 
-export function useTitle(
-  title: string,
-  options?: TranslationOptions
-): Ref<string> {
-  return vueUsetitle(`${__(title, options)} - ${usePage().props.value.appName}`)
+export function useTitle(title: string, options?: TranslationOptions): string {
+  const subTitle = __(title, options)
+  vueUsetitle(`${subTitle} - ${usePage().props.value.appName}`)
+  return subTitle
 }
 
 export function useUniqueId(): string {

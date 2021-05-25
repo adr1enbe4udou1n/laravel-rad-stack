@@ -1,7 +1,7 @@
 <template>
   <app-layout>
     <template #header>
-      <h1>{{ $t('Profile') }}</h1>
+      <h1>{{ title }}</h1>
     </template>
 
     <div class="max-w-7xl mx-auto">
@@ -24,7 +24,9 @@
 
   export default defineComponent({
     setup() {
-      useTitle('Profile')
+      const title = useTitle('Profile')
+
+      return { title }
     },
   })
 </script>

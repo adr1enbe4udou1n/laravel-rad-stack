@@ -1,7 +1,7 @@
 <template>
   <app-layout>
     <template #header>
-      <h1>{{ $t('Dashboard') }}</h1>
+      <h1>{{ title }}</h1>
     </template>
 
     Hello !
@@ -14,7 +14,9 @@
 
   export default defineComponent({
     setup() {
-      useTitle('Dashboard')
+      const title = useTitle('Dashboard')
+
+      return { title }
     },
   })
 </script>
