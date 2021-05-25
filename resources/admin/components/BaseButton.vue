@@ -88,27 +88,27 @@
   .btn-outlined {
     @apply bg-white shadow-sm focus:border-blue-300 focus:ring-blue-200;
 
-    & .btn-primary {
+    &.btn-primary {
       @apply border-primary-500 text-primary-500 hover:text-primary-500 active:text-primary-800 active:bg-primary-50;
     }
 
-    & .btn-dark {
+    &.btn-dark {
       @apply border-gray-300 text-gray-500 hover:text-gray-500 active:text-gray-800 active:bg-gray-50;
     }
 
-    & .btn-success {
+    &.btn-success {
       @apply border-green-300 text-green-500 hover:text-green-500 active:text-green-800 active:bg-green-50;
     }
 
-    & .btn-warning {
+    &.btn-warning {
       @apply border-yellow-300 text-yellow-500 hover:text-yellow-500 active:text-yellow-800 active:bg-yellow-50;
     }
 
-    & .btn-danger {
+    &.btn-danger {
       @apply border-red-300 text-red-500 hover:text-red-500 active:text-red-800 active:bg-red-50;
     }
 
-    & .btn-info {
+    &.btn-info {
       @apply border-blue-300 text-blue-500 hover:text-blue-500 active:text-blue-800 active:bg-blue-50;
     }
   }
