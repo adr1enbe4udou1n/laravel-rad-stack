@@ -4,7 +4,7 @@
       <h1>{{ $t('Profile') }}</h1>
     </template>
 
-    <div class="max-w-7xl mx-auto py-10 sm:px-6 lg:px-8">
+    <div class="max-w-7xl mx-auto">
       <update-profile-information-form :user="$page.props.user" />
 
       <section-border />
