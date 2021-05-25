@@ -4,13 +4,17 @@ import formsPlugin from 'windicss/plugin/forms'
 import typographyPlugin from 'windicss/plugin/typography'
 
 const primary = {
-  100: '#e6e8ff',
-  300: '#b2b7ff',
-  400: '#7886d7',
-  500: '#6574cd',
-  600: '#5661b3',
-  800: '#2f365f',
-  900: '#191e38',
+  DEFAULT: '#6574CD',
+  '50': '#FFFFFF',
+  '100': '#FFFFFF',
+  '200': '#D9DCF3',
+  '300': '#B2BAE6',
+  '400': '#8B97DA',
+  '500': '#6574CD',
+  '600': '#3F51C1',
+  '700': '#32419A',
+  '800': '#263173',
+  '900': '#19214D',
 }
 
 export default defineConfig({
@@ -23,6 +27,9 @@ export default defineConfig({
         primary,
       },
       borderColor: {
+        primary,
+      },
+      textColor: {
         primary,
       },
     },

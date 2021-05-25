@@ -29,6 +29,7 @@ export default defineConfig({
   plugins: [
     laravel(),
     windicss({
+      config: '../windi.config.ts',
       scan: {
         dirs: ['.'],
         fileExtensions: ['blade.php', 'vue', 'ts'],

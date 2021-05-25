@@ -19,6 +19,7 @@ export default defineConfig({
       dirs: ['admin/components', 'admin/layouts'],
     }),
     windicss({
+      config: '../windi.config.ts',
       scan: {
         dirs: ['.'],
         fileExtensions: ['blade.php', 'vue', 'ts'],
