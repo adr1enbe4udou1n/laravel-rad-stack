@@ -1,6 +1,8 @@
 <?php
 
 return [
+    'yes' => 'Oui',
+    'no' => 'Non',
     'titles' => [
         'index' => 'Liste :resource',
         'show' => 'Détail :resource #:id',
@@ -38,11 +40,11 @@ return [
         'prev' => 'Précédent',
         'first' => 'Première page',
         'last' => 'Dernière page',
+        'rows_per_page_text' => 'Nb éléments par page',
+        'page_text' => ':start-:end de :total',
         'selected' => ':count éléments sélectionnés',
     ],
     'confirm' => [
-        'yes' => 'Oui',
-        'no' => 'Non',
         'delete_title' => 'Supprimer :resource #:id ?',
         'delete_message' => 'Vous êtes sur le point de supprimer :resource #:id. Cette opération est irréversible !',
         'delete_many_title' => 'Supprimer :count :resource ?',

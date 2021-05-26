@@ -20,7 +20,7 @@ const mainNav: (NavLink | NavTitle)[] = [
   },
   { title: __('Access Managment') },
   {
-    href: route('admin.users.index'),
+    href: route('admin.users'),
     active: () => route().current('admin.users.*'),
     icon: 'users',
     text: __('Users'),
@@ -35,8 +35,9 @@ const headerNav: NavLink[] = [
     text: __('Dashboard'),
   },
   {
-    href: route('admin.users.index'),
-    active: () => route().current('admin.users.*'),
+    href: route('admin.users'),
+    active: () =>
+      route().current('admin.users') || route().current('admin.users.*'),
     icon: 'users',
     text: __('Users'),
   },

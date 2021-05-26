@@ -2,6 +2,7 @@ import {
   MenuIcon,
   ChartBarIcon,
   ExclamationIcon,
+  CheckIcon,
   CheckCircleIcon,
   UserIcon,
   UsersIcon,
@@ -43,6 +44,7 @@ export default {
     app.component('MenuIcon', MenuIcon)
     app.component('ChartBarIcon', ChartBarIcon)
     app.component('ExclamationIcon', ExclamationIcon)
+    app.component('CheckIcon', CheckIcon)
     app.component('CheckCircleIcon', CheckCircleIcon)
     app.component('UserIcon', UserIcon)
     app.component('UsersIcon', UsersIcon)

@@ -14,7 +14,7 @@ use Spatie\RouteAttributes\Attributes\Prefix;
 #[Prefix('users')]
 class UserController extends Controller
 {
-    #[Get('/', name: 'users.index')]
+    #[Get('/', name: 'users')]
     public function index()
     {
         return Inertia::render('users/Index', [
@@ -28,8 +28,7 @@ class UserController extends Controller
                     AllowedFilter::exact('active'),
                 ])
                 ->allowedSorts(['id', 'name', 'email', 'created_at', 'last_login_at'])
-                ->paginate(10)
-                ->withQueryString()
+                ->paginateWithQuery()
                 ->through(fn (User $user) => [
                     'id' => $user->id,
                     'name' => $user->name,

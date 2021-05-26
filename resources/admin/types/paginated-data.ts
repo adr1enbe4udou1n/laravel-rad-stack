@@ -5,16 +5,16 @@ export interface PaginatedData<Model> {
   from: number
   last_page: number
   last_page_url: string
-  links: Link[]
+  links: PaginatedLink[]
   next_page_url: string
   path: string
-  per_page: number
+  per_page: number | string
   prev_page_url: null
   to: number
   total: number
 }
 
-export interface Link {
+export interface PaginatedLink {
   url: null | string
   label: string
   active: boolean

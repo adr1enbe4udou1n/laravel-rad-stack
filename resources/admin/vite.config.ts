@@ -29,6 +29,7 @@ export default defineConfig({
   optimizeDeps: {
     include: [
       'vue',
+      'lodash',
       '@inertiajs/inertia',
       '@inertiajs/inertia-vue3',
       '@inertiajs/progress',

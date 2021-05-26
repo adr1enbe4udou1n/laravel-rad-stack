@@ -5,15 +5,15 @@
     </template>
 
     <data-table
-      :data="users.data"
-      :per-page="users.per_page"
-      :current-page="users.current_page"
-      :total="users.total"
+      :data="users"
       sort-by="id"
       :sort-desc="false"
       :columns="columns"
       resource-name="users"
-    ></data-table>
+      disable-show
+      row-click="edit"
+    >
+    </data-table>
   </app-layout>
 </template>
 
@@ -45,12 +45,30 @@
         {
           field: 'email',
           searchable: true,
+          type: 'email',
         },
-        'active',
-        'role',
-        'last_login_at',
-        'created_at',
-        'updated_at',
+        {
+          field: 'active',
+          type: 'boolean',
+        },
+        {
+          field: 'role',
+          type: 'select',
+          props: { options: 'roles' },
+        },
+        {
+          field: 'last_login_at',
+          type: 'date',
+          props: { format: 'dd/MM/yyyy HH:mm:ss' },
+        },
+        {
+          field: 'created_at',
+          type: 'date',
+        },
+        {
+          field: 'updated_at',
+          type: 'date',
+        },
       ]
 
       return { title, columns }
