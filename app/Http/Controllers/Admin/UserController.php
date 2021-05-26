@@ -34,6 +34,11 @@ class UserController extends Controller
                     'id' => $user->id,
                     'name' => $user->name,
                     'email' => $user->email,
+                    'active' => $user->active,
+                    'role' => $user->role,
+                    'last_login_at' => $user->last_login_at,
+                    'created_at' => $user->created_at,
+                    'updated_at' => $user->updated_at,
                 ]),
         ]);
     }

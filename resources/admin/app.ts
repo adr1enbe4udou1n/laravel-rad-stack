@@ -10,6 +10,7 @@ import { InertiaProgress } from '@inertiajs/progress'
 
 import Route from './plugins/route'
 import Translations from './plugins/translations'
+import DateFns from './plugins/date-fns'
 import HeroIcons from './plugins/hero-icons'
 
 const el = document.getElementById('app')
@@ -24,6 +25,7 @@ const app = createApp({
 })
   .use(Route)
   .use(Translations)
+  .use(DateFns)
   .use(InertiaPlugin)
   .use(HeroIcons)
 

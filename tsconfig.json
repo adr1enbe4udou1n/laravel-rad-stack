@@ -12,6 +12,7 @@
         "types": ["vite/client", "@types/jest", "@types/tailwindcss"],
         "allowJs": true,
         "strictNullChecks": false,
+        "suppressImplicitAnyIndexErrors": true,
         "baseUrl": ".",
         "paths": {
             "@admin/*": ["resources/admin/*"],

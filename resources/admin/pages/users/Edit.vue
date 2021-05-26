@@ -8,14 +8,15 @@
 
 <script lang="ts">
   import { useTitle } from '@admin/features/helpers'
-  import { defineComponent } from 'vue'
+  import { User } from '@admin/types'
+  import { defineComponent, PropType } from 'vue'
 
   export default defineComponent({
     props: {
-      user: Object,
+      user: Object as PropType<User>,
     },
     setup(props) {
-      const title = useTitle('crud.users.edit.title', { args: props.user })
+      const title = useTitle('crud.users.titles.edit', { args: props.user })
 
       return { title }
     },

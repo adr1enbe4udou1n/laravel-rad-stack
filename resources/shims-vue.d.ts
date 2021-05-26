@@ -1,6 +1,5 @@
-import { __ } from 'matice'
+import { Profile, EnumTypes } from '@admin/types'
 import { DefineComponent } from 'vue'
-import route from 'ziggy-js'
 
 declare module '*.vue' {
   const component: DefineComponent<
@@ -11,26 +10,15 @@ declare module '*.vue' {
   export default component
 }
 
-declare module '@vue/runtime-core' {
-  interface ComponentCustomProperties {
-    $t: typeof __
-    route: typeof route
-  }
-}
-
 declare module '@inertiajs/inertia' {
   namespace Inertia {
-    interface enumTypes {
-      roles: { [key: string]: string }
-    }
-
     interface PagePropsBeforeTransform extends PageProps {}
     interface PageProps {
       appName: string
-      user: { name: string; email: string }
+      user: Profile
       flash: any
       errors: { [key: string]: string }
-      enums: enumTypes
+      enums: EnumTypes
     }
   }
 }

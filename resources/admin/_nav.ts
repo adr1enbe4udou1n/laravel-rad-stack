@@ -42,11 +42,11 @@ const headerNav: NavLink[] = [
   },
 ]
 
-const isTitle = (a: any): a is NavTitle => {
-  return a.title !== undefined
+const isTitle = (a: NavTitle | NavLink): a is NavTitle => {
+  return (a as NavTitle).title !== undefined
 }
-const isLink = (a: any): a is NavLink => {
-  return a.href !== undefined
+const isLink = (a: NavTitle | NavLink): a is NavLink => {
+  return (a as NavLink).href !== undefined
 }
 
 export { NavLink, NavTitle, isTitle, isLink, mainNav, headerNav }

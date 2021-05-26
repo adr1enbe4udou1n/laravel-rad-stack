@@ -34,6 +34,7 @@ export default defineConfig({
       '@inertiajs/progress',
       'ziggy-js',
       'matice',
+      'date-fns',
       '@vueuse/core',
       'heroicons-vue3/solid',
       'heroicons-vue3/outline',

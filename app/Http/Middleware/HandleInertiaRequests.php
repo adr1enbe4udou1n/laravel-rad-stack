@@ -54,7 +54,9 @@ class HandleInertiaRequests extends Middleware
                     return;
                 }
 
-                return $request->user();
+                return $request->user()
+                    ->only(['id', 'name', 'email'])
+                ;
             },
             'enums' => function () {
                 return collect([

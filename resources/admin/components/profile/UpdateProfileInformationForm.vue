@@ -46,11 +46,12 @@
 <script lang="ts">
   import route from 'ziggy-js'
   import { useForm } from '@inertiajs/inertia-vue3'
-  import { defineComponent } from 'vue'
+  import { defineComponent, PropType } from 'vue'
+  import { Profile } from '@admin/types'
 
   export default defineComponent({
     props: {
-      user: Object,
+      user: Object as PropType<Profile>,
     },
     setup(props) {
       const form = useForm({

@@ -14,7 +14,7 @@
 
   export default defineComponent({
     setup() {
-      const title = useTitle('crud.users.create.title')
+      const title = useTitle('crud.users.titles.create')
 
       return { title }
     },
