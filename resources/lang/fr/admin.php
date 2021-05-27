@@ -45,16 +45,9 @@ return [
         'selected' => ':count éléments sélectionnés',
     ],
     'confirm' => [
-        'delete_title' => 'Supprimer :resource #:id ?',
-        'delete_message' => 'Vous êtes sur le point de supprimer :resource #:id. Cette opération est irréversible !',
+        'delete_title' => 'Supprimer :resource :label ?',
+        'delete_message' => 'Vous êtes sur le point de supprimer :resource :label. Cette opération est irréversible !',
         'delete_many_title' => 'Supprimer :count :resource ?',
         'delete_many_message' => 'Vous êtes sur le point de supprimer :count :resource. Cette opération est irréversible !',
-    ],
-    'messages' => [
-        'created' => ':resource créé avec succès !',
-        'updated' => ':resource #:id mis à jour avec succès !',
-        'deleted' => ':resource #:id supprimé avec succès !',
-        'updated_many' => ':count :resource mis à jour avec succès !',
-        'deleted_many' => ':count :resource supprimé(s) avec succès !',
     ],
 ];

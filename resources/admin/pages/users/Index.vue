@@ -9,10 +9,17 @@
       sort-by="id"
       :sort-desc="false"
       :columns="columns"
-      resource-name="users"
-      disable-show
+      resource="users"
       row-click="edit"
     >
+      <template #field:row-action>
+        <div class="flex gap-2">
+          <show-button />
+          <edit-button />
+          <impersonate-button />
+          <delete-button />
+        </div>
+      </template>
     </data-table>
   </app-layout>
 </template>
@@ -69,6 +76,7 @@
           field: 'updated_at',
           type: 'date',
         },
+        'row-action',
       ]
 
       return { title, columns }
