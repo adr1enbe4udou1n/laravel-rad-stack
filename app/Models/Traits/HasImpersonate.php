@@ -18,7 +18,7 @@ trait HasImpersonate
 
     public function canBeImpersonated()
     {
-        return ! $this->role || ! $this->role->equals(RoleEnum::super_admin()) || $this->id === Auth::id();
+        return $this->id !== Auth::id() && (! $this->role || ! $this->role->equals(RoleEnum::super_admin()));
     }
 
     public function setImpersonating($id)

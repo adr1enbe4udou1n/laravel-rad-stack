@@ -12,9 +12,12 @@
 
   export default defineComponent({
     setup() {
+      const resource = inject<string>('resource')
+      const item = inject<Model>('item')
+
       return {
-        resource: inject<string>('resource'),
-        item: inject<Model>('item'),
+        resource,
+        item,
       }
     },
   })

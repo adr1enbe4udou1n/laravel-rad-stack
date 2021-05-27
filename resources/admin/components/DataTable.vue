@@ -10,6 +10,11 @@
             v-for="column in getColumns"
             :key="column.field"
             class="px-6 pt-6 pb-4"
+            :style="column.width ? `width: ${column.width}px` : ''"
+            :class="{
+              'text-right': column.numeric,
+              'text-center': column.centered,
+            }"
           >
             {{
               $tif(`crud.${resource}.attributes.${column.field}`) ||

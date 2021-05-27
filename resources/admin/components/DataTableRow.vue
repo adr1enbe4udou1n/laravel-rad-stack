@@ -5,7 +5,13 @@
       :key="column.field"
       class="border-t px-6 py-4"
     >
-      <div class="flex items-center">
+      <div
+        class="flex items-center"
+        :class="{
+          'justify-end': column.numeric,
+          'justify-center': column.centered,
+        }"
+      >
         <slot
           :name="`field:${column.field}`"
           :row="item"

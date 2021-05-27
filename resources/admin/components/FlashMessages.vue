@@ -8,7 +8,7 @@
         'bg-red-700': style == 'danger',
       }"
     >
-      <div class="max-w-screen-xl mx-auto py-2 px-3 sm:px-6 lg:px-8">
+      <div class="py-2 px-3 sm:px-6 lg:px-8">
         <div class="flex items-center justify-between flex-wrap">
           <div class="w-0 flex-1 flex items-center min-w-0">
             <span
@@ -57,18 +57,25 @@
 </template>
 
 <script lang="ts">
-  import { computed, defineComponent, ref } from 'vue'
+  import { computed, defineComponent, ref, watch } from 'vue'
   import { usePage } from '@inertiajs/inertia-vue3'
   import { Inertia } from '@inertiajs/inertia'
 
   export default defineComponent({
     setup() {
       const show = ref(true)
-      const flash = usePage<Inertia.PageProps>().props.value.flash
 
-      const style = computed(() =>
-        flash?.danger ? 'danger' : flash?.warning ? 'warning' : 'success'
-      )
+      const flash = computed((): any => {
+        return usePage<Inertia.PageProps>().props.value.flash
+      })
+
+      const style = computed(() => {
+        return flash.value?.danger
+          ? 'danger'
+          : flash.value?.warning
+          ? 'warning'
+          : 'success'
+      })
 
       const icon = computed(() => {
         const v: 'success' | 'warning' | 'danger' = style.value
@@ -80,7 +87,16 @@
         }[v]
       })
 
-      const message = computed(() => flash[style.value])
+      const message = computed(() => {
+        return flash.value[style.value]
+      })
+
+      watch(
+        () => usePage<Inertia.PageProps>().props.value.flash,
+        () => {
+          show.value = true
+        }
+      )
 
       return { show, style, message, icon }
     },

@@ -25,9 +25,12 @@
           </div>
         </div>
 
-        <div class="hidden sm:flex sm:items-center sm:ml-6">
+        <div
+          class="hidden sm:flex sm:items-center sm:ml-6"
+          :class="{ 'bg-yellow-300': $page.props.user.is_impersonating }"
+        >
           <!-- Settings Dropdown -->
-          <div class="ml-3 relative">
+          <div class="relative">
             <dropdown align="right" width="48">
               <template #trigger>
                 <span class="inline-flex rounded-md">
@@ -43,9 +46,6 @@
                       leading-4
                       font-medium
                       rounded-md
-                      text-gray-500
-                      bg-white
-                      hover:text-gray-700
                       focus:outline-none
                       transition
                     "
@@ -68,6 +68,16 @@
                 </dropdown-link>
 
                 <div class="border-t border-gray-100"></div>
+
+                <!-- Authentication -->
+                <dropdown-link
+                  v-if="$page.props.user.is_impersonating"
+                  icon="lock-open"
+                  class="bg-yellow-300 hover:bg-yellow-500"
+                  @click="stopImpersonate"
+                >
+                  {{ $t('Stop impersonate') }}
+                </dropdown-link>
 
                 <!-- Authentication -->
                 <dropdown-link icon="logout" @click="logout">
@@ -169,9 +179,14 @@
         Inertia.post(route('logout'))
       }
 
+      const stopImpersonate = () => {
+        Inertia.post(route('admin.users.stop-impersonate'))
+      }
+
       return {
         showingNavigationDropdown,
         logout,
+        stopImpersonate,
         mainNav: mainNav.filter((l) => isLink(l)) as NavLink[],
         headerNav,
       }

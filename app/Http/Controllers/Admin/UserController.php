@@ -67,7 +67,7 @@ class UserController extends Controller
     {
         User::create($request->validated());
 
-        return redirect()->route('users')->with('success', 'User created.');
+        return redirect()->route('users')->with('flash.success', __('User created.'));
     }
 
     #[Put('{user}', name: 'users.update')]
@@ -75,7 +75,7 @@ class UserController extends Controller
     {
         $user->update($request->validated());
 
-        return redirect()->back()->with('success', 'User updated.');
+        return redirect()->back()->with('flash.success', __('User updated.'));
     }
 
     #[Delete('{user}', name: 'users.destroy')]
@@ -83,7 +83,7 @@ class UserController extends Controller
     {
         $user->delete();
 
-        return redirect()->back()->with('success', 'User deleted.');
+        return redirect()->back()->with('flash.success', __('User deleted.'));
     }
 
     #[Post('{user}/impersonate', name: 'users.impersonate')]
@@ -93,11 +93,11 @@ class UserController extends Controller
 
         if ($user->canBeImpersonated()) {
             Auth::user()->setImpersonating($user->id);
-        } else {
-            session()->flash('flash.error', 'Impersonate disabled for this user.');
+
+            return redirect()->route('admin.dashboard');
         }
 
-        return redirect()->back();
+        return redirect()->back()->with('flash.danger', __('Impersonate disabled for this user.'));
     }
 
     #[Post('stopImpersonate', name: 'users.stop-impersonate')]
@@ -105,8 +105,8 @@ class UserController extends Controller
     {
         Auth::user()->stopImpersonating();
 
-        session()->flash('flash.success', 'Welcome back !');
+        session()->flash('flash.success', __('Welcome Back!'));
 
-        return redirect()->back();
+        return redirect()->route('admin.dashboard');
     }
 }

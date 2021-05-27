@@ -709,9 +709,9 @@
     "Zip \/ Postal Code": "Code postal",
     "Access Managment": "Gestion des accès",
     "Users": "Utilisateurs",
-    "Impersonate disabled for this user": "Usurpation désactivée pour cet utilisateur",
-    "Welcome back !": "Content de vous revoir !",
+    "Impersonate disabled for this user.": "Usurpation désactivée pour cet utilisateur",
     "User created.": "Utilisateur ajouté.",
     "User updated.": "Utilisateur mis à jour.",
-    "User deleted.": "Utilisateur supprimé."
+    "User deleted.": "Utilisateur supprimé.",
+    "Stop impersonate": "Arrêter l'usurpation"
 }

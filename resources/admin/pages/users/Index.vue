@@ -12,12 +12,12 @@
       resource="users"
       row-click="edit"
     >
-      <template #field:row-action>
-        <div class="flex gap-2">
+      <template #field:row-action="{ row }">
+        <div class="flex gap-2 ml-auto">
           <show-button />
           <edit-button />
-          <impersonate-button />
-          <delete-button />
+          <impersonate-button v-if="row.can_be_impersonated" />
+          <delete-button v-if="$page.props.user.id !== row.id" />
         </div>
       </template>
     </data-table>
@@ -57,6 +57,7 @@
         {
           field: 'active',
           type: 'boolean',
+          centered: true,
         },
         {
           field: 'role',
@@ -67,14 +68,17 @@
           field: 'last_login_at',
           type: 'date',
           props: { format: 'dd/MM/yyyy HH:mm:ss' },
+          centered: true,
         },
         {
           field: 'created_at',
           type: 'date',
+          centered: true,
         },
         {
           field: 'updated_at',
           type: 'date',
+          centered: true,
         },
         'row-action',
       ]
