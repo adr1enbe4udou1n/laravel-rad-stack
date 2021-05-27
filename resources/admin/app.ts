@@ -19,8 +19,11 @@ const app = createApp({
   render: () =>
     h(InertiaApp, {
       initialPage: JSON.parse(el.dataset.page),
-      resolveComponent: (name) =>
-        import(`./pages/${name}.vue`).then((component) => component.default),
+      resolveComponent: (name) => {
+        const pages = import.meta.globEager(`./pages/**/*`)
+
+        return pages[`./pages/${name}.vue`].default
+      },
     }),
 })
   .use(Route)
