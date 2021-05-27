@@ -28,6 +28,10 @@ import {
   ChevronLeftIcon,
   ChevronRightIcon,
   ChevronUpIcon,
+  ArrowDownIcon,
+  ArrowLeftIcon,
+  ArrowRightIcon,
+  ArrowUpIcon,
 } from 'heroicons-vue3/outline'
 
 import {
@@ -70,5 +74,9 @@ export default {
     app.component('ChevronLeftIcon', ChevronLeftIcon)
     app.component('ChevronRightIcon', ChevronRightIcon)
     app.component('ChevronUpIcon', ChevronUpIcon)
+    app.component('ArrowDownIcon', ArrowDownIcon)
+    app.component('ArrowLeftIcon', ArrowLeftIcon)
+    app.component('ArrowRightIcon', ArrowRightIcon)
+    app.component('ArrowUpIcon', ArrowUpIcon)
   },
 }

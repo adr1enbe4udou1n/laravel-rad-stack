@@ -8,6 +8,7 @@ use App\Http\Requests\Admin\UserUpdateRequest;
 use App\Http\Resources\Admin\UserResource;
 use App\Models\User;
 use App\Support\GlobalSearchFilter;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Inertia\Inertia;
 use Spatie\QueryBuilder\AllowedFilter;
@@ -22,9 +23,10 @@ use Spatie\RouteAttributes\Attributes\Put;
 class UserController extends Controller
 {
     #[Get('/', name: 'users')]
-    public function index()
+    public function index(Request $request)
     {
         return Inertia::render('users/Index', [
+            'sort' => $request->get('sort', 'id'),
             'users' => QueryBuilder::for(User::class)
                 ->allowedFilters([
                     AllowedFilter::custom('q', new GlobalSearchFilter(['name', 'email'])),
@@ -34,7 +36,7 @@ class UserController extends Controller
                     AllowedFilter::exact('role'),
                     AllowedFilter::exact('active'),
                 ])
-                ->allowedSorts(['id', 'name', 'email', 'created_at', 'last_login_at'])
+                ->allowedSorts(['id', 'name', 'last_login_at', 'created_at', 'updated_at'])
                 ->paginateWithQuery()
                 ->through(fn (User $user) => UserResource::make($user)),
         ]);

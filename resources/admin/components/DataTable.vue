@@ -5,21 +5,47 @@
       :class="{ 'opacity-25': form.processing }"
     >
       <thead>
-        <tr class="text-left font-bold">
+        <tr class="text-left">
           <th
             v-for="column in getColumns"
             :key="column.field"
-            class="px-6 pt-6 pb-4"
+            class="px-6 pt-6 pb-4 border-primary-500"
             :style="column.width ? `width: ${column.width}px` : ''"
             :class="{
               'text-right': column.numeric,
               'text-center': column.centered,
+              'border-b': column.field === sortBy,
+              'hover:border-b cursor-pointer': column.sortable,
             }"
+            @click="onSort(column)"
           >
-            {{
-              $tif(`crud.${resource}.attributes.${column.field}`) ||
-              $tif(`admin.attributes.${column.field}`)
-            }}
+            <div
+              v-if="column.sortable"
+              type="button"
+              class="inline-flex items-center font-bold"
+            >
+              <span :class="{ 'order-2': column.numeric }">
+                {{
+                  $tif(`crud.${resource}.attributes.${column.field}`) ||
+                  $tif(`admin.attributes.${column.field}`)
+                }}
+              </span>
+              <component
+                :is="`${sortDesc ? 'arrow-down' : 'arrow-up'}-icon`"
+                v-if="column.field === sortBy"
+                class="h-4 w-4"
+                :class="{
+                  'order-1 mr-2': column.numeric,
+                  'ml-2': !column.numeric,
+                }"
+              />
+            </div>
+            <span v-else>
+              {{
+                $tif(`crud.${resource}.attributes.${column.field}`) ||
+                $tif(`admin.attributes.${column.field}`)
+              }}
+            </span>
           </th>
         </tr>
       </thead>
@@ -95,7 +121,7 @@
 </template>
 
 <script lang="ts">
-  import { computed, defineComponent, PropType } from 'vue'
+  import { computed, defineComponent, PropType, ref, watch } from 'vue'
   import { Model, PaginatedData } from '@admin/types'
   import { Column, Filter } from '@admin/types/data-table'
   import route from 'ziggy-js'
@@ -108,8 +134,7 @@
       resource: String,
       columns: Array as PropType<(string | Column)[]>,
       filters: Array as PropType<(string | Filter)[]>,
-      sortBy: String,
-      sortDesc: Boolean,
+      sort: String,
       rowClick: String,
       disableSearch: Boolean,
       disableCreate: Boolean,
@@ -118,6 +143,25 @@
       hideFooter: Boolean,
     },
     setup(props) {
+      const sortBy = ref('id')
+      const sortDesc = ref(false)
+
+      watch(
+        () => props.sort,
+        (val) => {
+          if (!val) return
+
+          if (val.startsWith('-')) {
+            sortBy.value = val.substring(1)
+            sortDesc.value = true
+            return
+          }
+          sortBy.value = val
+          sortDesc.value = false
+        },
+        { immediate: true }
+      )
+
       const getColumns = computed((): Column[] =>
         props.columns.map((c) => (typeof c === 'string' ? { field: c } : c))
       )
@@ -125,24 +169,24 @@
       const form = useForm({
         page: 1,
         perPage: 15,
+        sort: props.sort,
       })
 
-      const onPageChange = (page: number) => {
+      const doQuery = (query: any) => {
         form
           .transform((data) => ({
             ...data,
-            page,
+            ...query,
           }))
           .get(route(`admin.${props.resource}`))
       }
 
+      const onPageChange = (page: number) => {
+        doQuery({ page })
+      }
+
       const onPerPageChange = (e: Event) => {
-        form
-          .transform((data) => ({
-            ...data,
-            perPage: (e.target as HTMLInputElement).value,
-          }))
-          .get(route(`admin.${props.resource}`))
+        doQuery({ perPage: (e.target as HTMLInputElement).value })
       }
 
       const onRowClick = (id: number) => {
@@ -151,12 +195,27 @@
         }
       }
 
+      const onSort = (column: Column) => {
+        if (!column.sortable) return
+
+        let prefix = ''
+
+        if (column.field === sortBy.value && !sortDesc.value) {
+          prefix = '-'
+        }
+
+        doQuery({ sort: `${prefix}${column.field}` })
+      }
+
       return {
+        sortBy,
+        sortDesc,
         form,
         getColumns,
         onPageChange,
         onPerPageChange,
         onRowClick,
+        onSort,
         perPageOptions: [5, 10, 15, 50, 100],
       }
     },

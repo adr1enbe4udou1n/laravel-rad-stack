@@ -6,9 +6,8 @@
 
     <data-table
       :data="users"
-      sort-by="id"
-      :sort-desc="false"
       :columns="columns"
+      :sort="sort"
       resource="users"
       row-click="edit"
     >
@@ -32,6 +31,7 @@
 
   export default defineComponent({
     props: {
+      sort: String,
       users: Object as PropType<PaginatedData<User>>,
     },
     setup() {
@@ -68,16 +68,19 @@
           field: 'last_login_at',
           type: 'date',
           props: { format: 'dd/MM/yyyy HH:mm:ss' },
+          sortable: true,
           centered: true,
         },
         {
           field: 'created_at',
           type: 'date',
+          sortable: true,
           centered: true,
         },
         {
           field: 'updated_at',
           type: 'date',
+          sortable: true,
           centered: true,
         },
         'row-action',
