@@ -42,7 +42,7 @@
           }}
 
           <div class="mt-4 w-3/4">
-            <base-input
+            <text-input
               ref="password"
               v-model="form.password"
               :error="form.errors.password"

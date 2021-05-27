@@ -9,7 +9,7 @@
     <template #form>
       <!-- Name -->
       <div class="col-span-6 sm:col-span-4">
-        <base-input
+        <text-input
           v-model="form.name"
           :error="form.errors.name"
           :label="$t('Name')"
@@ -21,7 +21,7 @@
 
       <!-- Email -->
       <div class="col-span-6 sm:col-span-4">
-        <base-input
+        <text-input
           v-model="form.email"
           :error="form.errors.email"
           :label="$t('Email')"

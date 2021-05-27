@@ -1,5 +1,5 @@
 <template>
-  <base-label v-if="label" :for="id" class="mb-1">{{ label }}</base-label>
+  <input-label v-if="label" :for="id" class="mb-1">{{ label }}</input-label>
   <input
     v-bind="$attrs"
     :id="id"

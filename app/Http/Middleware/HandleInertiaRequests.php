@@ -55,7 +55,9 @@ class HandleInertiaRequests extends Middleware
                 }
 
                 return $request->user()
-                    ->only(['id', 'name', 'email'])
+                    ->only(['id', 'name', 'email']) + [
+                        'is_impersonating' => $request->user()->isImpersonating(),
+                    ]
                 ;
             },
             'enums' => function () {

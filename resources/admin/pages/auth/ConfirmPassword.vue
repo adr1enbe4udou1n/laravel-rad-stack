@@ -12,7 +12,7 @@
 
     <form @submit.prevent="submit">
       <div>
-        <base-input
+        <text-input
           v-model="form.password"
           :label="$t('Password')"
           type="password"

@@ -8,7 +8,7 @@
 
     <form @submit.prevent="submit">
       <div>
-        <base-input
+        <text-input
           v-model="form.email"
           :label="$t('Email')"
           type="email"
@@ -18,7 +18,7 @@
       </div>
 
       <div class="mt-4">
-        <base-input
+        <text-input
           v-model="form.password"
           :label="$t('Password')"
           type="password"
@@ -28,7 +28,7 @@
       </div>
 
       <div class="mt-4">
-        <base-checkbox
+        <checkbox-input
           v-model="form.remember"
           name="remember"
           :label="$t('Remember me')"

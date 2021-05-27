@@ -3,28 +3,33 @@
 namespace App\Models;
 
 use App\Enums\RoleEnum;
+use App\Models\Traits\HasImpersonate;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Notifications\DatabaseNotification;
+use Illuminate\Notifications\DatabaseNotificationCollection;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Support\Carbon;
+use Illuminate\Support\Facades\Hash;
 
 /**
  * App\Models\User.
  *
- * @property int                                                                                                       $id
- * @property string                                                                                                    $name
- * @property string                                                                                                    $email
- * @property null|\Illuminate\Support\Carbon                                                                           $email_verified_at
- * @property string                                                                                                    $password
- * @property null|string                                                                                               $two_factor_secret
- * @property null|string                                                                                               $two_factor_recovery_codes
- * @property bool                                                                                                      $active
- * @property null|RoleEnum                                                                                             $role
- * @property null|\Illuminate\Support\Carbon                                                                           $last_login_at
- * @property null|string                                                                                               $remember_token
- * @property null|\Illuminate\Support\Carbon                                                                           $created_at
- * @property null|\Illuminate\Support\Carbon                                                                           $updated_at
- * @property \Illuminate\Notifications\DatabaseNotification[]|\Illuminate\Notifications\DatabaseNotificationCollection $notifications
- * @property null|int                                                                                                  $notifications_count
+ * @property int                                                   $id
+ * @property string                                                $name
+ * @property string                                                $email
+ * @property null|Carbon                                           $email_verified_at
+ * @property string                                                $password
+ * @property null|string                                           $two_factor_secret
+ * @property null|string                                           $two_factor_recovery_codes
+ * @property bool                                                  $active
+ * @property null|RoleEnum                                         $role
+ * @property null|Carbon                                           $last_login_at
+ * @property null|string                                           $remember_token
+ * @property null|Carbon                                           $created_at
+ * @property null|Carbon                                           $updated_at
+ * @property DatabaseNotification[]|DatabaseNotificationCollection $notifications
+ * @property null|int                                              $notifications_count
  *
  * @method static \Database\Factories\UserFactory factory(...$parameters)
  * @method static \Illuminate\Database\Eloquent\Builder|User newModelQuery()
@@ -49,6 +54,7 @@ class User extends Authenticatable
 {
     use HasFactory;
     use Notifiable;
+    use HasImpersonate;
 
     /**
      * The attributes that are mass assignable.
@@ -82,4 +88,9 @@ class User extends Authenticatable
         'role' => RoleEnum::class,
         'last_login_at' => 'datetime',
     ];
+
+    public function setPasswordAttribute($password)
+    {
+        $this->attributes['password'] = Hash::needsRehash($password) ? Hash::make($password) : $password;
+    }
 }

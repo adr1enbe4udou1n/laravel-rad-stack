@@ -16,7 +16,7 @@
 
     <form @submit.prevent="submit">
       <div>
-        <base-input
+        <text-input
           v-model="form.email"
           :label="$t('Email')"
           type="email"

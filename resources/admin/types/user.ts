@@ -8,7 +8,7 @@ export class User extends Model {
   last_login_at: string
   created_at: string
   updated_at: string
-  id: number
+  can_be_impersonated: boolean
   toString() {
     return this.name
   }

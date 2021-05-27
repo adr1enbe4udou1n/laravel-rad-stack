@@ -59,11 +59,12 @@
 <script lang="ts">
   import { computed, defineComponent, ref } from 'vue'
   import { usePage } from '@inertiajs/inertia-vue3'
+  import { Inertia } from '@inertiajs/inertia'
 
   export default defineComponent({
     setup() {
       const show = ref(true)
-      const flash = usePage().props.value.flash
+      const flash = usePage<Inertia.PageProps>().props.value.flash
 
       const style = computed(() =>
         flash?.danger ? 'danger' : flash?.warning ? 'warning' : 'success'

@@ -9,10 +9,11 @@
         "resolveJsonModule": true,
         "esModuleInterop": true,
         "lib": ["esnext", "dom"],
-        "types": ["vite/client", "@types/jest", "@types/tailwindcss"],
+        "types": ["vite/client", "@types/jest"],
         "allowJs": true,
         "strictNullChecks": false,
         "suppressImplicitAnyIndexErrors": true,
+        "skipLibCheck": true,
         "baseUrl": ".",
         "paths": {
             "@admin/*": ["resources/admin/*"],

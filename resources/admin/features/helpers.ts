@@ -1,10 +1,13 @@
 import { usePage } from '@inertiajs/inertia-vue3'
 import { __, TranslationOptions } from 'matice'
 import { useTitle as vueUsetitle } from '@vueuse/core'
+import { Inertia } from '@inertiajs/inertia'
 
 export function useTitle(title: string, options?: TranslationOptions): string {
   const subTitle = __(title, options)
-  vueUsetitle(`${subTitle} - ${usePage().props.value.appName}`)
+  vueUsetitle(
+    `${subTitle} - ${usePage<Inertia.PageProps>().props.value.appName}`
+  )
   return subTitle
 }
 

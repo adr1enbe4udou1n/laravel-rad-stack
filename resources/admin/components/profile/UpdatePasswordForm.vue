@@ -12,7 +12,7 @@
 
     <template #form>
       <div class="col-span-6 sm:col-span-4">
-        <base-input
+        <text-input
           id="current_password"
           ref="current_password"
           v-model="form.current_password"
@@ -25,7 +25,7 @@
       </div>
 
       <div class="col-span-6 sm:col-span-4">
-        <base-input
+        <text-input
           id="password"
           ref="password"
           v-model="form.password"
@@ -38,7 +38,7 @@
       </div>
 
       <div class="col-span-6 sm:col-span-4">
-        <base-input
+        <text-input
           id="password_confirmation"
           v-model="form.password_confirmation"
           :label="$t('Confirm Password')"
