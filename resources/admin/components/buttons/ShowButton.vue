@@ -3,8 +3,11 @@
     icon="eye"
     :href="route(`admin.${resource}.show`, item.id)"
     variant="success"
+    :hide-label="hideLabel"
     @click.stop
-  />
+  >
+    {{ $t('Show') }}
+  </base-button>
 </template>
 
 <script lang="ts">
@@ -12,6 +15,9 @@
   import { defineComponent, inject } from 'vue'
 
   export default defineComponent({
+    props: {
+      hideLabel: Boolean,
+    },
     setup() {
       const resource = inject<string>('resource')
       const item = inject<Model>('item')

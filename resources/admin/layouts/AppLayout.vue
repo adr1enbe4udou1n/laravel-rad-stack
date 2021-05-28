@@ -55,7 +55,7 @@
         <flash-messages />
 
         <!-- Page Content -->
-        <main class="px-4 py-8 md:p-12">
+        <main class="px-4 py-8 md:p-8">
           <slot></slot>
         </main>
       </div>

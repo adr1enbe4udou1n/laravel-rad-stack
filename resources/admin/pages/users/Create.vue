@@ -1,22 +1,14 @@
 <template>
-  <app-layout>
-    <template #header>
-      <h1>{{ title }}</h1>
+  <create-layout resource="users">
+    <template #actions>
+      <list-button />
     </template>
-
-    Hello from create user !
-  </app-layout>
+    Hello from create user !</create-layout
+  >
 </template>
 
 <script lang="ts">
-  import { useTitle } from '@admin/features/helpers'
   import { defineComponent } from 'vue'
 
-  export default defineComponent({
-    setup() {
-      const title = useTitle('crud.users.titles.create')
-
-      return { title }
-    },
-  })
+  export default defineComponent({})
 </script>

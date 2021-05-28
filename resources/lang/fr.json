@@ -715,5 +715,7 @@
     "User deleted.": "Utilisateur supprimé.",
     "Stop impersonate": "Arrêter l'usurpation",
     "Active": "Actif",
-    "Inactive": "Inactif"
+    "Inactive": "Inactif",
+    "Show": "Voir",
+    "Impersonate": "Usurper"
 }

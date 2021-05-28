@@ -10,6 +10,7 @@ import {
   LogoutIcon,
   LockClosedIcon,
   LockOpenIcon,
+  ViewListIcon,
   PlusIcon,
   PencilIcon,
   PencilAltIcon,
@@ -62,6 +63,7 @@ export default {
     app.component('LogoutIcon', LogoutIcon)
     app.component('LockClosedIcon', LockClosedIcon)
     app.component('LockOpenIcon', LockOpenIcon)
+    app.component('ViewListIcon', ViewListIcon)
     app.component('PlusIcon', PlusIcon)
     app.component('TrashIcon', TrashIcon)
     app.component('ArchiveIcon', ArchiveIcon)

@@ -1,16 +1,20 @@
 <template>
   <base-button
-    icon="pencil"
-    :href="route(`admin.${resource}.edit`, item.id)"
+    variant="info"
+    icon="view-list"
+    :href="route(`admin.${resource}`)"
     :hide-label="hideLabel"
     @click.stop
   >
-    {{ $t('Edit') }}
+    {{
+      $t('admin.titles.index', {
+        args: { resource: $tc(`crud.${resource}.name`, 10) },
+      })
+    }}
   </base-button>
 </template>
 
 <script lang="ts">
-  import { Model } from '@admin/types'
   import { defineComponent, inject } from 'vue'
 
   export default defineComponent({
@@ -19,11 +23,9 @@
     },
     setup() {
       const resource = inject<string>('resource')
-      const item = inject<Model>('item')
 
       return {
         resource,
-        item,
       }
     },
   })

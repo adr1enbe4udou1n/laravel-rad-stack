@@ -3,6 +3,7 @@
     variant="success"
     icon="plus"
     :href="route(`admin.${resource}.create`)"
+    :hide-label="hideLabel"
     @click.stop
   >
     {{
@@ -17,6 +18,9 @@
   import { defineComponent, inject } from 'vue'
 
   export default defineComponent({
+    props: {
+      hideLabel: Boolean,
+    },
     setup() {
       const resource = inject<string>('resource')
 

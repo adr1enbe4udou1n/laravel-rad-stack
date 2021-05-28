@@ -29,8 +29,8 @@
       v-if="loading"
       class="-ml-1 h-4 w-4 text-white"
       :class="{
-        '-ml-1 mr-2': !!$slots.default,
-        '-ml-1 -mr-2': !$slots.default,
+        '-ml-1 mr-2': hasLabel,
+        '-ml-1 -mr-2': !hasLabel,
       }"
     />
     <component
@@ -38,16 +38,16 @@
       v-else-if="icon"
       class="w-4 h-4"
       :class="{
-        '-ml-1 mr-2': !!$slots.default,
-        '-ml-2 -mr-2': !$slots.default,
+        '-ml-1 mr-2': hasLabel,
+        '-ml-2 -mr-2': !hasLabel,
       }"
     />
-    <slot></slot>
+    <slot v-if="hasLabel"></slot>
   </component>
 </template>
 
 <script lang="ts">
-  import { defineComponent } from 'vue'
+  import { computed, defineComponent } from 'vue'
 
   export default defineComponent({
     props: {
@@ -55,6 +55,7 @@
       outlined: Boolean,
       href: String,
       icon: String,
+      hideLabel: Boolean,
       tag: {
         type: String,
         default: 'inertia-link',
@@ -67,6 +68,13 @@
             v
           ),
       },
+    },
+    setup(props, { slots }) {
+      const hasLabel = computed(() => {
+        return !props.hideLabel && !!slots.default
+      })
+
+      return { hasLabel }
     },
   })
 </script>

@@ -1,7 +1,7 @@
 <template>
-  <app-layout>
-    <template #header>
-      <h1>{{ title }}</h1>
+  <list-layout resource="users">
+    <template #actions>
+      <create-button />
     </template>
 
     <data-table
@@ -14,18 +14,17 @@
     >
       <template #field:row-action="{ row }">
         <div class="flex gap-2 ml-auto">
-          <show-button />
-          <edit-button />
-          <impersonate-button v-if="row.can_be_impersonated" />
-          <delete-button v-if="$page.props.user.id !== row.id" />
+          <show-button hide-label />
+          <edit-button hide-label />
+          <impersonate-button v-if="row.can_be_impersonated" hide-label />
+          <delete-button v-if="$page.props.user.id !== row.id" hide-label />
         </div>
       </template>
     </data-table>
-  </app-layout>
+  </list-layout>
 </template>
 
 <script lang="ts">
-  import { useTitle } from '@admin/features/helpers'
   import { defineComponent, PropType } from 'vue'
   import { PaginatedData, User } from '@admin/types'
   import { Column } from '@admin/types/data-table'
@@ -37,8 +36,6 @@
       filter: Object,
     },
     setup() {
-      const title = useTitle('crud.users.titles.index')
-
       const columns: (string | Column)[] = [
         {
           field: 'id',
@@ -88,7 +85,7 @@
         'row-action',
       ]
 
-      return { title, columns }
+      return { columns }
     },
   })
 </script>

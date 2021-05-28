@@ -3,6 +3,7 @@
     tag="a"
     icon="download"
     :href="route(`admin.${resource}`, getExportQuery)"
+    :hide-label="hideLabel"
     @click.stop
   >
     {{ $t('admin.data-table.export') }}
@@ -14,6 +15,9 @@
   import { InputParams } from 'ziggy-js'
 
   export default defineComponent({
+    props: {
+      hideLabel: Boolean,
+    },
     setup() {
       const resource = inject<string>('resource')
 

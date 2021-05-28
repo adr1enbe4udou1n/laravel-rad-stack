@@ -5,9 +5,9 @@ return [
     'no' => 'Non',
     'titles' => [
         'index' => 'Liste :resource',
-        'show' => 'Détail :resource #:id',
         'create' => 'Créer :resource',
-        'edit' => 'Editer :resource #:id',
+        'show' => 'Détail :resource ":label" #:id',
+        'edit' => 'Editer :resource ":label" #:id',
     ],
     'attributes' => [
         'id' => 'ID',

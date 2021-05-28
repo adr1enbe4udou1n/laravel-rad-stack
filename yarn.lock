@@ -1277,10 +1277,10 @@
   resolved "https://registry.yarnpkg.com/@windicss/plugin-scrollbar/-/plugin-scrollbar-1.2.3.tgz#4796e999e98a4bca6c269fa1faffd2e9b5452cac"
   integrity sha512-+cqv1pEmaNPITeBJ/lO6tc8IjBzRhQ+V9G8r249MMXivYoxUO4DtModBrRGHVvBgsYZgPXDsIv2jqtxc4NqYEg==
 
-"@windicss/plugin-utils@0.16.5":
-  version "0.16.5"
-  resolved "https://registry.yarnpkg.com/@windicss/plugin-utils/-/plugin-utils-0.16.5.tgz#00e11dd5b5a51c96e494a8fe3aa705e5fb2eb3a0"
-  integrity sha512-APDpVtol2RJLiHaGdn+VaBksaFWFk27LWjc51X1e+mkiPbHcepV+aBXLylNoTrIKzMjtVpsrUHRC+afGMBVgpw==
+"@windicss/plugin-utils@0.16.7":
+  version "0.16.7"
+  resolved "https://registry.yarnpkg.com/@windicss/plugin-utils/-/plugin-utils-0.16.7.tgz#54cd31841515e849f116a6d89e625da368f7de23"
+  integrity sha512-mxgTj/MkemN8JlyfaS20OAJ0BqTUoUlDT9wD/m5U+nUa5SN/r0kPlg1IW9SbmRTrYjNXWEENf9F0Fjb/X4zn6g==
   dependencies:
     "@antfu/utils" "^0.1.6"
     debug "^4.3.2"
@@ -2248,10 +2248,10 @@ data-urls@^2.0.0:
     whatwg-mimetype "^2.3.0"
     whatwg-url "^8.0.0"
 
-date-fns@^2.21.3:
-  version "2.21.3"
-  resolved "https://registry.yarnpkg.com/date-fns/-/date-fns-2.21.3.tgz#8f5f6889d7a96bbcc1f0ea50239b397a83357f9b"
-  integrity sha512-HeYdzCaFflc1i4tGbj7JKMjM4cKGYoyxwcIIkHzNgCkX8xXDNJDZXgDDVchIWpN4eQc3lH37WarduXFZJOtxfw==
+date-fns@^2.22.1:
+  version "2.22.1"
+  resolved "https://registry.yarnpkg.com/date-fns/-/date-fns-2.22.1.tgz#1e5af959831ebb1d82992bf67b765052d8f0efc4"
+  integrity sha512-yUFPQjrxEmIsMqlHhAhmxkuH769baF21Kk+nZwZGyrMoyLA+LugaQtC0+Tqf9CBUUULWwUJt6Q5ySI3LJDDCGg==
 
 deasync@^0.1.15:
   version "0.1.21"
@@ -6863,10 +6863,10 @@ vfile@^4.0.0, vfile@^4.0.1:
     unist-util-stringify-position "^2.0.0"
     vfile-message "^2.0.0"
 
-vite-plugin-components@^0.10.2:
-  version "0.10.2"
-  resolved "https://registry.yarnpkg.com/vite-plugin-components/-/vite-plugin-components-0.10.2.tgz#1c2dab1a6018f53a507e34498bf0017027fc344e"
-  integrity sha512-W9DVF8ylbycSX2Bb8bklz50JLfE+3Yu9BLsXxM3TwuoP2gmfWz7djoIjo5uE397BYbkYZpICKH7fv7aReGB7aw==
+vite-plugin-components@^0.10.3:
+  version "0.10.3"
+  resolved "https://registry.yarnpkg.com/vite-plugin-components/-/vite-plugin-components-0.10.3.tgz#076baf26c565e7e03bb1ab09ccf54466ec682a05"
+  integrity sha512-xdQfPNvktTV3z/qnOU8K7gUfviYlgBS2NVeLrkv7YVuiGH0PANhwhFNnYKNcipWnqgQV3ZfspUTaz6EkgBKF6A==
   dependencies:
     chokidar "^3.5.1"
     debug "^4.3.2"
@@ -6874,12 +6874,12 @@ vite-plugin-components@^0.10.2:
     magic-string "^0.25.7"
     minimatch "^3.0.4"
 
-vite-plugin-windicss@^0.16.5:
-  version "0.16.5"
-  resolved "https://registry.yarnpkg.com/vite-plugin-windicss/-/vite-plugin-windicss-0.16.5.tgz#cc94f3a3f3b9a967587db60bc742f6a79988898e"
-  integrity sha512-OevEU9W1mEemyY2kLgOu04MEBr0FZKiNCWe6FZwal5SqteZzr+5K99crQuRRxnB+hhtZ+d+QydKyUnqjuKx8Fw==
+vite-plugin-windicss@^0.16.7:
+  version "0.16.7"
+  resolved "https://registry.yarnpkg.com/vite-plugin-windicss/-/vite-plugin-windicss-0.16.7.tgz#5e6b849a607139ce769f7a757cc3b56b9d5349df"
+  integrity sha512-fNBLO2EBdQsJNU3IyehSmqPdrHc6Ve+hPYDaf5SrW8nGd9Wbd8ZVh6cX/1blRcjMw0qOjgcx7GM8pRWBjhzt3Q==
   dependencies:
-    "@windicss/plugin-utils" "0.16.5"
+    "@windicss/plugin-utils" "0.16.7"
     chalk "^4.1.1"
     debug "^4.3.2"
     windicss "^3.0.12"

@@ -23,8 +23,8 @@
         />
       </div>
     </div>
-    <div class="ml-auto flex flex-row gap-2">
-      <create-button v-if="!disableCreate" />
+    <div class="ml-auto flex items-center gap-2">
+      <slot name="actions"> </slot>
       <export-button v-if="!disableExport" />
     </div>
   </div>
@@ -170,7 +170,6 @@
       sort: String,
       rowClick: String,
       disableSearch: Boolean,
-      disableCreate: Boolean,
       disableExport: Boolean,
       hideHeader: Boolean,
       hideFooter: Boolean,

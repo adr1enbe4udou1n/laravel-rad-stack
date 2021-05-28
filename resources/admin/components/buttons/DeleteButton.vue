@@ -2,8 +2,11 @@
   <base-button
     icon="trash"
     variant="danger"
+    :hide-label="hideLabel"
     @click.stop="confirm"
-  ></base-button>
+  >
+    {{ $t('Delete') }}
+  </base-button>
 
   <!-- Delete Account Confirmation Modal -->
   <dialog-modal :show="confirming" @close="closeModal" @submit="submit">
@@ -41,6 +44,9 @@
   import route from 'ziggy-js'
 
   export default defineComponent({
+    props: {
+      hideLabel: Boolean,
+    },
     setup() {
       const resource = inject<string>('resource')
       const item = inject<Model>('item')

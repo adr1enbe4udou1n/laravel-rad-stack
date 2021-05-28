@@ -3,8 +3,11 @@
     icon="lock-closed"
     variant="warning"
     :loading="form.processing"
+    :hide-label="hideLabel"
     @click.stop="submit"
-  ></base-button>
+  >
+    {{ $t('Impersonate') }}
+  </base-button>
 </template>
 
 <script lang="ts">
@@ -14,6 +17,9 @@
   import route from 'ziggy-js'
 
   export default defineComponent({
+    props: {
+      hideLabel: Boolean,
+    },
     setup() {
       const resource = inject<string>('resource')
       const item = inject<Model>('item')
