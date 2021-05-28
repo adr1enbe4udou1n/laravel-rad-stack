@@ -3,51 +3,49 @@
   <select
     v-bind="$attrs"
     :id="id"
-    class="focus:ring focus:ring-opacity-50 rounded-md shadow-sm block w-full"
+    class="
+      focus:ring focus:ring-primary-500 focus:ring-opacity-50
+      rounded-md
+      shadow-sm
+      block
+      w-full
+      px-3
+      py-2
+      !border-primary-300
+    "
     :class="{ 'form-invalid': !!error }"
     :value="modelValue"
     @input="onInput"
-  />
+  >
+    <option
+      v-for="option in getChoices"
+      :key="option.value"
+      :value="option.value"
+    >
+      {{ option.text }}
+    </option>
+  </select>
   <input-error :message="error" class="mt-2" />
 </template>
 
 <script lang="ts">
-  import { useUniqueId } from '@admin/features/helpers'
-  import { transAttribute } from '@admin/plugins/translations'
-  import { computed, defineComponent, inject, ref } from 'vue'
-
-  interface Options {
-    text: string
-    value: string
-  }
+  import { choicesProps, choicesSetup } from '@admin/mixins/choices'
+  import { defineComponent } from 'vue'
 
   export default defineComponent({
     props: {
-      label: String,
-      source: String,
+      ...choicesProps,
       modelValue: String,
-      error: String,
-      options: [Array, Object] as Options[] | unknown,
     },
     emits: ['update:modelValue'],
     setup(props, { emit }) {
-      const input = ref(null)
-      const id = useUniqueId()
-
-      const resource = inject<string>('resource')
-
-      const getLabel = computed(() => {
-        if (props.source) {
-          return transAttribute(resource, props.source)
-        }
-        return props.label
-      })
+      const initial = choicesSetup(props)
 
       const onInput = (e: any) => {
         emit('update:modelValue', (e.target as HTMLInputElement).value)
       }
 
-      return { id, input, onInput, getLabel }
+      return { ...initial, onInput }
     },
   })
 </script>

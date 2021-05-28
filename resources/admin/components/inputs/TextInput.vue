@@ -4,7 +4,16 @@
     v-bind="$attrs"
     :id="id"
     ref="input"
-    class="focus:ring focus:ring-opacity-50 rounded-md shadow-sm block w-full"
+    class="
+      focus:ring focus:ring-opacity-50 focus:ring-primary-500
+      rounded-md
+      shadow-sm
+      block
+      w-full
+      px-3
+      py-2
+      !border-primary-300
+    "
     :class="{ 'form-invalid': !!error }"
     :value="modelValue"
     @input="$emit('update:modelValue', $event.target.value)"
@@ -13,36 +22,24 @@
 </template>
 
 <script lang="ts">
-  import { useUniqueId } from '@admin/features/helpers'
-  import { transAttribute } from '@admin/plugins/translations'
-  import { computed, defineComponent, inject, ref } from 'vue'
+  import { defineComponent, ref } from 'vue'
+  import { inputProps, inputSetup } from '@admin/mixins/input'
 
   export default defineComponent({
     props: {
-      label: String,
-      source: String,
+      ...inputProps,
       modelValue: String,
-      error: String,
     },
     emits: ['update:modelValue'],
     setup(props) {
       const input = ref(null)
-      const id = useUniqueId()
-
-      const resource = inject<string>('resource')
-
-      const getLabel = computed(() => {
-        if (props.source) {
-          return transAttribute(resource, props.source)
-        }
-        return props.label
-      })
+      const initial = inputSetup(props)
 
       const focus = () => {
         input.value?.focus()
       }
 
-      return { id, focus, input, getLabel }
+      return { ...initial, focus, input }
     },
   })
 </script>

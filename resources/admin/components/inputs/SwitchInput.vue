@@ -35,31 +35,23 @@
 </template>
 
 <script lang="ts">
-  import { transAttribute } from '@admin/plugins/translations'
-  import { computed, defineComponent, inject, ref } from 'vue'
+  import { inputProps, inputSetup } from '@admin/mixins/input'
+  import { defineComponent } from 'vue'
 
   export default defineComponent({
     props: {
-      label: String,
-      source: String,
+      ...inputProps,
       modelValue: Boolean,
     },
     emits: ['update:modelValue'],
     setup(props, { emit }) {
-      const resource = inject<string>('resource')
-
-      const getLabel = computed(() => {
-        if (props.source) {
-          return transAttribute(resource, props.source)
-        }
-        return props.label
-      })
+      const initial = inputSetup(props)
 
       const change = (e: Event) => {
         emit('update:modelValue', (e.target as HTMLInputElement).checked)
       }
 
-      return { change, getLabel }
+      return { ...initial, change }
     },
   })
 </script>

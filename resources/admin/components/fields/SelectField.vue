@@ -13,16 +13,16 @@
   export default defineComponent({
     props: {
       value: String,
-      options: [String, Array],
+      choices: [String, Array],
     },
     setup(props) {
       const label = computed(() => {
-        let options = props.options
+        let options = props.choices
 
         if (typeof options === 'string') {
           options =
             usePage<Inertia.PageProps>().props.value.enums[
-              props.options as string
+              props.choices as string
             ]
         }
         return options[props.value]

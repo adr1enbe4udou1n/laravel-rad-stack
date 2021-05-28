@@ -1,63 +1,44 @@
 <template>
-  <input-label :for="id" class="mb-1">{{ getLabel }}</input-label>
-  <select
-    v-bind="$attrs"
-    :id="id"
-    class="focus:ring focus:ring-opacity-50 rounded-md shadow-sm block w-full"
-    :class="{ 'form-invalid': !!error }"
-    :value="modelValue"
-    @input="onInput"
-  />
+  <input-label class="mb-1">{{ getLabel }}</input-label>
+  <div class="flex" :class="{ 'flex-col gap-1': stacked, 'gap-4': !stacked }">
+    <label
+      v-for="option in getChoices"
+      :key="option.value"
+      class="flex items-center text-sm whitespace-nowrap"
+    >
+      <input
+        type="radio"
+        :name="source"
+        :value="option.value"
+        class="mr-2"
+        :checked="modelValue === option.value"
+        @input="onInput"
+      />
+      {{ option.text }}
+    </label>
+  </div>
   <input-error :message="error" class="mt-2" />
 </template>
 
 <script lang="ts">
-  import { useUniqueId } from '@admin/features/helpers'
-  import { transAttribute } from '@admin/plugins/translations'
-  import { computed, defineComponent, inject, ref } from 'vue'
-
-  interface Options {
-    text: string
-    value: string
-  }
+  import { choicesProps, choicesSetup } from '@admin/mixins/choices'
+  import { defineComponent } from 'vue'
 
   export default defineComponent({
     props: {
-      label: String,
-      source: String,
+      ...choicesProps,
       modelValue: String,
-      error: String,
-      options: [Array, Object] as Options[] | unknown,
+      stacked: Boolean,
     },
     emits: ['update:modelValue'],
     setup(props, { emit }) {
-      const input = ref(null)
-      const id = useUniqueId()
-
-      const resource = inject<string>('resource')
-
-      const getLabel = computed(() => {
-        if (props.source) {
-          return transAttribute(resource, props.source)
-        }
-        return props.label
-      })
+      const initial = choicesSetup(props)
 
       const onInput = (e: any) => {
         emit('update:modelValue', (e.target as HTMLInputElement).value)
       }
 
-      return { id, input, onInput, getLabel }
+      return { ...initial, onInput }
     },
   })
 </script>
-
-<style lang="postcss" scoped>
-  input {
-    @apply border-gray-300 focus:border-indigo-300 focus:ring-indigo-200;
-
-    &.form-invalid {
-      @apply border-red-500 focus:border-red-300 focus:ring-red-200;
-    }
-  }
-</style>

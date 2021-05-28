@@ -43,7 +43,12 @@
           <switch-input v-model="form.active" source="active" />
         </div>
         <div class="mt-4">
-          <select-input v-model="form.role" source="role" options="roles" />
+          <radio-group-input
+            v-model="form.role"
+            source="role"
+            choices="roles"
+            stacked
+          />
         </div>
       </form>
     </div>

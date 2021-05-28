@@ -23,7 +23,7 @@
         <field source="name" />
         <field source="email" type="email" />
         <field source="active" type="boolean" />
-        <field source="role" type="select" options="roles" />
+        <field source="role" type="select" choices="roles" />
         <field source="last_login_at" type="date" />
         <field source="created_at" type="date" format="dd/MM/yyyy" />
         <field source="updated_at" type="date" format="dd/MM/yyyy" />
