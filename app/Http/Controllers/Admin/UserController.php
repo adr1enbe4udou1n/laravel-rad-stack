@@ -39,6 +39,7 @@ class UserController extends Controller
             ->allowedSorts(['id', 'name', 'last_login_at', 'created_at', 'updated_at'])
             ->paginateOrExport(fn (LengthAwarePaginator $users) => Inertia::render('users/Index', [
                 'sort' => $request->get('sort', 'id'),
+                'filter' => $request->get('filter'),
                 'users' => $users
                     ->through(fn (User $user) => UserResource::make($user)),
             ]), 'users', UserExport::class)

@@ -8,6 +8,7 @@
       :data="users"
       :columns="columns"
       :sort="sort"
+      :filter="filter"
       resource="users"
       row-click="edit"
     >
@@ -31,8 +32,9 @@
 
   export default defineComponent({
     props: {
-      sort: String,
       users: Object as PropType<PaginatedData<User>>,
+      sort: String,
+      filter: Object,
     },
     setup() {
       const title = useTitle('crud.users.titles.index')

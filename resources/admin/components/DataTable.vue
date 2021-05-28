@@ -1,6 +1,28 @@
 <template>
   <div v-if="data && !hideHeader" class="flex mb-6">
-    <div class="flex flex-row">Filters !</div>
+    <div v-if="!disableSearch" class="flex flex-row">
+      <div class="relative">
+        <input
+          v-model="form.filter.q"
+          type="text"
+          class="focus:ring focus:ring-opacity-50 rounded-md shadow-sm w-96"
+          :placeholder="$t('admin.data-table.search')"
+          @input="onFilter"
+        />
+        <search-icon
+          class="
+            h-5
+            w-5
+            absolute
+            top-1/2
+            right-4
+            transform
+            -translate-y-1/2
+            opacity-50
+          "
+        />
+      </div>
+    </div>
     <div class="ml-auto flex flex-row gap-2">
       <create-button v-if="!disableCreate" />
       <export-button v-if="!disableExport" />
@@ -76,7 +98,10 @@
           </template>
         </data-table-row>
         <tr v-if="data.data.length === 0">
-          <td class="border-t px-6 py-4" :colspan="getColumns.length">
+          <td
+            class="border-t px-6 py-4 text-center"
+            :colspan="getColumns.length"
+          >
             {{ $t('admin.data-table.empty') }}
           </td>
         </tr>
@@ -92,7 +117,7 @@
         -translate-x-1/2 -translate-y-1/2
       "
     >
-      <spinner class="h-32 w-32 text-primary" />
+      <spinner class="h-24 w-24 text-primary" />
     </span>
   </div>
   <div v-if="data && !hideFooter" class="flex mt-6">
@@ -109,7 +134,7 @@
           </option>
         </select>
       </div>
-      <div class="flex flex-row items-center ml-4">
+      <div v-if="data.total" class="flex flex-row items-center ml-4">
         <span>{{
           $t('admin.data-table.page_text', {
             args: { start: data.from, end: data.to, total: data.total },
@@ -130,17 +155,18 @@
 <script lang="ts">
   import { computed, defineComponent, PropType, provide, ref, watch } from 'vue'
   import { Model, PaginatedData } from '@admin/types'
-  import { Column, Filter } from '@admin/types/data-table'
+  import { Column } from '@admin/types/data-table'
   import route from 'ziggy-js'
   import { useForm } from '@inertiajs/inertia-vue3'
   import { Inertia } from '@inertiajs/inertia'
+  import { useDebounceFn } from '@vueuse/shared'
 
   export default defineComponent({
     props: {
       data: Object as PropType<PaginatedData<Model>>,
       resource: String,
       columns: Array as PropType<(string | Column)[]>,
-      filters: Array as PropType<(string | Filter)[]>,
+      filter: Object as PropType<{ [key: string]: string }>,
       sort: String,
       rowClick: String,
       disableSearch: Boolean,
@@ -173,27 +199,31 @@
         props.columns.map((c) => (typeof c === 'string' ? { field: c } : c))
       )
 
+      const getDefaultFilter = () => {
+        return { q: '' }
+      }
+
       const form = useForm({
         page: 1,
         perPage: 15,
         sort: props.sort,
+        filter: props.filter || getDefaultFilter(),
       })
 
-      const doQuery = (query: any) => {
-        form
-          .transform((data) => ({
-            ...data,
-            ...query,
-          }))
-          .get(route(`admin.${props.resource}`))
+      const doQuery = () => {
+        form.get(route(`admin.${props.resource}`), {
+          preserveState: true,
+        })
       }
 
       const onPageChange = (page: number) => {
-        doQuery({ page })
+        form.page = page
+        doQuery()
       }
 
       const onPerPageChange = (e: Event) => {
-        doQuery({ perPage: (e.target as HTMLInputElement).value })
+        form.perPage = parseInt((e.target as HTMLInputElement).value, 10)
+        doQuery()
       }
 
       const onRowClick = (id: number) => {
@@ -211,14 +241,21 @@
           prefix = '-'
         }
 
-        doQuery({ sort: `${prefix}${column.field}` })
+        form.sort = `${prefix}${column.field}`
+        doQuery()
       }
+
+      const onFilter = useDebounceFn(() => {
+        form.page = 1
+        doQuery()
+      })
 
       provide('resource', props.resource)
 
       return {
         sortBy,
         sortDesc,
+        onFilter,
         form,
         getColumns,
         onPageChange,

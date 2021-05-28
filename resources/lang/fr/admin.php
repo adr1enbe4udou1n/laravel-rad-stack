@@ -34,7 +34,7 @@ return [
     ],
     'data-table' => [
         'export' => 'Exporter',
-        'search' => 'Rechercher',
+        'search' => 'Rechercher...',
         'empty' => 'Aucun élément trouvé',
         'next' => 'Suivant',
         'prev' => 'Précédent',

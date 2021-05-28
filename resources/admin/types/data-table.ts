@@ -10,4 +10,9 @@ export interface Column {
   props?: any
 }
 
-export interface Filter {}
+export interface Filter {
+  field: string
+  label: string
+  type: string
+  value: any
+}

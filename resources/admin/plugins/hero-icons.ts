@@ -34,6 +34,7 @@ import {
   ArrowUpIcon,
   FilterIcon,
   DownloadIcon,
+  SearchIcon,
 } from 'heroicons-vue3/outline'
 
 import {
@@ -82,5 +83,6 @@ export default {
     app.component('ArrowUpIcon', ArrowUpIcon)
     app.component('DownloadIcon', DownloadIcon)
     app.component('FilterIcon', FilterIcon)
+    app.component('SearchIcon', SearchIcon)
   },
 }
