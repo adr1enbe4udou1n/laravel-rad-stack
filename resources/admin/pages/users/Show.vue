@@ -6,7 +6,29 @@
       <impersonate-button />
       <delete-button />
     </template>
-    Hello from show !
+
+    <div
+      class="
+        max-w-md
+        mx-auto
+        px-6
+        py-4
+        bg-white
+        shadow-md
+        overflow-hidden
+        rounded-lg
+      "
+    >
+      <div class="flex flex-col gap-4">
+        <field source="name" />
+        <field source="email" type="email" />
+        <field source="active" type="boolean" />
+        <field source="role" type="select" options="roles" />
+        <field source="last_login_at" type="date" />
+        <field source="created_at" type="date" format="dd/MM/yyyy" />
+        <field source="updated_at" type="date" format="dd/MM/yyyy" />
+      </div>
+    </div>
   </show-layout>
 </template>
 

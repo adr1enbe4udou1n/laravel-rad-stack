@@ -1,5 +1,5 @@
 <template>
-  <div v-if="data && !hideHeader" class="flex mb-6">
+  <div v-if="source && !hideHeader" class="flex mb-6">
     <div v-if="!disableSearch" class="flex flex-row">
       <div class="relative">
         <input
@@ -54,10 +54,7 @@
               class="inline-flex items-center font-bold"
             >
               <span :class="{ 'order-2': column.numeric }">
-                {{
-                  $tif(`crud.${resource}.attributes.${column.field}`) ||
-                  $tif(`admin.attributes.${column.field}`)
-                }}
+                {{ $ta(resource, column.field) }}
               </span>
               <component
                 :is="`${sortDesc ? 'arrow-down' : 'arrow-up'}-icon`"
@@ -70,17 +67,14 @@
               />
             </div>
             <span v-else>
-              {{
-                $tif(`crud.${resource}.attributes.${column.field}`) ||
-                $tif(`admin.attributes.${column.field}`)
-              }}
+              {{ $ta(resource, column.field) }}
             </span>
           </th>
         </tr>
       </thead>
-      <tbody v-if="data">
+      <tbody v-if="source">
         <data-table-row
-          v-for="item in data.data"
+          v-for="item in source.data"
           :key="item.id"
           class="hover:bg-gray-100 focus-within:bg-gray-100"
           :class="{ 'cursor-pointer': rowClick }"
@@ -97,7 +91,7 @@
             <slot :name="`field:${column.field}`" v-bind="props" />
           </template>
         </data-table-row>
-        <tr v-if="data.data.length === 0">
+        <tr v-if="source.data.length === 0">
           <td
             class="border-t px-6 py-4 text-center"
             :colspan="getColumns.length"
@@ -120,12 +114,12 @@
       <spinner class="h-24 w-24 text-primary" />
     </span>
   </div>
-  <div v-if="data && !hideFooter" class="flex mt-6">
+  <div v-if="source && !hideFooter" class="flex mt-6">
     <div class="ml-auto flex flex-row">
       <div class="flex flex-row items-center">
         <label>{{ $t('admin.data-table.rows_per_page_text') }}</label>
         <select
-          :value="data.per_page"
+          :value="source.per_page"
           class="h-full pl-4 pr-8 ml-2 rounded"
           @input="onPerPageChange"
         >
@@ -134,17 +128,17 @@
           </option>
         </select>
       </div>
-      <div v-if="data.total" class="flex flex-row items-center ml-4">
+      <div v-if="source.total" class="flex flex-row items-center ml-4">
         <span>{{
           $t('admin.data-table.page_text', {
-            args: { start: data.from, end: data.to, total: data.total },
+            args: { start: source.from, end: source.to, total: source.total },
           })
         }}</span>
         <pagination
           class="ml-2"
-          :current-page="data.current_page"
-          :per-page="data.per_page"
-          :total="data.total"
+          :current-page="source.current_page"
+          :per-page="source.per_page"
+          :total="source.total"
           @change="onPageChange"
         />
       </div>
@@ -163,7 +157,7 @@
 
   export default defineComponent({
     props: {
-      data: Object as PropType<PaginatedData<Model>>,
+      source: Object as PropType<PaginatedData<Model>>,
       resource: String,
       columns: Array as PropType<(string | Column)[]>,
       filter: Object as PropType<{ [key: string]: string }>,

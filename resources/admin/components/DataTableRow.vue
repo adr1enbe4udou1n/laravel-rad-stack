@@ -38,7 +38,6 @@
   import BooleanField from '@admin/components/fields/BooleanField.vue'
   import DateField from '@admin/components/fields/DateField.vue'
   import SelectField from '@admin/components/fields/SelectField.vue'
-  import BaseButton from './BaseButton.vue'
   import { Model } from '@admin/types'
   import { Column } from '@admin/types/data-table'
 
@@ -48,7 +47,6 @@
       BooleanField,
       DateField,
       SelectField,
-      BaseButton,
     },
     props: {
       columns: Array as PropType<Column[]>,

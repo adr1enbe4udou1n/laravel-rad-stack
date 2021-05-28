@@ -5,7 +5,7 @@
     </template>
 
     <data-table
-      :data="users"
+      :source="users"
       :columns="columns"
       :sort="sort"
       :filter="filter"
