@@ -53,10 +53,8 @@
     props: {
       columns: Array as PropType<Column[]>,
       item: Object as PropType<Model>,
-      resource: String,
     },
     setup(props) {
-      provide('resource', props.resource)
       provide('item', props.item)
     },
   })

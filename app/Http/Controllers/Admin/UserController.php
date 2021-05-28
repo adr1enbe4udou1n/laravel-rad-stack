@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Exports\UserExport;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\UserStoreRequest;
 use App\Http\Requests\Admin\UserUpdateRequest;
@@ -9,6 +10,7 @@ use App\Http\Resources\Admin\UserResource;
 use App\Models\User;
 use App\Support\GlobalSearchFilter;
 use Illuminate\Http\Request;
+use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Support\Facades\Auth;
 use Inertia\Inertia;
 use Spatie\QueryBuilder\AllowedFilter;
@@ -25,21 +27,22 @@ class UserController extends Controller
     #[Get('/', name: 'users')]
     public function index(Request $request)
     {
-        return Inertia::render('users/Index', [
-            'sort' => $request->get('sort', 'id'),
-            'users' => QueryBuilder::for(User::class)
-                ->allowedFilters([
-                    AllowedFilter::custom('q', new GlobalSearchFilter(['name', 'email'])),
-                    AllowedFilter::partial('name'),
-                    AllowedFilter::partial('email'),
-                    AllowedFilter::exact('id'),
-                    AllowedFilter::exact('role'),
-                    AllowedFilter::exact('active'),
-                ])
-                ->allowedSorts(['id', 'name', 'last_login_at', 'created_at', 'updated_at'])
-                ->paginateWithQuery()
-                ->through(fn (User $user) => UserResource::make($user)),
-        ]);
+        return QueryBuilder::for(User::class)
+            ->allowedFilters([
+                AllowedFilter::custom('q', new GlobalSearchFilter(['name', 'email'])),
+                AllowedFilter::partial('name'),
+                AllowedFilter::partial('email'),
+                AllowedFilter::exact('id'),
+                AllowedFilter::exact('role'),
+                AllowedFilter::exact('active'),
+            ])
+            ->allowedSorts(['id', 'name', 'last_login_at', 'created_at', 'updated_at'])
+            ->paginateOrExport(fn (LengthAwarePaginator $users) => Inertia::render('users/Index', [
+                'sort' => $request->get('sort', 'id'),
+                'users' => $users
+                    ->through(fn (User $user) => UserResource::make($user)),
+            ]), 'users', UserExport::class)
+        ;
     }
 
     #[Get('create', name: 'users.create')]

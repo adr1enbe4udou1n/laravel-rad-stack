@@ -3,10 +3,11 @@
 namespace App\Providers;
 
 use App\Support\LaravelViteManifest;
+use Closure;
 use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Pagination\Paginator;
 use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\ServiceProvider;
+use Maatwebsite\Excel\Facades\Excel;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -29,14 +30,20 @@ class AppServiceProvider extends ServiceProvider
             return '{!! App\Facades\ViteManifest::embed('.$expression.') !!}';
         });
 
-        Builder::macro('paginateWithQuery', function () {
+        Builder::macro('paginateOrExport', function (Closure $response, $resource, $export) {
             /** @var Builder */
             $builder = $this;
 
-            /** @var Paginator */
-            $paginator = $builder->paginate(min(100, request()->get('perPage', 15)));
+            if (request()->get('export')) {
+                $fileName = trans_choice("crud.{$resource}.name", 10);
+                $date = date('Ymd-His');
 
-            return $paginator->withQueryString();
+                return Excel::download(new $export($builder), "export-{$fileName}-{$date}.xlsx");
+            }
+
+            return $response(
+                $builder->paginate(min(100, request()->get('perPage', 15)))
+            );
         });
     }
 }

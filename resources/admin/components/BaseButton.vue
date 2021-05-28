@@ -1,6 +1,6 @@
 <template>
   <component
-    :is="href ? 'inertia-link' : 'button'"
+    :is="href ? tag : 'button'"
     class="
       inline-flex
       justify-center
@@ -55,6 +55,10 @@
       outlined: Boolean,
       href: String,
       icon: String,
+      tag: {
+        type: String,
+        default: 'inertia-link',
+      },
       variant: {
         type: String,
         default: 'primary',

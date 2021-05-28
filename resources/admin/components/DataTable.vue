@@ -1,4 +1,11 @@
 <template>
+  <div v-if="data && !hideHeader" class="flex mb-6">
+    <div class="flex flex-row">Filters !</div>
+    <div class="ml-auto flex flex-row gap-2">
+      <create-button v-if="!disableCreate" />
+      <export-button v-if="!disableExport" />
+    </div>
+  </div>
   <div class="bg-white rounded-md shadow overflow-x-auto relative">
     <table
       class="w-full whitespace-nowrap"
@@ -88,7 +95,7 @@
       <spinner class="h-32 w-32 text-primary" />
     </span>
   </div>
-  <div v-if="data" class="flex mt-6">
+  <div v-if="data && !hideFooter" class="flex mt-6">
     <div class="ml-auto flex flex-row">
       <div class="flex flex-row items-center">
         <label>{{ $t('admin.data-table.rows_per_page_text') }}</label>
@@ -121,7 +128,7 @@
 </template>
 
 <script lang="ts">
-  import { computed, defineComponent, PropType, ref, watch } from 'vue'
+  import { computed, defineComponent, PropType, provide, ref, watch } from 'vue'
   import { Model, PaginatedData } from '@admin/types'
   import { Column, Filter } from '@admin/types/data-table'
   import route from 'ziggy-js'
@@ -206,6 +213,8 @@
 
         doQuery({ sort: `${prefix}${column.field}` })
       }
+
+      provide('resource', props.resource)
 
       return {
         sortBy,

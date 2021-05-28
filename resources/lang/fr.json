@@ -713,5 +713,7 @@
     "User created.": "Utilisateur ajouté.",
     "User updated.": "Utilisateur mis à jour.",
     "User deleted.": "Utilisateur supprimé.",
-    "Stop impersonate": "Arrêter l'usurpation"
+    "Stop impersonate": "Arrêter l'usurpation",
+    "Active": "Actif",
+    "Inactive": "Inactif"
 }
