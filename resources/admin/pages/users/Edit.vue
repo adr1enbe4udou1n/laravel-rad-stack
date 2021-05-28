@@ -66,7 +66,9 @@
         password: '',
       })
 
-      const submit = () => {}
+      const submit = () => {
+        //
+      }
 
       return { form, submit }
     },
