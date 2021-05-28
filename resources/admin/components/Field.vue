@@ -1,18 +1,16 @@
 <template>
+  <label class="font-bold">{{ $ta(resource, source) }}</label>
   <div>
-    <label class="font-bold">{{ $ta(resource, source) }}</label>
-    <div>
-      <template v-if="item[source]">
-        <component
-          :is="`${type}-field`"
-          v-if="type"
-          :value="item[source]"
-          v-bind="$attrs"
-        ></component>
-        <span v-else>{{ item[source] }}</span>
-      </template>
-      <span v-else>-</span>
-    </div>
+    <template v-if="item[source]">
+      <component
+        :is="`${type}-field`"
+        v-if="type"
+        :value="item[source]"
+        v-bind="$attrs"
+      ></component>
+      <span v-else>{{ item[source] }}</span>
+    </template>
+    <span v-else>-</span>
   </div>
 </template>
 

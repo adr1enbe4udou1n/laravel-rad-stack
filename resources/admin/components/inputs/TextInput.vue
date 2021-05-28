@@ -1,5 +1,5 @@
 <template>
-  <input-label v-if="label" :for="id" class="mb-1">{{ label }}</input-label>
+  <input-label :for="id" class="mb-1" :value="getLabel" />
   <input
     v-bind="$attrs"
     :id="id"
@@ -14,24 +14,35 @@
 
 <script lang="ts">
   import { useUniqueId } from '@admin/features/helpers'
-  import { defineComponent, ref } from 'vue'
+  import { transAttribute } from '@admin/plugins/translations'
+  import { computed, defineComponent, inject, ref } from 'vue'
 
   export default defineComponent({
     props: {
       label: String,
+      source: String,
       modelValue: String,
       error: String,
     },
     emits: ['update:modelValue'],
-    setup() {
+    setup(props) {
       const input = ref(null)
       const id = useUniqueId()
+
+      const resource = inject<string>('resource')
+
+      const getLabel = computed(() => {
+        if (props.source) {
+          return transAttribute(resource, props.source)
+        }
+        return props.label
+      })
 
       const focus = () => {
         input.value?.focus()
       }
 
-      return { id, focus, input }
+      return { id, focus, input, getLabel }
     },
   })
 </script>
