@@ -71,6 +71,21 @@
             </span>
           </th>
         </tr>
+        <tr class="text-left">
+          <th
+            v-for="column in getColumns"
+            :key="column.field"
+            class="px-6 py-2 border-t"
+          >
+            <template v-if="column.searchable">
+              <input
+                v-model="form.filter[column.field]"
+                type="text"
+                @input="onFilter"
+              />
+            </template>
+          </th>
+        </tr>
       </thead>
       <tbody v-if="source">
         <data-table-row
@@ -189,7 +204,14 @@
       )
 
       const getDefaultFilter = () => {
-        return { q: '' }
+        return getColumns.value
+          .filter((c) => c.searchable)
+          .reduce(
+            (acc, column) => {
+              return { ...acc, [column.field]: '' }
+            },
+            props.disableSearch ? {} : { q: '' }
+          )
       }
 
       const form = useForm({
