@@ -1,19 +1,6 @@
 <template>
   <label class="flex items-center">
-    <input
-      type="checkbox"
-      :checked="modelValue"
-      class="
-        rounded
-        border-gray-300
-        text-primary-600
-        shadow-sm
-        checked:bg-primary-500
-        focus:border-primary-300
-        focus:ring focus:ring-primary-200 focus:ring-opacity-50
-      "
-      @change="change"
-    />
+    <input type="checkbox" :checked="modelValue" @change="change" />
     <span class="ml-2 text-sm text-gray-600">{{ getLabel }}</span>
   </label>
 </template>

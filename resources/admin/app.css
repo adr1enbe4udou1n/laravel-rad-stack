@@ -22,3 +22,15 @@ select {
 select {
     @apply pr-8;
 }
+
+input[type="checkbox"] {
+    @apply rounded border-gray-300 text-primary-600 shadow-sm;
+
+    &:focus {
+        @apply border-primary-300 ring ring-primary-200 ring-opacity-50;
+    }
+
+    &:checked {
+        @apply bg-primary-500;
+    }
+}
