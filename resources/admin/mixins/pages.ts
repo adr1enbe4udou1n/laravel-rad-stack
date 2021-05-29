@@ -6,7 +6,6 @@ import { computed, ExtractPropTypes, PropType, provide } from 'vue'
 export const pageProps = {
   title: String,
   resource: String,
-  item: Object as PropType<Model>,
 }
 
 export const pageWithItemProps = {
@@ -45,12 +44,12 @@ export const pageWithItemSetup = (
   name: string,
   count: number
 ) => {
-  const initialSetup = pageSetup(props, name, count, {
+  const initial = pageSetup(props, name, count, {
     label: useModelToString(props.resource, props.item),
     id: props.item.id,
   })
 
   provide('item', props.item)
 
-  return { ...initialSetup }
+  return { ...initial }
 }

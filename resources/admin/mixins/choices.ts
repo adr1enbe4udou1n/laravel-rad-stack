@@ -26,7 +26,7 @@ export interface Option {
 export const choicesSetup = (
   props: Readonly<ExtractPropTypes<typeof choicesProps>>
 ) => {
-  const initialInput = inputSetup(props)
+  const initial = inputSetup(props)
 
   const getChoices = computed((): Option[] => {
     let options = props.choices as Option[]
@@ -55,5 +55,5 @@ export const choicesSetup = (
     return options
   })
 
-  return { ...initialInput, getChoices }
+  return { ...initial, getChoices }
 }
