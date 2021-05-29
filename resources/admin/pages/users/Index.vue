@@ -17,7 +17,7 @@
           <show-button hide-label />
           <edit-button hide-label />
           <impersonate-button v-if="row.can_be_impersonated" hide-label />
-          <delete-button v-if="$page.props.user.id !== row.id" hide-label />
+          <delete-button v-if="$page.props.auth.id !== row.id" hide-label />
         </div>
       </template>
     </data-table>

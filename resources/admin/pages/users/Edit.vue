@@ -3,9 +3,10 @@
     <template #actions>
       <list-button />
       <show-button />
-      <impersonate-button />
-      <delete-button />
+      <impersonate-button v-if="user.can_be_impersonated" />
+      <delete-button v-if="$page.props.auth.id !== user.id" />
     </template>
+
     <div
       class="
         max-w-md

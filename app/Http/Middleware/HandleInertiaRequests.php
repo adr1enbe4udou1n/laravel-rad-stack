@@ -3,6 +3,7 @@
 namespace App\Http\Middleware;
 
 use App\Enums\RoleEnum;
+use App\Http\Resources\Admin\AuthResource;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
 use Inertia\Middleware;
@@ -49,16 +50,12 @@ class HandleInertiaRequests extends Middleware
                     return [$key => $bag->messages()];
                 })->all();
             },
-            'user' => function () use ($request) {
+            'auth' => function () use ($request) {
                 if (! $request->user()) {
                     return;
                 }
 
-                return $request->user()
-                    ->only(['id', 'name', 'email']) + [
-                        'is_impersonating' => $request->user()->isImpersonating(),
-                    ]
-                ;
+                return AuthResource::make($request->user());
             },
             'enums' => function () {
                 return collect([

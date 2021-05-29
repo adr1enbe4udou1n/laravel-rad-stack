@@ -3,8 +3,8 @@
     <template #actions>
       <list-button />
       <edit-button />
-      <impersonate-button />
-      <delete-button />
+      <impersonate-button v-if="user.can_be_impersonated" />
+      <delete-button v-if="$page.props.auth.id !== user.id" />
     </template>
 
     <div

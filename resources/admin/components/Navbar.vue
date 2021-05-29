@@ -27,7 +27,7 @@
 
         <div
           class="hidden sm:flex sm:items-center sm:ml-6"
-          :class="{ 'bg-yellow-300': $page.props.user.is_impersonating }"
+          :class="{ 'bg-yellow-300': $page.props.auth.is_impersonating }"
         >
           <!-- Settings Dropdown -->
           <div class="relative">
@@ -50,7 +50,7 @@
                       transition
                     "
                   >
-                    {{ $page.props.user.name }}
+                    {{ $page.props.auth.name }}
 
                     <chevron-down-icon class="h-4 w-4 ml-2" />
                   </button>
@@ -71,7 +71,7 @@
 
                 <!-- Authentication -->
                 <dropdown-link
-                  v-if="$page.props.user.is_impersonating"
+                  v-if="$page.props.auth.is_impersonating"
                   icon="lock-open"
                   class="bg-yellow-300 hover:bg-yellow-500"
                   @click="stopImpersonate"
@@ -139,10 +139,10 @@
         <div class="flex items-center px-4">
           <div>
             <div class="font-medium text-base text-gray-800">
-              {{ $page.props.user.name }}
+              {{ $page.props.auth.name }}
             </div>
             <div class="font-medium text-sm text-gray-500">
-              {{ $page.props.user.email }}
+              {{ $page.props.auth.email }}
             </div>
           </div>
         </div>

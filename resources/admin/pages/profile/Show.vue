@@ -5,7 +5,7 @@
     </template>
 
     <div class="max-w-7xl mx-auto">
-      <update-profile-information-form :user="$page.props.user" />
+      <update-profile-information-form :user="$page.props.auth" />
 
       <section-border />
 
