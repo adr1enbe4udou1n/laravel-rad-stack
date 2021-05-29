@@ -1,12 +1,7 @@
-import {
-  useModelToString,
-  useTitle,
-  useUniqueId,
-} from '@admin/features/helpers'
-import { transAttribute } from '@admin/plugins/translations'
+import { useModelToString, useTitle } from '@admin/features/helpers'
 import { Model } from '@admin/types'
 import { transChoice } from 'matice'
-import { computed, inject, ExtractPropTypes, PropType, provide } from 'vue'
+import { computed, ExtractPropTypes, PropType, provide } from 'vue'
 
 export const pageProps = {
   title: String,
