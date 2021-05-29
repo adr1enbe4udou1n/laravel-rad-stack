@@ -1,6 +1,6 @@
 import { useUniqueId } from '@admin/features/helpers'
 import { transAttribute } from '@admin/plugins/translations'
-import { computed, inject } from 'vue'
+import { computed, inject, ExtractPropTypes } from 'vue'
 
 export const inputProps = {
   label: String,
@@ -9,7 +9,7 @@ export const inputProps = {
 }
 
 export const inputSetup = (
-  props: Readonly<{ label?: string; source?: string }>
+  props: Readonly<ExtractPropTypes<typeof inputProps>>
 ) => {
   const id = useUniqueId()
 

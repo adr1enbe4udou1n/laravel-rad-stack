@@ -14,38 +14,18 @@
 </template>
 
 <script lang="ts">
-  import { useModelToString, useTitle } from '@admin/features/helpers'
-  import { Model } from '@admin/types'
-  import { transChoice } from 'matice'
-  import { computed, defineComponent, PropType, provide } from 'vue'
+  import {
+    pageWithItemProps as props,
+    pageWithItemSetup,
+  } from '@admin/mixins/pages'
+  import { defineComponent } from 'vue'
 
   export default defineComponent({
-    props: {
-      title: String,
-      resource: String,
-      item: Object as PropType<Model>,
-    },
+    props,
     setup(props) {
-      const getTitle = computed(() => {
-        return (
-          props.title ||
-          useTitle('admin.titles.show', {
-            args: {
-              resource: transChoice(
-                `crud.${props.resource}.name`,
-                0
-              ).toLowerCase(),
-              label: useModelToString(props.resource, props.item),
-              id: props.item.id,
-            },
-          })
-        )
-      })
+      const initial = pageWithItemSetup(props, 'show', 0)
 
-      provide('resource', props.resource)
-      provide('item', props.item)
-
-      return { getTitle }
+      return { ...initial }
     },
   })
 </script>

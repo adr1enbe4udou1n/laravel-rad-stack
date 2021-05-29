@@ -61,7 +61,7 @@
         {
           field: 'role',
           type: 'select',
-          props: { options: 'roles' },
+          props: { choices: 'roles' },
         },
         {
           field: 'last_login_at',

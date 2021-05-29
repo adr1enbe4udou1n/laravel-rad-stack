@@ -1,6 +1,6 @@
 import { Inertia } from '@inertiajs/inertia'
 import { usePage } from '@inertiajs/inertia-vue3'
-import { computed } from 'vue'
+import { computed, ExtractPropTypes } from 'vue'
 import { inputProps, inputSetup } from './input'
 
 export const choicesProps = {
@@ -24,18 +24,7 @@ export interface Option {
 }
 
 export const choicesSetup = (
-  props: Readonly<
-    {
-      optionText: string
-      optionValue: string
-      allowEmpty: boolean
-    } & {
-      choices?: unknown
-      emptyText?: string
-      label?: string
-      source?: string
-    }
-  >
+  props: Readonly<ExtractPropTypes<typeof choicesProps>>
 ) => {
   const initialInput = inputSetup(props)
 

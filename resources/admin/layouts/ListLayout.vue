@@ -14,33 +14,15 @@
 </template>
 
 <script lang="ts">
-  import { useTitle } from '@admin/features/helpers'
-  import { transChoice } from 'matice'
-  import { computed, defineComponent, provide } from 'vue'
+  import { pageProps as props, pageSetup } from '@admin/mixins/pages'
+  import { defineComponent } from 'vue'
 
   export default defineComponent({
-    props: {
-      title: String,
-      resource: String,
-    },
+    props,
     setup(props) {
-      const getTitle = computed(() => {
-        return (
-          props.title ||
-          useTitle('admin.titles.index', {
-            args: {
-              resource: transChoice(
-                `crud.${props.resource}.name`,
-                10
-              ).toLowerCase(),
-            },
-          })
-        )
-      })
+      const initial = pageSetup(props, 'index', 10)
 
-      provide('resource', props.resource)
-
-      return { getTitle }
+      return { ...initial }
     },
   })
 </script>
