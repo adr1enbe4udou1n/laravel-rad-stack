@@ -1,7 +1,12 @@
 <template>
   <edit-context v-slot="{ title }" resource="users" :item="user">
     <app-aside :title="title">
-      <user-form :method="method" :url="url" :initial-values="values" />
+      <user-form :method="method" :url="url" :initial-values="values">
+        <template #actions>
+          <impersonate-button hide-label />
+          <delete-button hide-label />
+        </template>
+      </user-form>
     </app-aside>
   </edit-context>
 </template>

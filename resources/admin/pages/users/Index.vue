@@ -5,7 +5,7 @@
         <page-header>
           <h1>{{ title }}</h1>
           <template #actions>
-            <create-button />
+            <create-button :only="['route']" />
           </template>
         </page-header>
       </template>
@@ -19,16 +19,18 @@
       >
         <template #field:row-action="{ row }">
           <div class="flex gap-2 ml-auto">
-            <show-button hide-label />
-            <edit-button hide-label />
+            <show-button hide-label :only="['route', 'user']" />
+            <edit-button hide-label :only="['route', 'user']" />
             <impersonate-button v-if="row.can_be_impersonated" hide-label />
             <delete-button v-if="$page.props.auth.id !== row.id" hide-label />
           </div>
         </template>
       </data-table>
 
-      <template v-if="route" #aside>
-        <component :is="`${route}-user`" :user="user" />
+      <template v-if="route !== 'list'" #aside>
+        <create-user v-if="route === 'create'" />
+        <show-user v-if="route === 'show'" :user="user" />
+        <edit-user v-if="route === 'edit'" :user="user" />
       </template>
     </app-layout>
   </list-context>

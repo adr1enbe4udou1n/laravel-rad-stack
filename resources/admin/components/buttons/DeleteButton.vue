@@ -1,5 +1,6 @@
 <template>
   <base-button
+    type="button"
     icon="trash"
     variant="danger"
     :hide-label="hideLabel"

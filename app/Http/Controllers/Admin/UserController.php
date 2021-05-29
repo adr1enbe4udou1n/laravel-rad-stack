@@ -2,19 +2,14 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Exports\UserExport;
 use App\Http\Controllers\Controller;
+use App\Http\Queries\UserQuery;
 use App\Http\Requests\Admin\UserStoreRequest;
 use App\Http\Requests\Admin\UserUpdateRequest;
 use App\Http\Resources\Admin\UserResource;
 use App\Models\User;
-use App\Support\GlobalSearchFilter;
-use Illuminate\Http\Request;
-use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Support\Facades\Auth;
 use Inertia\Inertia;
-use Spatie\QueryBuilder\AllowedFilter;
-use Spatie\QueryBuilder\QueryBuilder;
 use Spatie\RouteAttributes\Attributes\Delete;
 use Spatie\RouteAttributes\Attributes\Get;
 use Spatie\RouteAttributes\Attributes\Post;
@@ -25,24 +20,10 @@ use Spatie\RouteAttributes\Attributes\Put;
 class UserController extends Controller
 {
     #[Get('/', name: 'users')]
-    public function index(Request $request)
+    public function index()
     {
-        return QueryBuilder::for(User::class)
-            ->allowedFilters([
-                AllowedFilter::custom('q', new GlobalSearchFilter(['name', 'email'])),
-                AllowedFilter::partial('name'),
-                AllowedFilter::partial('email'),
-                AllowedFilter::exact('id'),
-                AllowedFilter::exact('role'),
-                AllowedFilter::exact('active'),
-            ])
-            ->allowedSorts(['id', 'name', 'last_login_at', 'created_at', 'updated_at'])
-            ->paginateOrExport(fn (LengthAwarePaginator $users) => Inertia::render('users/Index', [
-                'sort' => $request->get('sort', 'id'),
-                'filter' => $request->get('filter'),
-                'users' => $users
-                    ->through(fn (User $user) => UserResource::make($user)),
-            ]), 'users', UserExport::class)
+        return app(UserQuery::class)->make()
+            ->paginateOrExport(fn ($data) => Inertia::render('users/Index', ['route' => 'list'] + $data))
         ;
     }
 
@@ -51,7 +32,7 @@ class UserController extends Controller
     {
         return Inertia::render('users/Index', [
             'route' => 'create',
-        ]);
+        ] + app(UserQuery::class)->make()->get());
     }
 
     #[Get('{user}', name: 'users.show')]
@@ -60,7 +41,7 @@ class UserController extends Controller
         return Inertia::render('users/Index', [
             'route' => 'show',
             'user' => UserResource::make($user),
-        ]);
+        ] + app(UserQuery::class)->make()->get());
     }
 
     #[Get('{user}/edit', name: 'users.edit')]
@@ -69,7 +50,7 @@ class UserController extends Controller
         return Inertia::render('users/Index', [
             'route' => 'edit',
             'user' => UserResource::make($user),
-        ]);
+        ] + app(UserQuery::class)->make()->get());
     }
 
     #[Post('/', name: 'users.store')]

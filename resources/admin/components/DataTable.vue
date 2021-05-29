@@ -96,7 +96,6 @@
           :class="{ 'cursor-pointer': rowClick }"
           :columns="getColumns"
           :item="item"
-          :resource="resource"
           @click="onRowClick(item.id)"
         >
           <template
@@ -157,7 +156,16 @@
 </template>
 
 <script lang="ts">
-  import { computed, defineComponent, PropType, provide, ref, watch } from 'vue'
+  import {
+    computed,
+    defineComponent,
+    getCurrentInstance,
+    inject,
+    PropType,
+    provide,
+    ref,
+    watch,
+  } from 'vue'
   import { Model, PaginatedData } from '@admin/types'
   import { Column } from '@admin/types/data-table'
   import route from 'ziggy-js'
@@ -173,7 +181,6 @@
     components: { TextFilter, SelectFilter, BooleanFilter },
     props: {
       source: Object as PropType<PaginatedData<Model>>,
-      resource: String,
       columns: Array as PropType<(string | Column)[]>,
       filter: Object as PropType<{ [key: string]: string }>,
       sort: String,
@@ -184,6 +191,8 @@
       hideFooter: Boolean,
     },
     setup(props) {
+      const resource = inject<string>('resource')
+
       const sortBy = ref('id')
       const sortDesc = ref(false)
 
@@ -234,7 +243,7 @@
       })
 
       const doQuery = () => {
-        form.get(route(`admin.${props.resource}`), {
+        form.get(location.pathname, {
           preserveState: true,
         })
       }
@@ -251,7 +260,7 @@
 
       const onRowClick = (id: number) => {
         if (props.rowClick) {
-          Inertia.get(route(`admin.${props.resource}.${props.rowClick}`, id))
+          Inertia.get(route(`admin.${resource}.${props.rowClick}`, id))
         }
       }
 
@@ -273,11 +282,8 @@
         doQuery()
       })
 
-      if (props.resource) {
-        provide('resource', props.resource)
-      }
-
       return {
+        resource,
         sortBy,
         sortDesc,
         onFilter,

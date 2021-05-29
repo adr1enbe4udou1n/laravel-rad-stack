@@ -4,6 +4,7 @@
     icon="plus"
     :href="route(`admin.${resource}.create`)"
     :hide-label="hideLabel"
+    :only="only"
     @click.stop
   >
     {{
@@ -19,6 +20,7 @@
 
   export default defineComponent({
     props: {
+      only: Array,
       hideLabel: Boolean,
     },
     setup() {

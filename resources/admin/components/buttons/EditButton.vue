@@ -3,6 +3,7 @@
     icon="pencil"
     :href="route(`admin.${resource}.edit`, item.id)"
     :hide-label="hideLabel"
+    :only="only"
     @click.stop
   >
     {{ $t('Edit') }}
@@ -15,6 +16,7 @@
 
   export default defineComponent({
     props: {
+      only: Array,
       hideLabel: Boolean,
     },
     setup() {

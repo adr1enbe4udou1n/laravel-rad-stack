@@ -1,5 +1,6 @@
 <template>
   <base-button
+    type="button"
     icon="lock-closed"
     variant="warning"
     :loading="form.processing"

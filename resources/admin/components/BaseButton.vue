@@ -24,6 +24,7 @@
     ]"
     :disabled="loading"
     :href="href"
+    :only="only"
   >
     <spinner
       v-if="loading"
@@ -68,6 +69,7 @@
             v
           ),
       },
+      only: Array,
     },
     setup(props, { slots }) {
       const hasLabel = computed(() => {

@@ -4,6 +4,7 @@
     :href="route(`admin.${resource}.show`, item.id)"
     variant="success"
     :hide-label="hideLabel"
+    :only="only"
     @click.stop
   >
     {{ $t('Show') }}
@@ -16,6 +17,7 @@
 
   export default defineComponent({
     props: {
+      only: Array,
       hideLabel: Boolean,
     },
     setup() {

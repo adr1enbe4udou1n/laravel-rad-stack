@@ -36,10 +36,13 @@
         stacked
       />
     </div>
-    <div class="flex justify-end mt-4">
+    <div class="flex mt-4">
       <base-button type="submit" :loading="form.processing">
         {{ $t('Save') }}
       </base-button>
+      <div class="flex gap-2 ml-auto">
+        <slot name="actions" />
+      </div>
     </div>
   </form>
 </template>
