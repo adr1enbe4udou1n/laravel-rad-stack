@@ -1,5 +1,6 @@
 <template>
   <span
+    v-if="label"
     class="inline-block px-2 py-1 bg-primary-500 text-white text-sm rounded"
     >{{ label }}</span
   >

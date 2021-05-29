@@ -3,38 +3,23 @@
     <template #actions>
       <list-button />
     </template>
-    <div
-      class="
-        max-w-md
-        mx-auto
-        px-6
-        py-4
-        bg-white
-        shadow-md
-        overflow-hidden
-        rounded-lg
-      "
-    ></div>
+
+    <div class="max-w-2xl mx-auto">
+      <user-form :method="method" :url="url" />
+    </div>
   </create-layout>
 </template>
 
 <script lang="ts">
-  import { useForm } from '@inertiajs/inertia-vue3'
   import { defineComponent } from 'vue'
+  import route from 'ziggy-js'
 
   export default defineComponent({
     setup() {
-      const form = useForm({
-        name: '',
-        email: '',
-        password: '',
-        active: '',
-        role: '',
-      })
+      const method = 'post'
+      const url = route('admin.users.store')
 
-      const submit = () => {}
-
-      return { form, submit }
+      return { method, url }
     },
   })
 </script>

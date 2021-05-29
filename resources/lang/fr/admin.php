@@ -13,6 +13,7 @@ return [
         'id' => 'ID',
         'name' => 'Nom',
         'email' => 'Email',
+        'password' => 'Mot de passe',
         'active' => 'Actif',
         'created_at' => 'Créé le',
         'updated_at' => 'Mis à jour le',

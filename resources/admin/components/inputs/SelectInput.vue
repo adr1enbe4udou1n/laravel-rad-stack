@@ -11,7 +11,6 @@
       w-full
       px-3
       py-2
-      !border-primary-300
     "
     :class="{ 'form-invalid': !!error }"
     :value="modelValue"

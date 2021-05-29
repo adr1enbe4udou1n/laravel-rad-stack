@@ -7,76 +7,32 @@
       <delete-button v-if="$page.props.auth.id !== user.id" />
     </template>
 
-    <div
-      class="
-        max-w-md
-        mx-auto
-        px-6
-        py-4
-        bg-white
-        shadow-md
-        overflow-hidden
-        rounded-lg
-      "
-    >
-      <validation-errors />
-
-      <form @submit.prevent="submit">
-        <div>
-          <text-input
-            v-model="form.name"
-            :error="form.errors.name"
-            source="name"
-            type="text"
-            required
-          />
-        </div>
-        <div class="mt-4">
-          <text-input
-            v-model="form.email"
-            :error="form.errors.email"
-            source="email"
-            type="email"
-            required
-          />
-        </div>
-        <div class="mt-4">
-          <switch-input v-model="form.active" source="active" />
-        </div>
-        <div class="mt-4">
-          <radio-group-input
-            v-model="form.role"
-            source="role"
-            choices="roles"
-            stacked
-          />
-        </div>
-      </form>
+    <div class="max-w-2xl mx-auto">
+      <user-form :method="method" :url="url" :initial-values="values" />
     </div>
   </edit-layout>
 </template>
 
 <script lang="ts">
   import { User } from '@admin/types'
-  import { useForm } from '@inertiajs/inertia-vue3'
   import { defineComponent, PropType } from 'vue'
   import pick from 'lodash/pick'
+  import route from 'ziggy-js'
 
   export default defineComponent({
     props: {
       user: Object as PropType<User>,
     },
     setup(props) {
-      const form = useForm({
+      const values = {
         ...pick(props.user, ['name', 'email', 'active', 'role']),
         password: '',
-      })
-
-      const submit = () => {
-        //
       }
 
-      return { form, submit }
+      const method = 'put'
+      const url = route('admin.users.update', props.user.id)
+
+      return { url, method, values }
     },
   })
 </script>

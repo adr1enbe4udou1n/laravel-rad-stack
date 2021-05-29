@@ -1,5 +1,8 @@
 <template>
-  <div class="md:grid md:grid-cols-3 md:gap-6">
+  <div
+    class="md:grid md:gap-6"
+    :class="{ 'md:grid-cols-3': !!$slots.title || !!$slots.description }"
+  >
     <section-title>
       <template #title><slot name="title"></slot></template>
       <template #description><slot name="description"></slot></template>

@@ -5,14 +5,13 @@
     :id="id"
     ref="input"
     class="
-      focus:ring focus:ring-opacity-50 focus:ring-primary-500
+      focus:ring focus:ring-opacity-50
       rounded-md
       shadow-sm
       block
       w-full
       px-3
       py-2
-      !border-primary-300
     "
     :class="{ 'form-invalid': !!error }"
     :value="modelValue"

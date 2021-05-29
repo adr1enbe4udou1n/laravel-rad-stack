@@ -31,7 +31,7 @@ class UserStoreRequest extends FormRequest
             'email' => ['required', 'max:50', 'email', Rule::unique('users')],
             'password' => ['required'],
             'active' => ['boolean'],
-            'role' => [new EnumRule(RoleEnum::class)],
+            'role' => ['required', new EnumRule(RoleEnum::class)],
         ];
     }
 }

@@ -20,13 +20,27 @@
       "
     >
       <div class="flex flex-col gap-4">
-        <field source="name" />
-        <field source="email" type="email" />
-        <field source="active" type="boolean" />
-        <field source="role" type="select" choices="roles" />
-        <field source="last_login_at" type="date" />
-        <field source="created_at" type="date" format="dd/MM/yyyy" />
-        <field source="updated_at" type="date" format="dd/MM/yyyy" />
+        <div>
+          <field source="name" />
+        </div>
+        <div>
+          <field source="email" type="email" />
+        </div>
+        <div>
+          <field source="active" type="boolean" />
+        </div>
+        <div>
+          <field source="role" type="select" choices="roles" />
+        </div>
+        <div>
+          <field source="last_login_at" type="date" />
+        </div>
+        <div>
+          <field source="created_at" type="date" format="dd/MM/yyyy" />
+        </div>
+        <div>
+          <field source="updated_at" type="date" format="dd/MM/yyyy" />
+        </div>
       </div>
     </div>
   </show-layout>

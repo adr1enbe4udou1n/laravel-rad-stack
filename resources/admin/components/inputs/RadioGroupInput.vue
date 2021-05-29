@@ -10,7 +10,7 @@
         type="radio"
         :name="source"
         :value="option.value"
-        class="mr-2"
+        class="checked:bg-primary-500 mr-2"
         :checked="modelValue === option.value"
         @input="onInput"
       />
