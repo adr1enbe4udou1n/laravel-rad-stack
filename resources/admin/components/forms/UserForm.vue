@@ -29,12 +29,11 @@
         <switch-input v-model="form.active" source="active" />
       </div>
       <div class="col-span-6 sm:col-span-4">
-        <radio-group-input
+        <select-input
           v-model="form.role"
           :error="form.errors.role"
           source="role"
           choices="roles"
-          stacked
         />
       </div>
     </template>

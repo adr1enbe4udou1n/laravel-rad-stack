@@ -3,15 +3,7 @@
   <select
     v-bind="$attrs"
     :id="id"
-    class="
-      focus:ring focus:ring-primary-500 focus:ring-opacity-50
-      rounded-md
-      shadow-sm
-      block
-      w-full
-      px-3
-      py-2
-    "
+    class="block w-full"
     :class="{ 'form-invalid': !!error }"
     :value="modelValue"
     @input="onInput"
@@ -48,13 +40,3 @@
     },
   })
 </script>
-
-<style lang="postcss" scoped>
-  input {
-    @apply border-gray-300 focus:border-indigo-300 focus:ring-indigo-200;
-
-    &.form-invalid {
-      @apply border-red-500 focus:border-red-300 focus:ring-red-200;
-    }
-  }
-</style>

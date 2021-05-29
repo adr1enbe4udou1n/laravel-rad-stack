@@ -5,7 +5,7 @@
         <input
           v-model="form.filter.q"
           type="text"
-          class="focus:ring focus:ring-opacity-50 rounded-md shadow-sm w-96"
+          class="w-96"
           :placeholder="$t('admin.data-table.search')"
           @input="onFilter"
         />
@@ -118,11 +118,7 @@
     <div class="ml-auto flex flex-row">
       <div class="flex flex-row items-center">
         <label>{{ $t('admin.data-table.rows_per_page_text') }}</label>
-        <select
-          :value="source.per_page"
-          class="h-full pl-4 pr-8 ml-2 rounded"
-          @input="onPerPageChange"
-        >
+        <select :value="source.per_page" class="ml-2" @input="onPerPageChange">
           <option v-for="(o, i) in perPageOptions" :key="i" :value="o">
             {{ o }}
           </option>
