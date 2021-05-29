@@ -2,7 +2,7 @@
   <base-button
     tag="a"
     icon="download"
-    :href="route(`admin.${resource}`, getExportQuery)"
+    :href="exportUrl"
     :hide-label="hideLabel"
     @click.stop
   >
@@ -11,25 +11,28 @@
 </template>
 
 <script lang="ts">
-  import { computed, defineComponent, inject } from 'vue'
-  import { InputParams } from 'ziggy-js'
+  import { computed, defineComponent, inject, PropType } from 'vue'
+  import route, { InputParams } from 'ziggy-js'
+  import qs from 'qs'
 
   export default defineComponent({
     props: {
       hideLabel: Boolean,
+      filter: Object as PropType<{ [key: string]: string }>,
     },
-    setup() {
+    setup(props) {
       const resource = inject<string>('resource')
 
-      const getExportQuery = computed((): InputParams => {
-        return {
+      const exportUrl = computed((): InputParams => {
+        return `${route(`admin.${resource}`)}?${qs.stringify({
+          filter: props.filter,
           export: true,
-        }
+        })}`
       })
 
       return {
         resource,
-        getExportQuery,
+        exportUrl,
       }
     },
   })

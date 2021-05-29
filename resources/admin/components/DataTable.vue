@@ -25,7 +25,7 @@
     </div>
     <div class="ml-auto flex items-center gap-2">
       <slot name="actions"> </slot>
-      <export-button v-if="!disableExport" />
+      <export-button v-if="!disableExport" :filter="filter" />
     </div>
   </div>
   <div class="bg-white rounded-md shadow overflow-x-auto relative">
