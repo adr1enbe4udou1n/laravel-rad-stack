@@ -23,30 +23,43 @@ export interface Option {
   text: string
 }
 
+export const getOptionsFromChoices = (
+  choices: unknown,
+  optionText: string,
+  optionValue: string
+) => {
+  let options = choices as Option[]
+
+  if (typeof options === 'string') {
+    options = usePage<Inertia.PageProps>().props.value.enums[options as string]
+  }
+
+  if (typeof options === 'object') {
+    options = Object.keys(options).map((key) => {
+      return { value: key, text: options[key] }
+    })
+  }
+
+  if (Array.isArray(options)) {
+    options = options.map((o) => {
+      return { value: o[optionValue], text: o[optionText] }
+    })
+  }
+
+  return options
+}
+
 export const choicesSetup = (
   props: Readonly<ExtractPropTypes<typeof choicesProps>>
 ) => {
   const initial = inputSetup(props)
 
   const getChoices = computed((): Option[] => {
-    let options = props.choices as Option[]
-
-    if (typeof options === 'string') {
-      options =
-        usePage<Inertia.PageProps>().props.value.enums[options as string]
-    }
-
-    if (typeof options === 'object') {
-      options = Object.keys(options).map((key) => {
-        return { value: key, text: options[key] }
-      })
-    }
-
-    if (Array.isArray(options)) {
-      options = options.map((o) => {
-        return { value: o[props.optionValue], text: o[props.optionText] }
-      })
-    }
+    let options = getOptionsFromChoices(
+      props.choices,
+      props.optionText,
+      props.optionValue
+    )
 
     if (props.allowEmpty) {
       options = [{ value: '', text: props.emptyText }, ...options]

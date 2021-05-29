@@ -56,12 +56,13 @@
         {
           field: 'active',
           type: 'boolean',
-          centered: true,
+          searchable: true,
         },
         {
           field: 'role',
           type: 'select',
           props: { choices: 'roles' },
+          searchable: true,
         },
         {
           field: 'last_login_at',

@@ -78,9 +78,10 @@
             class="px-6 py-2 border-t"
           >
             <template v-if="column.searchable">
-              <input
+              <component
+                :is="`${getFilterFromType(column.type || 'text')}-filter`"
                 v-model="form.filter[column.field]"
-                type="text"
+                v-bind="column.props"
                 @input="onFilter"
               />
             </template>
@@ -166,7 +167,12 @@
   import { Inertia } from '@inertiajs/inertia'
   import { useDebounceFn } from '@vueuse/shared'
 
+  import TextFilter from '@admin/components/filters/TextFilter.vue'
+  import SelectFilter from '@admin/components/filters/SelectFilter.vue'
+  import BooleanFilter from '@admin/components/filters/BooleanFilter.vue'
+
   export default defineComponent({
+    components: { TextFilter, SelectFilter, BooleanFilter },
     props: {
       source: Object as PropType<PaginatedData<Model>>,
       resource: String,
@@ -202,6 +208,14 @@
       const getColumns = computed((): Column[] =>
         props.columns.map((c) => (typeof c === 'string' ? { field: c } : c))
       )
+
+      const getFilterFromType = (type: string) => {
+        return (
+          {
+            email: 'text',
+          }[type] || type
+        )
+      }
 
       const getDefaultFilter = () => {
         return getColumns.value
@@ -267,6 +281,7 @@
         sortBy,
         sortDesc,
         onFilter,
+        getFilterFromType,
         form,
         getColumns,
         onPageChange,
