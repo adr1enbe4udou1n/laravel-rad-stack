@@ -273,7 +273,9 @@
         doQuery()
       })
 
-      provide('resource', props.resource)
+      if (props.resource) {
+        provide('resource', props.resource)
+      }
 
       return {
         sortBy,

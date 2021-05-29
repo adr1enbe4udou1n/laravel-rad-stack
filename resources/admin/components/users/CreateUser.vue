@@ -1,13 +1,9 @@
 <template>
-  <create-layout resource="users">
-    <template #actions>
-      <list-button />
-    </template>
-
-    <div class="max-w-2xl mx-auto">
+  <create-context v-slot="{ title }" resource="users">
+    <app-aside :title="title">
       <user-form :method="method" :url="url" />
-    </div>
-  </create-layout>
+    </app-aside>
+  </create-context>
 </template>
 
 <script lang="ts">

@@ -49,13 +49,16 @@ class UserController extends Controller
     #[Get('create', name: 'users.create')]
     public function create()
     {
-        return Inertia::render('users/Create');
+        return Inertia::render('users/Index', [
+            'route' => 'create',
+        ]);
     }
 
     #[Get('{user}', name: 'users.show')]
     public function show(User $user)
     {
-        return Inertia::render('users/Show', [
+        return Inertia::render('users/Index', [
+            'route' => 'show',
             'user' => UserResource::make($user),
         ]);
     }
@@ -63,7 +66,8 @@ class UserController extends Controller
     #[Get('{user}/edit', name: 'users.edit')]
     public function edit(User $user)
     {
-        return Inertia::render('users/Edit', [
+        return Inertia::render('users/Index', [
+            'route' => 'edit',
             'user' => UserResource::make($user),
         ]);
     }

@@ -1,24 +1,6 @@
 <template>
-  <show-layout resource="users" :item="user">
-    <template #actions>
-      <list-button />
-      <edit-button />
-      <impersonate-button v-if="user.can_be_impersonated" />
-      <delete-button v-if="$page.props.auth.id !== user.id" />
-    </template>
-
-    <div
-      class="
-        max-w-md
-        mx-auto
-        px-6
-        py-4
-        bg-white
-        shadow-md
-        overflow-hidden
-        rounded-lg
-      "
-    >
+  <show-context v-slot="{ title }" resource="users" :item="user">
+    <app-aside :title="title">
       <div class="flex flex-col gap-4">
         <div>
           <field source="name" />
@@ -42,8 +24,8 @@
           <field source="updated_at" type="date" format="dd/MM/yyyy" />
         </div>
       </div>
-    </div>
-  </show-layout>
+    </app-aside>
+  </show-context>
 </template>
 
 <script lang="ts">

@@ -1,53 +1,47 @@
 <template>
-  <form-section @submitted="submit">
-    <template #form>
-      <div class="col-span-6 sm:col-span-4">
-        <text-input
-          v-model="form.name"
-          :error="form.errors.name"
-          source="name"
-          type="text"
-        />
-      </div>
-      <div class="col-span-6 sm:col-span-4">
-        <text-input
-          v-model="form.email"
-          :error="form.errors.email"
-          source="email"
-          type="email"
-        />
-      </div>
-      <div class="col-span-6 sm:col-span-4">
-        <text-input
-          v-model="form.password"
-          :error="form.errors.password"
-          source="password"
-          type="password"
-        />
-      </div>
-      <div class="col-span-6 sm:col-span-4">
-        <switch-input v-model="form.active" source="active" />
-      </div>
-      <div class="col-span-6 sm:col-span-4">
-        <radio-group-input
-          v-model="form.role"
-          :error="form.errors.role"
-          source="role"
-          choices="roles"
-          stacked
-        />
-      </div>
-    </template>
-    <template #actions>
-      <action-message :on="form.recentlySuccessful" class="mr-3">
-        {{ $t('Saved.') }}
-      </action-message>
-
+  <form @submit.prevent="submit">
+    <div>
+      <text-input
+        v-model="form.name"
+        :error="form.errors.name"
+        source="name"
+        type="text"
+      />
+    </div>
+    <div class="mt-4">
+      <text-input
+        v-model="form.email"
+        :error="form.errors.email"
+        source="email"
+        type="email"
+      />
+    </div>
+    <div class="mt-4">
+      <text-input
+        v-model="form.password"
+        :error="form.errors.password"
+        source="password"
+        type="password"
+      />
+    </div>
+    <div class="mt-4">
+      <switch-input v-model="form.active" source="active" />
+    </div>
+    <div class="mt-4">
+      <radio-group-input
+        v-model="form.role"
+        :error="form.errors.role"
+        source="role"
+        choices="roles"
+        stacked
+      />
+    </div>
+    <div class="flex justify-end mt-4">
       <base-button type="submit" :loading="form.processing">
         {{ $t('Save') }}
       </base-button>
-    </template>
-  </form-section>
+    </div>
+  </form>
 </template>
 
 <script lang="ts">

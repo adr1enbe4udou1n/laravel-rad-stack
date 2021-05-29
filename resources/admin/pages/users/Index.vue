@@ -1,27 +1,37 @@
 <template>
-  <list-layout resource="users">
-    <template #actions>
-      <create-button />
-    </template>
-
-    <data-table
-      :source="users"
-      :columns="columns"
-      :sort="sort"
-      :filter="filter"
-      resource="users"
-      row-click="edit"
-    >
-      <template #field:row-action="{ row }">
-        <div class="flex gap-2 ml-auto">
-          <show-button hide-label />
-          <edit-button hide-label />
-          <impersonate-button v-if="row.can_be_impersonated" hide-label />
-          <delete-button v-if="$page.props.auth.id !== row.id" hide-label />
-        </div>
+  <list-context v-slot="{ title }" resource="users">
+    <app-layout>
+      <template #header>
+        <page-header>
+          <h1>{{ title }}</h1>
+          <template #actions>
+            <create-button />
+          </template>
+        </page-header>
       </template>
-    </data-table>
-  </list-layout>
+
+      <data-table
+        :source="users"
+        :columns="columns"
+        :sort="sort"
+        :filter="filter"
+        row-click="edit"
+      >
+        <template #field:row-action="{ row }">
+          <div class="flex gap-2 ml-auto">
+            <show-button hide-label />
+            <edit-button hide-label />
+            <impersonate-button v-if="row.can_be_impersonated" hide-label />
+            <delete-button v-if="$page.props.auth.id !== row.id" hide-label />
+          </div>
+        </template>
+      </data-table>
+
+      <template v-if="route" #aside>
+        <component :is="`${route}-user`" :user="user" />
+      </template>
+    </app-layout>
+  </list-context>
 </template>
 
 <script lang="ts">
@@ -29,9 +39,16 @@
   import { PaginatedData, User } from '@admin/types'
   import { Column } from '@admin/types/data-table'
 
+  import CreateUser from '@admin/components/users/CreateUser.vue'
+  import ShowUser from '@admin/components/users/ShowUser.vue'
+  import EditUser from '@admin/components/users/EditUser.vue'
+
   export default defineComponent({
+    components: { CreateUser, ShowUser, EditUser },
     props: {
+      route: String,
       users: Object as PropType<PaginatedData<User>>,
+      user: Object as PropType<User>,
       sort: String,
       filter: Object,
     },

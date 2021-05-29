@@ -1,16 +1,9 @@
 <template>
-  <edit-layout resource="users" :item="user">
-    <template #actions>
-      <list-button />
-      <show-button />
-      <impersonate-button v-if="user.can_be_impersonated" />
-      <delete-button v-if="$page.props.auth.id !== user.id" />
-    </template>
-
-    <div class="max-w-2xl mx-auto">
+  <edit-context v-slot="{ title }" resource="users" :item="user">
+    <app-aside :title="title">
       <user-form :method="method" :url="url" :initial-values="values" />
-    </div>
-  </edit-layout>
+    </app-aside>
+  </edit-context>
 </template>
 
 <script lang="ts">
