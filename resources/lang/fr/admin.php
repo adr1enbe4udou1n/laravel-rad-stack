@@ -41,7 +41,7 @@ return [
         'prev' => 'Précédent',
         'first' => 'Première page',
         'last' => 'Dernière page',
-        'rows_per_page_text' => 'Nb éléments par page',
+        'rows_per_page_text' => 'éléments par page',
         'page_text' => ':start-:end de :total',
         'selected' => ':count éléments sélectionnés',
     ],
