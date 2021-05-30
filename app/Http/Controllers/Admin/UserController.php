@@ -23,7 +23,7 @@ class UserController extends Controller
     public function index()
     {
         return app(UserQuery::class)->make()
-            ->paginateOrExport(fn ($data) => Inertia::render('users/Index', ['route' => 'list'] + $data))
+            ->paginateOrExport(fn ($data) => Inertia::render('users/Index', ['action' => 'list'] + $data))
         ;
     }
 
@@ -31,7 +31,7 @@ class UserController extends Controller
     public function create()
     {
         return Inertia::render('users/Index', [
-            'route' => 'create',
+            'action' => 'create',
         ] + app(UserQuery::class)->make()->get());
     }
 
@@ -39,7 +39,7 @@ class UserController extends Controller
     public function show(User $user)
     {
         return Inertia::render('users/Index', [
-            'route' => 'show',
+            'action' => 'show',
             'user' => UserResource::make($user),
         ] + app(UserQuery::class)->make()->get());
     }
@@ -48,7 +48,7 @@ class UserController extends Controller
     public function edit(User $user)
     {
         return Inertia::render('users/Index', [
-            'route' => 'edit',
+            'action' => 'edit',
             'user' => UserResource::make($user),
         ] + app(UserQuery::class)->make()->get());
     }

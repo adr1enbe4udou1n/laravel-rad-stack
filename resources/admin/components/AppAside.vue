@@ -7,7 +7,7 @@
     <inertia-link
       :href="route(`admin.${resource}`)"
       class="inline-block p-2 text-white rounded-full bg-primary-500 ml-auto"
-      :only="['route']"
+      :only="['action']"
     >
       <x-icon class="h-5 w-5" />
     </inertia-link>

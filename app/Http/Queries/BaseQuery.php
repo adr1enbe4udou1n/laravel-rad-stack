@@ -3,6 +3,7 @@
 namespace App\Http\Queries;
 
 use Closure;
+use Illuminate\Support\Str;
 use Maatwebsite\Excel\Facades\Excel;
 use Spatie\QueryBuilder\QueryBuilder;
 
@@ -24,7 +25,7 @@ abstract class BaseQuery
     public function paginateOrExport(Closure $response)
     {
         if (request()->get('export')) {
-            $fileName = trans_choice("crud.{$this->resource}.name", 10);
+            $fileName = Str::lower(trans_choice("crud.{$this->resource}.name", 10));
             $date = date('Ymd-His');
 
             return Excel::download($this->export, "export-{$fileName}-{$date}.xlsx");

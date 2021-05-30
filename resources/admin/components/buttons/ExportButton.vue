@@ -18,20 +18,21 @@
   export default defineComponent({
     props: {
       hideLabel: Boolean,
-      filter: Object as PropType<{ [key: string]: string }>,
     },
-    setup(props) {
+    setup() {
       const resource = inject<string>('resource')
+      const filter = inject<{ [key: string]: string }>('filter')
 
       const exportUrl = computed((): InputParams => {
         return `${route(`admin.${resource}`)}?${qs.stringify({
-          filter: props.filter,
+          filter,
           export: true,
         })}`
       })
 
       return {
         resource,
+        filter,
         exportUrl,
       }
     },

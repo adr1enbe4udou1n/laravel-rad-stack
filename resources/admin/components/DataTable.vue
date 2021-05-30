@@ -24,8 +24,7 @@
       </div>
     </div>
     <div class="ml-auto flex items-center gap-2">
-      <slot name="actions"> </slot>
-      <export-button v-if="!disableExport" :filter="filter" />
+      <slot name="actions" />
     </div>
   </div>
   <div class="bg-white rounded-md shadow overflow-x-auto relative">
@@ -159,7 +158,6 @@
   import {
     computed,
     defineComponent,
-    getCurrentInstance,
     inject,
     PropType,
     provide,
@@ -186,12 +184,12 @@
       sort: String,
       rowClick: String,
       disableSearch: Boolean,
-      disableExport: Boolean,
       hideHeader: Boolean,
       hideFooter: Boolean,
     },
     setup(props) {
       const resource = inject<string>('resource')
+      provide('filter', props.filter)
 
       const sortBy = ref('id')
       const sortDesc = ref(false)

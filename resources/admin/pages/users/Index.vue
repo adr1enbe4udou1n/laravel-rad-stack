@@ -5,7 +5,7 @@
         <page-header>
           <h1>{{ title }}</h1>
           <template #actions>
-            <create-button :only="['route']" />
+            <create-button :only="['action']" />
           </template>
         </page-header>
       </template>
@@ -17,20 +17,23 @@
         :filter="filter"
         row-click="edit"
       >
+        <template #actions>
+          <export-button />
+        </template>
         <template #field:row-action="{ row }">
           <div class="flex gap-2 ml-auto">
-            <show-button hide-label :only="['route', 'user']" />
-            <edit-button hide-label :only="['route', 'user']" />
+            <show-button hide-label :only="['action', 'user']" />
+            <edit-button hide-label :only="['action', 'user']" />
             <impersonate-button v-if="row.can_be_impersonated" hide-label />
             <delete-button v-if="$page.props.auth.id !== row.id" hide-label />
           </div>
         </template>
       </data-table>
 
-      <template v-if="route !== 'list'" #aside>
-        <create-user v-if="route === 'create'" />
-        <show-user v-if="route === 'show'" :user="user" />
-        <edit-user v-if="route === 'edit'" :user="user" />
+      <template v-if="action !== 'list'" #aside>
+        <create-user v-if="action === 'create'" />
+        <show-user v-if="action === 'show'" :user="user" />
+        <edit-user v-if="action === 'edit'" :user="user" />
       </template>
     </app-layout>
   </list-context>
@@ -41,14 +44,9 @@
   import { PaginatedData, User } from '@admin/types'
   import { Column } from '@admin/types/data-table'
 
-  import CreateUser from '@admin/components/users/CreateUser.vue'
-  import ShowUser from '@admin/components/users/ShowUser.vue'
-  import EditUser from '@admin/components/users/EditUser.vue'
-
   export default defineComponent({
-    components: { CreateUser, ShowUser, EditUser },
     props: {
-      route: String,
+      action: String,
       users: Object as PropType<PaginatedData<User>>,
       user: Object as PropType<User>,
       sort: String,
