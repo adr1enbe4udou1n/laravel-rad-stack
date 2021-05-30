@@ -87,7 +87,7 @@
           </th>
         </tr>
       </thead>
-      <tbody v-if="source">
+      <tbody>
         <data-table-row
           v-for="item in source.data"
           :key="item.id"
@@ -128,30 +128,13 @@
       <spinner class="h-24 w-24 text-primary" />
     </span>
   </div>
-  <div v-if="source && !hideFooter" class="flex mt-6">
-    <div class="flex flex-row items-center">
-      <select :value="source.per_page" class="mr-2" @input="onPerPageChange">
-        <option v-for="(o, i) in perPageOptions" :key="i" :value="o">
-          {{ o }}
-        </option>
-      </select>
-      <label>{{ $t('admin.data-table.rows_per_page_text') }}</label>
-    </div>
-    <div v-if="source.total" class="flex flex-row items-center ml-auto">
-      <span>{{
-        $t('admin.data-table.page_text', {
-          args: { start: source.from, end: source.to, total: source.total },
-        })
-      }}</span>
-      <pagination
-        class="ml-2"
-        :current-page="source.current_page"
-        :per-page="source.per_page"
-        :total="source.total"
-        @change="onPageChange"
-      />
-    </div>
-  </div>
+
+  <data-iterator
+    :source="source"
+    :hide-footer="hideFooter"
+    :per-page-options="perPageOptions"
+    @change="onPageChange"
+  />
 </template>
 
 <script lang="ts">
@@ -186,6 +169,10 @@
       disableSearch: Boolean,
       hideHeader: Boolean,
       hideFooter: Boolean,
+      perPageOptions: {
+        type: Array as PropType<number[]>,
+        default: () => [5, 10, 15, 50, 100],
+      },
     },
     setup(props) {
       const resource = inject<string>('resource')
@@ -246,13 +233,9 @@
         })
       }
 
-      const onPageChange = (page: number) => {
-        form.page = page
-        doQuery()
-      }
-
-      const onPerPageChange = (e: Event) => {
-        form.perPage = parseInt((e.target as HTMLInputElement).value, 10)
+      const onPageChange = (pager: { page: number; perPage: number }) => {
+        form.page = pager.page
+        form.perPage = pager.perPage
         doQuery()
       }
 
@@ -289,10 +272,8 @@
         form,
         getColumns,
         onPageChange,
-        onPerPageChange,
         onRowClick,
         onSort,
-        perPageOptions: [5, 10, 15, 50, 100],
       }
     },
   })

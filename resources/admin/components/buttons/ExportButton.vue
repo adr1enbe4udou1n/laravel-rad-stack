@@ -11,7 +11,7 @@
 </template>
 
 <script lang="ts">
-  import { computed, defineComponent, inject, PropType } from 'vue'
+  import { computed, defineComponent, inject } from 'vue'
   import route, { InputParams } from 'ziggy-js'
   import qs from 'qs'
 
