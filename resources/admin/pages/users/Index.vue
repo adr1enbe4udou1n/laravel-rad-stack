@@ -24,7 +24,7 @@
           <div class="flex gap-2 ml-auto">
             <show-button hide-label :only="['action', 'user']" />
             <edit-button hide-label :only="['action', 'user']" />
-            <impersonate-button v-if="row.can_be_impersonated" hide-label />
+            <impersonate-button v-if="canBeImpersonated(row)" hide-label />
             <delete-button v-if="$page.props.auth.id !== row.id" hide-label />
           </div>
         </template>
@@ -41,7 +41,7 @@
 
 <script lang="ts">
   import { defineComponent, PropType } from 'vue'
-  import { PaginatedData, User } from '@admin/types'
+  import { Model, PaginatedData, User } from '@admin/types'
   import { Column } from '@admin/types/data-table'
 
   export default defineComponent({
@@ -103,7 +103,11 @@
         'row-action',
       ]
 
-      return { columns }
+      const canBeImpersonated = (item: Model) => {
+        return (item as User).can_be_impersonated
+      }
+
+      return { columns, canBeImpersonated }
     },
   })
 </script>

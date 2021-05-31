@@ -17,6 +17,7 @@ export default defineConfig({
     vue(),
     components({
       dirs: ['admin/components', 'admin/layouts'],
+      globalComponentsDeclaration: true,
     }),
     windicss({
       config: '../windi.config.ts',

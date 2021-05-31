@@ -58,7 +58,7 @@
           name: string
           email: string
           password: string
-          active: string
+          active: boolean
           role: string
         }>,
         default: () => {

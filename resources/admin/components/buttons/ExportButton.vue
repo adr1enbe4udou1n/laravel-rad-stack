@@ -12,7 +12,7 @@
 
 <script lang="ts">
   import { computed, defineComponent, inject } from 'vue'
-  import route, { InputParams } from 'ziggy-js'
+  import route from 'ziggy-js'
   import qs from 'qs'
 
   export default defineComponent({
@@ -23,7 +23,7 @@
       const resource = inject<string>('resource')
       const filter = inject<{ [key: string]: string }>('filter')
 
-      const exportUrl = computed((): InputParams => {
+      const exportUrl = computed((): string => {
         return `${route(`admin.${resource}`)}?${qs.stringify({
           filter,
           export: true,

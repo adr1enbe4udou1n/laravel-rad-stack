@@ -31,7 +31,7 @@
         >
           <!-- Settings Dropdown -->
           <div class="relative">
-            <dropdown align="right" width="48">
+            <dropdown align="right" :width="48">
               <template #trigger>
                 <span class="inline-flex rounded-md">
                   <button
