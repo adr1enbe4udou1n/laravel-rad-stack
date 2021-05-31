@@ -18,7 +18,7 @@
       <div
         v-show="open"
         class="absolute z-50 mt-2 rounded-md shadow-lg"
-        :class="[widthClass, [align]]"
+        :class="[`w-${width}`, [align]]"
         style="display: none"
         @click="open = false"
       >
@@ -43,15 +43,15 @@
         default: 'right',
       },
       width: {
-        type: String,
-        default: '48',
+        type: Number,
+        default: 48,
       },
       contentClasses: {
         type: Array,
         default: () => ['py-1', 'bg-white'],
       },
     },
-    setup(props) {
+    setup() {
       let open = ref(false)
 
       const closeOnEscape = (e: KeyboardEvent) => {
@@ -63,15 +63,8 @@
       onMounted(() => document.addEventListener('keydown', closeOnEscape))
       onUnmounted(() => document.removeEventListener('keydown', closeOnEscape))
 
-      const widthClass = computed(() => {
-        return {
-          48: 'w-48',
-        }[props.width.toString()]
-      })
-
       return {
         open,
-        widthClass,
       }
     },
   })

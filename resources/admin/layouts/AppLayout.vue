@@ -59,20 +59,8 @@
           <slot></slot>
         </main>
       </div>
-      <div
-        v-if="$slots.aside"
-        class="
-          hidden
-          md:block
-          bg-white
-          w-96
-          p-6
-          overflow-y-auto
-          scrollbar-thin scrollbar-thumb-primary-900 scrollbar-track-gray-100
-        "
-      >
-        <slot name="aside"></slot>
-      </div>
+
+      <slot name="aside"></slot>
     </div>
   </div>
 </template>
