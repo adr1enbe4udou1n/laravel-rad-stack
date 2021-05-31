@@ -41,7 +41,7 @@
 
 <script lang="ts">
   import { defineComponent, PropType } from 'vue'
-  import { Model, PaginatedData, User } from '@admin/types'
+  import { PaginatedData, User } from '@admin/types'
   import { Column } from '@admin/types/data-table'
 
   export default defineComponent({

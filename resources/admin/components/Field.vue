@@ -15,7 +15,6 @@
 </template>
 
 <script lang="ts">
-  import { Model } from '@admin/types'
   import { defineComponent, inject } from 'vue'
   import EmailField from '@admin/components/fields/EmailField.vue'
   import BooleanField from '@admin/components/fields/BooleanField.vue'
