@@ -85,7 +85,9 @@
       const form = useForm(props.initialValues)
 
       const submit = () => {
-        form.submit(props.method, props.url)
+        form.submit(props.method, props.url, {
+          preserveState: true,
+        })
       }
 
       return { form, submit }
