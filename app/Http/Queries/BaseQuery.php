@@ -13,7 +13,7 @@ abstract class BaseQuery
     protected QueryBuilder $query;
     protected $export;
     protected string $resource;
-    protected int $perPage = 30;
+    protected int $perPage = 15;
 
     public function paginate(): LengthAwarePaginator
     {

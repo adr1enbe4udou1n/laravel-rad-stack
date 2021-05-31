@@ -179,7 +179,6 @@
     },
     setup(props) {
       const resource = inject<string>('resource')
-      provide('filter', props.filter)
 
       const sortBy = ref('id')
       const sortDesc = ref(false)
@@ -227,8 +226,13 @@
         page: props.source.current_page,
         perPage: props.source.per_page,
         sort: props.sort,
-        filter: props.filter || getDefaultFilter(),
+        filter: {
+          ...getDefaultFilter(),
+          ...props.filter,
+        },
       })
+
+      provide('filter', form.filter)
 
       const doQuery = () => {
         form.get(location.pathname, {
