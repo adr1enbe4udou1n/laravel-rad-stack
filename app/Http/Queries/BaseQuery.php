@@ -13,10 +13,11 @@ abstract class BaseQuery
     protected QueryBuilder $query;
     protected $export;
     protected string $resource;
+    protected int $perPage = 30;
 
     public function paginate(): LengthAwarePaginator
     {
-        return $this->query->paginate(min(100, request()->get('perPage', 15)));
+        return $this->query->paginate(min(100, request()->get('perPage', $this->perPage)));
     }
 
     abstract public function get(): array;

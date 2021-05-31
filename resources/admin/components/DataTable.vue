@@ -161,7 +161,10 @@
   export default defineComponent({
     components: { TextFilter, SelectFilter, BooleanFilter },
     props: {
-      source: Object as PropType<PaginatedData<Model>>,
+      source: {
+        type: Object as PropType<PaginatedData<Model>>,
+        required: true,
+      },
       columns: Array as PropType<(string | Column)[]>,
       filter: Object as PropType<{ [key: string]: string }>,
       sort: String,
@@ -171,7 +174,7 @@
       hideFooter: Boolean,
       perPageOptions: {
         type: Array as PropType<number[]>,
-        default: () => [5, 10, 15, 50, 100],
+        default: () => [5, 10, 15, 30, 50, 100],
       },
     },
     setup(props) {
@@ -221,8 +224,8 @@
       }
 
       const form = useForm({
-        page: 1,
-        perPage: 15,
+        page: props.source.current_page,
+        perPage: props.source.per_page,
         sort: props.sort,
         filter: props.filter || getDefaultFilter(),
       })

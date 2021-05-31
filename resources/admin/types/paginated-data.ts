@@ -8,7 +8,7 @@ export interface PaginatedData<Model> {
   links: PaginatedLink[]
   next_page_url: string
   path: string
-  per_page: number | string
+  per_page: number
   prev_page_url: null
   to: number
   total: number
