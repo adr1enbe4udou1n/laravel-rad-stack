@@ -13,7 +13,6 @@
         "allowJs": true,
         "strictNullChecks": false,
         "suppressImplicitAnyIndexErrors": true,
-        "skipLibCheck": true,
         "baseUrl": ".",
         "paths": {
             "@admin/*": ["resources/admin/*"],

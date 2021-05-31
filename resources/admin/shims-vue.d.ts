@@ -1,7 +1,5 @@
 import { Profile, EnumTypes } from '@admin/types'
-import { Inertia } from '@inertiajs/inertia'
-import { Page, Errors, ErrorBag } from '@inertiajs/inertia/types/types'
-import { DefineComponent } from 'vue'
+import { ComputedRef, DefineComponent } from 'vue'
 
 declare module '*.vue' {
   const component: DefineComponent<
@@ -18,19 +16,16 @@ declare module '@inertiajs/inertia' {
     interface PageProps {
       appName: string
       auth: Profile
-      flash: any
-      errors: Errors & ErrorBag
+      flash: { [key: string]: string }
+      errors: { [key: string]: string }[]
       enums: EnumTypes
     }
 
-    interface CustomPage extends Page {
-      props: PageProps
+    interface Page {
+      props: ComputedRef<Inertia.PageProps>
+      url: ComputedRef<string>
+      component: ComputedRef<string>
+      version: ComputedRef<string | null>
     }
-  }
-}
-
-declare module '@vue/runtime-core' {
-  export interface ComponentCustomProperties {
-    $page: Inertia.CustomPage
   }
 }

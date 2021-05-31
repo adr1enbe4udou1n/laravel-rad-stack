@@ -340,23 +340,28 @@
     minimatch "^3.0.4"
     strip-json-comments "^3.1.1"
 
+"@heroicons/vue@^1.0.1":
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/@heroicons/vue/-/vue-1.0.1.tgz#bd37662a45ed031d9b4ab1c860574e2174ca1bd3"
+  integrity sha512-pClbScVNpkBCHdM86+EAjQ5iUAs1PVjRHDFRNImQQyot75KrAk4SDfeKGDkQqPaGdJ9ZHIK13cl2W0eYc29QWg==
+
 "@iarna/toml@2.2.5":
   version "2.2.5"
   resolved "https://registry.yarnpkg.com/@iarna/toml/-/toml-2.2.5.tgz#b32366c89b43c6f8cefbdefac778b9c828e3ba8c"
   integrity sha512-trnsAYxU3xnS1gPHPyU961coFyLkh4gAD/0zQ5mymY4yOZ+CYvsPqUbOFSw0aDM4y0tV7tiFxL/1XfXPNC6IPg==
 
 "@inertiajs/inertia-vue3@^0.4.0":
-  version "0.4.0"
-  resolved "https://registry.yarnpkg.com/@inertiajs/inertia-vue3/-/inertia-vue3-0.4.0.tgz#041d03657012dd1d85af2eb94276ff8303517762"
-  integrity sha512-3NZjI5gaccNgwCF21Slb8LccSP01enREmZkqyOEpp3twTqNUnwv7qnHF80dNDAwAVFoZlmqy3QYzqao1b6BcoA==
+  version "0.4.1"
+  resolved "https://registry.yarnpkg.com/@inertiajs/inertia-vue3/-/inertia-vue3-0.4.1.tgz#04bd6491b1f4f6a0d559919c6175d363c62afbbf"
+  integrity sha512-5U65uDvwzNaqb2jbcBq8TeXdjEYGOuTkCtMdrcIvSI472wGByF6Ca4PYYfwFUNufsnjjYFXTMowRHRQWN2JGwQ==
   dependencies:
     lodash.clonedeep "^4.5.0"
     lodash.isequal "^4.5.0"
 
-"@inertiajs/inertia@^0.9.0":
-  version "0.9.0"
-  resolved "https://registry.yarnpkg.com/@inertiajs/inertia/-/inertia-0.9.0.tgz#7442b157e3f0108591e13bf4c06072d170ce8965"
-  integrity sha512-n2jAUgR/Z5v0sYv4cfg15WoEwQ9TzlNlNE4iKQRyHWjmQf9buabDVP8lTaH+zn7US2SVswPamQ0gUBRDHgoPpw==
+"@inertiajs/inertia@^0.8.7":
+  version "0.8.7"
+  resolved "https://registry.yarnpkg.com/@inertiajs/inertia/-/inertia-0.8.7.tgz#6b92feef68d09a1cf5c2b786bf8bb46a61d8aac7"
+  integrity sha512-kCqfmBZbZ1845xYsMIk0LoYR1xzSkrMtyRefejPRx/cvVgK1drtpikoCJAov+OH6HI2lVhkhfnsFrEFl/rmx1A==
   dependencies:
     axios "^0.21.1"
     deepmerge "^4.0.0"
@@ -3342,11 +3347,6 @@ hast-util-whitespace@^1.0.3:
   version "1.0.4"
   resolved "https://registry.yarnpkg.com/hast-util-whitespace/-/hast-util-whitespace-1.0.4.tgz#e4fe77c4a9ae1cb2e6c25e02df0043d0164f6e41"
   integrity sha512-I5GTdSfhYfAPNztx2xJRQpG8cuDSNt599/7YUn7Gx/WxNMsG+a835k97TDkFgk123cwjfwINaZknkKkphx/f2A==
-
-heroicons-vue3@^1.0.1:
-  version "1.0.1"
-  resolved "https://registry.yarnpkg.com/heroicons-vue3/-/heroicons-vue3-1.0.1.tgz#324bced2fa9e3bcc7abeab03ebc64f10a0e33ceb"
-  integrity sha512-oSHUq5Nm/ADuBR9c0stAjqsyV9mgsHMX+HUwCU0YsbFqgr/IEi9JyUvGYtJeXrnUyGiFeVPCZ7hTEjde8Y25NQ==
 
 hosted-git-info@^2.1.4:
   version "2.8.9"

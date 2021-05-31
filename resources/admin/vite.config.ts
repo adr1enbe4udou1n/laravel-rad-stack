@@ -42,8 +42,8 @@ export default defineConfig({
       'lodash/pick',
       '@vueuse/core',
       '@vueuse/shared',
-      'heroicons-vue3/solid',
-      'heroicons-vue3/outline',
+      '@heroicons/vue/solid',
+      '@heroicons/vue/outline',
     ],
   },
 })

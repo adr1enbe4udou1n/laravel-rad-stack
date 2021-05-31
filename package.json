@@ -13,7 +13,8 @@
         "lint": "eslint resources/**/*.{js,ts,vue}"
     },
     "devDependencies": {
-        "@inertiajs/inertia": "^0.9.0",
+        "@heroicons/vue": "^1.0.1",
+        "@inertiajs/inertia": "^0.8.7",
         "@inertiajs/inertia-vue3": "^0.4.0",
         "@inertiajs/progress": "^0.2.5",
         "@types/color-string": "^1.5.0",
@@ -39,7 +40,6 @@
         "eslint-config-prettier": "^8.3.0",
         "eslint-plugin-prettier": "^3.4.0",
         "eslint-plugin-vue": "^7.10.0",
-        "heroicons-vue3": "^1.0.1",
         "jest": "^27.0.3",
         "lodash": "^4.17.19",
         "matice": "^1.1.4",

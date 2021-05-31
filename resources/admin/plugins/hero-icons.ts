@@ -36,12 +36,12 @@ import {
   FilterIcon,
   DownloadIcon,
   SearchIcon,
-} from 'heroicons-vue3/outline'
+} from '@heroicons/vue/outline'
 
 import {
   ChartBarIcon as ChartBarIconSolid,
   UsersIcon as UsersIconSolid,
-} from 'heroicons-vue3/solid'
+} from '@heroicons/vue/solid'
 
 import { App } from 'vue'
 
