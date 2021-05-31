@@ -34,7 +34,7 @@
 </template>
 
 <script lang="ts">
-  import { computed, onMounted, onUnmounted, ref, defineComponent } from 'vue'
+  import { onMounted, onUnmounted, ref, defineComponent } from 'vue'
 
   export default defineComponent({
     props: {
