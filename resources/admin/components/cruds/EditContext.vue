@@ -1,5 +1,7 @@
 <template>
-  <slot :title="getTitle" />
+  <div>
+    <slot :title="getTitle" />
+  </div>
 </template>
 
 <script lang="ts">

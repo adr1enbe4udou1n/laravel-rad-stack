@@ -51,7 +51,10 @@
 
   export default defineComponent({
     props: {
-      user: Object as PropType<Profile>,
+      user: {
+        type: Object as PropType<Profile>,
+        required: true,
+      },
     },
     setup(props) {
       const form = useForm({

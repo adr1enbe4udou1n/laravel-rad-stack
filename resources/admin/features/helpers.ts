@@ -16,8 +16,15 @@ export function useUniqueId(): string {
   return Math.random().toString(36).substr(2, 9)
 }
 
-export function useModelToString(resource: string, model: Model): string {
-  return {
-    users: (model: User) => model.name,
-  }[resource](model)
+export function useModelToString(
+  resource: string | undefined,
+  model: Model | undefined
+): string | undefined {
+  if (resource) {
+    return (
+      {
+        users: (model: User) => model.name,
+      } as { [key: string]: (model: any) => string }
+    )[resource](model)
+  }
 }

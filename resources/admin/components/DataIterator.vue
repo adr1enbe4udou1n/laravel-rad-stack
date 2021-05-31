@@ -31,7 +31,10 @@
 
   export default defineComponent({
     props: {
-      source: Object as PropType<PaginatedData<Model>>,
+      source: {
+        type: Object as PropType<PaginatedData<Model>>,
+        required: true,
+      },
       hideFooter: Boolean,
       perPageOptions: {
         type: Array as PropType<number[]>,

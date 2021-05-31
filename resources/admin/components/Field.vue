@@ -1,14 +1,14 @@
 <template>
-  <label class="font-bold">{{ $ta(resource, source) }}</label>
+  <label class="font-bold">{{ $ta(source) }}</label>
   <div>
-    <template v-if="item[source]">
+    <template v-if="value">
       <component
         :is="`${type}-field`"
         v-if="type"
-        :value="item[source]"
+        :value="value"
         v-bind="$attrs"
       ></component>
-      <span v-else>{{ item[source] }}</span>
+      <span v-else>{{ value }}</span>
     </template>
     <span v-else>-</span>
   </div>
@@ -36,13 +36,11 @@
       },
       type: String,
     },
-    setup() {
-      const resource = inject<string>('resource')
-      const item = inject<Model>('item')
+    setup(props) {
+      const item = inject<any>('item')
 
       return {
-        resource,
-        item,
+        value: item ? item[props.source] : null,
       }
     },
   })

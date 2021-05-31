@@ -13,20 +13,25 @@
 
   export default defineComponent({
     props: {
-      value: String,
-      choices: [String, Array],
+      value: {
+        type: String,
+        required: true,
+      },
+      choices: {
+        type: [String, Array],
+        required: true,
+      },
     },
     setup(props) {
       const label = computed(() => {
         let options = props.choices
 
         if (typeof options === 'string') {
-          options =
-            usePage<Inertia.PageProps>().props.value.enums[
-              props.choices as string
-            ]
+          options = (usePage<Inertia.PageProps>().props.value.enums as any)[
+            props.choices as string
+          ]
         }
-        return options[props.value]
+        return (options as any)[props.value]
       })
       return { label }
     },

@@ -15,23 +15,25 @@ import HeroIcons from './plugins/hero-icons'
 
 const el = document.getElementById('app')
 
-const app = createApp({
-  render: () =>
-    h(InertiaApp, {
-      initialPage: JSON.parse(el.dataset.page),
-      resolveComponent: (name) => {
-        const pages = import.meta.globEager(`./pages/**/*`)
+if (el) {
+  const app = createApp({
+    render: () =>
+      h(InertiaApp, {
+        initialPage: JSON.parse(el.dataset.page as string),
+        resolveComponent: (name) => {
+          const pages = import.meta.globEager(`./pages/**/*`)
 
-        return pages[`./pages/${name}.vue`].default
-      },
-    }),
-})
-  .use(Route)
-  .use(Translations)
-  .use(DateFns)
-  .use(InertiaPlugin)
-  .use(HeroIcons)
+          return pages[`./pages/${name}.vue`].default
+        },
+      }),
+  })
+    .use(Route)
+    .use(Translations)
+    .use(DateFns)
+    .use(InertiaPlugin)
+    .use(HeroIcons)
 
-app.mount(el)
+  app.mount(el)
 
-InertiaProgress.init({ color: '#4B5563' })
+  InertiaProgress.init({ color: '#4B5563' })
+}

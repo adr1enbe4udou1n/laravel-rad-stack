@@ -28,7 +28,7 @@
       }
 
       const method = 'put'
-      const url = route('admin.users.update', props.user.id)
+      const url = route('admin.users.update', props.user?.id)
 
       return { url, method, values }
     },

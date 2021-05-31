@@ -7,7 +7,10 @@
 
   export default defineComponent({
     props: {
-      value: [String, Number],
+      value: {
+        type: [String, Number],
+        required: true,
+      },
       format: {
         type: String,
         default: 'dd/MM/yyyy',

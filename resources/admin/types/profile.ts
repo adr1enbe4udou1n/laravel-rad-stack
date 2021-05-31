@@ -1,10 +1,14 @@
 import { Model } from './model'
 
 export class Profile extends Model {
-  id: number
-  name: string
-  email: string
-  is_impersonating: boolean
+  constructor(
+    public id: number,
+    public name: string,
+    public email: string,
+    public is_impersonating: boolean
+  ) {
+    super(id)
+  }
   toString() {
     return this.name
   }

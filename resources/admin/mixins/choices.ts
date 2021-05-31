@@ -20,7 +20,7 @@ export const choicesProps = {
 
 export interface Option {
   value: string
-  text: string
+  text: string | undefined
 }
 
 export const getOptionsFromChoices = (
@@ -31,17 +31,17 @@ export const getOptionsFromChoices = (
   let options = choices as Option[]
 
   if (typeof options === 'string') {
-    options = usePage<Inertia.PageProps>().props.value.enums[options as string]
+    options = usePage<Inertia.PageProps>().props.value.enums[options]
   }
 
   if (typeof options === 'object') {
     options = Object.keys(options).map((key) => {
-      return { value: key, text: options[key] }
+      return { value: key, text: (options as any)[key] }
     })
   }
 
   if (Array.isArray(options)) {
-    options = options.map((o) => {
+    options = options.map((o: any) => {
       return { value: o[optionValue], text: o[optionText] }
     })
   }

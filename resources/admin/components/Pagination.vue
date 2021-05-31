@@ -53,9 +53,18 @@
 
   export default defineComponent({
     props: {
-      currentPage: Number,
-      perPage: [Number, String],
-      total: Number,
+      currentPage: {
+        type: Number,
+        required: true,
+      },
+      perPage: {
+        type: [Number, String],
+        required: true,
+      },
+      total: {
+        type: Number,
+        required: true,
+      },
     },
     emits: ['change'],
     setup(props, { emit }) {

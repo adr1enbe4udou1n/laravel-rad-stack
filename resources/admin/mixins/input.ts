@@ -1,6 +1,6 @@
 import { useUniqueId } from '@admin/features/helpers'
 import { transAttribute } from '@admin/plugins/translations'
-import { computed, inject, ExtractPropTypes } from 'vue'
+import { computed, ExtractPropTypes } from 'vue'
 
 export const inputProps = {
   label: String,
@@ -15,8 +15,7 @@ export const inputSetup = (
 
   const getLabel = computed(() => {
     if (props.source) {
-      const resource = inject<string>('resource')
-      return transAttribute(resource, props.source)
+      return transAttribute(props.source)
     }
     return props.label
   })

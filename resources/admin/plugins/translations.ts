@@ -1,16 +1,26 @@
-import { App } from 'vue'
+import { App, inject } from 'vue'
 
 import { __, transChoice, trans } from 'matice'
 
-export const transAttribute = (resource: string, field: string) => {
-  try {
-    return trans(`crud.${resource}.attributes.${field}`)
-  } catch {
+export const transAttribute = (field: string) => {
+  const resource = inject<string>('resource')
+
+  if (resource) {
     try {
-      return trans(`admin.attributes.${field}`)
+      return trans(`crud.${resource}.attributes.${field}`)
     } catch {
-      return ''
+      try {
+        return trans(`admin.attributes.${field}`)
+      } catch {
+        return ''
+      }
     }
+  }
+
+  try {
+    return trans(`admin.attributes.${field}`)
+  } catch {
+    return ''
   }
 }
 

@@ -64,7 +64,7 @@
       }
 
       const submit = () => {
-        form.delete(route(`admin.${resource}.destroy`, item.id), {
+        form.delete(route(`admin.${resource}.destroy`, item?.id), {
           preserveScroll: true,
           onSuccess: () => closeModal(),
         })

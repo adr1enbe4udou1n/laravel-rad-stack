@@ -13,7 +13,10 @@
 
   export default defineComponent({
     props: {
-      value: Boolean,
+      value: {
+        type: Boolean,
+        required: true,
+      },
     },
   })
 </script>

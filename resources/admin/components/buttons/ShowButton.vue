@@ -1,7 +1,7 @@
 <template>
   <base-button
     icon="eye"
-    :href="route(`admin.${resource}.show`, item.id)"
+    :href="route(`admin.${resource}.show`, item?.id)"
     variant="success"
     :hide-label="hideLabel"
     :only="only"

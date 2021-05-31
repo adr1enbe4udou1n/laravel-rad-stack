@@ -80,7 +80,7 @@
           if (show) {
             document.body.style.overflow = 'hidden'
           } else {
-            document.body.style.overflow = null
+            document.body.style.overflow = ''
           }
         },
         { immediate: true }

@@ -65,12 +65,12 @@
 <script lang="ts">
   import route from 'ziggy-js'
   import { useForm } from '@inertiajs/inertia-vue3'
-  import { defineComponent, ref } from 'vue'
+  import { defineComponent, Ref, ref } from 'vue'
 
   export default defineComponent({
     setup() {
-      const password = ref(null)
-      const current_password = ref(null)
+      const password: Ref<HTMLInputElement | null> = ref(null)
+      const current_password: Ref<HTMLInputElement | null> = ref(null)
 
       const form = useForm({
         current_password: '',

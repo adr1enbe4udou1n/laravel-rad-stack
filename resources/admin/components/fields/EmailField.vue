@@ -7,7 +7,10 @@
 
   export default defineComponent({
     props: {
-      value: String,
+      value: {
+        type: String,
+        required: true,
+      },
     },
   })
 </script>

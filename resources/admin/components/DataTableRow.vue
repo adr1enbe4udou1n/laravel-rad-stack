@@ -19,7 +19,7 @@
         >
           <component
             :is="`${column.type}-field`"
-            v-if="column.type"
+            v-if="column.type && item[column.field]"
             :value="item[column.field]"
             v-bind="column.props"
           />
@@ -38,7 +38,6 @@
   import BooleanField from '@admin/components/fields/BooleanField.vue'
   import DateField from '@admin/components/fields/DateField.vue'
   import SelectField from '@admin/components/fields/SelectField.vue'
-  import { Model } from '@admin/types'
   import { Column } from '@admin/types/data-table'
 
   export default defineComponent({
@@ -50,7 +49,10 @@
     },
     props: {
       columns: Array as PropType<Column[]>,
-      item: Object as PropType<Model>,
+      item: {
+        type: Object as PropType<{ [key: string]: any }>,
+        required: true,
+      },
     },
     setup(props) {
       provide('item', props.item)

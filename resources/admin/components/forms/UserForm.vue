@@ -55,11 +55,11 @@
     props: {
       initialValues: {
         type: Object as PropType<{
-          name: string
-          email: string
-          password: string
-          active: boolean
-          role: string
+          name?: string
+          email?: string
+          password?: string
+          active?: boolean
+          role?: string
         }>,
         default: () => {
           return {

@@ -53,7 +53,7 @@
               class="inline-flex items-center font-bold"
             >
               <span :class="{ 'order-2': column.numeric }">
-                {{ $ta(resource, column.field) }}
+                {{ $ta(column.field) }}
               </span>
               <component
                 :is="`${sortDesc ? 'arrow-down' : 'arrow-up'}-icon`"
@@ -66,7 +66,7 @@
               />
             </div>
             <span v-else>
-              {{ $ta(resource, column.field) }}
+              {{ $ta(column.field) }}
             </span>
           </th>
         </tr>
@@ -165,7 +165,10 @@
         type: Object as PropType<PaginatedData<Model>>,
         required: true,
       },
-      columns: Array as PropType<(string | Column)[]>,
+      columns: {
+        type: Array as PropType<(string | Column)[]>,
+        required: true,
+      },
       filter: Object as PropType<{ [key: string]: string }>,
       sort: String,
       rowClick: String,
@@ -178,8 +181,6 @@
       },
     },
     setup(props) {
-      const resource = inject<string>('resource')
-
       const sortBy = ref('id')
       const sortDesc = ref(false)
 
@@ -218,7 +219,7 @@
             (acc, column) => {
               return { ...acc, [column.field]: '' }
             },
-            props.disableSearch ? {} : { q: '' }
+            props.disableSearch ? {} : ({ q: '' } as { [key: string]: string })
           )
       }
 
@@ -247,7 +248,9 @@
       }
 
       const onRowClick = (id: number) => {
-        if (props.rowClick) {
+        const resource = inject<string>('resource')
+
+        if (props.rowClick && resource) {
           Inertia.get(route(`admin.${resource}.${props.rowClick}`, id))
         }
       }
@@ -271,7 +274,6 @@
       })
 
       return {
-        resource,
         sortBy,
         sortDesc,
         onFilter,

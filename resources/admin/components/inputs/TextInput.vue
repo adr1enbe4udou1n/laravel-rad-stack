@@ -7,13 +7,13 @@
     class="block w-full"
     :class="{ 'form-invalid': !!error }"
     :value="modelValue"
-    @input="$emit('update:modelValue', $event.target.value)"
+    @input="onInput"
   />
   <input-error :message="error" class="mt-2" />
 </template>
 
 <script lang="ts">
-  import { defineComponent, ref } from 'vue'
+  import { defineComponent, Ref, ref } from 'vue'
   import { inputProps, inputSetup } from '@admin/mixins/input'
 
   export default defineComponent({
@@ -22,15 +22,19 @@
       modelValue: String,
     },
     emits: ['update:modelValue'],
-    setup(props) {
-      const input = ref(null)
+    setup(props, { emit }) {
+      const input: Ref<HTMLInputElement | null> = ref(null)
       const initial = inputSetup(props)
 
       const focus = () => {
         input.value?.focus()
       }
 
-      return { ...initial, focus, input }
+      const onInput = (e: any) => {
+        emit('update:modelValue', (e.target as HTMLInputElement).value)
+      }
+
+      return { ...initial, focus, input, onInput }
     },
   })
 </script>

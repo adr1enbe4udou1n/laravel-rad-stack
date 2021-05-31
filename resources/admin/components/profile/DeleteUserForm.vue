@@ -74,11 +74,11 @@
 <script lang="ts">
   import route from 'ziggy-js'
   import { useForm } from '@inertiajs/inertia-vue3'
-  import { defineComponent, ref } from 'vue'
+  import { defineComponent, Ref, ref } from 'vue'
 
   export default defineComponent({
     setup() {
-      const password = ref(null)
+      const password: Ref<HTMLInputElement | null> = ref(null)
       const confirmingUserDeletion = ref(false)
 
       const form = useForm({
@@ -101,7 +101,7 @@
         form.delete(route('admin.current-user.destroy'), {
           preserveScroll: true,
           onSuccess: () => closeModal(),
-          onError: () => password.value.focus(),
+          onError: () => password.value?.focus(),
           onFinish: () => form.reset(),
         })
       }

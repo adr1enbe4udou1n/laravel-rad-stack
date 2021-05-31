@@ -1,3 +1,3 @@
 export abstract class Model {
-  id: number
+  constructor(public id: number) {}
 }

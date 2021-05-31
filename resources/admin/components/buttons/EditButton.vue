@@ -1,7 +1,7 @@
 <template>
   <base-button
     icon="pencil"
-    :href="route(`admin.${resource}.edit`, item.id)"
+    :href="route(`admin.${resource}.edit`, item?.id)"
     :hide-label="hideLabel"
     :only="only"
     @click.stop

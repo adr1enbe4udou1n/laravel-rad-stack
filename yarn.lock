@@ -350,13 +350,12 @@
   resolved "https://registry.yarnpkg.com/@iarna/toml/-/toml-2.2.5.tgz#b32366c89b43c6f8cefbdefac778b9c828e3ba8c"
   integrity sha512-trnsAYxU3xnS1gPHPyU961coFyLkh4gAD/0zQ5mymY4yOZ+CYvsPqUbOFSw0aDM4y0tV7tiFxL/1XfXPNC6IPg==
 
-"@inertiajs/inertia-vue3@^0.4.0":
-  version "0.4.1"
-  resolved "https://registry.yarnpkg.com/@inertiajs/inertia-vue3/-/inertia-vue3-0.4.1.tgz#04bd6491b1f4f6a0d559919c6175d363c62afbbf"
-  integrity sha512-5U65uDvwzNaqb2jbcBq8TeXdjEYGOuTkCtMdrcIvSI472wGByF6Ca4PYYfwFUNufsnjjYFXTMowRHRQWN2JGwQ==
+"@inertiajs/inertia-vue3@^0.3.9":
+  version "0.3.14"
+  resolved "https://registry.yarnpkg.com/@inertiajs/inertia-vue3/-/inertia-vue3-0.3.14.tgz#d5c1704b4ccf7bd7552bffbfc3d1520f12d148d4"
+  integrity sha512-0GU1VccEloABiL2nPrh4Fc8elgD3gmAt6R64IECISrjwu8VrqKUEQLqhgUttPK05ZIj3tyqakN/VgE+4Ovuxng==
   dependencies:
     lodash.clonedeep "^4.5.0"
-    lodash.isequal "^4.5.0"
 
 "@inertiajs/inertia@^0.8.7":
   version "0.8.7"
@@ -4601,11 +4600,6 @@ lodash.clonedeep@^4.5.0:
   version "4.5.0"
   resolved "https://registry.yarnpkg.com/lodash.clonedeep/-/lodash.clonedeep-4.5.0.tgz#e23f3f9c4f8fbdde872529c1071857a086e5ccef"
   integrity sha1-4j8/nE+Pvd6HJSnBBxhXoIblzO8=
-
-lodash.isequal@^4.5.0:
-  version "4.5.0"
-  resolved "https://registry.yarnpkg.com/lodash.isequal/-/lodash.isequal-4.5.0.tgz#415c4478f2bcc30120c22ce10ed3226f7d3e18e0"
-  integrity sha1-QVxEePK8wwEgwizhDtMib30+GOA=
 
 lodash.iteratee@^4.5.0:
   version "4.7.0"

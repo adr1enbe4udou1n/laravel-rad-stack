@@ -47,7 +47,10 @@
   export default defineComponent({
     props: {
       action: String,
-      users: Object as PropType<PaginatedData<User>>,
+      users: {
+        type: Object as PropType<PaginatedData<User>>,
+        required: true,
+      },
       user: Object as PropType<User>,
       sort: String,
       filter: Object,
@@ -103,7 +106,7 @@
         'row-action',
       ]
 
-      const canBeImpersonated = (item: Model) => {
+      const canBeImpersonated = (item: any) => {
         return (item as User).can_be_impersonated
       }
 
