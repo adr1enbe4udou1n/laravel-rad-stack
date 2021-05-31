@@ -7,14 +7,14 @@ Dotenv.config()
 export default (entry: string): UserConfigExport => {
   return {
     base: `${process.env.ASSET_URL || ''}/dist/`,
-    root: 'resources',
+    root: `resources/${entry}`,
     publicDir: `${entry}/static`,
     build: {
-      outDir: `../public/dist/${entry}`,
+      outDir: `../../public/dist/${entry}`,
       emptyOutDir: true,
       manifest: true,
       rollupOptions: {
-        input: `/${entry}/app.ts`,
+        input: '/app.ts',
       },
     },
   }

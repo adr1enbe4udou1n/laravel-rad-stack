@@ -9,33 +9,29 @@ class LaravelViteManifest
 {
     private $manifestCache = [];
 
-    public function embed(string $entry, ?string $serverUrl): string
+    public function embed(string $name, string $devUrl): string
     {
         if (App::environment('local')) {
-            $serverUrl = $serverUrl
-                ? Str::of($serverUrl)->rtrim('/')
-                : 'http://localhost:3000';
-
-            return $this->jsImports("{$serverUrl}/{$entry}");
+            return $this->jsImports($devUrl);
         }
 
-        [$manifestKey] = explode('/', $entry);
+        $entry = Str::of(parse_url($devUrl, PHP_URL_PATH))->trim('/');
 
-        return $this->jsImports($this->productionAssets($entry, $manifestKey))
-            .$this->jsPreloadImports($entry, $manifestKey)
-            .$this->cssImports($entry, $manifestKey);
+        return $this->jsImports($this->productionAssets($name, $entry))
+            .$this->jsPreloadImports($name, $entry)
+            .$this->cssImports($name, $entry);
     }
 
-    private function getManifest(string $key): array
+    private function getManifest(string $name): array
     {
-        if (! empty($this->manifestCache[$key])) {
-            return $this->manifestCache[$key];
+        if (! empty($this->manifestCache[$name])) {
+            return $this->manifestCache[$name];
         }
 
-        $content = file_get_contents(public_path("dist/{$key}/manifest.json"));
-        $this->manifestCache[$key] = json_decode($content, true);
+        $content = file_get_contents(public_path("dist/{$name}/manifest.json"));
+        $this->manifestCache[$name] = json_decode($content, true);
 
-        return $this->manifestCache[$key];
+        return $this->manifestCache[$name];
     }
 
     private function jsImports(string $url): string
@@ -43,62 +39,62 @@ class LaravelViteManifest
         return "<script type=\"module\" crossorigin src=\"{$url}\"></script>";
     }
 
-    private function jsPreloadImports(string $entry, string $manifestKey): string
+    private function jsPreloadImports(string $name, string $entry): string
     {
         $res = '';
-        foreach ($this->preloadUrls($entry, $manifestKey) as $url) {
+        foreach ($this->preloadUrls($name, $entry) as $url) {
             $res .= "<link rel=\"modulepreload\" href=\"{$url}\">";
         }
 
         return $res;
     }
 
-    private function preloadUrls(string $entry, string $manifestKey): array
+    private function preloadUrls(string $name, string $entry): array
     {
         $urls = [];
-        $manifest = $this->getManifest($manifestKey);
+        $manifest = $this->getManifest($name);
 
         if (! empty($manifest[$entry]['imports'])) {
             foreach ($manifest[$entry]['imports'] as $imports) {
-                $urls[] = asset("/dist/{$manifestKey}/".$manifest[$imports]['file']);
+                $urls[] = asset("/dist/{$name}/".$manifest[$imports]['file']);
             }
         }
 
         return $urls;
     }
 
-    private function cssImports(string $entry, string $manifestKey): string
+    private function cssImports(string $name, string $entry): string
     {
         $tags = '';
-        foreach ($this->cssUrls($entry, $manifestKey) as $url) {
+        foreach ($this->cssUrls($name, $entry) as $url) {
             $tags .= "<link rel=\"stylesheet\" href=\"{$url}\">";
         }
 
         return $tags;
     }
 
-    private function cssUrls(string $entry, string $manifestKey): array
+    private function cssUrls(string $name, string $entry): array
     {
         $urls = [];
-        $manifest = $this->getManifest($manifestKey);
+        $manifest = $this->getManifest($name);
 
         if (! empty($manifest[$entry]['css'])) {
             foreach ($manifest[$entry]['css'] as $file) {
-                $urls[] = asset("/dist/{$manifestKey}/{$file}");
+                $urls[] = asset("/dist/{$name}/{$file}");
             }
         }
 
         return $urls;
     }
 
-    private function productionAssets(string $entry, string $manifestKey): string
+    private function productionAssets(string $name, string $entry): string
     {
-        $manifest = $this->getManifest($manifestKey);
+        $manifest = $this->getManifest($name);
 
         if (! isset($manifest[$entry])) {
             return '';
         }
 
-        return asset("/dist/{$manifestKey}/".$manifest[$entry]['file']);
+        return asset("/dist/{$name}/".$manifest[$entry]['file']);
     }
 }

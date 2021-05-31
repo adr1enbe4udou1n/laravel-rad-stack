@@ -20,7 +20,7 @@ const laravel = (): Plugin => ({
 // https://vitejs.dev/config/
 export default defineConfig({
   ...baseConfig('front'),
-  cacheDir: '../node_modules/.vite/front',
+  cacheDir: '../../node_modules/.vite/front',
   resolve: {
     alias: {
       '@front': __dirname,
@@ -29,7 +29,7 @@ export default defineConfig({
   plugins: [
     laravel(),
     windicss({
-      config: '../windi.config.ts',
+      config: '../../windi.config.ts',
       scan: {
         dirs: ['.'],
         fileExtensions: ['blade.php', 'vue', 'ts'],

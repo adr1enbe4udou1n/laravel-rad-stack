@@ -13,10 +13,9 @@ export const inputSetup = (
 ) => {
   const id = useUniqueId()
 
-  const resource = inject<string>('resource')
-
   const getLabel = computed(() => {
     if (props.source) {
+      const resource = inject<string>('resource')
       return transAttribute(resource, props.source)
     }
     return props.label

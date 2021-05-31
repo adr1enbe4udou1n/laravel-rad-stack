@@ -10,7 +10,7 @@
 
     @routes
     @translations
-    @vite("admin/app.ts", "http://localhost:3200")
+    @vite("admin", "http://localhost:3200/app.ts")
 </head>
 
 <body class="antialiased">

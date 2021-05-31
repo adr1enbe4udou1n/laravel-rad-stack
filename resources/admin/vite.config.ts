@@ -7,7 +7,7 @@ import windicss from 'vite-plugin-windicss'
 // https://vitejs.dev/config/
 export default defineConfig({
   ...baseConfig('admin'),
-  cacheDir: '../node_modules/.vite/admin',
+  cacheDir: '../../node_modules/.vite/admin',
   resolve: {
     alias: {
       '@admin': __dirname,
@@ -16,11 +16,11 @@ export default defineConfig({
   plugins: [
     vue(),
     components({
-      dirs: ['admin/components', 'admin/layouts'],
+      dirs: ['components', 'layouts'],
       globalComponentsDeclaration: true,
     }),
     windicss({
-      config: '../windi.config.ts',
+      config: '../../windi.config.ts',
       scan: {
         dirs: ['.'],
         fileExtensions: ['blade.php', 'vue', 'ts'],
@@ -28,6 +28,7 @@ export default defineConfig({
     }),
   ],
   optimizeDeps: {
+    entries: ['admin/app.ts'],
     include: [
       'vue',
       'lodash',
