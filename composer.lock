@@ -3527,16 +3527,16 @@
         },
         {
             "name": "spatie/laravel-enum",
-            "version": "2.5.0",
+            "version": "2.5.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/spatie/laravel-enum.git",
-                "reference": "fd31abb8f548795ce834fa7e8749e268b61cd0c3"
+                "reference": "860bcf367e36d277eee86d0ba7dfa7df66e56594"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/spatie/laravel-enum/zipball/fd31abb8f548795ce834fa7e8749e268b61cd0c3",
-                "reference": "fd31abb8f548795ce834fa7e8749e268b61cd0c3",
+                "url": "https://api.github.com/repos/spatie/laravel-enum/zipball/860bcf367e36d277eee86d0ba7dfa7df66e56594",
+                "reference": "860bcf367e36d277eee86d0ba7dfa7df66e56594",
                 "shasum": ""
             },
             "require": {
@@ -3547,7 +3547,7 @@
                 "illuminate/http": "^8.0",
                 "illuminate/support": "^8.0",
                 "php": "^7.4 || ^8.0",
-                "spatie/enum": "^3.5"
+                "spatie/enum": "^3.9"
             },
             "conflict": {
                 "bensampo/laravel-enum": "*"
@@ -3603,7 +3603,7 @@
             ],
             "support": {
                 "issues": "https://github.com/spatie/laravel-enum/issues",
-                "source": "https://github.com/spatie/laravel-enum/tree/2.5.0"
+                "source": "https://github.com/spatie/laravel-enum/tree/2.5.1"
             },
             "funding": [
                 {
@@ -3615,7 +3615,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2021-05-01T10:00:13+00:00"
+            "time": "2021-05-31T15:32:30+00:00"
         },
         {
             "name": "spatie/laravel-query-builder",
@@ -7513,16 +7513,16 @@
         },
         {
             "name": "facade/flare-client-php",
-            "version": "1.8.0",
+            "version": "1.8.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/facade/flare-client-php.git",
-                "reference": "69742118c037f34ee1ef86dc605be4a105d9e984"
+                "reference": "47b639dc02bcfdfc4ebb83de703856fa01e35f5f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/facade/flare-client-php/zipball/69742118c037f34ee1ef86dc605be4a105d9e984",
-                "reference": "69742118c037f34ee1ef86dc605be4a105d9e984",
+                "url": "https://api.github.com/repos/facade/flare-client-php/zipball/47b639dc02bcfdfc4ebb83de703856fa01e35f5f",
+                "reference": "47b639dc02bcfdfc4ebb83de703856fa01e35f5f",
                 "shasum": ""
             },
             "require": {
@@ -7566,7 +7566,7 @@
             ],
             "support": {
                 "issues": "https://github.com/facade/flare-client-php/issues",
-                "source": "https://github.com/facade/flare-client-php/tree/1.8.0"
+                "source": "https://github.com/facade/flare-client-php/tree/1.8.1"
             },
             "funding": [
                 {
@@ -7574,7 +7574,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2021-04-30T11:11:50+00:00"
+            "time": "2021-05-31T19:23:29+00:00"
         },
         {
             "name": "facade/ignition",
