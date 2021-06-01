@@ -13,7 +13,8 @@
         "paths": {
             "@admin/*": ["./resources/admin/*"],
             "@front/*": ["./resources/front/*"]
-        }
+        },
+        "plugins": [{ "name": "typescript-vue-plugin" }]
     },
     "include": [
         "resources/**/*.ts",

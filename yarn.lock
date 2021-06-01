@@ -6574,6 +6574,14 @@ typescript-vscode-sh-plugin@^0.6.14:
   resolved "https://registry.yarnpkg.com/typescript-vscode-sh-plugin/-/typescript-vscode-sh-plugin-0.6.14.tgz#a81031b502f6346a26ea49ce082438c3e353bb38"
   integrity sha512-AkNlRBbI6K7gk29O92qthNSvc6jjmNQ6isVXoYxkFwPa8D04tIv2SOPd+sd+mNpso4tNdL2gy7nVtrd5yFqvlA==
 
+typescript-vue-plugin@^0.25.18:
+  version "0.25.18"
+  resolved "https://registry.yarnpkg.com/typescript-vue-plugin/-/typescript-vue-plugin-0.25.18.tgz#306b30cec601b304945dc660d5614c517646f337"
+  integrity sha512-M9oECsc4VcHrZ5JQqoaLR/qdQx+cpic0jnBApwUjkL/ODrCrDXMl2mgiqfJG7m9eQUjzyXmjoRLAKCz1GzFsOg==
+  dependencies:
+    "@volar/shared" "^0.25.18"
+    vscode-vue-languageservice "^0.25.18"
+
 typescript@^4.3.2:
   version "4.3.2"
   resolved "https://registry.yarnpkg.com/typescript/-/typescript-4.3.2.tgz#399ab18aac45802d6f2498de5054fcbbe716a805"
@@ -7062,7 +7070,7 @@ vscode-uri@^3.0.2:
   resolved "https://registry.yarnpkg.com/vscode-uri/-/vscode-uri-3.0.2.tgz#ecfd1d066cb8ef4c3a208decdbab9a8c23d055d0"
   integrity sha512-jkjy6pjU1fxUvI51P+gCsxg1u2n8LSt0W6KrCNQceaziKzff74GoWmjVG46KieVzybO1sttPQmYfrwSHey7GUA==
 
-vscode-vue-languageservice@^0.25.17:
+vscode-vue-languageservice@^0.25.17, vscode-vue-languageservice@^0.25.18:
   version "0.25.18"
   resolved "https://registry.yarnpkg.com/vscode-vue-languageservice/-/vscode-vue-languageservice-0.25.18.tgz#f94e5674d0afcb96dd2aa4afba97378735666191"
   integrity sha512-clhqqgiyDqm3pIwq+9l/JvW4BAbwJ8HTU7i5Sl34oYuvlJCx9wjTPjSeAj92EDPecvXLThHMep0XUUePtiePTg==

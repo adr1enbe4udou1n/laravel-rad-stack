@@ -1,14 +1,5 @@
 import { Profile, EnumTypes } from '@admin/types'
-import { ComputedRef, DefineComponent } from 'vue'
-
-declare module '*.vue' {
-  const component: DefineComponent<
-    Record<string, never>,
-    Record<string, never>,
-    unknown
-  >
-  export default component
-}
+import { ComputedRef } from 'vue'
 
 declare module '@inertiajs/inertia' {
   namespace Inertia {
