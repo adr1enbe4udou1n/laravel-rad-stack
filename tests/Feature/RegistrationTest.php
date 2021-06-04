@@ -6,102 +6,80 @@ use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Config;
 use Inertia\Testing\Assert;
-use Tests\TestCase;
+use function Pest\Laravel\assertAuthenticated;
+use function Pest\Laravel\get;
+use function Pest\Laravel\post;
 
-class RegistrationTest extends TestCase
-{
-    use RefreshDatabase;
+uses(RefreshDatabase::class);
 
-    public function test_registration_screen_can_be_rendered()
-    {
-        $response = $this->get('/register');
+test('registration screen can be rendered', function () {
+    $response = get('/register');
 
-        $response->assertInertia(fn (Assert $page) => $page->component('auth/Register'));
-    }
+    $response->assertInertia(fn (Assert $page) => $page->component('auth/Register'));
+});
 
-    public function test_new_users_can_register()
-    {
-        $response = $this->post('/register', [
-            'name' => 'Test User',
-            'email' => 'test@example.com',
+test('new users can register', function () {
+    $response = post('/register', [
+        'name' => 'User',
+        'email' => 'test@example.com',
+        'password' => 'password',
+        'password_confirmation' => 'password',
+    ]);
+
+    assertAuthenticated();
+    $response->assertRedirect(RouteServiceProvider::HOME);
+});
+
+test('new users can register with strong password if debug disabled', function () {
+    Config::set('app.debug', false);
+
+    $response = post('/register', [
+        'name' => 'User',
+        'email' => 'test@example.com',
+        'password' => 'p4$$w0rD',
+        'password_confirmation' => 'p4$$w0rD',
+    ]);
+
+    assertAuthenticated();
+    $response->assertRedirect(RouteServiceProvider::HOME);
+});
+
+test('new users cannot register with invalid data', function (array $data, array $errors) {
+    $response = post('/register', $data);
+
+    $response->assertSessionHasErrors($errors);
+})->with([
+    [
+        [
+            'name' => 'User',
+            'email' => 'example.com',
             'password' => 'password',
             'password_confirmation' => 'password',
-        ]);
-
-        $this->assertAuthenticated();
-        $response->assertRedirect(RouteServiceProvider::HOME);
-    }
-
-    public function test_new_users_can_register_with_strong_password_if_debug_disabled()
-    {
-        Config::set('app.debug', false);
-
-        $response = $this->post('/register', [
-            'name' => 'Test User',
+        ],
+        ['email'],
+    ],
+    [
+        [
+            'name' => 'User',
             'email' => 'test@example.com',
-            'password' => 'p4$$w0rD',
-            'password_confirmation' => 'p4$$w0rD',
-        ]);
+            'password' => 'password',
+            'password_confirmation' => 'wrong-password',
+        ],
+        ['password'],
+    ],
+]);
 
-        $this->assertAuthenticated();
-        $response->assertRedirect(RouteServiceProvider::HOME);
-    }
+test('new users cannot register with weak password if debug disabled', function (string $password) {
+    Config::set('app.debug', false);
 
-    public function invalidData()
-    {
-        yield [
-            [
-                'name' => 'Test User',
-                'email' => 'example.com',
-                'password' => 'password',
-                'password_confirmation' => 'password',
-            ],
-            ['email'],
-        ];
+    $response = post('/register', [
+        'name' => 'User',
+        'email' => 'test@example.com',
+        'password' => $password,
+        'password_confirmation' => $password,
+    ]);
 
-        yield [
-            [
-                'name' => 'Test User',
-                'email' => 'test@example.com',
-                'password' => 'password',
-                'password_confirmation' => 'wrong-password',
-            ],
-            ['password'],
-        ];
-    }
-
-    /**
-     * @dataProvider invalidData
-     */
-    public function test_new_users_cannot_register_with_invalid_data(array $data, array $errors)
-    {
-        $response = $this->post('/register', $data);
-
-        $response->assertSessionHasErrors($errors);
-    }
-
-    public function invalidPasswords()
-    {
-        yield ['password'];
-        yield ['PassWord'];
-        yield ['p4ssw0rd'];
-        yield ['pa$$word'];
-    }
-
-    /**
-     * @dataProvider invalidPasswords
-     */
-    public function test_new_users_cannot_register_with_weak_password_if_debug_disabled(string $password)
-    {
-        Config::set('app.debug', false);
-
-        $response = $this->post('/register', [
-            'name' => 'Test User',
-            'email' => 'test@example.com',
-            'password' => $password,
-            'password_confirmation' => $password,
-        ]);
-
-        $response->assertSessionHasErrors('password');
-    }
-}
+    $response->assertSessionHasErrors('password');
+})->with([
+    'password', 'PassWord', 'p4ssw0rd', 'pa$$word',
+]);
