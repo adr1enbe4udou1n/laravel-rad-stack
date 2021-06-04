@@ -4,6 +4,7 @@ namespace Tests\Feature;
 
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Inertia\Testing\Assert;
 use Tests\TestCase;
 
 class PasswordConfirmationTest extends TestCase
@@ -16,7 +17,9 @@ class PasswordConfirmationTest extends TestCase
 
         $response = $this->actingAs($user)->get('/user/confirm-password');
 
-        $response->assertStatus(200);
+        $response->assertInertia(
+            fn (Assert $page) => $page->component('auth/ConfirmPassword')
+        );
     }
 
     public function test_password_can_be_confirmed()
