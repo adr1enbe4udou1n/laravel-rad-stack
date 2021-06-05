@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Enums\RoleEnum;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Str;
@@ -41,6 +42,48 @@ class UserFactory extends Factory
         return $this->state(function (array $attributes) {
             return [
                 'email_verified_at' => null,
+            ];
+        });
+    }
+
+    /**
+     * Indicate that the model's role is admin.
+     *
+     * @return \Illuminate\Database\Eloquent\Factories\Factory
+     */
+    public function superAdmin()
+    {
+        return $this->state(function (array $attributes) {
+            return [
+                'role' => RoleEnum::super_admin(),
+            ];
+        });
+    }
+
+    /**
+     * Indicate that the model's role is admin.
+     *
+     * @return \Illuminate\Database\Eloquent\Factories\Factory
+     */
+    public function admin()
+    {
+        return $this->state(function (array $attributes) {
+            return [
+                'role' => RoleEnum::admin(),
+            ];
+        });
+    }
+
+    /**
+     * Indicate that the model's role is admin.
+     *
+     * @return \Illuminate\Database\Eloquent\Factories\Factory
+     */
+    public function user()
+    {
+        return $this->state(function (array $attributes) {
+            return [
+                'role' => RoleEnum::user(),
             ];
         });
     }

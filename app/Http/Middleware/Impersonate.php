@@ -3,6 +3,7 @@
 namespace App\Http\Middleware;
 
 use Closure;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class Impersonate
@@ -12,7 +13,7 @@ class Impersonate
      *
      * @param mixed $request
      */
-    public function handle($request, Closure $next)
+    public function handle(Request $request, Closure $next)
     {
         if ($request->session()->has('impersonate')) {
             Auth::onceUsingId($request->session()->get('impersonate'));

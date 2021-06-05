@@ -80,18 +80,14 @@ class UserController extends Controller
     #[Post('{user}/impersonate', name: 'users.impersonate')]
     public function impersonate(User $user)
     {
-        abort_unless(Auth::user()->canImpersonate(), 403);
+        abort_unless(Auth::user()->canImpersonate($user), 403);
 
-        if ($user->canBeImpersonated()) {
-            Auth::user()->setImpersonating($user->id);
+        Auth::user()->setImpersonating($user->id);
 
-            return redirect()->route('admin.dashboard');
-        }
-
-        return redirect()->back()->with('flash.danger', __('Impersonate disabled for this user.'));
+        return redirect()->route('admin.dashboard');
     }
 
-    #[Post('stopImpersonate', name: 'users.stop-impersonate')]
+    #[Post('stop-impersonate', name: 'users.stop-impersonate')]
     public function stopImpersonate()
     {
         Auth::user()->stopImpersonating();

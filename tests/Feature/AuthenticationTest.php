@@ -46,6 +46,6 @@ test('users can logout', function () {
 
     $response = post('/logout');
 
-    $response->assertRedirect('login');
+    $response->assertRedirect('/login');
     assertGuest('web');
 });

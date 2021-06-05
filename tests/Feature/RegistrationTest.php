@@ -26,8 +26,8 @@ test('new users can register', function () {
         'password_confirmation' => 'password',
     ]);
 
-    assertAuthenticated();
     $response->assertRedirect(RouteServiceProvider::HOME);
+    assertAuthenticated();
 });
 
 test('new users can register with strong password if debug disabled', function () {
@@ -40,8 +40,8 @@ test('new users can register with strong password if debug disabled', function (
         'password_confirmation' => 'p4$$w0rD',
     ]);
 
-    assertAuthenticated();
     $response->assertRedirect(RouteServiceProvider::HOME);
+    assertAuthenticated();
 });
 
 test('new users cannot register with invalid data', function (array $data, array $errors) {

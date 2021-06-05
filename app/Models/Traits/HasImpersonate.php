@@ -3,7 +3,7 @@
 namespace App\Models\Traits;
 
 use App\Enums\RoleEnum;
-use Illuminate\Support\Facades\Auth;
+use App\Models\User;
 use Illuminate\Support\Facades\Session;
 
 /**
@@ -11,14 +11,9 @@ use Illuminate\Support\Facades\Session;
  */
 trait HasImpersonate
 {
-    public function canImpersonate()
+    public function canImpersonate(User $user)
     {
-        return $this->role && $this->role->equals(RoleEnum::super_admin(), RoleEnum::admin());
-    }
-
-    public function canBeImpersonated()
-    {
-        return $this->id !== Auth::id() && (! $this->role || ! $this->role->equals(RoleEnum::super_admin()));
+        return $this->id !== $user->id && $this->role?->equals(RoleEnum::super_admin(), RoleEnum::admin()) && ! $user->role?->equals(RoleEnum::super_admin());
     }
 
     public function setImpersonating($id)
