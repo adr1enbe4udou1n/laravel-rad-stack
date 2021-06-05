@@ -84,6 +84,13 @@ class UserController extends Controller
 
         Auth::user()->setImpersonating($user->id);
 
+        session()->flash(
+            'flash.warning',
+            __('You are connected as :name, you can comeback to you own account from profile menu', [
+                'name' => $user->name,
+            ])
+        );
+
         return redirect()->route('admin.dashboard');
     }
 
