@@ -109,7 +109,7 @@ test('admin can export users', function () {
     Excel::matchByRegex();
     Excel::assertDownloaded('/export-.*\\.xlsx/', function (UserExport $export) {
         /* @var User $user */
-        return 9 === $export->query()->count();
+        return 9 === $export->query()->count() && $export->headings() && $export->map($export->query()->first());
     });
 });
 

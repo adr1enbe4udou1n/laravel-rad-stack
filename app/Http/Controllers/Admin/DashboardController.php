@@ -19,4 +19,10 @@ class DashboardController extends Controller
     {
         return Inertia::render('Dashboard');
     }
+
+    #[Get('profile', name: 'profile.show')]
+    public function show()
+    {
+        return Inertia::render('profile/Show');
+    }
 }

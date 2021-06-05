@@ -11,11 +11,11 @@ uses(RefreshDatabase::class);
 test('user accounts can be deleted', function () {
     actingAs($user = User::factory()->create());
 
-    $response = delete('/admin/user', [
+    $response = delete('/profile/user', [
         'password' => 'password',
     ]);
 
-    $response->assertRedirect('login');
+    $response->assertRedirect('/login');
     expect($user->fresh())->toBeNull();
     assertGuest('web');
 });
@@ -23,7 +23,7 @@ test('user accounts can be deleted', function () {
 test('correct password must be provided before account can be deleted', function () {
     actingAs($user = User::factory()->create());
 
-    $response = delete('/admin/user', [
+    $response = delete('/profile/user', [
         'password' => 'wrong-password',
     ]);
 

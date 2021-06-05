@@ -13,6 +13,8 @@
 </head>
 
 <body class="antialiased">
+    <h1>Hello !</h1>
+
     @livewireScripts
 </body>
 

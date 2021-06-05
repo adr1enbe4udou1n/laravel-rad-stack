@@ -4,10 +4,22 @@ namespace Tests\Feature;
 
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Inertia\Testing\Assert;
 use function Pest\Laravel\actingAs;
+use function Pest\Laravel\get;
 use function Pest\Laravel\put;
 
 uses(RefreshDatabase::class);
+
+test('admin can show his profile', function () {
+    actingAs(User::factory()->admin()->create());
+
+    $response = get('/admin/profile');
+
+    $response->assertInertia(
+        fn (Assert $page) => $page->component('profile/Show')
+    );
+});
 
 test('profile information can be updated', function () {
     actingAs($user = User::factory()->create());

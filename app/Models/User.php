@@ -89,4 +89,9 @@ class User extends Authenticatable
     {
         $this->attributes['password'] = Hash::needsRehash($password) ? Hash::make($password) : $password;
     }
+
+    public function hasAdminAccess()
+    {
+        return $this->role?->equals(RoleEnum::super_admin(), RoleEnum::admin());
+    }
 }

@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\Http\Controllers\UserProfileController;
 use Illuminate\Cache\RateLimiting\Limit;
 use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvider;
 use Illuminate\Http\Request;
@@ -55,13 +56,19 @@ class RouteServiceProvider extends ServiceProvider
             ->registerDirectory(app_path('Http/Controllers/Front'))
         ;
 
+        (new RouteRegistrar(app()->router))
+            ->useRootNamespace(app()->getNamespace())
+            ->useMiddleware(['web', 'auth:sanctum'])
+            ->registerClass(UserProfileController::class)
+        ;
+
         Route::prefix('admin')
             ->name('admin.')
             ->group(
                 function () {
                     (new RouteRegistrar(app()->router))
                         ->useRootNamespace(app()->getNamespace())
-                        ->useMiddleware(['web', 'auth:sanctum'])
+                        ->useMiddleware(['web', 'auth:sanctum', 'can:access-admin'])
                         ->registerDirectory(app_path('Http/Controllers/Admin'))
                     ;
                 }

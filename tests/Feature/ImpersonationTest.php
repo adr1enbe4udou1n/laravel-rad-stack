@@ -20,22 +20,9 @@ test('user can impersonate other user', function () {
     $response->assertSessionHas('impersonate', $user->id);
 });
 
-test('inertia page return current user when no impersonate', function () {
-    actingAs($user = User::factory()->admin()->create());
-
-    $response = get('/admin/dashboard');
-
-    $response->assertInertia(
-        fn (Assert $page) => $page
-            ->component('Dashboard')
-            ->where('auth.id', $user->id)
-            ->where('auth.is_impersonating', false)
-    );
-});
-
 test('inertia page return impersonated user when impersonate', function () {
-    actingAs(User::factory()->admin()->create());
-    $user = User::factory()->create();
+    actingAs(User::factory()->superAdmin()->create());
+    $user = User::factory()->admin()->create();
 
     withSession(['impersonate' => $user->id]);
 
@@ -50,8 +37,8 @@ test('inertia page return impersonated user when impersonate', function () {
 });
 
 test('user can stop impersonate', function () {
-    actingAs(User::factory()->admin()->create());
-    $user = User::factory()->create();
+    actingAs(User::factory()->superAdmin()->create());
+    $user = User::factory()->admin()->create();
 
     withSession(['impersonate' => $user->id]);
 

@@ -1,22 +1,15 @@
 <?php
 
-namespace App\Http\Controllers\Admin;
+namespace App\Http\Controllers;
 
-use App\Http\Controllers\Controller;
 use Illuminate\Contracts\Auth\StatefulGuard;
 use Illuminate\Http\Request;
-use Inertia\Inertia;
 use Spatie\RouteAttributes\Attributes\Delete;
-use Spatie\RouteAttributes\Attributes\Get;
+use Spatie\RouteAttributes\Attributes\Prefix;
 
+#[Prefix('profile')]
 class UserProfileController extends Controller
 {
-    #[Get('user/profile', name: 'profile.show')]
-    public function show()
-    {
-        return Inertia::render('profile/Show');
-    }
-
     #[Delete('user', name: 'current-user.destroy')]
     public function destroy(Request $request, StatefulGuard $auth)
     {

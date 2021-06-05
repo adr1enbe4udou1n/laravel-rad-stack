@@ -18,6 +18,41 @@ test('login screen can be rendered', function () {
     $response->assertInertia(fn (Assert $page) => $page->component('auth/Login'));
 });
 
+test('guest user should be redirected to login when intent go to authenticated page', function () {
+    $response = get('/admin');
+
+    $response->assertRedirect('/login');
+});
+
+test('admin should be redirected to dashboard when intent go to admin home', function () {
+    actingAs(User::factory()->admin()->create());
+
+    $response = get('/admin');
+
+    $response->assertRedirect('/admin/dashboard');
+});
+
+test('admin can go to dashboard', function () {
+    actingAs($user = User::factory()->admin()->create());
+
+    $response = get('/admin/dashboard');
+
+    $response->assertInertia(
+        fn (Assert $page) => $page
+            ->component('Dashboard')
+            ->where('auth.id', $user->id)
+            ->where('auth.is_impersonating', false)
+    );
+});
+
+test('non admin cannot go to admin dashboard', function () {
+    actingAs(User::factory()->user()->create());
+
+    $response = get('/admin/dashboard');
+
+    $response->assertForbidden();
+});
+
 test('users can authenticate using the login screen', function () {
     $user = User::factory()->create();
 

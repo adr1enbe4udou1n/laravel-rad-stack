@@ -2,7 +2,7 @@
 
 namespace App\Support;
 
-use Illuminate\Support\Facades\App;
+use Config;
 use Illuminate\Support\Str;
 
 class LaravelViteManifest
@@ -11,15 +11,19 @@ class LaravelViteManifest
 
     public function embed(string $name, string $devUrl): string
     {
-        if (App::environment('local')) {
+        if (Config::get('vite.dev_server')) {
             return $this->jsImports($devUrl);
         }
 
         $entry = Str::of(parse_url($devUrl, PHP_URL_PATH))->trim('/');
 
-        return $this->jsImports($this->productionAssets($name, $entry))
+        if ($assets = $this->productionAssets($name, $entry)) {
+            return $this->jsImports($assets)
             .$this->jsPreloadImports($name, $entry)
             .$this->cssImports($name, $entry);
+        }
+
+        return '';
     }
 
     private function getManifest(string $name): array
@@ -92,7 +96,7 @@ class LaravelViteManifest
         $manifest = $this->getManifest($name);
 
         if (! isset($manifest[$entry])) {
-            return '';
+            return false;
         }
 
         return asset("/dist/{$name}/".$manifest[$entry]['file']);
