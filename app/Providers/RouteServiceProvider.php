@@ -3,10 +3,7 @@
 namespace App\Providers;
 
 use App\Http\Controllers\UserProfileController;
-use Illuminate\Cache\RateLimiting\Limit;
 use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvider;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\RateLimiter;
 use Illuminate\Support\Facades\Route;
 use Spatie\RouteAttributes\RouteRegistrar;
 
@@ -35,21 +32,6 @@ class RouteServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        $this->configureRateLimiting();
-
-        // $this->routes(function () {
-        //     Route::prefix('api')
-        //         ->middleware('api')
-        //         ->namespace($this->namespace)
-        //         ->group(base_path('routes/api.php'))
-        //     ;
-
-        //     Route::middleware('web')
-        //         ->namespace($this->namespace)
-        //         ->group(base_path('routes/web.php'))
-        //     ;
-        // });
-
         (new RouteRegistrar(app()->router))
             ->useRootNamespace(app()->getNamespace())
             ->useMiddleware(['web'])
@@ -74,15 +56,5 @@ class RouteServiceProvider extends ServiceProvider
                 }
             )
         ;
-    }
-
-    /**
-     * Configure the rate limiters for the application.
-     */
-    protected function configureRateLimiting()
-    {
-        RateLimiter::for('api', function (Request $request) {
-            return Limit::perMinute(60)->by(optional($request->user())->id ?: $request->ip());
-        });
     }
 }

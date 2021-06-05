@@ -5,7 +5,6 @@ namespace App\Http\Middleware;
 use App\Enums\RoleEnum;
 use App\Http\Resources\Admin\AuthResource;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Session;
 use Inertia\Middleware;
 
 class HandleInertiaRequests extends Middleware
@@ -44,11 +43,6 @@ class HandleInertiaRequests extends Middleware
             'appName' => config('app.name'),
             'flash' => function () use ($request) {
                 return $request->session()->get('flash', []);
-            },
-            'errorBags' => function () {
-                return collect(optional(Session::get('errors'))->getBags() ?: [])->mapWithKeys(function ($bag, $key) {
-                    return [$key => $bag->messages()];
-                })->all();
             },
             'auth' => function () use ($request) {
                 if (! $request->user()) {

@@ -8,7 +8,9 @@ use function Pest\Laravel\actingAs;
 use function Pest\Laravel\assertAuthenticated;
 use function Pest\Laravel\assertGuest;
 use function Pest\Laravel\get;
+use function Pest\Laravel\getJson;
 use function Pest\Laravel\post;
+use function Pest\Laravel\postJson;
 
 uses(RefreshDatabase::class);
 
@@ -18,10 +20,24 @@ test('login screen can be rendered', function () {
     $response->assertInertia(fn (Assert $page) => $page->component('auth/Login'));
 });
 
+test('authenticated admin should be redirected to admin when go to login page', function () {
+    actingAs(User::factory()->admin()->create());
+
+    $response = get('/login');
+
+    $response->assertRedirect('/admin');
+});
+
 test('guest user should be redirected to login when intent go to authenticated page', function () {
     $response = get('/admin');
 
     $response->assertRedirect('/login');
+});
+
+test('guest user should be unauthorized to do authenticated json request', function () {
+    $response = getJson('/admin/users');
+
+    $response->assertUnauthorized();
 });
 
 test('admin should be redirected to dashboard when intent go to admin home', function () {
@@ -82,5 +98,14 @@ test('users can logout', function () {
     $response = post('/logout');
 
     $response->assertRedirect('/login');
+    assertGuest('web');
+});
+
+test('users can logout with json', function () {
+    actingAs(User::factory()->create());
+
+    $response = postJson('/logout');
+
+    $response->assertStatus(204);
     assertGuest('web');
 });

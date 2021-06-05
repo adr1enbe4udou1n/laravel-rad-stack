@@ -3,7 +3,6 @@
 namespace App\Http\Responses;
 
 use Illuminate\Http\JsonResponse;
-use Inertia\Inertia;
 use Laravel\Fortify\Contracts\LogoutResponse as LogoutResponseContract;
 
 class LogoutResponse implements LogoutResponseContract
@@ -20,6 +19,5 @@ class LogoutResponse implements LogoutResponseContract
         return $request->wantsJson()
                     ? new JsonResponse('', 204)
                     : redirect()->route('login');
-        // : Inertia::location('/');
     }
 }
