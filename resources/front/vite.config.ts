@@ -1,6 +1,5 @@
 import { defineConfig, Plugin } from 'vite'
 import baseConfig from '../vite.config'
-import windicss from 'vite-plugin-windicss'
 
 /**
  * Enable full reload for blade file
@@ -19,23 +18,17 @@ const laravel = (): Plugin => ({
 
 // https://vitejs.dev/config/
 export default defineConfig({
-  ...baseConfig('front'),
+  ...baseConfig('front', [
+    './storage/framework/views/*.php',
+    './resources/front/**/*.{blade.php,ts,vue}',
+  ]),
   cacheDir: '../../node_modules/.vite/front',
   resolve: {
     alias: {
       '@front': __dirname,
     },
   },
-  plugins: [
-    laravel(),
-    windicss({
-      config: '../../windi.config.ts',
-      scan: {
-        dirs: ['.'],
-        fileExtensions: ['blade.php', 'vue', 'ts'],
-      },
-    }),
-  ],
+  plugins: [laravel()],
   optimizeDeps: {
     include: ['vue', 'alpinejs'],
   },

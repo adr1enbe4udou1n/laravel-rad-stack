@@ -41,14 +41,14 @@
     @apply text-primary-300 group-hover:text-white;
 
     svg {
-      @apply fill-primary-400 group-hover:fill-white;
+      @apply fill-current text-primary-400 group-hover:text-white;
     }
 
     &.active {
       @apply text-white;
 
       svg {
-        @apply fill-white;
+        @apply fill-current text-white;
       }
     }
   }
