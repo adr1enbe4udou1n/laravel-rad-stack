@@ -11,8 +11,6 @@ use Spatie\QueryBuilder\QueryBuilder;
 
 class UserQuery extends BaseQuery
 {
-    private UserExport $exporter;
-
     public function make(): self
     {
         $this->query = QueryBuilder::for(User::class)
