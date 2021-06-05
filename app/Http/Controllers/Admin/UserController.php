@@ -84,14 +84,12 @@ class UserController extends Controller
 
         Auth::user()->setImpersonating($user->id);
 
-        session()->flash(
+        return redirect()->route('admin.dashboard')->with(
             'flash.warning',
             __('You are connected as :name, you can comeback to you own account from profile menu', [
                 'name' => $user->name,
             ])
         );
-
-        return redirect()->route('admin.dashboard');
     }
 
     #[Post('stop-impersonate', name: 'users.stop-impersonate')]
@@ -99,8 +97,6 @@ class UserController extends Controller
     {
         Auth::user()->stopImpersonating();
 
-        session()->flash('flash.success', __('Welcome Back!'));
-
-        return redirect()->route('admin.dashboard');
+        return redirect()->route('admin.dashboard')->with('flash.success', __('Welcome Back!'));
     }
 }
