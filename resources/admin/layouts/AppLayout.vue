@@ -6,8 +6,7 @@
           hidden
           sm:flex
           bg-primary-900
-          md:flex-shrink-0
-          md:w-56
+          md:flex-shrink-0 md:w-56
           px-6
           items-center
           justify-between
@@ -40,8 +39,7 @@
       <div
         scroll-region
         class="
-          md:flex-1
-          md:overflow-y-auto
+          md:flex-1 md:overflow-y-auto
           scrollbar-thin scrollbar-thumb-primary-900 scrollbar-track-gray-100
         "
       >

@@ -41,8 +41,7 @@
               shadow-xl
               transform
               transition-all
-              sm:w-full
-              sm:mx-auto
+              sm:w-full sm:mx-auto
             "
             :class="maxWidthClass"
           >

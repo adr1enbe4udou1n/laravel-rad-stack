@@ -13,8 +13,7 @@
       text-xs
       uppercase
       tracking-widest
-      focus:outline-none
-      focus:ring
+      focus:outline-none focus:ring
       disabled:opacity-25
       transition
     "
