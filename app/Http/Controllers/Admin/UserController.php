@@ -7,6 +7,7 @@ use App\Http\Queries\UserQuery;
 use App\Http\Requests\Admin\UserStoreRequest;
 use App\Http\Requests\Admin\UserUpdateRequest;
 use App\Http\Resources\Admin\UserResource;
+use App\Http\Responses\LoginResponse;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Inertia\Inertia;
@@ -84,12 +85,14 @@ class UserController extends Controller
 
         Auth::user()->setImpersonating($user->id);
 
-        return redirect()->route('admin.dashboard')->with(
+        session()->flash(
             'flash.warning',
             __('You are connected as :name, you can comeback to you own account from profile menu', [
                 'name' => $user->name,
             ])
         );
+
+        return app(LoginResponse::class)->setUser($user);
     }
 
     #[Post('stop-impersonate', name: 'users.stop-impersonate')]

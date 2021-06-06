@@ -29,6 +29,7 @@ class UserFactory extends Factory
             'email_verified_at' => now(),
             'password' => 'password',
             'active' => true,
+            'role' => 'user',
             'remember_token' => Str::random(10),
         ];
     }
@@ -85,20 +86,6 @@ class UserFactory extends Factory
         return $this->state(function (array $attributes) {
             return [
                 'role' => RoleEnum::admin(),
-            ];
-        });
-    }
-
-    /**
-     * Indicate that the model's role is user.
-     *
-     * @return \Illuminate\Database\Eloquent\Factories\Factory
-     */
-    public function user()
-    {
-        return $this->state(function (array $attributes) {
-            return [
-                'role' => RoleEnum::user(),
             ];
         });
     }

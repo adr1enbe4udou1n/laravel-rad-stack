@@ -1,7 +1,6 @@
 <?php
 
 use App\Models\User;
-use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Inertia\Testing\Assert;
 use function Pest\Laravel\actingAs;
@@ -62,7 +61,7 @@ test('admin can go to dashboard', function () {
 });
 
 test('non admin cannot go to admin dashboard', function () {
-    actingAs(User::factory()->user()->create());
+    actingAs(User::factory()->create());
 
     $response = get('/admin/dashboard');
 
@@ -77,8 +76,20 @@ test('users can authenticate using the login screen', function () {
         'password' => 'password',
     ]);
 
+    $response->assertHeader('X-Inertia-Location', url('/'));
     assertAuthenticated();
-    $response->assertRedirect(RouteServiceProvider::HOME);
+});
+
+test('admins can authenticate using the login screen', function () {
+    $user = User::factory()->admin()->create();
+
+    $response = post('/login', [
+        'email' => $user->email,
+        'password' => 'password',
+    ]);
+
+    $response->assertRedirect('/admin/dashboard');
+    assertAuthenticated();
 });
 
 test('users can not authenticate with invalid password', function () {

@@ -2,11 +2,12 @@
 
 namespace Tests\Feature;
 
-use App\Providers\RouteServiceProvider;
+use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Config;
 use Inertia\Testing\Assert;
 use function Pest\Laravel\assertAuthenticated;
+use function Pest\Laravel\assertDatabaseHas;
 use function Pest\Laravel\get;
 use function Pest\Laravel\post;
 
@@ -18,7 +19,7 @@ test('registration screen can be rendered', function () {
     $response->assertInertia(fn (Assert $page) => $page->component('auth/Register'));
 });
 
-test('new users can register', function () {
+test('first new user can register as super admin', function () {
     $response = post('/register', [
         'name' => 'User',
         'email' => 'test@example.com',
@@ -26,21 +27,44 @@ test('new users can register', function () {
         'password_confirmation' => 'password',
     ]);
 
-    $response->assertRedirect(RouteServiceProvider::HOME);
+    $response->assertRedirect('/admin/dashboard');
     assertAuthenticated();
+    assertDatabaseHas('users', [
+        'name' => 'User',
+        'email' => 'test@example.com',
+        'role' => 'super_admin',
+    ]);
+});
+
+test('new users can register with user role', function () {
+    User::factory()->create();
+
+    $response = post('/register', [
+        'name' => 'User',
+        'email' => 'test@example.com',
+        'password' => 'password',
+        'password_confirmation' => 'password',
+    ]);
+
+    $response->assertHeader('X-Inertia-Location', url('/'));
+    assertAuthenticated();
+    assertDatabaseHas('users', [
+        'name' => 'User',
+        'email' => 'test@example.com',
+        'role' => 'user',
+    ]);
 });
 
 test('new users can register with strong password if debug disabled', function () {
     Config::set('app.debug', false);
 
-    $response = post('/register', [
+    post('/register', [
         'name' => 'User',
         'email' => 'test@example.com',
         'password' => 'p4$$w0rD',
         'password_confirmation' => 'p4$$w0rD',
     ]);
 
-    $response->assertRedirect(RouteServiceProvider::HOME);
     assertAuthenticated();
 });
 

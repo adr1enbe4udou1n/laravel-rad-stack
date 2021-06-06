@@ -10,13 +10,23 @@ use function Pest\Laravel\withSession;
 
 uses(RefreshDatabase::class);
 
-test('user can impersonate other user', function () {
+test('admin can impersonate other admin', function () {
+    actingAs(User::factory()->admin()->create());
+    $user = User::factory()->admin()->create();
+
+    $response = post("/admin/users/{$user->id}/impersonate");
+
+    $response->assertRedirect('/admin/dashboard');
+    $response->assertSessionHas('impersonate', $user->id);
+});
+
+test('admin can impersonate user', function () {
     actingAs(User::factory()->admin()->create());
     $user = User::factory()->create();
 
     $response = post("/admin/users/{$user->id}/impersonate");
 
-    $response->assertRedirect('/admin/dashboard');
+    $response->assertHeader('X-Inertia-Location', url('/'));
     $response->assertSessionHas('impersonate', $user->id);
 });
 
