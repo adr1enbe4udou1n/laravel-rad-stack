@@ -10,8 +10,6 @@ class Impersonate
 {
     /**
      * Handle an incoming request.
-     *
-     * @param mixed $request
      */
     public function handle(Request $request, Closure $next)
     {

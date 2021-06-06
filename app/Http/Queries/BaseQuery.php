@@ -3,7 +3,6 @@
 namespace App\Http\Queries;
 
 use Closure;
-use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Support\Str;
 use Maatwebsite\Excel\Facades\Excel;
 use Spatie\QueryBuilder\QueryBuilder;
@@ -15,7 +14,7 @@ abstract class BaseQuery
     protected string $resource;
     protected int $perPage = 15;
 
-    public function paginate(): LengthAwarePaginator
+    public function paginate()
     {
         return $this->query->paginate(min(100, request()->get('perPage', $this->perPage)));
     }

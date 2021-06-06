@@ -3,18 +3,17 @@
 namespace App\Exports;
 
 use App\Models\User;
+use Illuminate\Database\Query\Builder;
 use Illuminate\Support\Facades\Lang;
 use Maatwebsite\Excel\Concerns\FromQuery;
 use Maatwebsite\Excel\Concerns\ShouldAutoSize;
 use Maatwebsite\Excel\Concerns\WithHeadings;
 use Maatwebsite\Excel\Concerns\WithMapping;
+use Spatie\QueryBuilder\QueryBuilder;
 
 class UserExport implements FromQuery, WithHeadings, WithMapping, ShouldAutoSize
 {
-    /**
-     * @var Builder
-     */
-    private $query;
+    private Builder | QueryBuilder $query;
 
     public function __construct($query)
     {

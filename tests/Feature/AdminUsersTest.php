@@ -32,7 +32,7 @@ test('admin can list users', function () {
         fn (Assert $page) => $page
             ->component('users/Index')
             ->where('action', 'list')
-            ->where('users.total', 30)
+            ->where('users.meta.total', 30)
     );
 });
 
@@ -53,7 +53,7 @@ test('admin can sort users', function (string $sort, $expected) {
             ->component('users/Index')
             ->where('action', 'list')
             ->where("users.data.0.{$attribute}", $expected)
-            ->where('users.total', 9)
+            ->where('users.meta.total', 9)
             ->where('sort', $sort)
     );
 })->with([
@@ -77,7 +77,7 @@ test('admin can filter users', function (array $filter, int $total) {
         fn (Assert $page) => $page
             ->component('users/Index')
             ->where('action', 'list')
-            ->where('users.total', $total)
+            ->where('users.meta.total', $total)
             ->where('filter', $filter)
     );
 })->with([

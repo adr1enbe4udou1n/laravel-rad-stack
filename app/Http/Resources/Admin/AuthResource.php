@@ -2,6 +2,7 @@
 
 namespace App\Http\Resources\Admin;
 
+use App\Models\User;
 use Illuminate\Http\Resources\Json\JsonResource;
 
 /**
@@ -9,7 +10,7 @@ use Illuminate\Http\Resources\Json\JsonResource;
  */
 class AuthResource extends JsonResource
 {
-    public static $wrap = false;
+    public static $wrap = null;
 
     /**
      * Transform the resource into an array.

@@ -36,7 +36,7 @@ class UserQuery extends BaseQuery
         return [
             'sort' => request()->get('sort', 'id'),
             'filter' => request()->get('filter'),
-            'users' => fn () => $this->paginate()->through(fn (User $user) => UserResource::make($user)),
+            'users' => fn () => UserResource::collection($this->paginate()),
         ];
     }
 }

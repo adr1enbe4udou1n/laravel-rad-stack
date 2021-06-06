@@ -5,10 +5,8 @@
         "build": "run-p build:*",
         "dev:front": "vite --config resources/front/vite.config.ts --port 3100",
         "build:front": "vue-tsc --noEmit && vite build --config resources/front/vite.config.ts",
-        "serve:front": "vite preview --config resources/front/vite.config.ts",
         "dev:admin": "vite --config resources/admin/vite.config.ts --port 3200",
         "build:admin": "vue-tsc --noEmit && vite build --config resources/admin/vite.config.ts",
-        "serve:admin": "vite preview --config resources/admin/vite.config.ts",
         "test:unit": "jest src",
         "lint": "eslint resources/**/*.{js,ts,vue}"
     },

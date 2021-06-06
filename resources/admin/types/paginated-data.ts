@@ -1,20 +1,28 @@
 export interface PaginatedData<Model> {
-  current_page: number
   data: Model[]
-  first_page_url: string
+  links: Links
+  meta: Meta
+}
+
+export interface Links {
+  first: string
+  last: string
+  prev: null
+  next: string
+}
+
+export interface Meta {
+  current_page: number
   from: number
   last_page: number
-  last_page_url: string
-  links: PaginatedLink[]
-  next_page_url: string
+  links: Link[]
   path: string
   per_page: number
-  prev_page_url: null
   to: number
   total: number
 }
 
-export interface PaginatedLink {
+export interface Link {
   url: null | string
   label: string
   active: boolean

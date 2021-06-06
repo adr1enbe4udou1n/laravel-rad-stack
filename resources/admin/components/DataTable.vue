@@ -224,8 +224,8 @@
       }
 
       const form = useForm({
-        page: props.source.current_page,
-        perPage: props.source.per_page,
+        page: props.source.meta.current_page,
+        perPage: props.source.meta.per_page,
         sort: props.sort,
         filter: {
           ...getDefaultFilter(),

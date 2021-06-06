@@ -96,7 +96,7 @@ class LaravelViteManifest
         $manifest = $this->getManifest($name);
 
         if (! isset($manifest[$entry])) {
-            return false;
+            return '';
         }
 
         return asset("/dist/{$name}/".$manifest[$entry]['file']);

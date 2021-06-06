@@ -4,6 +4,7 @@ namespace App\Providers;
 
 use App\Http\Controllers\UserProfileController;
 use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvider;
+use Illuminate\Routing\Router;
 use Illuminate\Support\Facades\Route;
 use Spatie\RouteAttributes\RouteRegistrar;
 
@@ -32,13 +33,13 @@ class RouteServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        (new RouteRegistrar(app()->router))
+        (new RouteRegistrar(app(Router::class)))
             ->useRootNamespace(app()->getNamespace())
             ->useMiddleware(['web'])
             ->registerDirectory(app_path('Http/Controllers/Front'))
         ;
 
-        (new RouteRegistrar(app()->router))
+        (new RouteRegistrar(app(Router::class)))
             ->useRootNamespace(app()->getNamespace())
             ->useMiddleware(['web', 'auth:sanctum'])
             ->registerClass(UserProfileController::class)
@@ -48,7 +49,7 @@ class RouteServiceProvider extends ServiceProvider
             ->name('admin.')
             ->group(
                 function () {
-                    (new RouteRegistrar(app()->router))
+                    (new RouteRegistrar(app(Router::class)))
                         ->useRootNamespace(app()->getNamespace())
                         ->useMiddleware(['web', 'auth:sanctum', 'can:access-admin'])
                         ->registerDirectory(app_path('Http/Controllers/Admin'))

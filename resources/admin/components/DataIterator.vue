@@ -1,24 +1,32 @@
 <template>
   <div v-if="source && !hideFooter" class="flex mt-6">
     <div class="flex flex-row items-center">
-      <select :value="source.per_page" class="mr-2" @input="onPerPageChange">
+      <select
+        :value="source.meta.per_page"
+        class="mr-2"
+        @input="onPerPageChange"
+      >
         <option v-for="(count, i) in perPageOptions" :key="i" :value="count">
           {{ count }}
         </option>
       </select>
       <label>{{ $t('admin.data-table.rows_per_page_text') }}</label>
     </div>
-    <div v-if="source.total" class="flex flex-row items-center ml-auto">
+    <div v-if="source.meta.total" class="flex flex-row items-center ml-auto">
       <span>{{
         $t('admin.data-table.page_text', {
-          args: { start: source.from, end: source.to, total: source.total },
+          args: {
+            start: source.meta.from,
+            end: source.meta.to,
+            total: source.meta.total,
+          },
         })
       }}</span>
       <pagination
         class="ml-2"
-        :current-page="source.current_page"
-        :per-page="source.per_page"
-        :total="source.total"
+        :current-page="source.meta.current_page"
+        :per-page="source.meta.per_page"
+        :total="source.meta.total"
         @change="onPageChange"
       />
     </div>
@@ -44,7 +52,7 @@
     emits: ['change'],
     setup(props, { emit }) {
       const onPageChange = (page: number) => {
-        emit('change', { page, perPage: props.source.per_page })
+        emit('change', { page, perPage: props.source.meta.per_page })
       }
 
       const onPerPageChange = (e: Event) => {
