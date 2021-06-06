@@ -19,7 +19,7 @@ use function Pest\Laravel\put;
 uses(RefreshDatabase::class);
 
 beforeEach(function () {
-    actingAs(User::factory()->admin()->create());
+    actingAs(User::factory()->superAdmin()->create());
     User::addGlobalScope('admin', fn (Builder $builder) => $builder->where('id', '!=', 1));
 });
 

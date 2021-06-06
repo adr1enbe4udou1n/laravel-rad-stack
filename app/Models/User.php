@@ -96,4 +96,13 @@ class User extends Authenticatable
     {
         return $this->role->equals(RoleEnum::super_admin(), RoleEnum::admin());
     }
+
+    public function canUpdate(User $user)
+    {
+        if ($this->role->equals(RoleEnum::admin())) {
+            return ! $user->role->equals(RoleEnum::super_admin());
+        }
+
+        return $this->role->equals(RoleEnum::super_admin());
+    }
 }

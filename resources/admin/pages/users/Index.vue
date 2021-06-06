@@ -23,9 +23,16 @@
         <template #field:row-action="{ row }">
           <div class="flex gap-2 ml-auto">
             <show-button hide-label :only="['action', 'user']" />
-            <edit-button hide-label :only="['action', 'user']" />
+            <edit-button
+              v-if="canBeUpdated(row)"
+              hide-label
+              :only="['action', 'user']"
+            />
             <impersonate-button v-if="canBeImpersonated(row)" hide-label />
-            <delete-button v-if="$page.props.auth.id !== row.id" hide-label />
+            <delete-button
+              v-if="canBeUpdated(row) && $page.props.auth.id !== row.id"
+              hide-label
+            />
           </div>
         </template>
       </data-table>
@@ -106,11 +113,15 @@
         'row-action',
       ]
 
+      const canBeUpdated = (item: any) => {
+        return (item as User).can_be_updated
+      }
+
       const canBeImpersonated = (item: any) => {
         return (item as User).can_be_impersonated
       }
 
-      return { columns, canBeImpersonated }
+      return { columns, canBeUpdated, canBeImpersonated }
     },
   })
 </script>

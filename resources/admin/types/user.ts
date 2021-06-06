@@ -10,6 +10,7 @@ export class User extends Model {
     public last_login_at: string,
     public created_at: string,
     public updated_at: string,
+    public can_be_updated: boolean,
     public can_be_impersonated: boolean
   ) {
     super(id)

@@ -62,7 +62,7 @@ class UserController extends Controller
         return redirect()->route('admin.users')->with('flash.success', __('User created.'));
     }
 
-    #[Put('{user}', name: 'users.update')]
+    #[Put('{user}', name: 'users.update', middleware: 'can:modify-user,user')]
     public function update(User $user, UserUpdateRequest $request)
     {
         $user->update($request->validated());
@@ -70,7 +70,7 @@ class UserController extends Controller
         return redirect()->route('admin.users')->with('flash.success', __('User updated.'));
     }
 
-    #[Delete('{user}', name: 'users.destroy')]
+    #[Delete('{user}', name: 'users.destroy', middleware: 'can:modify-user,user')]
     public function destroy(User $user)
     {
         $user->delete();
