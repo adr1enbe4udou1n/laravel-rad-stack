@@ -61,6 +61,7 @@
 
 <script lang="ts">
   import { useTitle } from '@admin/features/helpers'
+  import route from 'ziggy-js'
   import { useForm } from '@inertiajs/inertia-vue3'
   import { defineComponent } from 'vue'
 
@@ -76,7 +77,7 @@
       })
 
       const submit = () => {
-        form.post('/register', {
+        form.post(route('register'), {
           onFinish: () => form.reset('password', 'password_confirmation'),
         })
       }

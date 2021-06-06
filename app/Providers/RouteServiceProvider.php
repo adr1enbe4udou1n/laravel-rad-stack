@@ -7,6 +7,13 @@ use App\Http\Controllers\Auth\UserProfileController;
 use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvider;
 use Illuminate\Routing\Router;
 use Illuminate\Support\Facades\Route;
+use Laravel\Fortify\Http\Controllers\AuthenticatedSessionController;
+use Laravel\Fortify\Http\Controllers\ConfirmablePasswordController;
+use Laravel\Fortify\Http\Controllers\NewPasswordController;
+use Laravel\Fortify\Http\Controllers\PasswordController;
+use Laravel\Fortify\Http\Controllers\PasswordResetLinkController;
+use Laravel\Fortify\Http\Controllers\ProfileInformationController;
+use Laravel\Fortify\Http\Controllers\RegisteredUserController;
 use Spatie\RouteAttributes\RouteRegistrar;
 
 class RouteServiceProvider extends ServiceProvider
@@ -34,6 +41,47 @@ class RouteServiceProvider extends ServiceProvider
      */
     public function boot()
     {
+        Route::group(['middleware' => ['web']], function () {
+            Route::post('/login', [AuthenticatedSessionController::class, 'store'])
+                ->middleware(['guest', 'throttle:login'])
+                ->name('login')
+            ;
+
+            Route::post('/logout', [AuthenticatedSessionController::class, 'destroy'])
+                ->name('logout')
+            ;
+
+            Route::post('/forgot-password', [PasswordResetLinkController::class, 'store'])
+                ->middleware(['guest'])
+                ->name('password.email')
+            ;
+
+            Route::post('/reset-password', [NewPasswordController::class, 'store'])
+                ->middleware(['guest'])
+                ->name('password.update')
+            ;
+
+            Route::post('/register', [RegisteredUserController::class, 'store'])
+                ->middleware(['guest'])
+                ->name('register')
+            ;
+
+            Route::put('/user/profile-information', [ProfileInformationController::class, 'update'])
+                ->middleware(['auth'])
+                ->name('user-profile-information.update')
+            ;
+
+            Route::put('/user/password', [PasswordController::class, 'update'])
+                ->middleware(['auth'])
+                ->name('user-password.update')
+            ;
+
+            Route::post('/user/confirm-password', [ConfirmablePasswordController::class, 'store'])
+                ->middleware(['auth'])
+                ->name('password.confirm')
+            ;
+        });
+
         (new RouteRegistrar(app(Router::class)))
             ->useRootNamespace(app()->getNamespace())
             ->useMiddleware(['web'])

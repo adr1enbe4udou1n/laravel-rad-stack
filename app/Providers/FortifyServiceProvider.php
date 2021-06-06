@@ -24,6 +24,8 @@ class FortifyServiceProvider extends ServiceProvider
     public function register()
     {
         $this->app->singleton(LogoutResponseContract::class, LogoutResponse::class);
+
+        Fortify::ignoreRoutes();
     }
 
     /**
