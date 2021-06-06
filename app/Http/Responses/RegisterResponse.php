@@ -3,7 +3,6 @@
 namespace App\Http\Responses;
 
 use App\Enums\RoleEnum;
-use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Auth;
 use Inertia\Inertia;
 use Laravel\Fortify\Contracts\RegisterResponse as RegisterResponseContract;
@@ -19,10 +18,6 @@ class RegisterResponse implements RegisterResponseContract
      */
     public function toResponse($request)
     {
-        if ($request->wantsJson()) {
-            return new JsonResponse('', 201);
-        }
-
         if (Auth::user()->role->equals(RoleEnum::user())) {
             return Inertia::location(route('home'));
         }

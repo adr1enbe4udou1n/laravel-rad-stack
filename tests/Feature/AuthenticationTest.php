@@ -9,7 +9,6 @@ use function Pest\Laravel\assertGuest;
 use function Pest\Laravel\get;
 use function Pest\Laravel\getJson;
 use function Pest\Laravel\post;
-use function Pest\Laravel\postJson;
 
 uses(RefreshDatabase::class);
 
@@ -122,14 +121,5 @@ test('users can logout', function () {
     $response = post('/logout');
 
     $response->assertRedirect('/admin/login');
-    assertGuest('web');
-});
-
-test('users can logout with json', function () {
-    actingAs(User::factory()->create());
-
-    $response = postJson('/logout');
-
-    $response->assertStatus(204);
     assertGuest('web');
 });
