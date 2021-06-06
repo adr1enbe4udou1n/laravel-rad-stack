@@ -54,7 +54,6 @@
 
 <script lang="ts">
   import { useTitle } from '@admin/features/helpers'
-  import route from 'ziggy-js'
   import { useForm } from '@inertiajs/inertia-vue3'
   import { defineComponent } from 'vue'
 
@@ -78,7 +77,7 @@
             ...data,
             remember: data.remember ? 'on' : '',
           }))
-          .post(route('admin.login'))
+          .post('/login')
       }
 
       return { form, submit }

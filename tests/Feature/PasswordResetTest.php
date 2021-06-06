@@ -30,7 +30,7 @@ test('reset password screen can be rendered', function () {
         'email' => $user->email,
     ]);
 
-    Notification::assertSentTo($user, ResetPassword::class, function ($notification) {
+    Notification::assertSentTo($user, ResetPassword::class, function (ResetPassword $notification) {
         $response = get('/admin/reset-password/'.$notification->token);
 
         $response->assertInertia(

@@ -2,6 +2,7 @@
   <div
     class="
       hidden
+      h-full
       md:block
       bg-white
       p-6

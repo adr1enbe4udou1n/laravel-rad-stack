@@ -40,7 +40,6 @@
 
 <script lang="ts">
   import { useTitle } from '@admin/features/helpers'
-  import route from 'ziggy-js'
   import { useForm } from '@inertiajs/inertia-vue3'
   import { defineComponent } from 'vue'
 
@@ -56,7 +55,7 @@
       })
 
       const submit = () => {
-        form.post(route('password.email'))
+        form.post('/forgot-password')
       }
 
       return { form, submit }
