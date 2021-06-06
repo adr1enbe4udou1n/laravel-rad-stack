@@ -45,7 +45,7 @@
 
       <div class="flex items-center justify-end mt-4">
         <inertia-link
-          :href="route('login')"
+          :href="route('admin.login')"
           class="underline text-sm text-gray-600 hover:text-gray-900"
         >
           {{ $t('Already registered?') }}
@@ -77,7 +77,7 @@
       })
 
       const submit = () => {
-        form.post(route('register'), {
+        form.post(route('admin.register'), {
           onFinish: () => form.reset('password', 'password_confirmation'),
         })
       }

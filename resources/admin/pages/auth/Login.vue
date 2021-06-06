@@ -38,7 +38,7 @@
       <div class="flex items-center justify-end mt-4">
         <inertia-link
           v-if="canResetPassword"
-          :href="route('password.request')"
+          :href="route('admin.password.request')"
           class="underline text-sm text-gray-600 hover:text-gray-900"
         >
           {{ $t('Forgot your password?') }}
@@ -78,7 +78,7 @@
             ...data,
             remember: data.remember ? 'on' : '',
           }))
-          .post(route('login'))
+          .post(route('admin.login'))
       }
 
       return { form, submit }

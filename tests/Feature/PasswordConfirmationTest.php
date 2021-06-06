@@ -9,10 +9,10 @@ use function Pest\Laravel\actingAs;
 
 uses(RefreshDatabase::class);
 
-test('confirm password screen can be rendered', function () {
-    $user = User::factory()->create();
+test('confirm password screen can be rendered for admin', function () {
+    $user = User::factory()->admin()->create();
 
-    $response = actingAs($user)->get('/user/confirm-password');
+    $response = actingAs($user)->get('/admin/user/confirm-password');
 
     $response->assertInertia(
         fn (Assert $page) => $page->component('auth/ConfirmPassword')

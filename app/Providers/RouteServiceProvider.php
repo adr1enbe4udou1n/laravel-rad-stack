@@ -2,7 +2,8 @@
 
 namespace App\Providers;
 
-use App\Http\Controllers\UserProfileController;
+use App\Http\Controllers\Auth\AuthController;
+use App\Http\Controllers\Auth\UserProfileController;
 use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvider;
 use Illuminate\Routing\Router;
 use Illuminate\Support\Facades\Route;
@@ -49,6 +50,12 @@ class RouteServiceProvider extends ServiceProvider
             ->name('admin.')
             ->group(
                 function () {
+                    (new RouteRegistrar(app(Router::class)))
+                        ->useRootNamespace(app()->getNamespace())
+                        ->useMiddleware(['web', 'guest'])
+                        ->registerClass(AuthController::class)
+                    ;
+
                     (new RouteRegistrar(app(Router::class)))
                         ->useRootNamespace(app()->getNamespace())
                         ->useMiddleware(['web', 'auth:sanctum', 'can:access-admin'])

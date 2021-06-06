@@ -14,7 +14,7 @@ use function Pest\Laravel\post;
 uses(RefreshDatabase::class);
 
 test('reset password link screen can be rendered', function () {
-    $response = get('/forgot-password');
+    $response = get('/admin/forgot-password');
 
     $response->assertInertia(
         fn (Assert $page) => $page->component('auth/ForgotPassword')
@@ -31,7 +31,7 @@ test('reset password screen can be rendered', function () {
     ]);
 
     Notification::assertSentTo($user, ResetPassword::class, function ($notification) {
-        $response = get('/reset-password/'.$notification->token);
+        $response = get('/admin/reset-password/'.$notification->token);
 
         $response->assertInertia(
             fn (Assert $page) => $page->component('auth/ResetPassword')

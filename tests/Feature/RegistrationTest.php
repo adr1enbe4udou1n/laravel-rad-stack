@@ -13,7 +13,7 @@ use function Pest\Laravel\post;
 uses(RefreshDatabase::class);
 
 test('registration screen can be rendered', function () {
-    $response = get('/register');
+    $response = get('/admin/register');
 
     $response->assertInertia(fn (Assert $page) => $page->component('auth/Register'));
 });

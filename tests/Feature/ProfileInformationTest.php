@@ -14,7 +14,7 @@ uses(RefreshDatabase::class);
 test('admin can show his profile', function () {
     actingAs(User::factory()->admin()->create());
 
-    $response = get('/admin/profile');
+    $response = get('/admin/user/profile');
 
     $response->assertInertia(
         fn (Assert $page) => $page->component('profile/Show')

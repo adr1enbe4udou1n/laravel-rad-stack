@@ -15,7 +15,7 @@ test('user accounts can be deleted', function () {
         'password' => 'password',
     ]);
 
-    $response->assertRedirect('/login');
+    $response->assertRedirect('/admin/login');
     expect($user->fresh())->toBeNull();
     assertGuest('web');
 });
