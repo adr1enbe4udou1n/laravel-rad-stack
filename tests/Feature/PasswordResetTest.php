@@ -64,6 +64,7 @@ test('password can be reset with valid token', function () {
         ]);
 
         $response->assertSessionHasNoErrors();
+        $response->assertRedirect('/admin/login');
 
         return true;
     });
