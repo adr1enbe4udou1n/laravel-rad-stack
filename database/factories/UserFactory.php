@@ -28,6 +28,7 @@ class UserFactory extends Factory
             'email' => $this->faker->unique()->safeEmail(),
             'email_verified_at' => now(),
             'password' => 'password',
+            'active' => true,
             'remember_token' => Str::random(10),
         ];
     }
@@ -47,7 +48,21 @@ class UserFactory extends Factory
     }
 
     /**
-     * Indicate that the model's role is admin.
+     * Indicate that the model's is inactive.
+     *
+     * @return \Illuminate\Database\Eloquent\Factories\Factory
+     */
+    public function inactive()
+    {
+        return $this->state(function (array $attributes) {
+            return [
+                'active' => false,
+            ];
+        });
+    }
+
+    /**
+     * Indicate that the model's role is super admin.
      *
      * @return \Illuminate\Database\Eloquent\Factories\Factory
      */
@@ -75,7 +90,7 @@ class UserFactory extends Factory
     }
 
     /**
-     * Indicate that the model's role is admin.
+     * Indicate that the model's role is user.
      *
      * @return \Illuminate\Database\Eloquent\Factories\Factory
      */

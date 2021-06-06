@@ -11,6 +11,7 @@ use App\Models\User;
 use Illuminate\Auth\Notifications\ResetPassword;
 use Illuminate\Cache\RateLimiting\Limit;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\RateLimiter;
 use Illuminate\Support\ServiceProvider;
 use Laravel\Fortify\Contracts\LogoutResponse as LogoutResponseContract;
@@ -38,13 +39,24 @@ class FortifyServiceProvider extends ServiceProvider
         Fortify::updateUserPasswordsUsing(UpdateUserPassword::class);
         Fortify::resetUserPasswordsUsing(ResetUserPassword::class);
 
+        Fortify::authenticateUsing(function (Request $request) {
+            /** @var User */
+            $user = User::whereActive(true)->where('email', $request->email)->first();
+
+            if (null !== $user && Hash::check($request->password, $user->password)) {
+                return $user;
+            }
+        });
+
         RateLimiter::for('login', function (Request $request) {
             return Limit::perMinute(5)->by($request->email.$request->ip());
         });
 
-        ResetPassword::createUrlUsing(fn (User $notifiable, string $token) => route('admin.password.reset', [
-            'token' => $token,
-            'email' => $notifiable->email,
-        ]));
+        ResetPassword::createUrlUsing(fn (User $notifiable, string $token) => url(
+            route('admin.password.reset', [
+                'token' => $token,
+                'email' => $notifiable->getEmailForPasswordReset(),
+            ])
+        ));
     }
 }

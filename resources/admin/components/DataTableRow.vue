@@ -19,7 +19,7 @@
         >
           <component
             :is="`${column.type}-field`"
-            v-if="column.type && item[column.field]"
+            v-if="column.type && item[column.field] !== null"
             :value="item[column.field]"
             v-bind="column.props"
           />

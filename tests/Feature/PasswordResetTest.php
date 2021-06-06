@@ -30,8 +30,13 @@ test('reset password screen can be rendered', function () {
         'email' => $user->email,
     ]);
 
-    Notification::assertSentTo($user, ResetPassword::class, function (ResetPassword $notification) {
-        $response = get('/admin/reset-password/'.$notification->token);
+    Notification::assertSentTo($user, ResetPassword::class, function (ResetPassword $notification) use ($user) {
+        $email = urlencode($user->email);
+        $url = "/admin/reset-password/{$notification->token}?email={$email}";
+
+        expect(url($url))->toBe($notification->toMail($user)->actionUrl);
+
+        $response = get($url);
 
         $response->assertInertia(
             fn (Assert $page) => $page->component('auth/ResetPassword')

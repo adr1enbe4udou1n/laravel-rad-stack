@@ -1,14 +1,13 @@
 <?php
 
-namespace App\Http\Controllers\Auth;
+namespace App\Http\Controllers;
 
-use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 use Spatie\RouteAttributes\Attributes\Get;
 
-class AuthController extends Controller
+class AdminAuthController extends Controller
 {
     #[Get('login', name: 'login')]
     public function login()

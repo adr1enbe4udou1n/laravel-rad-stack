@@ -84,11 +84,24 @@ test('users can authenticate using the login screen', function () {
 test('users can not authenticate with invalid password', function () {
     $user = User::factory()->create();
 
-    post('/login', [
+    $response = post('/login', [
         'email' => $user->email,
         'password' => 'wrong-password',
     ]);
 
+    $response->assertSessionHasErrors();
+    assertGuest();
+});
+
+test('inactive users can not authenticate', function () {
+    $user = User::factory()->inactive()->create();
+
+    $response = post('/login', [
+        'email' => $user->email,
+        'password' => 'password',
+    ]);
+
+    $response->assertSessionHasErrors();
     assertGuest();
 });
 

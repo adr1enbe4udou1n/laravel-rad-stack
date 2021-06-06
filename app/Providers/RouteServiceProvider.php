@@ -2,8 +2,8 @@
 
 namespace App\Providers;
 
-use App\Http\Controllers\Auth\AuthController;
-use App\Http\Controllers\Auth\UserProfileController;
+use App\Http\Controllers\AdminAuthController;
+use App\Http\Controllers\DestroyUserController;
 use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvider;
 use Illuminate\Routing\Router;
 use Illuminate\Support\Facades\Route;
@@ -41,6 +41,7 @@ class RouteServiceProvider extends ServiceProvider
      */
     public function boot()
     {
+        // Auth specific actions routes...
         Route::group(['middleware' => ['web']], function () {
             Route::post('/login', [AuthenticatedSessionController::class, 'store'])
                 ->middleware(['guest', 'throttle:login'])
@@ -80,30 +81,33 @@ class RouteServiceProvider extends ServiceProvider
                 ->middleware(['auth'])
                 ->name('password.confirm')
             ;
+
+            Route::delete('/user', [DestroyUserController::class, 'destroy'])
+                ->middleware(['auth'])
+                ->name('current-user.destroy')
+            ;
         });
 
+        // Front dedicated routes...
         (new RouteRegistrar(app(Router::class)))
             ->useRootNamespace(app()->getNamespace())
             ->useMiddleware(['web'])
             ->registerDirectory(app_path('Http/Controllers/Front'))
         ;
 
-        (new RouteRegistrar(app(Router::class)))
-            ->useRootNamespace(app()->getNamespace())
-            ->useMiddleware(['web', 'auth:sanctum'])
-            ->registerClass(UserProfileController::class)
-        ;
-
+        // Admin dedicated routes...
         Route::prefix('admin')
             ->name('admin.')
             ->group(
                 function () {
+                    // Admin guest auth routes...
                     (new RouteRegistrar(app(Router::class)))
                         ->useRootNamespace(app()->getNamespace())
                         ->useMiddleware(['web', 'guest'])
-                        ->registerClass(AuthController::class)
+                        ->registerClass(AdminAuthController::class)
                     ;
 
+                    // Admin authenticated routes...
                     (new RouteRegistrar(app(Router::class)))
                         ->useRootNamespace(app()->getNamespace())
                         ->useMiddleware(['web', 'auth:sanctum', 'can:access-admin'])

@@ -1,17 +1,12 @@
 <?php
 
-namespace App\Http\Controllers\Auth;
+namespace App\Http\Controllers;
 
-use App\Http\Controllers\Controller;
 use Illuminate\Contracts\Auth\StatefulGuard;
 use Illuminate\Http\Request;
-use Spatie\RouteAttributes\Attributes\Delete;
-use Spatie\RouteAttributes\Attributes\Prefix;
 
-#[Prefix('profile')]
-class UserProfileController extends Controller
+class DestroyUserController extends Controller
 {
-    #[Delete('user', name: 'current-user.destroy')]
     public function destroy(Request $request, StatefulGuard $auth)
     {
         $request->validate([

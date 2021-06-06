@@ -11,7 +11,7 @@ uses(RefreshDatabase::class);
 test('user accounts can be deleted', function () {
     actingAs($user = User::factory()->create());
 
-    $response = delete('/profile/user', [
+    $response = delete('/user', [
         'password' => 'password',
     ]);
 
@@ -23,7 +23,7 @@ test('user accounts can be deleted', function () {
 test('correct password must be provided before account can be deleted', function () {
     actingAs($user = User::factory()->create());
 
-    $response = delete('/profile/user', [
+    $response = delete('/user', [
         'password' => 'wrong-password',
     ]);
 
