@@ -81,7 +81,7 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
         'active' => 'boolean',
-        'role' => RoleEnum::class.':nullable',
+        'role' => RoleEnum::class,
         'last_login_at' => 'datetime',
     ];
 
@@ -92,6 +92,6 @@ class User extends Authenticatable
 
     public function hasAdminAccess()
     {
-        return $this->role?->equals(RoleEnum::super_admin(), RoleEnum::admin());
+        return $this->role->equals(RoleEnum::super_admin(), RoleEnum::admin());
     }
 }

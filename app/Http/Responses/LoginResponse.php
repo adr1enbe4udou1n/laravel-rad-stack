@@ -38,7 +38,7 @@ class LoginResponse implements LoginResponseContract
             return new JsonResponse('', 201);
         }
 
-        if ($this->user->role?->equals(RoleEnum::user())) {
+        if ($this->user->role->equals(RoleEnum::user())) {
             return Inertia::location(route('home'));
         }
 

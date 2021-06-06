@@ -2,6 +2,7 @@
 
 namespace Tests\Feature;
 
+use App\Enums\RoleEnum;
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Config;
@@ -32,7 +33,7 @@ test('first new user can register as super admin', function () {
     assertDatabaseHas('users', [
         'name' => 'User',
         'email' => 'test@example.com',
-        'role' => 'super_admin',
+        'role' => RoleEnum::super_admin(),
     ]);
 });
 
@@ -51,7 +52,7 @@ test('new users can register with user role', function () {
     assertDatabaseHas('users', [
         'name' => 'User',
         'email' => 'test@example.com',
-        'role' => 'user',
+        'role' => RoleEnum::user(),
     ]);
 });
 

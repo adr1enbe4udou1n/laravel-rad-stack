@@ -29,7 +29,7 @@ class UserFactory extends Factory
             'email_verified_at' => now(),
             'password' => 'password',
             'active' => true,
-            'role' => 'user',
+            'role' => RoleEnum::user(),
             'remember_token' => Str::random(10),
         ];
     }
