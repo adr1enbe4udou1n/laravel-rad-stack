@@ -19,16 +19,4 @@ class DashboardController extends Controller
     {
         return Inertia::render('Dashboard');
     }
-
-    #[Get('user/profile', name: 'profile.show')]
-    public function show()
-    {
-        return Inertia::render('profile/Show');
-    }
-
-    #[Get('user/confirm-password', name: 'password.confirm')]
-    public function confirmPassword()
-    {
-        return Inertia::render('auth/ConfirmPassword');
-    }
 }

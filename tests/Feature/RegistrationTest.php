@@ -108,3 +108,24 @@ test('new users cannot register with weak password if debug disabled', function 
 })->with([
     'password', 'PassWord', 'p4ssw0rd', 'pa$$word',
 ]);
+
+test('new users cannot render registration page when feature disabled', function () {
+    Config::set('auth.registration', false);
+
+    $response = get('/admin/register');
+
+    $response->assertNotFound();
+});
+
+test('new users cannot register when feature disabled', function () {
+    Config::set('auth.registration', false);
+
+    $response = post('/register', [
+        'name' => 'User',
+        'email' => 'test@example.com',
+        'password' => 'password',
+        'password_confirmation' => 'password',
+    ]);
+
+    $response->assertNotFound();
+});

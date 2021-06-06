@@ -25,6 +25,14 @@
           required
           autocomplete="current-password"
         />
+        <div class="flex mt-2">
+          <inertia-link
+            :href="route('admin.password.request')"
+            class="underline text-xs text-gray-600 hover:text-gray-900 ml-auto"
+          >
+            {{ $t('Forgot your password?') }}
+          </inertia-link>
+        </div>
       </div>
 
       <div class="mt-4">
@@ -37,11 +45,11 @@
 
       <div class="flex items-center justify-end mt-4">
         <inertia-link
-          v-if="canResetPassword"
-          :href="route('admin.password.request')"
-          class="underline text-sm text-gray-600 hover:text-gray-900"
+          v-if="canRegister"
+          :href="route('admin.register')"
+          class="underline text-sm text-gray-600 hover:text-gray-900 ml-auto"
         >
-          {{ $t('Forgot your password?') }}
+          {{ $t('Not registered yet?') }}
         </inertia-link>
 
         <base-button type="submit" class="ml-4" :loading="form.processing">
@@ -60,7 +68,7 @@
 
   export default defineComponent({
     props: {
-      canResetPassword: Boolean,
+      canRegister: Boolean,
       status: String,
     },
     setup() {

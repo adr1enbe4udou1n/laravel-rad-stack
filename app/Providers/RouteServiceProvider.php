@@ -65,7 +65,7 @@ class RouteServiceProvider extends ServiceProvider
             Route::post('/register', [RegisteredUserController::class, 'store'])
                 ->middleware(['guest'])
                 ->name('register')
-            ;
+                ;
 
             Route::put('/user/profile-information', [ProfileInformationController::class, 'update'])
                 ->middleware(['auth'])
@@ -103,7 +103,7 @@ class RouteServiceProvider extends ServiceProvider
                     // Admin guest auth routes...
                     (new RouteRegistrar(app(Router::class)))
                         ->useRootNamespace(app()->getNamespace())
-                        ->useMiddleware(['web', 'guest'])
+                        ->useMiddleware(['web'])
                         ->registerClass(AdminAuthController::class)
                     ;
 
