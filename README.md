@@ -58,13 +58,11 @@ Only simple basic features :
 
 ## Usage
 
-### Launch backend
-
 Keep in mind as you must have **PHP 8.0** as minimum requirement.
 
 ```sh
 composer install
-# prepare database and environment variables
+# Prepare database and environment variables
 php artisan migrate:fresh --seed
 php artisan serve
 
@@ -86,27 +84,38 @@ The essential plugins :
 - [Eslint](https://marketplace.visualstudio.com/items?itemName=dbaeumer.vscode-eslint)
 - [WindiCSS IntelliSense](https://marketplace.visualstudio.com/items?itemName=voorjaar.windicss-intellisense)
 - [Volar](https://marketplace.visualstudio.com/items?itemName=johnsoncodehk.volar) for realtime typescript feedback inside your templates > You should disable vetur in order to avoid conflicts.
+- [Error Lens](https://marketplace.visualstudio.com/items?itemName=usernamehw.errorlens) for inlined errors.
 
-### Advices
+### Fullstack RAD development
 
-This stack is intended for RAD development while keeping high quality delivery. If not pure UI development, you can almost avoid to use browser for development by using PHP static analysis and tests on backend side and by using vue typescript. Let's open you heart for instant feedback on all stacks !
+This stack is intended for RAD development while keeping high quality delivery. If not pure UI development, you can almost avoid to use browser by using PHP static analysis as well as realtime tests on backend side and by using vue typescript instant feedbacks on frontend side. Say 🛑 to spending time on debugging !
 
-TODO watcher
+And for UI development you still benefits from instant Vite HMR and WindiCSS realtime classes scan. Fullstack RAD development on every stage !
 
-composer global require spatie/phpunit-watcher
-https://github.com/spatie/phpunit-watcher
-phpunit-watcher watch
-
-#### Scripts
+#### Available QA scripts
 
 ```sh
-composer format
-composer analyse
-composer test
+composer format # PHP CS format
+composer analyse # PHP static analysis
 
-yarn lint --fix
-yarn vue-tsc --noEmit
-yarn test:unit # no tests for now
+# Use custom env.testing file if needed for next line
+composer test # Launch tests suite with console coverage report, and fail if less than 90% (adapt for your own needs)
+
+yarn lint --fix # TS & Vue files auto format
+yarn vue-tsc --noEmit # Full TS & Vue templates compiling
+yarn test:unit # For client side unit testing with jest, note that client side tests are not included for this boilerplate
+```
+
+#### TDD ready
+
+This project has 100% code coverage and is ready to use within [Spatie PHPUnit Watcher](https://github.com/spatie/phpunit-watcher), which is ideal for TDD :
+
+```sh
+# Install watcher globally 
+composer global require spatie/phpunit-watcher
+
+# Launch phpunit watcher and enjoy live development testing
+phpunit-watcher watch
 ```
 
 ## Documentation
