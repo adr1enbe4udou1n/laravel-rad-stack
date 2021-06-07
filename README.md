@@ -1,12 +1,24 @@
-# Laravel Inertia TS Stack
+<p align="center">
+  <a href="https://vitejs.dev" target="_blank" rel="noopener noreferrer">
+    <img width="180" src="public/logo.svg" alt="Vite logo">
+  </a>
+</p>
 
-![logo](public/logo.png)
+# Laravel RAD Stack ⚡
 
-## About This Stack
+This minimal featured modern monolith web starter kit boilerplate aims to have ready-to-go dev fullstack with **high QA expectation** without sacrifice **RAD development**.
 
-This minimal featured modern monolith web starter kit boilerplate aims to have ready-to-go dev stack with high enterprise quality standing requirements.
+While developing new features, you can mostly avoid to switch every time to your browser thanks to **PHP static analysis** and **full tests suite** on backend. On frontend side you'll be covered with **typescript** instant feedbacks. Typescript is fully integrated to **Vue 3** by usage of **composition API** as well as **Volar plugin** for proper template inferrer. **Jest** is integrated as well for client side testing.
 
-### Technologies involved
+> Say 🛑 to spending time on debugging !
+
+For UI oriented development you'll still benefits from instant **Vite HMR** and **WindiCSS realtime classes scan**. Fullstack RAD development on every stage !
+
+Besides all code is heavily linted from top to bottom thanks to **PHP CS Fixer** and **eslint prettier**.
+
+> Say 🛑 to spending time on code style endless discussions !
+
+## Technologies involved
 
 - **Laravel 8** and **PHP 8.0** as minimum requirement. It allows usage of **PHP attributes** which notably is perfect for routes definition inside controllers as Symfony does.
 - Usage of **[Vite](https://vitejs.dev/)** as main frontend tooling for instant start and HMR development thanks to modern [esbuild bundler](https://github.com/evanw/esbuild) with proper Laravel manifest management for dev and production.
@@ -14,11 +26,11 @@ This minimal featured modern monolith web starter kit boilerplate aims to have r
 - Front is ready to go for full **blade + livewire + AlpineJS** integration. Perfect for SEO based websites. It's configured with Windi CSS but you can easily switch to another framework.
 - Basic admin UI fully build with **[Inertia](https://inertiajs.com/) + Windi CSS + Vue 3 Typescript with composition API**. Thanks to Inertia for get rid of Vue Router boilerplate to typescript for instant IDE feedbacks !
 
-#### Why Windi CSS ?
+### Why Windi CSS ?
 
 It's fully written in Typescript and 100% compatible with Tailwind 2.x API. It has perfect integration with Vite + Typescript combo. Besides it's JIT from the ground up, which is ideal for HMR development. If you come from Tailwind, don't worry, nothing will really change for you and yes, it has dedicated plugin for [VSCode](https://windicss.org/editors/vscode.html).
 
-### Features
+## Features
 
 Only simple basic features :
 
@@ -29,7 +41,7 @@ Only simple basic features :
 - Extensible **DataTable** component with **paging**, **sorting**, **global search**, **by column filter**, **template columns**, **customizable row actions**, **excel export** features. All that with efficient nice dev API !
 - Backend is fully tested project by using [Pest](https://pestphp.com/) testing framework with **100% code coverage**, which gives you a perfect starting dev point if you want to go with **TDD** in mind.
 
-### Backend Packages
+## Backend Packages
 
 - [Laravel Fortify](https://github.com/laravel/fortify) for ready to used backend authentication endpoints.
 - [Spatie Route Attributes](https://github.com/spatie/laravel-route-attributes) for direct routes definition inside controllers. No more heavy routes files !
@@ -39,9 +51,9 @@ Only simple basic features :
 - [Spatie Laravel Enum](https://github.com/spatie/laravel-enum) for proper enum support.
 - [Spatie Query Builder](https://github.com/spatie/laravel-query-builder) as nice Eloquent builder for API REST resources browsing, totally bridged inside above **DataTable** component.
 
-### Advanced dev tools for high quality standard
+## Advanced dev tools for high quality standard
 
-#### Backend dev tools
+### Backend dev tools
 
 - [Clockwork](https://github.com/itsgoingd/clockwork) for advanced profiling with debugbar and frontend metrics enabled. Can show N+1 query problems.
 - [Laravel IDE Helper](https://github.com/barryvdh/laravel-ide-helper) for proper autocompletion, compatible with PHPStorm and VSCode Intelephense
@@ -49,7 +61,7 @@ Only simple basic features :
 - [Larastan](https://github.com/nunomaduro/larastan) for static PHP code analysis.
 - [Pest](https://pestphp.com/) as enjoyable testing API.
 
-#### Frontend dev tools
+### Frontend dev tools
 
 - **Prettier** for opinionated code formatting and **Eslint** for typescript linting
 - Full **Vue template typescript support** thanks to Johnson Chu's incredible work via his [Volar plugin](https://github.com/johnsoncodehk/volar). You finally now have typescript lint everywhere as angular does !
@@ -86,13 +98,7 @@ The essential plugins :
 - [Volar](https://marketplace.visualstudio.com/items?itemName=johnsoncodehk.volar) for realtime typescript feedback inside your templates > You should disable vetur in order to avoid conflicts.
 - [Error Lens](https://marketplace.visualstudio.com/items?itemName=usernamehw.errorlens) for inlined errors.
 
-### Fullstack RAD development
-
-This stack is intended for RAD development while keeping high quality delivery. If not pure UI development, you can almost avoid to use browser by using PHP static analysis as well as realtime tests on backend side and by using vue typescript instant feedbacks on frontend side. Say 🛑 to spending time on debugging !
-
-And for UI development you still benefits from instant Vite HMR and WindiCSS realtime classes scan. Fullstack RAD development on every stage !
-
-#### Available QA scripts
+### Available QA scripts
 
 ```sh
 composer format # PHP CS format
