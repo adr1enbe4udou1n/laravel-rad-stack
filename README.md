@@ -9,7 +9,7 @@ This minimal featured modern monolith web starter kit boilerplate aims to have r
 ### Technologies involved
 
 - **Laravel 8** and **PHP 8.0** as minimum requirement. It allows usage of **PHP attributes** which notably is perfect for routes definition inside controllers as Symfony does.
-- Usage of **[Vite](https://vitejs.dev/)** as main frontend tooling for instant start and HMR development thanks to modern [esbuild bundler](https://github.com/evanw/esbuild).
+- Usage of **[Vite](https://vitejs.dev/)** as main frontend tooling for instant start and HMR development thanks to modern [esbuild bundler](https://github.com/evanw/esbuild) with proper Laravel manifest management for dev and production.
 - **[Windi CSS](https://windicss.org/)** as main CSS framework for both front and admin parts.
 - Front is ready to go for full **blade + livewire + AlpineJS** integration. Perfect for SEO based websites. It's configured with Windi CSS but you can easily switch to another framework.
 - Basic admin UI fully build with **[Inertia](https://inertiajs.com/) + Windi CSS + Vue 3 Typescript with composition API**. Thanks to Inertia for get rid of Vue Router boilerplate to typescript for instant IDE feedbacks !
@@ -51,18 +51,63 @@ Only simple basic features :
 
 #### Frontend dev tools
 
-- Prettier code formatting
-- Eslint for typescript linting
+- **Prettier** for opinionated code formatting and **Eslint** for typescript linting
+- Full **Vue template typescript support** thanks to Johnson Chu's incredible work via his [Volar plugin](https://github.com/johnsoncodehk/volar). You finally now have typescript lint everywhere as angular does !
+- Usage of **[Vite auto component register](https://github.com/antfu/vite-plugin-components)** while keeping typescript props inferring functional !
+- **[Jest](https://jestjs.io/)** ready to use for client side component / typescript unit testing (not as unlike to backend there is no unit test provided to this boilerplate).
 
 ## Usage
 
+### Launch backend
+
+Keep in mind as you must have **PHP 8.0** as minimum requirement.
+
+```sh
+composer install
+# prepare database and environment variables
+php artisan migrate:fresh --seed
+php artisan serve
+
+# Finally launch frontend Vite HMR dev server
+yarn && yarn dev
+```
+
+Both front and admin dev HMR server will be started in parallel into different ports.
+
+Front is empty, access to admin in <http://localhost:8000/admin> and login as `admin@example.com` / `password`
+
 ### VSCode configuration
+
+The essential plugins :
+
+- [PHP Intelephense](https://marketplace.visualstudio.com/items?itemName=bmewburn.vscode-intelephense-client)
+- [PHP CS Fixer](https://marketplace.visualstudio.com/items?itemName=junstyle.php-cs-fixer) > Don't forget to add `.php-cs-fixer.dist.php` file as config file.
+- [EditorConfig](https://marketplace.visualstudio.com/items?itemName=EditorConfig.EditorConfig)
+- [Eslint](https://marketplace.visualstudio.com/items?itemName=dbaeumer.vscode-eslint)
+- [WindiCSS IntelliSense](https://marketplace.visualstudio.com/items?itemName=voorjaar.windicss-intellisense)
+- [Volar](https://marketplace.visualstudio.com/items?itemName=johnsoncodehk.volar) for realtime typescript feedback inside your templates > You should disable vetur in order to avoid conflicts.
 
 ### Advices
 
-This stack is perfect for real RAD development while keeping high quality delivery. If not pure UI development, you can almost avoid to use browser for development by using PHP static analysis and tests on backend side and by using vue typescript. Let's open you heart for instant feedback on all stacks !
+This stack is intended for RAD development while keeping high quality delivery. If not pure UI development, you can almost avoid to use browser for development by using PHP static analysis and tests on backend side and by using vue typescript. Let's open you heart for instant feedback on all stacks !
 
 TODO watcher
+
+composer global require spatie/phpunit-watcher
+https://github.com/spatie/phpunit-watcher
+phpunit-watcher watch
+
+#### Scripts
+
+```sh
+composer format
+composer analyse
+composer test
+
+yarn lint --fix
+yarn vue-tsc --noEmit
+yarn test:unit # no tests for now
+```
 
 ## Documentation
 
