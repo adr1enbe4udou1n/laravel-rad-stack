@@ -32,6 +32,7 @@
         "@windicss/plugin-scrollbar": "^1.2.3",
         "alpinejs": "^2.8.2",
         "axios": "^0.21",
+        "clockwork-browser": "^1.0.0",
         "date-fns": "^2.22.1",
         "dotenv": "^10.0.0",
         "eslint": "^7.28.0",

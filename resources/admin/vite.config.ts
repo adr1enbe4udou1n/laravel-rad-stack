@@ -30,6 +30,8 @@ export default defineConfig({
   optimizeDeps: {
     entries: ['admin/app.ts'],
     include: [
+      'clockwork-browser/metrics',
+      'clockwork-browser/toolbar',
       'vue',
       'lodash',
       '@inertiajs/inertia',

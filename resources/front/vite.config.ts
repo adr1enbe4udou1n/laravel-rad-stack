@@ -37,6 +37,11 @@ export default defineConfig({
     }),
   ],
   optimizeDeps: {
-    include: ['vue', 'alpinejs'],
+    include: [
+      'clockwork-browser/metrics',
+      'clockwork-browser/toolbar',
+      'vue',
+      'alpinejs',
+    ],
   },
 })
