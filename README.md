@@ -4,27 +4,28 @@
   </a>
 </p>
 
-# Laravel RAD Stack ⚡
+# Laravel RAD Stack
 
-This minimal featured modern monolith web starter kit boilerplate aims to have ready-to-go dev fullstack with **high QA expectation** without sacrifice **RAD development**.
+This modern monolith web starter kit boilerplate, with both front and admin parts, aims to have ready-to-go dev fullstack with **high QA expectation** 📈 without sacrifice **RAD development** ⚡.
 
-While developing new features, you can mostly avoid to switch every time to your browser thanks to **PHP static analysis** and **full tests suite** on backend. On frontend side you'll be covered with **typescript** instant feedbacks. Typescript is fully integrated to **Vue 3** by usage of **composition API** as well as **Volar plugin** for proper template inferrer. **Jest** is integrated as well for client side testing.
+While developing new ✨, reduce your ⏲ testing inside your browser thanks to **PHP Stan** 🧐 (static analysis tool) and **watchable tests suite written on Pest** ✅ (testing framework focussed on simplicity). This boilerplate includes tests with full coverage 💯. **IDE helper for Laravel** 🐕‍🦺 is integrated as well. On frontend side you'll be covered with **typescript instant feedbacks** 🚸. Typescript is fully integrated to **Vue 3** by usage of **composition API** as well as **[Vue Tsc plugin](https://github.com/johnsoncodehk/vue-tsc)** (from Volar) for full TS support inside Vue templates. **Jest** is integrated as well for client side testing.
 
-> Say 🛑 to spending time on debugging !
+> Say 🛑 to spending time on debugging and say 😎 to proper refactoring without breaking your app ♻️ ! At last resort, you're still covered with **Clockwork**, the perfect companion for advanced debugging & profiling ⏱.
 
-For UI oriented development you'll still benefits from instant **Vite HMR** and **WindiCSS realtime classes scan**. Fullstack RAD development on every stage !
+For UI oriented development you'll still benefit of instant **Vite HMR** and **Windi CSS realtime classes scan** 👌. Fullstack RAD development on every stage ⚡ !
 
-Besides all code is heavily linted from top to bottom thanks to **PHP CS Fixer** and **eslint prettier**.
+Besides all code is heavily linted from top to bottom thanks to **PHP CS Fixer** and **eslint prettier** 🎨.
 
-> Say 🛑 to spending time on code style endless discussions !
+> Say 🛑 to spending time on endless code style discussions !
 
 ## Technologies involved
 
-- **Laravel 8** and **PHP 8.0** as minimum requirement. It allows usage of **PHP attributes** which notably is perfect for routes definition inside controllers as Symfony does.
+- **Laravel 8** and **PHP 8.0** as minimum requirement. It allows usage of **PHP attributes** which is perfect for routes definition inside controllers as Symfony does.
 - Usage of **[Vite](https://vitejs.dev/)** as main frontend tooling for instant start and HMR development thanks to modern [esbuild bundler](https://github.com/evanw/esbuild) with proper Laravel manifest management for dev and production.
 - **[Windi CSS](https://windicss.org/)** as main CSS framework for both front and admin parts.
-- Front is ready to go for full **blade + livewire + AlpineJS** integration. Perfect for SEO based websites. It's configured with Windi CSS but you can easily switch to another framework.
-- Basic admin UI fully build with **[Inertia](https://inertiajs.com/) + Windi CSS + Vue 3 Typescript with composition API**. Thanks to Inertia for get rid of Vue Router boilerplate to typescript for instant IDE feedbacks !
+- Front is empty but ready to go for full **Livewire + AlpineJS** integration. Perfect for SEO based websites. It's configured for Windi CSS and Typescript but you can easily switch to another tools.
+- Basic admin UI fully build with **[Inertia](https://inertiajs.com/) + Windi CSS + Vue 3 Typescript with composition API**. Give thanks to Inertia for get ridding of boring Vue Router boilerplate and typescript for instant IDE feedbacks !
+- Backend is fully tested project by using **[Pest](https://pestphp.com/)** testing framework with **100% code coverage**, which gives you a perfect starting dev point if you want to embrace **TDD**.
 
 ### Why Windi CSS ?
 
@@ -34,14 +35,13 @@ It's fully written in Typescript and 100% compatible with Tailwind 2.x API. It h
 
 Only simple basic features :
 
-- Empty and easily removable front part, prepared with livewire and AlpineJS.
+- Empty and easily removable front part, prepared with **Livewire and AlpineJS**.
 - Admin UI Layout with all **basic auth pages** (login / register / reset password / profile) and **users management with impersonation**. All credits goes to [Laravel Jetstream](https://jetstream.laravel.com) and [Ping CRM](https://github.com/inertiajs/pingcrm).
-- Clear separation between front and admin parts, with dedicated folders for controllers and resources and separated Vite configs. It's really simple to remove front part if you need only admin for CRM based application. **CSS purge and CSS build** is properly configured for each front and admin part.
-- Admin RAD mini framework similar to [React Admin](https://marmelab.com/react-admin/) with ready to use **crud pages**, **data table**, **fields** and **form inputs**. **Quick aside panel** view/edit with real inertia routing context is also supported and actually used for users management in this boilerplate !
-- Extensible **DataTable** component with **paging**, **sorting**, **global search**, **by column filter**, **template columns**, **customizable row actions**, **excel export** features. All that with efficient nice dev API !
-- Backend is fully tested project by using [Pest](https://pestphp.com/) testing framework with **100% code coverage**, which gives you a perfect starting dev point if you want to go with **TDD** in mind.
+- Clear separation between front and admin parts, with dedicated folders for controllers and resources and separated Vite configs. It's really simple to remove front part if you need only admin for CRM based application. **CSS purge and production builds** are properly configured for each front and admin part.
+- **Admin RAD lightweight framework** similar to [React Admin](https://marmelab.com/react-admin/) with ready to use **crud pages**, **data table**, **fields** and **form inputs**. **Quick aside panel** view/edit with real inertia routing context is also supported and actually used for users management in this boilerplate !
+- Extensible **DataTable** component with **paging**, **sorting**, **global search**, **by column filter**, **template columns**, **customizable row actions**, **excel export** features. All that with efficient and nice dev API !
 
-## Backend Packages
+### Backend packages used
 
 - [Laravel Fortify](https://github.com/laravel/fortify) for ready to used backend authentication endpoints.
 - [Spatie Route Attributes](https://github.com/spatie/laravel-route-attributes) for direct routes definition inside controllers. No more heavy routes files !
@@ -51,26 +51,26 @@ Only simple basic features :
 - [Spatie Laravel Enum](https://github.com/spatie/laravel-enum) for proper enum support.
 - [Spatie Query Builder](https://github.com/spatie/laravel-query-builder) as nice Eloquent builder for API REST resources browsing, totally bridged inside above **DataTable** component.
 
-## Advanced dev tools for high quality standard
+## Dev tools for high QA
 
 ### Backend dev tools
 
-- [Clockwork](https://github.com/itsgoingd/clockwork) for advanced profiling with debugbar and frontend metrics enabled. Can show N+1 query problems.
+- [Clockwork](https://github.com/itsgoingd/clockwork) for advanced profiling with debug bar and frontend metrics (**web vitals**) enabled. Can show **N+1 query** problems.
 - [Laravel IDE Helper](https://github.com/barryvdh/laravel-ide-helper) for proper autocompletion, compatible with PHPStorm and VSCode Intelephense
-- [PHP CS Fixer 3](friendsofphp/php-cs-fixer) configured for Laravel default styling. Use it with this [VSCode plugin](https://github.com/junstyle/vscode-php-cs-fixer) for proper formatting on save.
+- [PHP CS Fixer 3](friendsofphp/php-cs-fixer) configured for Laravel default styling.
 - [Larastan](https://github.com/nunomaduro/larastan) for static PHP code analysis.
 - [Pest](https://pestphp.com/) as enjoyable testing API.
 
 ### Frontend dev tools
 
-- **Prettier** for opinionated code formatting and **Eslint** for typescript linting
-- Full **Vue template typescript support** thanks to Johnson Chu's incredible work via his [Volar plugin](https://github.com/johnsoncodehk/volar). You finally now have typescript lint everywhere as angular does !
-- Usage of **[Vite auto component register](https://github.com/antfu/vite-plugin-components)** while keeping typescript props inferring functional !
-- **[Jest](https://jestjs.io/)** ready to use for client side component / typescript unit testing (not as unlike to backend there is no unit test provided to this boilerplate).
+- **Prettier** as opinionated code formatting and **Eslint** for proper typescript linting
+- Full **Vue template typescript support** thanks to Johnson Chu's incredible work via his [Volar plugin](https://github.com/johnsoncodehk/volar). You finally now have typescript lint everywhere as Angular does with full VScode support !
+- [Vite auto component register](https://github.com/antfu/vite-plugin-components) while keeping typescript props inferring functional !
+- [Jest](https://jestjs.io/) ready to use for client side component / typescript unit testing. Note that unlike backend side there is no client unit tests provided to this boilerplate.
 
 ## Usage
 
-Keep in mind as you must have **PHP 8.0** as minimum requirement.
+Keep in mind that you must have **PHP 8.0** as minimum requirement.
 
 ```sh
 composer install
@@ -84,7 +84,7 @@ yarn && yarn dev
 
 Both front and admin dev HMR server will be started in parallel into different ports.
 
-Front is empty, access to admin in <http://localhost:8000/admin> and login as `admin@example.com` / `password`
+Front is empty, access to admin in <http://localhost:8000/admin> and login as `admin@example.com` / `password`.
 
 ### VSCode configuration
 
@@ -105,19 +105,19 @@ composer format # PHP CS format
 composer analyse # PHP static analysis
 
 # Use custom env.testing file if needed for next line
-composer test # Launch tests suite with console coverage report, and fail if less than 90% (adapt for your own needs)
+composer test # Launch backend tests suite with console coverage report, and fail if less than 90% (adapt for your own needs)
 
 yarn lint --fix # TS & Vue files auto format
-yarn vue-tsc --noEmit # Full TS & Vue templates compiling
-yarn test:unit # For client side unit testing with jest, note that client side tests are not included for this boilerplate
+yarn vue-tsc --noEmit # Full TS & Vue templates compiling report
+yarn test:unit # Launch client side unit testing suite
 ```
 
 #### TDD ready
 
-This project has 100% code coverage and is ready to use within [Spatie PHPUnit Watcher](https://github.com/spatie/phpunit-watcher), which is ideal for TDD :
+This project has 💯 code coverage and is ready to use within [Spatie PHPUnit Watcher](https://github.com/spatie/phpunit-watcher), which is perfect for **TDD** :
 
 ```sh
-# Install watcher globally 
+# Install watcher globally if not already installed
 composer global require spatie/phpunit-watcher
 
 # Launch phpunit watcher and enjoy live development testing
