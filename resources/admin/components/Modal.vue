@@ -108,7 +108,10 @@
       }
 
       onMounted(() => document.addEventListener('keydown', closeOnEscape))
-      onUnmounted(() => document.removeEventListener('keydown', closeOnEscape))
+      onUnmounted(() => {
+        document.removeEventListener('keydown', closeOnEscape)
+        document.body.style.overflow = ''
+      })
 
       return {
         close,
