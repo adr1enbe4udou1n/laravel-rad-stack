@@ -15,6 +15,16 @@ steps:
       from_secret: registry_password
     cache_from: registry.okami101.io/adr1enbe4udou1n/laravel-rad-stack
 
+- name: install
+  image: registry.okami101.io/adr1enbe4udou1n/laravel-rad-stack
+  commands:
+    - composer install
+
+- name: test
+  image: registry.okami101.io/adr1enbe4udou1n/laravel-rad-stack
+  commands:
+    - php artisan test --coverage --min=90
+
 trigger:
   event:
   - push
