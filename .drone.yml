@@ -1,0 +1,24 @@
+kind: pipeline
+type: docker
+name: default
+
+steps:
+- name: build
+  image: docker
+  environment:
+    REGISTRY: registry.okami101.io
+    REPO: adr1enbe4udou1n/laravel-rad-stack
+    USERNAME:
+      from_secret: registry_username
+    PASSWORD:
+      from_secret: registry_password
+    TAG: latest
+  commands:
+    - docker login $REGISTRY -u $USERNAME -p $PASSWORD
+    - docker build -t $REGISTRY/$REPO:$TAG .
+    - docker push $REGISTRY/$REPO:$TAG
+
+trigger:
+  event:
+  - push
+  - pull_request
