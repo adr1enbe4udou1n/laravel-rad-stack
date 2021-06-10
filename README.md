@@ -131,5 +131,3 @@ TODO (or not to do ?).
 ## License
 
 This project is open-sourced software licensed under the [MIT license](https://adr1enbe4udou1n.mit-license.org).
-
-# deploy

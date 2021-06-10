@@ -13,6 +13,7 @@ steps:
       from_secret: registry_username
     password:
       from_secret: registry_password
+    cache_from: registry.okami101.io/adr1enbe4udou1n/laravel-rad-stack
 
 trigger:
   event:
