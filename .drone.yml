@@ -25,6 +25,9 @@ steps:
   commands:
     - php artisan test --coverage --min=90
 
+image_pull_secrets:
+  - dockerconfig
+
 trigger:
   event:
   - push
