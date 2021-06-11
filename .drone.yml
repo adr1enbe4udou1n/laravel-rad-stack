@@ -32,6 +32,7 @@ steps:
     - php artisan key:generate
     - composer format -- --dry-run
     - composer analyse
+    - RUN docker-php-ext-enable xdebug && export XDEBUG_MODE=coverage
     - composer test
 
 image_pull_secrets:
