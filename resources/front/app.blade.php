@@ -14,7 +14,10 @@
 
 <body class="antialiased">
     <div class="min-h-screen flex flex-col justify-center items-center bg-primary-400 px-6">
-        <a href="{{ route('admin.login') }}" class="text-center uppercase font-bold sm:max-w-md px-12 py-8 bg-white shadow-md overflow-hidden rounded-sm">Go to admin</a>
+        <a href="{{ route('admin.login') }}"
+            class="text-center uppercase font-bold sm:max-w-md px-12 py-8 bg-white shadow-md overflow-hidden rounded-sm">
+            Go to admin !
+        </a>
     </div>
 
     @livewireScripts
