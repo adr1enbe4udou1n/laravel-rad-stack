@@ -6,6 +6,17 @@ workspace:
   path: /srv/laravel
 
 steps:
+- name: restore-cache
+  image: drillster/drone-volume-cache
+  volumes:
+  - name: cache
+    path: /cache
+  settings:
+    restore: true
+    mount:
+      - ./node_modules
+      - ./vendor
+
 - name: docker
   image: plugins/docker
   settings:
@@ -32,8 +43,24 @@ steps:
     - php artisan key:generate
     - composer format -- --dry-run
     - composer analyse
-    - RUN docker-php-ext-enable xdebug && export XDEBUG_MODE=coverage
+    - docker-php-ext-enable xdebug && export XDEBUG_MODE=coverage
     - composer test
+
+- name: rebuild-cache
+  image: drillster/drone-volume-cache
+  volumes:
+  - name: cache
+    path: /cache
+  settings:
+    rebuild: true
+    mount:
+      - ./node_modules
+      - ./vendor
 
 image_pull_secrets:
   - dockerconfig
+
+volumes:
+  - name: cache
+    host:
+      path: /tmp/cache
