@@ -3,7 +3,7 @@ type: docker
 name: default
 
 workspace:
-  - path: /srv/laravel
+  path: /srv/laravel
 
 steps:
 - name: docker
