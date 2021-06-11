@@ -23,6 +23,8 @@ steps:
   commands:
     - local-php-security-checker
     - composer install
+    - composer post-root-package-install
+    - composer post-create-project-cmd
     - php artisan key:generate
     - composer format -- --dry-run
     - composer analyse
