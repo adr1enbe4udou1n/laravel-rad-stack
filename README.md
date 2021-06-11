@@ -8,6 +8,8 @@
 
 This modern monolith web starter kit boilerplate, with both front and admin parts, aims to have ready-to-go dev fullstack with **high QA expectation** 📈 without sacrifice **RAD development** ⚡.
 
+> Check [online demo](https://laravel-rad-stack.okami101.io) -> go to admin and use pre-filled login (read only)  
+
 While developing new ✨, reduce your ⏲ testing inside your browser thanks to **PHP Stan** 🧐 (static analysis tool) and **watchable tests suite written on Pest** ✅ (testing framework focussed on simplicity). This boilerplate includes tests with full coverage 💯. **IDE helper for Laravel** 🐕‍🦺 is integrated as well. On frontend side you'll be covered with **typescript instant feedbacks** 🚸. Typescript is fully integrated to **Vue 3** by usage of **composition API** as well as **[Vue Tsc plugin](https://github.com/johnsoncodehk/vue-tsc)** (from Volar) for full TS support inside Vue templates. **Jest** is integrated as well for client side testing.
 
 > Say 🛑 to spending time on debugging and say 😎 to proper refactoring without breaking your app ♻️ ! At last resort, you're still covered with **Clockwork**, the perfect companion for advanced debugging & profiling ⏱.
