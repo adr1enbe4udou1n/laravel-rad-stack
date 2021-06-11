@@ -2,6 +2,9 @@ kind: pipeline
 type: docker
 name: default
 
+workspace:
+  - path: /srv/laravel
+
 steps:
 - name: docker
   image: plugins/docker
