@@ -12,6 +12,8 @@ RUN apk add --no-cache \
     freetype-dev \
     libjpeg-turbo-dev \
     libpng-dev \
+    libzip-dev \
+    zip \
     ;
 
 RUN docker-php-ext-install pdo_mysql && docker-php-ext-enable pdo_mysql
@@ -22,6 +24,7 @@ RUN pecl install redis \
     && pecl install xdebug-3.0.4 \
     && docker-php-ext-enable redis
 RUN docker-php-ext-enable opcache
+RUN docker-php-ext-install zip && docker-php-ext-enable zip
 
 RUN apk add --no-cache nginx
 

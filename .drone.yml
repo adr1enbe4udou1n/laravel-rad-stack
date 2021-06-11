@@ -27,8 +27,3 @@ steps:
 
 image_pull_secrets:
   - dockerconfig
-
-trigger:
-  event:
-  - push
-  - pull_request
