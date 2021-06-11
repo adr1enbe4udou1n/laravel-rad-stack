@@ -12,7 +12,7 @@ class ReadOnly
         '*/login',
         '*/logout',
         '*/users/*/impersonate',
-        '*/users/stopImpersonate',
+        '*/users/stop-impersonate',
     ];
 
     /**
