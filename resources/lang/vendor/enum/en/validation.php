@@ -1,5 +1,7 @@
 <?php
 
+use App\Enums\RoleEnum;
+
 return [
     'enum' => 'The :attribute field is not a valid :enum.',
     'enum_index' => 'The :attribute field is not a valid index of :enum.',
@@ -7,7 +9,7 @@ return [
     'enum_value' => 'The :attribute field is not a valid value of :enum.',
 
     'enums' => [
-        \App\Enum\RoleEnum::class => [
+        RoleEnum::class => [
             'super_admin' => 'Super admin',
             'admin' => 'Admin',
             'user' => 'User',

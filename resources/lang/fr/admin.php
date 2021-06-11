@@ -43,7 +43,7 @@ return [
         'last' => 'Dernière page',
         'rows_per_page_text' => 'éléments par page',
         'page_text' => ':start-:end de :total',
-        'selected' => ':count éléments sélectionnés',
+        'selected' => ':count élément(s) sélectionné(s)',
     ],
     'confirm' => [
         'delete_title' => 'Supprimer :resource :label ?',

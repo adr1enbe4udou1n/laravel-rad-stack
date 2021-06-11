@@ -720,5 +720,6 @@
     "Inactive": "Inactif",
     "Show": "Voir",
     "Impersonate": "Usurper",
-    "You are connected as :name, you can comeback to you own account from profile menu": "Vous êtes connecté en tant que :name, vous pouvez à tout moment revenir à votre propre compte depuis le menu de profil."
+    "You are connected as :name, you can comeback to you own account from profile menu": "Vous êtes connecté en tant que :name, vous pouvez à tout moment revenir à votre propre compte depuis le menu de profil.",
+    "Application is on read only mode.": "Application en mode lecture seule."
 }
