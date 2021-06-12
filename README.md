@@ -6,13 +6,15 @@
 
 # Laravel RAD Stack
 
-This modern monolith web starter kit boilerplate, with both front and admin parts, aims to have ready-to-go dev fullstack with **high QA expectation** 📈 without sacrifice **RAD development** ⚡.
+This modern monolith web starter kit, with only few features and separate front and admin parts, aims to have ready-to-go fullstack webapp with **high QA expectation** 📈 without sacrifice **[RAD](https://en.wikipedia.org/wiki/Rapid_application_development)** ⚡.
 
-> Check [online demo](https://laravel-rad-stack.okami101.io) -> go to admin and use pre-filled login (read only)  
+> Check [online demo 🌐](https://laravel-rad-stack.okami101.io) (read only mode)
 
-While developing new ✨, reduce your ⏲ testing inside your browser thanks to **PHP Stan** 🧐 (static analysis tool) and **watchable tests suite written on Pest** ✅ (testing framework focussed on simplicity). This boilerplate includes tests with full coverage 💯. **IDE helper for Laravel** 🐕‍🦺 is integrated as well. On frontend side you'll be covered with **typescript instant feedbacks** 🚸. Typescript is fully integrated to **Vue 3** by usage of **composition API** as well as **[Vue Tsc plugin](https://github.com/johnsoncodehk/vue-tsc)** (from Volar) for full TS support inside Vue templates. **Jest** is integrated as well for client side testing.
+While developing new ✨, reduce your ⏲ testing inside your browser thanks to **PHP Stan** 🧐 (static analysis tool) and **watchable tests suite written on Pest** ✅, a pleasant testing framework focused on simplicity. This boilerplate includes backend tests with 💯 coverage. **IDE helper for Laravel** 🐕‍🦺 is integrated. Finally **Clockwork** ⏱ is proposed as your perfect companion for advanced debugging & profiling.
 
-> Say 🛑 to spending time on debugging and say 😎 to proper refactoring without breaking your app ♻️ ! At last resort, you're still covered with **Clockwork**, the perfect companion for advanced debugging & profiling ⏱.
+On frontend side you'll be covered with **typescript instant feedbacks** 🚸. Typescript is fully integrated to **Vue 3** by usage of **composition API** as well as **[Vue TSC](https://github.com/johnsoncodehk/vue-tsc)** (from Volar plugin) for full TS support inside Vue templates. **Jest** is integrated for client side testing if needed, ideal for unit testing your Vue components.
+
+> Say 🛑 to spending time on debugging and say 😎 to live **TDD** and proper **refactoring** ♻️ without being afraid of breaking your app !
 
 For UI oriented development you'll still benefit of instant **Vite HMR** and **Windi CSS realtime classes scan** 👌. Fullstack RAD development on every stage ⚡ !
 
@@ -22,12 +24,12 @@ Besides all code is heavily linted from top to bottom thanks to **PHP CS Fixer**
 
 ## Technologies involved
 
-- **Laravel 8** and **PHP 8.0** as minimum requirement. It allows usage of **PHP attributes** which is perfect for routes definition inside controllers as Symfony does.
+- **Laravel 8** and **PHP 8.0** as minimum requirement. It allows usage of **PHP attributes** which is perfect for routing definitions directly inside controllers as Symfony does.
 - Usage of **[Vite](https://vitejs.dev/)** as main frontend tooling for instant start and HMR development thanks to modern [esbuild bundler](https://github.com/evanw/esbuild) with proper Laravel manifest management for dev and production.
 - **[Windi CSS](https://windicss.org/)** as main CSS framework for both front and admin parts.
 - Front is empty but ready to go for full **Livewire + AlpineJS** integration. Perfect for SEO based websites. It's configured for Windi CSS and Typescript but you can easily switch to another tools.
 - Basic admin UI fully build with **[Inertia](https://inertiajs.com/) + Windi CSS + Vue 3 Typescript with composition API**. Give thanks to Inertia for get ridding of boring Vue Router boilerplate and typescript for instant IDE feedbacks !
-- Backend is fully tested project by using **[Pest](https://pestphp.com/)** testing framework with **100% code coverage**, which gives you a perfect starting dev point if you want to embrace **TDD**.
+- Backend is fully tested by using **[Pest](https://pestphp.com/)** testing framework with **100% code coverage**, which gives you a perfect starting dev point if you want to embrace **TDD**.
 
 ### Why Windi CSS ?
 
@@ -51,7 +53,7 @@ Only simple basic features :
 - [Matice](https://github.com/GENL/matice) for nice Laravel translations integration within client side.
 - [Laravel Excel](https://laravel-excel.com/) as perfect solution for data table Excel export.
 - [Spatie Laravel Enum](https://github.com/spatie/laravel-enum) for proper enum support.
-- [Spatie Query Builder](https://github.com/spatie/laravel-query-builder) as nice Eloquent builder for API REST resources browsing, totally bridged inside above **DataTable** component.
+- [Spatie Query Builder](https://github.com/spatie/laravel-query-builder) as nice Eloquent builder for API REST resources browsing, totally bridged inside above DataTable component.
 
 ## Dev tools for high QA
 
@@ -77,6 +79,7 @@ Keep in mind that you must have **PHP 8.0** as minimum requirement.
 ```sh
 composer install
 # Prepare database and environment variables
+php artisan key:generate
 php artisan migrate:fresh --seed
 php artisan serve
 
@@ -125,10 +128,6 @@ composer global require spatie/phpunit-watcher
 # Launch phpunit watcher and enjoy live development testing
 phpunit-watcher watch
 ```
-
-## Documentation
-
-TODO (or not to do ?).
 
 ## License
 
