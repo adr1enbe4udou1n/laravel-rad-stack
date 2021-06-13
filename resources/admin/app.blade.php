@@ -9,13 +9,7 @@
     <title>{{ config('app.name') }}</title>
 
     @routes
-
-    @if (App::isProduction())
-        <script src="{{ asset('matice_translations.js') }}"></script>
-    @else
-        @translations
-    @endif
-
+    @translations
     @vite("admin", "http://localhost:3200/app.ts")
 </head>
 
