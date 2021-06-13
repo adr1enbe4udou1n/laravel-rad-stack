@@ -58,7 +58,6 @@ steps:
     - local-php-security-checker
     - composer format -- --dry-run
     - composer analyse
-    - docker-php-ext-enable xdebug && export XDEBUG_MODE=coverage
     - composer test
 
 - name: deploy
