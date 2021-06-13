@@ -40,6 +40,7 @@ steps:
     - composer install
     - cp .env.example .env
     - php artisan key:generate
+    - php artisan matice:generate
     - composer format -- --dry-run
     - composer analyse
     - docker-php-ext-enable xdebug && export XDEBUG_MODE=coverage
