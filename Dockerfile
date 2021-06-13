@@ -8,7 +8,7 @@ COPY public public/
 COPY resources resources/
 COPY storage storage/
 COPY vendor vendor/
-COPY artisan composer.json ./
+COPY artisan composer.json composer.lock ./
 
 RUN chown -R www-data:www-data bootstrap/cache storage
 
