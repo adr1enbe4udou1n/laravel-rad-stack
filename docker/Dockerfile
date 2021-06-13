@@ -15,8 +15,6 @@ COPY nginx.conf /etc/nginx/conf.d/default.conf
 COPY start-container.sh /usr/local/bin/start-container
 RUN chmod +x /usr/local/bin/start-container
 
-RUN export XDEBUG_MODE=coverage
-
 EXPOSE 80
 
 ENTRYPOINT ["start-container"]

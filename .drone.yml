@@ -58,6 +58,7 @@ steps:
     - local-php-security-checker
     - composer format -- --dry-run
     - composer analyse
+    - export XDEBUG_MODE=coverage
     - composer test
 
 - name: deploy
