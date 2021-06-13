@@ -41,15 +41,6 @@ steps:
     - php artisan key:generate
     - php artisan matice:generate
 
-- name: qa
-  image: registry.okami101.io/adr1enbe4udou1n/laravel-rad-stack
-  commands:
-    - local-php-security-checker
-    - composer format -- --dry-run
-    - composer analyse
-    - docker-php-ext-enable xdebug && export XDEBUG_MODE=coverage
-    - composer test
-
 - name: rebuild-cache
   image: drillster/drone-volume-cache
   volumes:
@@ -60,6 +51,15 @@ steps:
     mount:
       - ./node_modules
       - ./vendor
+
+- name: qa
+  image: registry.okami101.io/adr1enbe4udou1n/laravel-rad-stack
+  commands:
+    - local-php-security-checker
+    - composer format -- --dry-run
+    - composer analyse
+    - docker-php-ext-enable xdebug && export XDEBUG_MODE=coverage
+    - composer test
 
 - name: deploy
   image: plugins/docker
