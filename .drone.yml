@@ -79,3 +79,26 @@ volumes:
   - name: cache
     host:
       path: /tmp/cache
+
+---
+kind: pipeline
+type: docker
+name: deploy
+
+steps:
+
+- name: deploy
+  image: appleboy/drone-ssh
+  settings:
+    host: front.okami101.io
+    username: okami
+    key:
+      from_secret: swarm_ssh_key
+    script:
+      - docker service update --image registry.okami101.io/adr1enbe4udou1n/laravel-rad-stack-app:latest --with-registry-auth laravel-rad-stack_app
+
+trigger:
+  event:
+  - promote
+  target:
+  - production
