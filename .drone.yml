@@ -1,6 +1,6 @@
 kind: pipeline
 type: docker
-name: default
+name: build
 
 steps:
 - name: docker
@@ -25,21 +25,21 @@ steps:
   settings:
     restore: true
     mount:
-      - ./node_modules
-      - ./vendor
+    - ./node_modules
+    - ./vendor
 
 - name: assets
   image: node:14-alpine
   commands:
-    - yarn && yarn lint && yarn build
+  - yarn && yarn lint && yarn build
 
 - name: build
   image: registry.okami101.io/adr1enbe4udou1n/laravel-rad-stack
   commands:
-    - composer install
-    - cp .env.example .env
-    - php artisan key:generate
-    - php artisan matice:generate
+  - composer install
+  - cp .env.example .env
+  - php artisan key:generate
+  - php artisan matice:generate
 
 - name: rebuild-cache
   image: drillster/drone-volume-cache
@@ -49,17 +49,17 @@ steps:
   settings:
     rebuild: true
     mount:
-      - ./node_modules
-      - ./vendor
+    - ./node_modules
+    - ./vendor
 
 - name: qa
   image: registry.okami101.io/adr1enbe4udou1n/laravel-rad-stack
   commands:
-    - local-php-security-checker
-    - composer format -- --dry-run
-    - composer analyse
-    - export XDEBUG_MODE=coverage
-    - composer test
+  - local-php-security-checker
+  - composer format -- --dry-run
+  - composer analyse
+  - export XDEBUG_MODE=coverage
+  - composer test
 
 - name: deploy
   image: plugins/docker
@@ -73,12 +73,17 @@ steps:
       from_secret: registry_password
 
 image_pull_secrets:
-  - dockerconfig
+- dockerconfig
 
 volumes:
-  - name: cache
-    host:
-      path: /tmp/cache
+- name: cache
+  host:
+    path: /tmp/cache
+
+trigger:
+  event:
+  - push
+  - pull_request
 
 ---
 kind: pipeline
@@ -95,7 +100,7 @@ steps:
     key:
       from_secret: swarm_ssh_key
     script:
-      - docker service update --image registry.okami101.io/adr1enbe4udou1n/laravel-rad-stack-app:latest --with-registry-auth laravel-rad-stack_app
+    - docker service update --image registry.okami101.io/adr1enbe4udou1n/laravel-rad-stack-app:latest --with-registry-auth laravel-rad-stack_app
 
 trigger:
   event:
