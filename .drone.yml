@@ -44,13 +44,6 @@ steps:
   - docker
   - restore-cache
 
-- name: frontend
-  image: node:14-alpine
-  commands:
-  - yarn && yarn lint && yarn build
-  depends_on:
-  - restore-cache
-
 - name: rebuild-cache
   image: drillster/drone-volume-cache
   volumes:
@@ -62,7 +55,6 @@ steps:
     - ./node_modules
     - ./vendor
   depends_on:
-  - frontend
   - backend
 
 - name: deploy
