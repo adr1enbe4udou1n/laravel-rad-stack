@@ -44,14 +44,6 @@ steps:
   - docker
   - restore-cache
 
-- name: frontend
-  image: node:14-alpine
-  commands:
-  - yarn && yarn lint && yarn build
-  depends_on:
-  - restore-cache
-
-
 - name: rebuild-cache
   image: drillster/drone-volume-cache
   volumes:
@@ -65,19 +57,6 @@ steps:
   depends_on:
   - frontend
   - backend
-
-- name: deploy
-  image: plugins/docker
-  settings:
-    registry: registry.okami101.io
-    repo: registry.okami101.io/adr1enbe4udou1n/laravel-rad-stack-app
-    tags: latest
-    username:
-      from_secret: registry_username
-    password:
-      from_secret: registry_password
-  depends_on:
-  - rebuild-cache
 
 image_pull_secrets:
 - dockerconfig
