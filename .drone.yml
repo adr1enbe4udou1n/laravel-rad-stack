@@ -40,9 +40,6 @@ steps:
   - composer analyse
   - export XDEBUG_MODE=coverage
   - composer test
-  depends_on:
-  - docker
-  - restore-cache
 
 - name: rebuild-cache
   image: drillster/drone-volume-cache
