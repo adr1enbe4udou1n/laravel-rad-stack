@@ -8,7 +8,7 @@
         "dev:admin": "vite --config resources/admin/vite.config.ts --port 3200",
         "build:admin": "vue-tsc --noEmit && vite build --config resources/admin/vite.config.ts",
         "test:unit": "jest resources",
-        "lint": "eslint resources/**/*.{js,ts,vue}"
+        "lint": "eslint resources/{admin,front}/**/*.{js,ts,vue}"
     },
     "devDependencies": {
         "@heroicons/vue": "^1.0.1",
