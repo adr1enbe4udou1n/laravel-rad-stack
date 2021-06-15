@@ -3,6 +3,7 @@
 namespace App\Support;
 
 use Config;
+use Illuminate\Support\Facades\File;
 use Illuminate\Support\Str;
 
 class LaravelViteManifest
@@ -32,10 +33,13 @@ class LaravelViteManifest
             return $this->manifestCache[$name];
         }
 
-        $content = file_get_contents(public_path("dist/{$name}/manifest.json"));
-        $this->manifestCache[$name] = json_decode($content, true);
+        $manifest = public_path("dist/{$name}/manifest.json");
 
-        return $this->manifestCache[$name];
+        if (File::exists($manifest)) {
+            $this->manifestCache[$name] = json_decode(File::get($manifest), true);
+        }
+
+        return $this->manifestCache[$name] ?? [];
     }
 
     private function jsImports(string $url): string
