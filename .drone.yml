@@ -41,6 +41,7 @@ steps:
   - export XDEBUG_MODE=coverage
   - composer test
   depends_on:
+  - docker
   - restore-cache
 
 - name: frontend
