@@ -40,11 +40,30 @@ steps:
   - composer analyse
   - export XDEBUG_MODE=coverage
   - composer test
+  depends_on:
+  - restore-cache
 
 - name: frontend
   image: node:14-alpine
   commands:
   - yarn && yarn lint && yarn build
+  depends_on:
+  - restore-cache
+
+
+- name: rebuild-cache
+  image: drillster/drone-volume-cache
+  volumes:
+  - name: cache
+    path: /cache
+  settings:
+    rebuild: true
+    mount:
+    - ./node_modules
+    - ./vendor
+  depends_on:
+  - frontend
+  - backend
 
 - name: deploy
   image: plugins/docker
@@ -57,19 +76,7 @@ steps:
     password:
       from_secret: registry_password
   depends_on:
-  - frontend
-  - backend
-
-- name: rebuild-cache
-  image: drillster/drone-volume-cache
-  volumes:
-  - name: cache
-    path: /cache
-  settings:
-    rebuild: true
-    mount:
-    - ./node_modules
-    - ./vendor
+  - rebuild-cache
 
 image_pull_secrets:
 - dockerconfig
