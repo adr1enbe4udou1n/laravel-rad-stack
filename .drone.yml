@@ -51,8 +51,6 @@ steps:
     mount:
     - ./node_modules
     - ./vendor
-  depends_on:
-  - backend
 
 - name: deploy
   image: plugins/docker
@@ -64,8 +62,6 @@ steps:
       from_secret: registry_username
     password:
       from_secret: registry_password
-  depends_on:
-  - rebuild-cache
 
 image_pull_secrets:
 - dockerconfig
