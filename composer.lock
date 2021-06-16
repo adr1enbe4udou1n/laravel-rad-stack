@@ -1272,16 +1272,16 @@
         },
         {
             "name": "laravel/framework",
-            "version": "v8.46.0",
+            "version": "v8.47.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laravel/framework.git",
-                "reference": "a18266c612e0e6aba5e0174b3c873d2d217dccfb"
+                "reference": "93db226946453f4285558b7c3166ddb6e7ea5400"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel/framework/zipball/a18266c612e0e6aba5e0174b3c873d2d217dccfb",
-                "reference": "a18266c612e0e6aba5e0174b3c873d2d217dccfb",
+                "url": "https://api.github.com/repos/laravel/framework/zipball/93db226946453f4285558b7c3166ddb6e7ea5400",
+                "reference": "93db226946453f4285558b7c3166ddb6e7ea5400",
                 "shasum": ""
             },
             "require": {
@@ -1436,20 +1436,20 @@
                 "issues": "https://github.com/laravel/framework/issues",
                 "source": "https://github.com/laravel/framework"
             },
-            "time": "2021-06-08T13:36:46+00:00"
+            "time": "2021-06-15T14:00:32+00:00"
         },
         {
             "name": "laravel/sanctum",
-            "version": "v2.11.1",
+            "version": "v2.11.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laravel/sanctum.git",
-                "reference": "5de9d0ced8ae50dacb00c16077115f32e94d13f2"
+                "reference": "b21e65cbe13896946986cb0868180cd69e1bd5d3"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel/sanctum/zipball/5de9d0ced8ae50dacb00c16077115f32e94d13f2",
-                "reference": "5de9d0ced8ae50dacb00c16077115f32e94d13f2",
+                "url": "https://api.github.com/repos/laravel/sanctum/zipball/b21e65cbe13896946986cb0868180cd69e1bd5d3",
+                "reference": "b21e65cbe13896946986cb0868180cd69e1bd5d3",
                 "shasum": ""
             },
             "require": {
@@ -1500,7 +1500,7 @@
                 "issues": "https://github.com/laravel/sanctum/issues",
                 "source": "https://github.com/laravel/sanctum"
             },
-            "time": "2021-05-25T16:43:06+00:00"
+            "time": "2021-06-15T15:56:21+00:00"
         },
         {
             "name": "laravel/tinker",
@@ -1824,16 +1824,16 @@
         },
         {
             "name": "livewire/livewire",
-            "version": "2.5.0",
+            "version": "v2.5.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/livewire/livewire.git",
-                "reference": "5cffdbfe4204e0d932cde6f8c9bdf63f0928b4d4"
+                "reference": "a4ffb135693e7982e5b982ca203f5dc7a7ae1126"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/livewire/livewire/zipball/5cffdbfe4204e0d932cde6f8c9bdf63f0928b4d4",
-                "reference": "5cffdbfe4204e0d932cde6f8c9bdf63f0928b4d4",
+                "url": "https://api.github.com/repos/livewire/livewire/zipball/a4ffb135693e7982e5b982ca203f5dc7a7ae1126",
+                "reference": "a4ffb135693e7982e5b982ca203f5dc7a7ae1126",
                 "shasum": ""
             },
             "require": {
@@ -1884,7 +1884,7 @@
             "description": "A front-end framework for Laravel.",
             "support": {
                 "issues": "https://github.com/livewire/livewire/issues",
-                "source": "https://github.com/livewire/livewire/tree/2.5.0"
+                "source": "https://github.com/livewire/livewire/tree/v2.5.1"
             },
             "funding": [
                 {
@@ -1892,7 +1892,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2021-06-14T22:25:45+00:00"
+            "time": "2021-06-15T13:24:48+00:00"
         },
         {
             "name": "maatwebsite/excel",
@@ -8497,31 +8497,28 @@
         },
         {
             "name": "pestphp/pest",
-            "version": "v1.4.0",
+            "version": "v1.5.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/pestphp/pest.git",
-                "reference": "dd2921fd26fa02673077d5b75b8756a6f5adcdbc"
+                "reference": "729638a3bb560fb680c9f8bf973ca62e216b767a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/pestphp/pest/zipball/dd2921fd26fa02673077d5b75b8756a6f5adcdbc",
-                "reference": "dd2921fd26fa02673077d5b75b8756a6f5adcdbc",
+                "url": "https://api.github.com/repos/pestphp/pest/zipball/729638a3bb560fb680c9f8bf973ca62e216b767a",
+                "reference": "729638a3bb560fb680c9f8bf973ca62e216b767a",
                 "shasum": ""
             },
             "require": {
-                "nunomaduro/collision": "^5.0",
-                "pestphp/pest-plugin": "^1.0",
-                "pestphp/pest-plugin-coverage": "^1.0",
-                "pestphp/pest-plugin-expectations": "^1.6",
-                "pestphp/pest-plugin-init": "^1.1",
+                "nunomaduro/collision": "^5.4.0",
+                "pestphp/pest-plugin": "^1.0.0",
                 "php": "^7.3 || ^8.0",
                 "phpunit/phpunit": ">= 9.3.7 <= 9.5.5"
             },
             "require-dev": {
-                "illuminate/console": "^8.32.1",
-                "illuminate/support": "^8.32.1",
-                "laravel/dusk": "^6.13.0",
+                "illuminate/console": "^8.47.0",
+                "illuminate/support": "^8.47.0",
+                "laravel/dusk": "^6.15.0",
                 "pestphp/pest-dev-tools": "dev-master"
             },
             "bin": [
@@ -8534,6 +8531,8 @@
                 },
                 "pest": {
                     "plugins": [
+                        "Pest\\Plugins\\Coverage",
+                        "Pest\\Plugins\\Init",
                         "Pest\\Plugins\\Version"
                     ]
                 },
@@ -8573,7 +8572,7 @@
             ],
             "support": {
                 "issues": "https://github.com/pestphp/pest/issues",
-                "source": "https://github.com/pestphp/pest/tree/v1.4.0"
+                "source": "https://github.com/pestphp/pest/tree/v1.5.0"
             },
             "funding": [
                 {
@@ -8601,7 +8600,7 @@
                     "type": "patreon"
                 }
             ],
-            "time": "2021-06-10T18:26:42+00:00"
+            "time": "2021-06-15T22:06:43+00:00"
         },
         {
             "name": "pestphp/pest-plugin",
@@ -8674,229 +8673,6 @@
                 }
             ],
             "time": "2021-01-03T15:53:42+00:00"
-        },
-        {
-            "name": "pestphp/pest-plugin-coverage",
-            "version": "v1.0.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/pestphp/pest-plugin-coverage.git",
-                "reference": "50260c8671377a5082a06b9e228a984c13ed199c"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/pestphp/pest-plugin-coverage/zipball/50260c8671377a5082a06b9e228a984c13ed199c",
-                "reference": "50260c8671377a5082a06b9e228a984c13ed199c",
-                "shasum": ""
-            },
-            "require": {
-                "pestphp/pest-plugin": "^1.0",
-                "php": "^7.3 || ^8.0",
-                "sebastian/environment": "^5.1.2"
-            },
-            "conflict": {
-                "pestphp/pest": "<1.0"
-            },
-            "require-dev": {
-                "pestphp/pest": "^1.0",
-                "pestphp/pest-dev-tools": "dev-master"
-            },
-            "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "1.x-dev"
-                },
-                "pest": {
-                    "plugins": [
-                        "Pest\\PluginCoverage\\Plugin"
-                    ]
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "Pest\\PluginCoverage\\": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "description": "The Pest Coverage Plugin",
-            "keywords": [
-                "coverage",
-                "framework",
-                "pest",
-                "php",
-                "plugin",
-                "test",
-                "testing",
-                "unit"
-            ],
-            "support": {
-                "source": "https://github.com/pestphp/pest-plugin-coverage/tree/v1.0.0"
-            },
-            "funding": [
-                {
-                    "url": "https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=66BYDWAT92N6L",
-                    "type": "custom"
-                },
-                {
-                    "url": "https://github.com/nunomaduro",
-                    "type": "github"
-                },
-                {
-                    "url": "https://www.patreon.com/nunomaduro",
-                    "type": "patreon"
-                }
-            ],
-            "time": "2021-01-03T15:51:41+00:00"
-        },
-        {
-            "name": "pestphp/pest-plugin-expectations",
-            "version": "v1.6.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/pestphp/pest-plugin-expectations.git",
-                "reference": "efc39fb844f26e5f1d0f14784e06c8153c57d78f"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/pestphp/pest-plugin-expectations/zipball/efc39fb844f26e5f1d0f14784e06c8153c57d78f",
-                "reference": "efc39fb844f26e5f1d0f14784e06c8153c57d78f",
-                "shasum": ""
-            },
-            "require": {
-                "php": "^7.3 || ^8.0",
-                "phpunit/phpunit": "^9.0"
-            },
-            "conflict": {
-                "pestphp/pest": "<1.0"
-            },
-            "require-dev": {
-                "pestphp/pest": "^1.0",
-                "pestphp/pest-dev-tools": "dev-master"
-            },
-            "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "1.x-dev"
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "Pest\\Expectations\\": "src/"
-                },
-                "files": [
-                    "src/Autoload.php"
-                ]
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "description": "Add expectations testing capabilities to Pest or PHPUnit",
-            "keywords": [
-                "expectations",
-                "framework",
-                "pest",
-                "php",
-                "test",
-                "testing",
-                "unit"
-            ],
-            "support": {
-                "source": "https://github.com/pestphp/pest-plugin-expectations/tree/v1.6.0"
-            },
-            "funding": [
-                {
-                    "url": "https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=66BYDWAT92N6L",
-                    "type": "custom"
-                },
-                {
-                    "url": "https://github.com/nunomaduro",
-                    "type": "github"
-                },
-                {
-                    "url": "https://www.patreon.com/nunomaduro",
-                    "type": "patreon"
-                }
-            ],
-            "time": "2021-06-10T17:37:27+00:00"
-        },
-        {
-            "name": "pestphp/pest-plugin-init",
-            "version": "v1.1.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/pestphp/pest-plugin-init.git",
-                "reference": "cb3dfa1a9887aafb3d0b4db0fb8f6171ce69b49e"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/pestphp/pest-plugin-init/zipball/cb3dfa1a9887aafb3d0b4db0fb8f6171ce69b49e",
-                "reference": "cb3dfa1a9887aafb3d0b4db0fb8f6171ce69b49e",
-                "shasum": ""
-            },
-            "require": {
-                "pestphp/pest-plugin": "^1.0",
-                "php": "^7.3 || ^8.0"
-            },
-            "conflict": {
-                "pestphp/pest": "<1.0"
-            },
-            "require-dev": {
-                "pestphp/pest": "^1.0",
-                "pestphp/pest-dev-tools": "dev-master"
-            },
-            "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "1.x-dev"
-                },
-                "pest": {
-                    "plugins": [
-                        "Pest\\Init\\Plugin"
-                    ]
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "Pest\\Init\\": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "description": "The Pest Init plugin",
-            "keywords": [
-                "framework",
-                "init",
-                "pest",
-                "php",
-                "plugin",
-                "test",
-                "testing",
-                "unit"
-            ],
-            "support": {
-                "source": "https://github.com/pestphp/pest-plugin-init/tree/v1.1.0"
-            },
-            "funding": [
-                {
-                    "url": "https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=66BYDWAT92N6L",
-                    "type": "custom"
-                },
-                {
-                    "url": "https://github.com/nunomaduro",
-                    "type": "github"
-                },
-                {
-                    "url": "https://www.patreon.com/nunomaduro",
-                    "type": "patreon"
-                }
-            ],
-            "time": "2021-05-10T16:31:00+00:00"
         },
         {
             "name": "pestphp/pest-plugin-laravel",
@@ -10797,16 +10573,16 @@
         },
         {
             "name": "sebastian/type",
-            "version": "2.3.2",
+            "version": "2.3.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/type.git",
-                "reference": "0d1c587401514d17e8f9258a27e23527cb1b06c1"
+                "reference": "b8cd8a1c753c90bc1a0f5372170e3e489136f914"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/type/zipball/0d1c587401514d17e8f9258a27e23527cb1b06c1",
-                "reference": "0d1c587401514d17e8f9258a27e23527cb1b06c1",
+                "url": "https://api.github.com/repos/sebastianbergmann/type/zipball/b8cd8a1c753c90bc1a0f5372170e3e489136f914",
+                "reference": "b8cd8a1c753c90bc1a0f5372170e3e489136f914",
                 "shasum": ""
             },
             "require": {
@@ -10841,7 +10617,7 @@
             "homepage": "https://github.com/sebastianbergmann/type",
             "support": {
                 "issues": "https://github.com/sebastianbergmann/type/issues",
-                "source": "https://github.com/sebastianbergmann/type/tree/2.3.2"
+                "source": "https://github.com/sebastianbergmann/type/tree/2.3.4"
             },
             "funding": [
                 {
@@ -10849,7 +10625,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2021-06-04T13:02:07+00:00"
+            "time": "2021-06-15T12:49:02+00:00"
         },
         {
             "name": "sebastian/version",

@@ -30,9 +30,15 @@ steps:
 
 - name: backend
   image: registry.okami101.io/adr1enbe4udou1n/laravel-rad-stack
+  environment:
+    APP_DEBUG: 'true'
+    DB_CONNECTION: mysql
+    DB_HOST: db
+    DB_DATABASE: test
+    DB_USERNAME: root
   commands:
   - composer install
-  - cp .env.example .env
+  - export APP_KEY=$(php artisan --no-ansi key:generate --show)
   - php artisan key:generate
   - php artisan matice:generate
   - local-php-security-checker
@@ -85,6 +91,13 @@ volumes:
 - name: cache
   host:
     path: /tmp/cache
+
+services:
+- name: db
+  image: mysql
+  environment:
+    MYSQL_ALLOW_EMPTY_PASSWORD: 'yes'
+    MYSQL_DATABASE: test
 
 trigger:
   event:

@@ -20,7 +20,7 @@ uses(RefreshDatabase::class);
 
 beforeEach(function () {
     actingAs(User::factory()->superAdmin()->create());
-    User::addGlobalScope('admin', fn (Builder $builder) => $builder->where('id', '!=', 1));
+    User::addGlobalScope('admin', fn (Builder $builder) => $builder->where('role', '!=', RoleEnum::super_admin()));
 });
 
 test('admin can list users', function () {
@@ -57,8 +57,8 @@ test('admin can sort users', function (string $sort, $expected) {
             ->where('sort', $sort)
     );
 })->with([
-    ['id', 2], ['name', 'user 1'],
-    ['-id', 10], ['-name', 'user 9'],
+    ['name', 'user 1'],
+    ['-name', 'user 9'],
 ]);
 
 test('admin can filter users', function (array $filter, int $total) {
