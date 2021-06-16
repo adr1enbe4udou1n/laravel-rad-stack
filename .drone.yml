@@ -47,7 +47,6 @@ steps:
   - export XDEBUG_MODE=coverage
   - composer test
   depends_on:
-  - db
   - docker
   - restore-cache
 
