@@ -25,8 +25,10 @@
 
         <p class="mt-12 text-center max-w-196 font-600">
             This frontend part is initialized for Windi CSS + Livewire + AlpineJS v3 + Typescript.<br>
-            No front-end pages are provided
-            in this demo. Only the admin panel which is build on Inertia + Vue 3 with composition API + Typescript.
+            No front-end pages are provided in this demo.<br>
+            The admin panel which is build on Inertia + Vue 3 with composition API + Typescript.<br>
+            Give a 🌟 to <a href="https://github.com/adr1enbe4udou1n/laravel-rad-stack" target="_blank"
+                class="underline">my repo</a> !
         </p>
     </div>
 
