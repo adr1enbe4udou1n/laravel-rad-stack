@@ -39,7 +39,6 @@ steps:
   commands:
   - composer install
   - export APP_KEY=$(php artisan --no-ansi key:generate --show)
-  - php artisan key:generate
   - php artisan matice:generate
   - local-php-security-checker
   - composer format -- --dry-run
