@@ -1,15 +1,12 @@
 <template>
   <div
     class="
-      hidden
       h-full
-      md:block
       bg-white
       p-6
       overflow-y-auto
       scrollbar-thin scrollbar-thumb-primary-900 scrollbar-track-gray-100
     "
-    :class="[`w-${width}`]"
   >
     <header class="flex items-center mb-8">
       <h2 class="font-semibold text-gray-800 leading-tight w-3/4">
@@ -34,10 +31,6 @@
   export default defineComponent({
     props: {
       title: String,
-      width: {
-        type: Number,
-        default: 96,
-      },
     },
     setup() {
       const resource = inject<string>('resource')

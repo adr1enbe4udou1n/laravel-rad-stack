@@ -1,6 +1,9 @@
 <template>
-  <div v-if="source && !hideFooter" class="flex mt-6">
-    <div class="flex flex-row items-center">
+  <div
+    v-if="source && !hideFooter"
+    class="flex flex-col sm:flex-row mt-6 gap-4"
+  >
+    <div class="flex flex-row justify-center sm:justify-start items-center">
       <select
         :value="source.meta.per_page"
         class="mr-2"
@@ -13,7 +16,7 @@
       <label>{{ $t('admin.data-table.rows_per_page_text') }}</label>
     </div>
     <div v-if="source.meta.total" class="flex flex-row items-center ml-auto">
-      <span>{{
+      <span class="hidden sm:inline-block">{{
         $t('admin.data-table.page_text', {
           args: {
             start: source.meta.from,

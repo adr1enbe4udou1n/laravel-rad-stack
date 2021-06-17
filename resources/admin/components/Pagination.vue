@@ -1,6 +1,6 @@
 <template>
   <div v-if="pages.length > 1">
-    <div class="flex flex-wrap -mb-1">
+    <div class="flex flex-wrap justify-center -mb-1">
       <button
         type="button"
         class="link"

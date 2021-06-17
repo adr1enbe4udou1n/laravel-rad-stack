@@ -21,7 +21,8 @@ const mainNav: (NavLink | NavTitle)[] = [
   { title: __('Access Managment') },
   {
     href: route('admin.users'),
-    active: () => route().current('admin.users.*'),
+    active: () =>
+      route().current('admin.users') || route().current('admin.users.*'),
     icon: 'users',
     text: __('Users'),
   },

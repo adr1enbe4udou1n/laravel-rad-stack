@@ -3,8 +3,6 @@
     <template #header>
       <h1>{{ title }}</h1>
     </template>
-
-    Hello !
   </app-layout>
 </template>
 

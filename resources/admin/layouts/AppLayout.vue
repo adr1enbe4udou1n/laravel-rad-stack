@@ -42,6 +42,7 @@
           md:flex-1 md:overflow-y-auto
           scrollbar-thin scrollbar-thumb-primary-900 scrollbar-track-gray-100
         "
+        :class="{ 'hidden sm:block': !!$slots.aside }"
       >
         <!-- Page Heading -->
         <header v-if="$slots.header" class="bg-white shadow">
@@ -58,7 +59,7 @@
         </main>
       </div>
 
-      <slot name="aside"></slot>
+      <slot name="aside" class="app-aside"></slot>
     </div>
   </div>
 </template>

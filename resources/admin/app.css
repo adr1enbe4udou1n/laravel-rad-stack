@@ -4,9 +4,9 @@ h1 {
     @apply font-semibold text-xl text-gray-800 leading-tight;
 }
 
-input[type="text"],
-input[type="email"],
-input[type="password"],
+input[type='text'],
+input[type='email'],
+input[type='password'],
 select {
     @apply border-gray-300 rounded-md shadow-sm px-3 py-2;
 
@@ -23,7 +23,7 @@ select {
     @apply pr-8;
 }
 
-input[type="checkbox"] {
+input[type='checkbox'] {
     @apply rounded border-gray-300 text-primary-600 shadow-sm;
 
     &:focus {

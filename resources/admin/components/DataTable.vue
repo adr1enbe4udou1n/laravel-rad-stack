@@ -1,11 +1,14 @@
 <template>
-  <div v-if="source && !hideHeader" class="flex mb-6">
-    <div v-if="!disableSearch" class="flex flex-row">
+  <div
+    v-if="source && !hideHeader"
+    class="flex flex-col sm:flex-row gap-4 mb-6"
+  >
+    <div v-if="!disableSearch" class="w-full sm:w-96">
       <div class="relative">
         <input
           v-model="form.filter.q"
           type="text"
-          class="w-96"
+          class="w-full"
           :placeholder="$t('admin.data-table.search')"
           @input="onFilter"
         />
@@ -27,7 +30,16 @@
       <slot name="actions" />
     </div>
   </div>
-  <div class="bg-white rounded-md shadow overflow-x-auto relative">
+  <div
+    class="
+      bg-white
+      rounded-md
+      shadow
+      overflow-x-auto
+      relative
+      scrollbar-thin scrollbar-thumb-primary-900 scrollbar-track-gray-100
+    "
+  >
     <table
       class="w-full whitespace-nowrap"
       :class="{ 'opacity-25': form.processing }"
