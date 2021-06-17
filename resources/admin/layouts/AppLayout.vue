@@ -59,7 +59,7 @@
         </main>
       </div>
 
-      <slot name="aside" class="app-aside"></slot>
+      <slot name="aside"></slot>
     </div>
   </div>
 </template>
