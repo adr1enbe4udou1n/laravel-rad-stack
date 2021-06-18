@@ -7031,10 +7031,10 @@ vfile@^4.0.0, vfile@^4.0.1:
     unist-util-stringify-position "^2.0.0"
     vfile-message "^2.0.0"
 
-vite-plugin-components@^0.11.1:
-  version "0.11.1"
-  resolved "https://registry.yarnpkg.com/vite-plugin-components/-/vite-plugin-components-0.11.1.tgz#fc1f38c4087ef8551767a1fa92cbff3edd191f3b"
-  integrity sha512-rApT5gc8hLgIgO4+8xtlt81UD76mUvsTtx44UZViJJGYFr8ofEALlgRn5Fwai1MHbOlWWdOfPMvMa3ooC52COQ==
+vite-plugin-components@^0.11.2:
+  version "0.11.2"
+  resolved "https://registry.yarnpkg.com/vite-plugin-components/-/vite-plugin-components-0.11.2.tgz#83cd0ebf3388329464ccaf6e259a416492a728a3"
+  integrity sha512-FfW88iOmOHx1GlGJ2KT3r51Oyu7pntgkMxv7X7WxwPS69lOCWzmDO0n2+TWiWYPDpboDLJsPKBDeSBN1BhTtXQ==
   dependencies:
     chokidar "^3.5.1"
     debug "^4.3.2"
@@ -7586,9 +7586,9 @@ yocto-queue@^0.1.0:
   resolved "https://registry.yarnpkg.com/yocto-queue/-/yocto-queue-0.1.0.tgz#0294eb3dee05028d31ee1a5fa2c556a6aaf10a1b"
   integrity sha512-rVksvsnNCdJ/ohGc6xgPwyN8eheCxsiLM8mxuE/t/mOVqJewPuO1miLpTHQiRgTKCLexL4MeAFVagts7HmNZ2Q==
 
-ziggy-js@^1.2.0:
-  version "1.2.0"
-  resolved "https://registry.yarnpkg.com/ziggy-js/-/ziggy-js-1.2.0.tgz#6e7345722898a32eaf637488e0fd6c405098b953"
-  integrity sha512-LElIxqUCYe3w+BNUfQ0JSsUjrhsP7iRymmdFEXW/l7ZPvl1Yrdnti6IQ7bgqN4K6ODJg7VcnKxf4DsHFvOgVKg==
+ziggy-js@^1.3.0:
+  version "1.3.0"
+  resolved "https://registry.yarnpkg.com/ziggy-js/-/ziggy-js-1.3.0.tgz#988032f17bbf8addb5864c14097c5705196c347b"
+  integrity sha512-JU1Co6rvw9Wun8XGDPt1hGaxy64wESSrLz0hacv6y1agjR7RDCT0w8IWXo0Z/G1TcSlHF275yAgN9hbXEG5N2A==
   dependencies:
     qs "^6.8.0"
