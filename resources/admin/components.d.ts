@@ -51,6 +51,7 @@ declare module 'vue' {
     UserForm: typeof import('./components/forms/UserForm.vue')['default']
     CheckboxGroupInput: typeof import('./components/inputs/CheckboxGroupInput.vue')['default']
     CheckboxInput: typeof import('./components/inputs/CheckboxInput.vue')['default']
+    DateInput: typeof import('./components/inputs/DateInput.vue')['default']
     RadioGroupInput: typeof import('./components/inputs/RadioGroupInput.vue')['default']
     SelectInput: typeof import('./components/inputs/SelectInput.vue')['default']
     SwitchInput: typeof import('./components/inputs/SwitchInput.vue')['default']

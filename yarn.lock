@@ -1139,7 +1139,7 @@
     "@typescript-eslint/types" "4.27.0"
     eslint-visitor-keys "^2.0.0"
 
-"@vitejs/plugin-vue@^1.2.2":
+"@vitejs/plugin-vue@^1.2.3":
   version "1.2.3"
   resolved "https://registry.yarnpkg.com/@vitejs/plugin-vue/-/plugin-vue-1.2.3.tgz#2e8e008b1cc3a6ad1dfbec75743c7ffd9b4872a6"
   integrity sha512-LlnLpObkGKZ+b7dcpL4T24l13nPSHLjo+6Oc7MbZiKz5PMAUzADfNJ3EKfYIQ0l0969nxf2jp/9vsfnuJ7h6fw==
@@ -1474,10 +1474,10 @@ ajv@^8.0.1:
     require-from-string "^2.0.2"
     uri-js "^4.2.2"
 
-alpinejs@^3.0.9:
-  version "3.0.9"
-  resolved "https://registry.yarnpkg.com/alpinejs/-/alpinejs-3.0.9.tgz#98f53ed10a5fdc020a62a93de5262689a4aa509d"
-  integrity sha512-f1aBQCQ92ahVSrNdaw+SsRN+tmULSsnxk/JdNrAv6kr4Cpba+ER9BQK0pm+gGWqYd7w+fklx6r7wlqzgO0rbTw==
+alpinejs@^3.1.0:
+  version "3.1.0"
+  resolved "https://registry.yarnpkg.com/alpinejs/-/alpinejs-3.1.0.tgz#f573490d78c2d508c41e0bd94e7b7c58f171b677"
+  integrity sha512-FZ9VNmFNHxO7PeuNLumxqIKKoDI7dOshwR0qcUXmVtrhrB2nRnWsWOPta1tlrUs1LCIrrY5ZYVD/RWcGeu3ItQ==
   dependencies:
     "@vue/reactivity" "^3.0.2"
 
@@ -3153,6 +3153,11 @@ flat@^5.0.2:
   version "5.0.2"
   resolved "https://registry.yarnpkg.com/flat/-/flat-5.0.2.tgz#8ca6fe332069ffa9d324c327198c598259ceb241"
   integrity sha512-b6suED+5/3rTpUBdG1gupIl8MPFCAMA0QXwmljLhvCUKcUvdE4gWky9zpuGCcXHOsz4J9wPGNWq6OKpmIzz3hQ==
+
+flatpickr@^4.6.9:
+  version "4.6.9"
+  resolved "https://registry.yarnpkg.com/flatpickr/-/flatpickr-4.6.9.tgz#9a13383e8a6814bda5d232eae3fcdccb97dc1499"
+  integrity sha512-F0azNNi8foVWKSF+8X+ZJzz8r9sE1G4hl06RyceIaLvyltKvDl6vqk9Lm/6AUUCi5HWaIjiUbk7UpeE/fOXOpw==
 
 flatted@^3.1.0:
   version "3.1.1"

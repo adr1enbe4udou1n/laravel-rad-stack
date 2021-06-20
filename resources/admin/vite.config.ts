@@ -33,7 +33,6 @@ export default defineConfig({
       'clockwork-browser/metrics',
       'clockwork-browser/toolbar',
       'vue',
-      'lodash',
       '@inertiajs/inertia',
       '@inertiajs/inertia-vue3',
       '@inertiajs/progress',

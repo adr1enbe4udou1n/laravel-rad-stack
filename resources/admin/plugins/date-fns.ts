@@ -5,7 +5,7 @@ import { format as dateFormat, parseJSON as dateParse } from 'date-fns'
 export default {
   install: (app: App): void => {
     app.config.globalProperties.$dateFormat = (
-      date: string | number,
+      date: string | number | undefined,
       format = 'dd/MM/yyyy'
     ): string => (date ? dateFormat(dateParse(date), format) : '')
   },
@@ -13,6 +13,6 @@ export default {
 
 declare module '@vue/runtime-core' {
   interface ComponentCustomProperties {
-    $dateFormat: (date: string | number, format: string) => string
+    $dateFormat: (date: string | number | undefined, format: string) => string
   }
 }
