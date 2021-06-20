@@ -49,6 +49,7 @@ declare module 'vue' {
     SelectFilter: typeof import('./components/filters/SelectFilter.vue')['default']
     TextFilter: typeof import('./components/filters/TextFilter.vue')['default']
     UserForm: typeof import('./components/forms/UserForm.vue')['default']
+    CheckboxGroupInput: typeof import('./components/inputs/CheckboxGroupInput.vue')['default']
     CheckboxInput: typeof import('./components/inputs/CheckboxInput.vue')['default']
     RadioGroupInput: typeof import('./components/inputs/RadioGroupInput.vue')['default']
     SelectInput: typeof import('./components/inputs/SelectInput.vue')['default']

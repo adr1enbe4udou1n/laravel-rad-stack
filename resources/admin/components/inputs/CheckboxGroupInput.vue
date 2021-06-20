@@ -7,11 +7,11 @@
       class="flex items-center text-sm whitespace-nowrap"
     >
       <input
-        type="radio"
+        type="checkbox"
         :name="source"
         :value="option.value"
         class="checked:bg-primary-500 mr-2"
-        :checked="modelValue === option.value"
+        :checked="modelValue?.includes(option.value)"
         @input="onInput"
       />
       {{ option.text }}
@@ -27,7 +27,7 @@
   export default defineComponent({
     props: {
       ...choicesProps,
-      modelValue: String,
+      modelValue: Array,
       stacked: Boolean,
     },
     emits: ['update:modelValue'],
@@ -35,7 +35,16 @@
       const initial = choicesSetup(props)
 
       const onInput = (e: Event) => {
-        emit('update:modelValue', (e.target as HTMLInputElement).value)
+        const { checked, value } = e.target as HTMLInputElement
+
+        if (checked) {
+          return emit('update:modelValue', [...(props.modelValue || []), value])
+        }
+
+        emit(
+          'update:modelValue',
+          props.modelValue?.filter((v) => v !== value)
+        )
       }
 
       return { ...initial, onInput }

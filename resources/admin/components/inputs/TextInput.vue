@@ -30,7 +30,7 @@
         input.value?.focus()
       }
 
-      const onInput = (e: any) => {
+      const onInput = (e: Event) => {
         emit('update:modelValue', (e.target as HTMLInputElement).value)
       }
 

@@ -64,16 +64,16 @@
         },
         {
             "name": "bacon/bacon-qr-code",
-            "version": "2.0.3",
+            "version": "2.0.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Bacon/BaconQrCode.git",
-                "reference": "3e9d791b67d0a2912922b7b7c7312f4b37af41e4"
+                "reference": "f73543ac4e1def05f1a70bcd1525c8a157a1ad09"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Bacon/BaconQrCode/zipball/3e9d791b67d0a2912922b7b7c7312f4b37af41e4",
-                "reference": "3e9d791b67d0a2912922b7b7c7312f4b37af41e4",
+                "url": "https://api.github.com/repos/Bacon/BaconQrCode/zipball/f73543ac4e1def05f1a70bcd1525c8a157a1ad09",
+                "reference": "f73543ac4e1def05f1a70bcd1525c8a157a1ad09",
                 "shasum": ""
             },
             "require": {
@@ -111,9 +111,9 @@
             "homepage": "https://github.com/Bacon/BaconQrCode",
             "support": {
                 "issues": "https://github.com/Bacon/BaconQrCode/issues",
-                "source": "https://github.com/Bacon/BaconQrCode/tree/2.0.3"
+                "source": "https://github.com/Bacon/BaconQrCode/tree/2.0.4"
             },
-            "time": "2020-10-30T02:02:47+00:00"
+            "time": "2021-06-18T13:26:35+00:00"
         },
         {
             "name": "brick/math",
@@ -1572,16 +1572,16 @@
         },
         {
             "name": "league/commonmark",
-            "version": "1.6.2",
+            "version": "1.6.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/thephpleague/commonmark.git",
-                "reference": "7d70d2f19c84bcc16275ea47edabee24747352eb"
+                "reference": "c3c8b7217c52572fb42aaf84211abccf75a151b2"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/thephpleague/commonmark/zipball/7d70d2f19c84bcc16275ea47edabee24747352eb",
-                "reference": "7d70d2f19c84bcc16275ea47edabee24747352eb",
+                "url": "https://api.github.com/repos/thephpleague/commonmark/zipball/c3c8b7217c52572fb42aaf84211abccf75a151b2",
+                "reference": "c3c8b7217c52572fb42aaf84211abccf75a151b2",
                 "shasum": ""
             },
             "require": {
@@ -1599,7 +1599,7 @@
                 "github/gfm": "0.29.0",
                 "michelf/php-markdown": "~1.4",
                 "mikehaertl/php-shellcommand": "^1.4",
-                "phpstan/phpstan": "^0.12",
+                "phpstan/phpstan": "^0.12.90",
                 "phpunit/phpunit": "^7.5 || ^8.5 || ^9.2",
                 "scrutinizer/ocular": "^1.5",
                 "symfony/finder": "^4.2"
@@ -1669,7 +1669,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2021-05-12T11:39:41+00:00"
+            "time": "2021-06-19T20:08:14+00:00"
         },
         {
             "name": "league/flysystem",
@@ -6082,16 +6082,16 @@
         },
         {
             "name": "tightenco/ziggy",
-            "version": "v1.3.0",
+            "version": "v1.3.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/tighten/ziggy.git",
-                "reference": "10d28d654e054f609ba1b78b1a0ba62358088977"
+                "reference": "5bf99821cf37ec32072caa48da0b09b8ab5b4341"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/tighten/ziggy/zipball/10d28d654e054f609ba1b78b1a0ba62358088977",
-                "reference": "10d28d654e054f609ba1b78b1a0ba62358088977",
+                "url": "https://api.github.com/repos/tighten/ziggy/zipball/5bf99821cf37ec32072caa48da0b09b8ab5b4341",
+                "reference": "5bf99821cf37ec32072caa48da0b09b8ab5b4341",
                 "shasum": ""
             },
             "require": {
@@ -6142,9 +6142,9 @@
             ],
             "support": {
                 "issues": "https://github.com/tighten/ziggy/issues",
-                "source": "https://github.com/tighten/ziggy/tree/v1.3.0"
+                "source": "https://github.com/tighten/ziggy/tree/v1.3.1"
             },
-            "time": "2021-06-18T00:57:47+00:00"
+            "time": "2021-06-19T00:42:05+00:00"
         },
         {
             "name": "tijsverkoyen/css-to-inline-styles",
@@ -8497,16 +8497,16 @@
         },
         {
             "name": "pestphp/pest",
-            "version": "v1.5.0",
+            "version": "v1.7.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/pestphp/pest.git",
-                "reference": "729638a3bb560fb680c9f8bf973ca62e216b767a"
+                "reference": "1680613e1250070ab6ccfcbec429d04f1830f5bc"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/pestphp/pest/zipball/729638a3bb560fb680c9f8bf973ca62e216b767a",
-                "reference": "729638a3bb560fb680c9f8bf973ca62e216b767a",
+                "url": "https://api.github.com/repos/pestphp/pest/zipball/1680613e1250070ab6ccfcbec429d04f1830f5bc",
+                "reference": "1680613e1250070ab6ccfcbec429d04f1830f5bc",
                 "shasum": ""
             },
             "require": {
@@ -8572,12 +8572,12 @@
             ],
             "support": {
                 "issues": "https://github.com/pestphp/pest/issues",
-                "source": "https://github.com/pestphp/pest/tree/v1.5.0"
+                "source": "https://github.com/pestphp/pest/tree/v1.7.0"
             },
             "funding": [
                 {
-                    "url": "https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=66BYDWAT92N6L",
-                    "type": "custom"
+                    "url": "https://github.com/lukeraymonddowning",
+                    "type": "github"
                 },
                 {
                     "url": "https://github.com/nunomaduro",
@@ -8600,7 +8600,7 @@
                     "type": "patreon"
                 }
             ],
-            "time": "2021-06-15T22:06:43+00:00"
+            "time": "2021-06-19T13:42:29+00:00"
         },
         {
             "name": "pestphp/pest-plugin",
@@ -10569,6 +10569,7 @@
                     "type": "github"
                 }
             ],
+            "abandoned": true,
             "time": "2020-09-28T06:45:17+00:00"
         },
         {

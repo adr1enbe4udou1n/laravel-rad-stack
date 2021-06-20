@@ -5,13 +5,18 @@
     :id="id"
     class="block w-full"
     :class="{ 'form-invalid': !!error }"
-    :value="modelValue"
+    :multiple="multiple"
     @input="onInput"
   >
     <option
       v-for="option in getChoices"
       :key="option.value"
       :value="option.value"
+      :selected="
+        multiple
+          ? modelValue?.includes(option.value)
+          : modelValue === option.value
+      "
     >
       {{ option.text }}
     </option>
@@ -26,14 +31,25 @@
   export default defineComponent({
     props: {
       ...choicesProps,
-      modelValue: String,
+      modelValue: [String, Array],
+      multiple: Boolean,
     },
     emits: ['update:modelValue'],
     setup(props, { emit }) {
       const initial = choicesSetup(props)
 
-      const onInput = (e: any) => {
-        emit('update:modelValue', (e.target as HTMLInputElement).value)
+      const onInput = (e: Event) => {
+        let { options, value } = e.target as HTMLSelectElement
+
+        if (!props.multiple) {
+          return emit('update:modelValue', value)
+        }
+
+        const values = Array.from(options)
+          .filter((o) => o.selected)
+          .map((o) => o.value)
+
+        return emit('update:modelValue', values)
       }
 
       return { ...initial, onInput }
