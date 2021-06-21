@@ -60,7 +60,6 @@
           password?: string
           active?: boolean
           role?: string
-          last_login_at?: string
         }>,
         default: () => {
           return {
@@ -69,7 +68,6 @@
             password: '',
             active: true,
             role: '',
-            last_login_at: '',
           }
         },
       },
