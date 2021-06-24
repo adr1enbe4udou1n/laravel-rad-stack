@@ -22,15 +22,16 @@ class UserResource extends JsonResource
      */
     public function toArray($request)
     {
-        return [
-            'id' => $this->resource->id,
-            'name' => $this->resource->name,
-            'email' => $this->resource->email,
-            'active' => $this->resource->active,
-            'role' => $this->resource->role,
-            'last_login_at' => $this->resource->last_login_at,
-            'created_at' => $this->resource->created_at,
-            'updated_at' => $this->resource->updated_at,
+        return $this->resource->only([
+            'id',
+            'name',
+            'email',
+            'active',
+            'role',
+            'last_login_at',
+            'created_at',
+            'updated_at',
+        ]) + [
             'can_be_updated' => Auth::user()->canUpdate($this->resource),
             'can_be_impersonated' => Auth::user()->canImpersonate($this->resource),
         ];

@@ -113,7 +113,7 @@ test('admin can export users', function () {
     });
 });
 
-test('admin can show user', function () {
+test('admin can render show user page', function () {
     $user = User::factory()->create();
 
     $response = get("/admin/users/{$user->id}");
@@ -128,7 +128,7 @@ test('admin can show user', function () {
     );
 });
 
-test('admin can create user', function () {
+test('admin can render create user page', function () {
     $response = get('/admin/users/create');
 
     $response->assertInertia(
@@ -138,7 +138,7 @@ test('admin can create user', function () {
     );
 });
 
-test('admin can edit user', function () {
+test('admin can render edit user page', function () {
     $user = User::factory()->create();
 
     $response = get("/admin/users/{$user->id}/edit");
