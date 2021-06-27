@@ -6,6 +6,7 @@ export const inputProps = {
   label: String,
   source: String,
   error: String,
+  hint: String,
 }
 
 export const inputSetup = (

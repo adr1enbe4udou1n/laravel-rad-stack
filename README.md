@@ -40,7 +40,7 @@ It's fully written in Typescript and 100% compatible with Tailwind 2.x API. It h
 Only simple basic features :
 
 - Empty and easily removable front part, prepared with **Livewire and AlpineJS**.
-- Admin UI Layout with all **basic auth pages** (login / register / reset password / profile) and **users management with impersonation**. All credits goes to [Laravel Jetstream](https://jetstream.laravel.com) and [Ping CRM](https://github.com/inertiajs/pingcrm).
+- Admin UI Layout with all **basic auth pages** (login / register / reset password / profile), **users management with impersonation** and **basic posts crud management**. All credits goes to [Laravel Jetstream](https://jetstream.laravel.com) and [Ping CRM](https://github.com/inertiajs/pingcrm).
 - Clear separation between front and admin parts, with dedicated folders for controllers and resources and separated Vite configs. It's really simple to remove front part if you need only admin for CRM based application. **CSS purge and production builds** are properly configured for each front and admin part.
 - **Admin RAD lightweight framework** similar to [React Admin](https://marmelab.com/react-admin/) with ready to use **crud pages**, **data table**, **fields** and **form inputs**. **Quick aside panel** view/edit with real inertia routing context is also supported and actually used for users management in this boilerplate !
 - Extensible **DataTable** component with **paging**, **sorting**, **global search**, **by column filter**, **template columns**, **customizable row actions**, **excel export** features. All that with efficient and nice dev API !
@@ -120,15 +120,7 @@ yarn test:unit # Launch client side unit testing suite
 
 #### TDD ready
 
-This project has 💯 code coverage and is ready to use within [Spatie PHPUnit Watcher](https://github.com/spatie/phpunit-watcher), which is perfect for **TDD** :
-
-```sh
-# Install watcher globally if not already installed
-composer global require spatie/phpunit-watcher
-
-# Launch phpunit watcher and enjoy live development testing
-phpunit-watcher watch
-```
+This project has 💯 code coverage and is ready to use within [Spatie PHPUnit Watcher](https://github.com/spatie/phpunit-watcher), which is perfect for **TDD** ! Just use `composer test:watch` command.
 
 ## License
 

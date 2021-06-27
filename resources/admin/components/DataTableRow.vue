@@ -34,18 +34,22 @@
 
 <script lang="ts">
   import { defineComponent, PropType, provide } from 'vue'
+  import TextField from '@admin/components/fields/TextField.vue'
   import EmailField from '@admin/components/fields/EmailField.vue'
   import BooleanField from '@admin/components/fields/BooleanField.vue'
   import DateField from '@admin/components/fields/DateField.vue'
   import SelectField from '@admin/components/fields/SelectField.vue'
+  import ReferenceField from '@admin/components/fields/ReferenceField.vue'
   import { Column } from '@admin/types/data-table'
 
   export default defineComponent({
     components: {
+      TextField,
       EmailField,
       BooleanField,
       DateField,
       SelectField,
+      ReferenceField,
     },
     props: {
       columns: Array as PropType<Column[]>,

@@ -1,10 +1,11 @@
 <template>
-  <select :value="modelValue" @input="onFilter">
+  <select @input="onFilter">
     <option value=""></option>
     <option
       v-for="option in getChoices"
       :key="option.value"
       :value="option.value"
+      :selected="isSelected(option)"
     >
       {{ option.text }}
     </option>
@@ -17,7 +18,7 @@
 
   export default defineComponent({
     props: {
-      modelValue: String,
+      modelValue: [String, Number, Array],
       choices: [Array, Object, String],
       optionText: {
         type: String,
@@ -27,6 +28,7 @@
         type: String,
         default: 'value',
       },
+      multiple: Boolean,
     },
     emits: ['update:modelValue'],
     setup(props, { emit }) {
@@ -42,7 +44,13 @@
         emit('update:modelValue', (e.target as HTMLInputElement).value)
       }
 
-      return { getChoices, onFilter }
+      const isSelected = (option: Option) => {
+        return props.multiple
+          ? ((props.modelValue as string[]) || []).includes(option.value)
+          : props.modelValue === option.value
+      }
+
+      return { getChoices, onFilter, isSelected }
     },
   })
 </script>

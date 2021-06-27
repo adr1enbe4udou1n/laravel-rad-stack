@@ -4,7 +4,7 @@
     icon="trash"
     variant="danger"
     :hide-label="hideLabel"
-    @click.stop="confirm"
+    @click="confirm"
   >
     {{ $t('Delete') }}
   </base-button>

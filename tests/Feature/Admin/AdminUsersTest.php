@@ -24,7 +24,11 @@ beforeEach(function () {
 });
 
 test('admin can list users', function () {
-    User::factory(30)->create();
+    User::factory()->create([
+        'name' => 'The first user name',
+        'email' => 'The first email user',
+    ]);
+    User::factory(29)->create();
 
     $response = get('/admin/users');
 
@@ -32,6 +36,8 @@ test('admin can list users', function () {
         fn (Assert $page) => $page
             ->component('users/Index')
             ->where('action', 'list')
+            ->where('users.data.0.name', 'The first user name')
+            ->where('users.data.0.email', 'The first email user')
             ->where('users.meta.total', 30)
     );
 });
@@ -96,24 +102,28 @@ test('admin can filter users', function (array $filter, int $total) {
 
 test('admin can export users', function () {
     Excel::fake();
-    User::factory()->createMany(
-        collect(range(1, 9))->map(fn ($i) => [
-            'name' => "user {$i}",
-            'email' => "user-{$i}@example.com",
-            'role' => RoleEnum::user(),
-        ])->toArray()
-    );
+    User::factory(9)->create();
 
     get('/admin/users?export=1');
 
     Excel::matchByRegex();
     Excel::assertDownloaded('/export-.*\\.xlsx/', function (UserExport $export) {
-        /* @var User $user */
         return 9 === $export->query()->count() && $export->headings() && $export->map($export->query()->first());
     });
 });
 
-test('admin can render show user page', function () {
+test('admin can render user create page', function () {
+    $response = get('/admin/users/create');
+
+    $response->assertInertia(
+        fn (Assert $page) => $page
+            ->component('users/Index')
+            ->where('action', 'create')
+    );
+});
+
+test('admin can render user show page', function () {
+    /** @var User */
     $user = User::factory()->create();
 
     $response = get("/admin/users/{$user->id}");
@@ -128,17 +138,8 @@ test('admin can render show user page', function () {
     );
 });
 
-test('admin can render create user page', function () {
-    $response = get('/admin/users/create');
-
-    $response->assertInertia(
-        fn (Assert $page) => $page
-            ->component('users/Index')
-            ->where('action', 'create')
-    );
-});
-
-test('admin can render edit user page', function () {
+test('admin can render user edit page', function () {
+    /** @var User */
     $user = User::factory()->create();
 
     $response = get("/admin/users/{$user->id}/edit");
@@ -162,6 +163,7 @@ test('admin can store user', function () {
         'role' => RoleEnum::user(),
     ]);
 
+    $response->assertStatus(302);
     $response->assertSessionDoesntHaveErrors();
     assertDatabaseHas('users', [
         'name' => 'example',
@@ -169,6 +171,15 @@ test('admin can store user', function () {
         'active' => true,
         'role' => RoleEnum::user(),
     ]);
+});
+
+test('admin cannot store user with invalid data', function () {
+    $response = post('/admin/users', [
+        'email' => 'user@example.com',
+    ]);
+
+    $response->assertStatus(302);
+    $response->assertSessionHasErrors(['name']);
 });
 
 test('admin can update user', function () {
@@ -182,6 +193,7 @@ test('admin can update user', function () {
         'role' => RoleEnum::user(),
     ]);
 
+    $response->assertStatus(302);
     $response->assertSessionDoesntHaveErrors();
     assertDatabaseHas('users', [
         'name' => 'example',
@@ -191,6 +203,17 @@ test('admin can update user', function () {
     ]);
 });
 
+test('admin cannot update user with invalid data', function () {
+    $user = User::factory()->create();
+
+    $response = put("/admin/users/{$user->id}", [
+        'email' => 'user@example.com',
+    ]);
+
+    $response->assertStatus(302);
+    $response->assertSessionHasErrors(['name']);
+});
+
 test('admin can delete user', function () {
     $user = User::factory()->create([
         'email' => 'user@example.com',
@@ -198,6 +221,7 @@ test('admin can delete user', function () {
 
     $response = delete("/admin/users/{$user->id}");
 
+    $response->assertStatus(302);
     $response->assertSessionDoesntHaveErrors();
     assertDatabaseMissing('users', [
         'email' => 'user@example.com',

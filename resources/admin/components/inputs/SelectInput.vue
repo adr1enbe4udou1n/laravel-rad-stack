@@ -12,26 +12,23 @@
       v-for="option in getChoices"
       :key="option.value"
       :value="option.value"
-      :selected="
-        multiple
-          ? modelValue?.includes(option.value)
-          : modelValue === option.value
-      "
+      :selected="isSelected(option)"
     >
       {{ option.text }}
     </option>
   </select>
   <input-error :message="error" class="mt-2" />
+  <input-hint :message="hint" class="mt-2" />
 </template>
 
 <script lang="ts">
-  import { choicesProps, choicesSetup } from '@admin/mixins/choices'
+  import { choicesProps, choicesSetup, Option } from '@admin/mixins/choices'
   import { defineComponent } from 'vue'
 
   export default defineComponent({
     props: {
       ...choicesProps,
-      modelValue: [String, Array],
+      modelValue: [String, Number, Array],
       multiple: Boolean,
     },
     emits: ['update:modelValue'],
@@ -52,7 +49,13 @@
         return emit('update:modelValue', values)
       }
 
-      return { ...initial, onInput }
+      const isSelected = (option: Option) => {
+        return props.multiple
+          ? ((props.modelValue as string[]) || []).includes(option.value)
+          : props.modelValue === option.value
+      }
+
+      return { ...initial, onInput, isSelected }
     },
   })
 </script>

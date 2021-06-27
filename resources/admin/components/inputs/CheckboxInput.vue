@@ -3,6 +3,8 @@
     <input type="checkbox" :checked="modelValue" @change="change" />
     <span class="ml-2 text-sm text-gray-600">{{ getLabel }}</span>
   </label>
+  <input-error :message="error" class="mt-2" />
+  <input-hint :message="hint" class="mt-2" />
 </template>
 
 <script lang="ts">

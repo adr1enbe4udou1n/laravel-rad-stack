@@ -2,6 +2,7 @@
 
 namespace App\Http\Middleware;
 
+use App\Enums\PostStatusEnum;
 use App\Enums\RoleEnum;
 use App\Http\Resources\Admin\AuthResource;
 use Illuminate\Http\Request;
@@ -54,6 +55,7 @@ class HandleInertiaRequests extends Middleware
             'enums' => function () {
                 return collect([
                     'roles' => RoleEnum::class,
+                    'post_statuses' => PostStatusEnum::class,
                 ])
                     ->mapWithKeys(fn ($enum, $key) => [$key => $enum::toArray()])
                 ;

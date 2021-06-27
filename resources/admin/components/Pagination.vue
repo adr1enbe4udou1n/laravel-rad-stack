@@ -1,5 +1,5 @@
 <template>
-  <div v-if="pages.length > 1">
+  <div v-if="pages > 1">
     <div class="flex flex-wrap justify-center -mb-1">
       <button
         type="button"
@@ -17,8 +17,11 @@
       >
         <chevron-left-icon />
       </button>
+      <button v-if="showFirstDots" type="button" class="link" disabled>
+        ...
+      </button>
       <button
-        v-for="(page, i) in pages"
+        v-for="(page, i) in links"
         :key="i"
         type="button"
         class="link"
@@ -28,10 +31,13 @@
       >
         {{ page }}
       </button>
+      <button v-if="showLastDots" type="button" class="link" disabled>
+        ...
+      </button>
       <button
         type="button"
         class="link"
-        :disabled="currentPage === lastPage"
+        :disabled="currentPage === pages"
         @click="changePage(currentPage + 1)"
       >
         <chevron-right-icon />
@@ -39,8 +45,8 @@
       <button
         type="button"
         class="link"
-        :disabled="currentPage === lastPage"
-        @click="changePage(lastPage)"
+        :disabled="currentPage === pages"
+        @click="changePage(pages)"
       >
         <chevron-double-right-icon />
       </button>
@@ -65,10 +71,18 @@
         type: Number,
         required: true,
       },
+      limit: {
+        type: Number,
+        default: 6,
+      },
+      ellipsesThreshold: {
+        type: Number,
+        default: 3,
+      },
     },
     emits: ['change'],
     setup(props, { emit }) {
-      const lastPage = computed(() => {
+      const pages = computed(() => {
         let page = props.perPage
         if (typeof page === 'string') {
           page = parseInt(page, 10)
@@ -76,8 +90,68 @@
         return Math.ceil(props.total / page)
       })
 
-      const pages = computed(() =>
-        [...Array(Math.ceil(lastPage.value)).keys()].map((x) => ++x)
+      const showAllPages = computed(() => {
+        return pages.value <= props.limit
+      })
+      const nearFromBeginning = computed(() => {
+        return (
+          !showAllPages.value &&
+          props.currentPage < props.limit - 1 &&
+          props.limit > props.ellipsesThreshold
+        )
+      })
+      const nearFromEnd = computed(() => {
+        return (
+          !showAllPages.value &&
+          !nearFromBeginning.value &&
+          pages.value - props.currentPage + 2 < props.limit &&
+          props.limit > props.ellipsesThreshold
+        )
+      })
+      const isOnTheMiddle = computed(() => {
+        return (
+          !showAllPages.value &&
+          !nearFromBeginning.value &&
+          !nearFromEnd.value &&
+          props.limit > props.ellipsesThreshold
+        )
+      })
+      const showFirstDots = computed(() => {
+        return nearFromEnd.value || isOnTheMiddle.value
+      })
+      const showLastDots = computed(() => {
+        return nearFromBeginning.value || isOnTheMiddle.value
+      })
+      const numberOfLinks = computed(() => {
+        if (showAllPages.value) {
+          return pages.value
+        }
+        if (nearFromBeginning.value || nearFromEnd.value) {
+          return props.limit - 1
+        }
+        if (isOnTheMiddle.value) {
+          return props.limit - 2
+        }
+        return props.limit
+      })
+      const startNumber = computed(() => {
+        let startNumber = 1
+        if (nearFromEnd.value) {
+          startNumber = pages.value - numberOfLinks.value + 1
+        } else if (isOnTheMiddle.value) {
+          startNumber = props.currentPage - Math.floor(numberOfLinks.value / 2)
+        }
+        if (startNumber < 1) {
+          return 1
+        }
+        if (startNumber > pages.value - numberOfLinks.value) {
+          return pages.value - numberOfLinks.value + 1
+        }
+        return startNumber
+      })
+
+      const links = computed(() =>
+        [...Array(numberOfLinks.value).keys()].map((x) => startNumber.value + x)
       )
 
       const changePage = (page: number) => {
@@ -85,9 +159,11 @@
       }
 
       return {
-        lastPage,
         pages,
         changePage,
+        showFirstDots,
+        showLastDots,
+        links,
       }
     },
   })

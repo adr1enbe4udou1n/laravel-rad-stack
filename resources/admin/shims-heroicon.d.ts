@@ -42,9 +42,12 @@ declare module '@heroicons/vue/outline' {
   export { default as FilterIcon } from '@heroicons/vue/outline/esm/FilterIcon.js'
   export { default as DownloadIcon } from '@heroicons/vue/outline/esm/DownloadIcon.js'
   export { default as SearchIcon } from '@heroicons/vue/outline/esm/SearchIcon.js'
+  export { default as TagIcon } from '@heroicons/vue/outline/esm/TagIcon.js'
+  export { default as NewspaperIcon } from '@heroicons/vue/outline/esm/NewspaperIcon.js'
 }
 
 declare module '@heroicons/vue/solid' {
   export { default as ChartBarIcon } from '@heroicons/vue/solid/esm/AcademicCapIcon.js'
   export { default as UsersIcon } from '@heroicons/vue/solid/esm/AcademicCapIcon.js'
+  export { default as NewspaperIcon } from '@heroicons/vue/solid/esm/NewspaperIcon.js'
 }

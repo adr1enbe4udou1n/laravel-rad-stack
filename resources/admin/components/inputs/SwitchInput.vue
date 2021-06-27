@@ -32,6 +32,8 @@
       {{ getLabel }}
     </div>
   </label>
+  <input-error :message="error" class="mt-2" />
+  <input-hint :message="hint" class="mt-2" />
 </template>
 
 <script lang="ts">

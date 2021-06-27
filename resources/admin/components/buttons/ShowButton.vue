@@ -5,7 +5,6 @@
     variant="success"
     :hide-label="hideLabel"
     :only="only"
-    @click.stop
   >
     {{ $t('Show') }}
   </base-button>

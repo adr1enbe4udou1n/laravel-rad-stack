@@ -1,29 +1,28 @@
 <template>
-  <select :value="modelValue" @input="onFilter">
-    <option value=""></option>
-    <option value="1">
-      {{ $t('admin.yes') }}
-    </option>
-    <option value="0">
-      {{ $t('admin.no') }}
-    </option>
-  </select>
+  <select-filter v-model="value" :choices="choices" />
 </template>
 
 <script lang="ts">
-  import { defineComponent } from 'vue'
+  import { __ } from 'matice'
+  import { computed, defineComponent } from 'vue'
 
   export default defineComponent({
     props: {
-      modelValue: [String, Number],
+      modelValue: String,
     },
     emits: ['update:modelValue'],
     setup(props, { emit }) {
-      const onFilter = (e: Event) => {
-        emit('update:modelValue', (e.target as HTMLInputElement).value)
+      const choices = {
+        1: __('admin.yes'),
+        0: __('admin.no'),
       }
 
-      return { onFilter }
+      const value = computed({
+        get: () => props.modelValue,
+        set: (val) => emit('update:modelValue', val),
+      })
+
+      return { choices, value }
     },
   })
 </script>

@@ -24,29 +24,23 @@ export interface Option {
 }
 
 export const getOptionsFromChoices = (
-  choices: unknown,
+  choices: any,
   optionText: string,
   optionValue: string
 ) => {
-  let options = choices as Option[]
-
-  if (typeof options === 'string') {
-    options = usePage<Inertia.PageProps>().props.value.enums[options]
-  }
-
-  if (typeof options === 'object') {
-    options = Object.keys(options).map((key) => {
-      return { value: key, text: (options as any)[key] }
-    })
-  }
-
-  if (Array.isArray(options)) {
-    options = options.map((o: any) => {
+  if (Array.isArray(choices)) {
+    return choices.map((o: any) => {
       return { value: o[optionValue], text: o[optionText] }
     })
   }
 
-  return options
+  if (typeof choices === 'string') {
+    choices = (usePage<Inertia.PageProps>().props.value.enums as any)[choices]
+  }
+
+  return Object.keys(choices).map((key) => {
+    return { value: key, text: (choices as any)[key] }
+  })
 }
 
 export const choicesSetup = (

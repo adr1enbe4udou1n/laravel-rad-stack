@@ -1,10 +1,10 @@
 <template>
   <base-button
     icon="pencil"
+    variant="info"
     :href="route(`admin.${resource}.edit`, item?.id)"
     :hide-label="hideLabel"
     :only="only"
-    @click.stop
   >
     {{ $t('Edit') }}
   </base-button>

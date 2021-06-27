@@ -4,7 +4,6 @@
     icon="view-list"
     :href="route(`admin.${resource}`)"
     :hide-label="hideLabel"
-    @click.stop
   >
     {{
       $t('admin.titles.index', {

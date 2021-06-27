@@ -863,6 +863,11 @@
   dependencies:
     defer-to-connect "^2.0.0"
 
+"@tinymce/tinymce-vue@^4.0.3":
+  version "4.0.3"
+  resolved "https://registry.yarnpkg.com/@tinymce/tinymce-vue/-/tinymce-vue-4.0.3.tgz#69429f6f8f88762fb3b02ee72e42135f0272a48c"
+  integrity sha512-8wJ9hM5dTOhsaffBAxeaigkOwUJcOAgfMRD47tewJS6vezVDttIIpqrBV+5Y9xtnJ6SM/RZuUz19XBg+ra85gg==
+
 "@tootallnate/once@1":
   version "1.1.2"
   resolved "https://registry.yarnpkg.com/@tootallnate/once/-/once-1.1.2.tgz#ccb91445360179a04e7fe6aff78c00ffc1eeaf82"
@@ -1463,10 +1468,10 @@ ajv@^8.0.1:
     require-from-string "^2.0.2"
     uri-js "^4.2.2"
 
-alpinejs@^3.1.0:
-  version "3.1.0"
-  resolved "https://registry.yarnpkg.com/alpinejs/-/alpinejs-3.1.0.tgz#f573490d78c2d508c41e0bd94e7b7c58f171b677"
-  integrity sha512-FZ9VNmFNHxO7PeuNLumxqIKKoDI7dOshwR0qcUXmVtrhrB2nRnWsWOPta1tlrUs1LCIrrY5ZYVD/RWcGeu3ItQ==
+alpinejs@^3.1.1:
+  version "3.1.1"
+  resolved "https://registry.yarnpkg.com/alpinejs/-/alpinejs-3.1.1.tgz#a1c02c57c86ec5cafbeaa92107610eebdc0ab441"
+  integrity sha512-svEX82laPua+oqbYlUgX1H7Q+R0GD0V7fOnjZocPBqABmpQGkofPtPV9dGFkgZy7G6q60KFSzkiSwKMw33EFYw==
   dependencies:
     "@vue/reactivity" "^3.0.2"
 
@@ -2783,10 +2788,10 @@ eslint-plugin-prettier@^3.4.0:
   dependencies:
     prettier-linter-helpers "^1.0.0"
 
-eslint-plugin-vue@^7.11.1:
-  version "7.11.1"
-  resolved "https://registry.yarnpkg.com/eslint-plugin-vue/-/eslint-plugin-vue-7.11.1.tgz#77eb4b44032d5cca79f9af21d06991d8694a314a"
-  integrity sha512-lbw3vkEAGqYjqd1HpPFWHXtYaS8mILTJ5KOpJfRxO3Fo7o0wCf1zD7vSOasbm6nTA9xIgvZQ4VcyGIzQXxznHw==
+eslint-plugin-vue@^7.12.1:
+  version "7.12.1"
+  resolved "https://registry.yarnpkg.com/eslint-plugin-vue/-/eslint-plugin-vue-7.12.1.tgz#ef6499ce4fe0566659c8e12c71713f5308630a76"
+  integrity sha512-xHf/wCt88qmzqQerjaSteUFGASj7fPreglKD4ijnvoKRkoSJ3/H3kuJE8QFFtc+2wjw6hRDs834HH7vpuTJQzg==
   dependencies:
     eslint-utils "^2.1.0"
     natural-compare "^1.4.0"
@@ -5517,10 +5522,10 @@ prettier@^1.16.4, prettier@^1.18.2:
   resolved "https://registry.yarnpkg.com/prettier/-/prettier-1.19.1.tgz#f7d7f5ff8a9cd872a7be4ca142095956a60797cb"
   integrity sha512-s7PoyDv/II1ObgQunCbB9PdLmUcBZcnWOcxDh7O0N/UwDEsHyqkW+Qh28jW+mVuCdx7gLB0BotYI1Y6uI9iyew==
 
-prettier@^2.3.1:
-  version "2.3.1"
-  resolved "https://registry.yarnpkg.com/prettier/-/prettier-2.3.1.tgz#76903c3f8c4449bc9ac597acefa24dc5ad4cbea6"
-  integrity sha512-p+vNbgpLjif/+D+DwAZAbndtRrR0md0MwfmOVN9N+2RgyACMT+7tfaRnT+WDPkqnuVwleyuBIG2XBxKDme3hPA==
+prettier@^2.3.2:
+  version "2.3.2"
+  resolved "https://registry.yarnpkg.com/prettier/-/prettier-2.3.2.tgz#ef280a05ec253712e486233db5c6f23441e7342d"
+  integrity sha512-lnJzDfJ66zkMy58OL5/NY5zp70S7Nz6KqcKkXYzn2tMVrNxvbqaBpg7H3qHaLxCJ5lNMsGuM8+ohS7cZrthdLQ==
 
 pretty-format@^26.0.0, pretty-format@^26.6.2:
   version "26.6.2"

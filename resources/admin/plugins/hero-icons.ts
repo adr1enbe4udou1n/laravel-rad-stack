@@ -36,11 +36,14 @@ import {
   FilterIcon,
   DownloadIcon,
   SearchIcon,
+  TagIcon,
+  NewspaperIcon,
 } from '@heroicons/vue/outline'
 
 import {
   ChartBarIcon as ChartBarIconSolid,
   UsersIcon as UsersIconSolid,
+  NewspaperIcon as NewspaperIconSolid,
 } from '@heroicons/vue/solid'
 
 import { App } from 'vue'
@@ -49,6 +52,7 @@ export default {
   install: (app: App): void => {
     app.component('ChartBarIconSolid', ChartBarIconSolid)
     app.component('UsersIconSolid', UsersIconSolid)
+    app.component('NewspaperIconSolid', NewspaperIconSolid)
     app.component('MenuIcon', MenuIcon)
     app.component('ChartBarIcon', ChartBarIcon)
     app.component('ExclamationIcon', ExclamationIcon)
@@ -86,5 +90,7 @@ export default {
     app.component('DownloadIcon', DownloadIcon)
     app.component('FilterIcon', FilterIcon)
     app.component('SearchIcon', SearchIcon)
+    app.component('TagIcon', TagIcon)
+    app.component('NewspaperIcon', NewspaperIcon)
   },
 }

@@ -1,6 +1,17 @@
 <template>
   <input-label :for="id" class="mb-1" :value="getLabel" />
+  <textarea
+    v-if="multiline"
+    v-bind="$attrs"
+    :id="id"
+    ref="input"
+    class="block w-full"
+    :class="{ 'form-invalid': !!error }"
+    :value="modelValue"
+    @input="onInput"
+  />
   <input
+    v-else
     v-bind="$attrs"
     :id="id"
     ref="input"
@@ -10,6 +21,7 @@
     @input="onInput"
   />
   <input-error :message="error" class="mt-2" />
+  <input-hint :message="hint" class="mt-2" />
 </template>
 
 <script lang="ts">
@@ -20,6 +32,7 @@
     props: {
       ...inputProps,
       modelValue: String,
+      multiline: Boolean,
     },
     emits: ['update:modelValue'],
     setup(props, { emit }) {

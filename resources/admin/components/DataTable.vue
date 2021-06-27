@@ -82,17 +82,22 @@
             </span>
           </th>
         </tr>
-        <tr class="text-left">
+        <tr v-if="hasFilter" class="text-left">
           <th
             v-for="column in getColumns"
             :key="column.field"
             class="px-6 py-2 border-t"
+            :class="{
+              'text-right': column.numeric,
+              'text-center': column.centered,
+            }"
           >
             <template v-if="column.searchable">
               <component
                 :is="`${getFilterFromType(column.type || 'text')}-filter`"
                 v-model="form.filter[column.field]"
                 v-bind="column.props"
+                class="max-w-48"
                 @input="onFilter"
               />
             </template>
@@ -169,9 +174,17 @@
   import TextFilter from '@admin/components/filters/TextFilter.vue'
   import SelectFilter from '@admin/components/filters/SelectFilter.vue'
   import BooleanFilter from '@admin/components/filters/BooleanFilter.vue'
+  import ReferenceFilter from '@admin/components/filters/ReferenceFilter.vue'
+  import DateFilter from '@admin/components/filters/DateFilter.vue'
 
   export default defineComponent({
-    components: { TextFilter, SelectFilter, BooleanFilter },
+    components: {
+      TextFilter,
+      SelectFilter,
+      BooleanFilter,
+      ReferenceFilter,
+      DateFilter,
+    },
     props: {
       source: {
         type: Object as PropType<PaginatedData<Model>>,
@@ -195,6 +208,7 @@
     setup(props) {
       const sortBy = ref('id')
       const sortDesc = ref(false)
+      const resource = inject<string>('resource')
 
       watch(
         () => props.sort,
@@ -260,8 +274,6 @@
       }
 
       const onRowClick = (id: number) => {
-        const resource = inject<string>('resource')
-
         if (props.rowClick && resource) {
           Inertia.get(route(`admin.${resource}.${props.rowClick}`, id))
         }
@@ -285,6 +297,10 @@
         doQuery()
       })
 
+      const hasFilter = computed(() => {
+        return getColumns.value.filter((c) => c.searchable).length
+      })
+
       return {
         sortBy,
         sortDesc,
@@ -295,6 +311,7 @@
         onPageChange,
         onRowClick,
         onSort,
+        hasFilter,
       }
     },
   })

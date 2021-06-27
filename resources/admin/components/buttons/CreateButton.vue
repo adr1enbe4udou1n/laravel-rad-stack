@@ -5,7 +5,6 @@
     :href="route(`admin.${resource}.create`)"
     :hide-label="hideLabel"
     :only="only"
-    @click.stop
   >
     {{
       $t('admin.titles.create', {

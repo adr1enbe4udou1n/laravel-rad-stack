@@ -15,4 +15,7 @@ export class User extends Model {
   ) {
     super(id)
   }
+  toString() {
+    return this.name
+  }
 }

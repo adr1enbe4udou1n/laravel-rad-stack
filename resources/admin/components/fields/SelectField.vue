@@ -1,7 +1,8 @@
 <template>
   <span
     v-if="label"
-    class="inline-block px-2 py-1 bg-primary-500 text-white text-sm rounded"
+    class="inline-block px-2 py-1 text-white text-sm rounded"
+    :class="variant || 'bg-primary-500'"
     >{{ label }}</span
   >
 </template>
@@ -10,6 +11,7 @@
   import { usePage } from '@inertiajs/inertia-vue3'
   import { computed, defineComponent } from 'vue'
   import { Inertia } from '@inertiajs/inertia'
+  import { enumVariants } from '@admin/types/enums'
 
   export default defineComponent({
     props: {
@@ -33,7 +35,19 @@
         }
         return (options as any)[props.value]
       })
-      return { label }
+
+      const variant = computed(() => {
+        if (typeof props.choices !== 'string') return null
+
+        const variant = (enumVariants as any)[props.choices]
+
+        if (variant) {
+          return variant[props.value]
+        }
+        return null
+      })
+
+      return { label, variant }
     },
   })
 </script>

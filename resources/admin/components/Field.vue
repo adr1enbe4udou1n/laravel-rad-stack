@@ -1,5 +1,5 @@
 <template>
-  <label class="font-bold">{{ $ta(source) }}</label>
+  <label class="font-medium text-sm text-gray-700">{{ $ta(source) }}</label>
   <div>
     <template v-if="value">
       <component

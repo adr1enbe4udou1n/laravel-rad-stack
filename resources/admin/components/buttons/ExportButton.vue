@@ -1,10 +1,10 @@
 <template>
   <base-button
     tag="a"
+    variant="success"
     icon="download"
     :href="exportUrl"
     :hide-label="hideLabel"
-    @click.stop
   >
     {{ $t('admin.data-table.export') }}
   </base-button>

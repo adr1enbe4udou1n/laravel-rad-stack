@@ -11,15 +11,7 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        \App\Models\User::factory()->superAdmin()->create([
-            'name' => 'superadmin',
-            'email' => 'superadmin@example.com',
-        ]);
-        \App\Models\User::factory()->admin()->create([
-            'name' => 'admin',
-            'email' => 'admin@example.com',
-        ]);
-        \App\Models\User::factory(10)->admin()->create();
-        \App\Models\User::factory(90)->create();
+        $this->call(UserSeeder::class);
+        $this->call(PostSeeder::class);
     }
 }

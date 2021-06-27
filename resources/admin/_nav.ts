@@ -18,6 +18,14 @@ const mainNav: (NavLink | NavTitle)[] = [
     icon: 'chart-bar',
     text: __('Dashboard'),
   },
+  { title: __('Content Managment') },
+  {
+    href: route('admin.posts'),
+    active: () =>
+      route().current('admin.posts') || route().current('admin.posts.*'),
+    icon: 'newspaper',
+    text: __('Posts'),
+  },
   { title: __('Access Managment') },
   {
     href: route('admin.users'),
@@ -34,6 +42,13 @@ const headerNav: NavLink[] = [
     active: () => route().current('admin.dashboard'),
     icon: 'chart-bar',
     text: __('Dashboard'),
+  },
+  {
+    href: route('admin.posts'),
+    active: () =>
+      route().current('admin.posts') || route().current('admin.posts.*'),
+    icon: 'newspaper',
+    text: __('Posts'),
   },
   {
     href: route('admin.users'),
