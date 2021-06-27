@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Carbon;
@@ -14,12 +15,14 @@ use Spatie\Sluggable\SlugOptions;
 /**
  * App\Models\PostCategory.
  *
- * @property int         $id
- * @property string      $name
- * @property null|int    $order_column
- * @property string      $slug
- * @property null|Carbon $created_at
- * @property null|Carbon $updated_at
+ * @property int               $id
+ * @property string            $name
+ * @property null|int          $order_column
+ * @property string            $slug
+ * @property null|Carbon       $created_at
+ * @property null|Carbon       $updated_at
+ * @property Collection|Post[] $posts
+ * @property null|int          $posts_count
  *
  * @method static \Database\Factories\PostCategoryFactory factory(...$parameters)
  * @method static Builder|PostCategory newModelQuery()
@@ -45,6 +48,11 @@ class PostCategory extends Model implements Sortable
     protected $hidden = [
         'order_column',
     ];
+
+    public function posts()
+    {
+        return $this->hasMany(Post::class, 'category_id');
+    }
 
     /**
      * Get the options for generating the slug.

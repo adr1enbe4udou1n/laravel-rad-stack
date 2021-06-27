@@ -13,6 +13,6 @@ class PostCategoryController extends Controller
     #[Get('/', name: 'post-categories')]
     public function reference()
     {
-        return PostCategory::query()->ordered()->get();
+        return PostCategory::query()->ordered()->withCount('posts')->get();
     }
 }
