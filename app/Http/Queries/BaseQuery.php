@@ -3,13 +3,14 @@
 namespace App\Http\Queries;
 
 use Closure;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Str;
 use Maatwebsite\Excel\Facades\Excel;
 use Spatie\QueryBuilder\QueryBuilder;
 
 abstract class BaseQuery
 {
-    protected QueryBuilder $query;
+    protected Builder | QueryBuilder $query;
     protected $export;
     protected string $resource;
     protected int $perPage = 15;
