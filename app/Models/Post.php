@@ -80,6 +80,7 @@ class Post extends Model
         return SlugOptions::create()
             ->generateSlugsFrom('title')
             ->saveSlugsTo('slug')
+            ->doNotGenerateSlugsOnUpdate()
         ;
     }
 

@@ -196,7 +196,47 @@ test('admin can store post', function (array $data, array $expected) {
     $response->assertSessionDoesntHaveErrors();
 
     assertDatabaseHas('posts', $expected);
-})->with('posts');
+})->with([[
+    [
+        'title' => 'My new post',
+        'summary' => 'My summary of the new post',
+    ],
+    [
+        'title' => 'My new post',
+        'summary' => 'My summary of the new post',
+        'status' => 'draft',
+        'slug' => 'my-new-post',
+        'published_at' => null,
+    ],
+], [
+    [
+        'title' => 'My new post',
+        'summary' => 'My summary of the new post',
+        'publish' => true,
+        'pin' => true,
+        'promote' => true,
+    ],
+    [
+        'title' => 'My new post',
+        'summary' => 'My summary of the new post',
+        'status' => 'published',
+        'pin' => true,
+        'promote' => true,
+        'published_at' => Carbon::now()->second(0),
+    ],
+], [
+    [
+        'title' => 'My new post',
+        'summary' => 'My summary of the new post',
+        'publish' => true,
+        'published_at' => Carbon::tomorrow(),
+    ],
+    [
+        'title' => 'My new post',
+        'summary' => 'My summary of the new post',
+        'status' => 'scheduled',
+    ],
+]]);
 
 test('admin cannot store post with invalid data', function (array $data, array $expected) {
     $category = PostCategory::factory()->create();
@@ -209,11 +249,10 @@ test('admin cannot store post with invalid data', function (array $data, array $
     $response->assertSessionHasErrors($expected);
 })->with('invalid_posts');
 
-test('admin can update post', function (array $data, array $expected) {
+test('admin can update post', function (array $initial, array $data, array $expected) {
     $post = Post::factory()
-        ->draft()
         ->for(PostCategory::factory(), 'category')
-        ->create()
+        ->create($initial)
     ;
 
     $response = put("/admin/posts/{$post->id}", $data + [
@@ -224,7 +263,39 @@ test('admin can update post', function (array $data, array $expected) {
     $response->assertSessionDoesntHaveErrors();
 
     assertDatabaseHas('posts', $expected);
-})->with('posts');
+})->with([[
+    [
+        'slug' => 'initial-slug',
+        'status' => 'draft',
+    ],
+    [
+        'title' => 'My updated title',
+        'summary' => 'My updated summary',
+    ],
+    [
+        'title' => 'My updated title',
+        'summary' => 'My updated summary',
+        'slug' => 'initial-slug',
+    ],
+], [
+    [
+        'slug' => 'initial-slug',
+        'status' => 'published',
+        'published_at' => Carbon::now()->second(0),
+    ],
+    [
+        'title' => 'My updated title',
+        'summary' => 'My updated summary',
+        'publish' => true,
+        'published_at' => Carbon::now()->second(0)->toISOString(),
+    ],
+    [
+        'status' => 'published',
+        'title' => 'My updated title',
+        'summary' => 'My updated summary',
+        'slug' => 'initial-slug',
+    ],
+]]);
 
 test('admin cannot update post with invalid data', function (array $data, array $expected) {
     $post = Post::factory()

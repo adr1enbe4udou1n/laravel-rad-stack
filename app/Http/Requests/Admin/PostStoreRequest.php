@@ -46,15 +46,24 @@ class PostStoreRequest extends FormRequest
     public function prepareForValidation()
     {
         $status = PostStatusEnum::draft();
+        $publishedAt = $this->published_at;
 
         if ($this->publish) {
-            $status = $this->published_at > Carbon::now()
-                ? PostStatusEnum::scheduled()
-                : PostStatusEnum::published();
+            if ($publishedAt) {
+                $status = Carbon::parse($publishedAt) > Carbon::now()
+                    ? PostStatusEnum::scheduled()
+                    : PostStatusEnum::published();
+            }
+
+            if (! $publishedAt) {
+                $publishedAt = Carbon::now()->setSecond(0);
+                $status = PostStatusEnum::published();
+            }
         }
 
         $this->merge([
             'status' => $status,
+            'published_at' => $publishedAt,
         ]);
     }
 }
