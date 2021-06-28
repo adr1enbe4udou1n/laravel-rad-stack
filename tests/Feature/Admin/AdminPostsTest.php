@@ -27,6 +27,7 @@ beforeEach(function () {
 });
 
 test('admin can list posts', function () {
+    Post::factory(29)->create();
     Post::factory()
         ->for(PostCategory::factory()->state([
             'name' => 'My post category',
@@ -36,7 +37,6 @@ test('admin can list posts', function () {
             'summary' => 'My post summary',
         ])
     ;
-    Post::factory(29)->create();
 
     $response = get('/admin/posts');
 
