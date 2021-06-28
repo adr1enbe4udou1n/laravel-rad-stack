@@ -33,7 +33,6 @@
       modelValue: [String, Number, Date, Array],
       options: Object as PropType<FlatpickrOptions>,
     },
-    emits: ['update:modelValue'],
     setup(props) {
       const fp: Ref<FlatpickrInstance | null> = ref(null)
       const fpInput: Ref<HTMLInputElement | null> = ref(null)
@@ -51,7 +50,10 @@
         }
 
         fp.value = flatpickr(fpInput.value as Node, config)
-        fp.value.setDate(props.modelValue as string, true)
+
+        if (props.modelValue) {
+          fp.value.setDate(props.modelValue as string, true)
+        }
       })
       onBeforeUnmount(() => {
         if (fp.value) {

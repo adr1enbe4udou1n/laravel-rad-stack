@@ -28,6 +28,7 @@ class PostQuery extends BaseQuery
             ])
             ->allowedSorts(['id', 'title', 'published_at', 'created_at', 'updated_at'])
             ->with('category')
+            ->orderByDesc('id')
         ;
 
         $this->export = new PostExport($this->query);
