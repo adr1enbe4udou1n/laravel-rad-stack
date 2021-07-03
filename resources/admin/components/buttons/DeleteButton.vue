@@ -39,6 +39,7 @@
 <script lang="ts">
   import { useModelToString } from '@admin/features/helpers'
   import { Model } from '@admin/types'
+  import { VisitOptions } from '@inertiajs/inertia'
   import { useForm } from '@inertiajs/inertia-vue3'
   import { transChoice } from 'matice'
   import { defineComponent, inject, ref } from 'vue'
@@ -67,7 +68,7 @@
         form.delete(route(`admin.${resource}.destroy`, item?.id), {
           preserveScroll: true,
           onSuccess: () => closeModal(),
-        })
+        } as unknown as VisitOptions)
       }
 
       return {

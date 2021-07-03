@@ -23,6 +23,9 @@
         <div>
           <field source="updated_at" type="date" format="dd/MM/yyyy" />
         </div>
+        <div class="flex">
+          <edit-button class="ml-auto" />
+        </div>
       </div>
     </app-aside>
   </show-context>

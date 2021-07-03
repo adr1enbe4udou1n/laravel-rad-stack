@@ -1,8 +1,8 @@
-FROM php:8.0-fpm-alpine
+FROM php:8.0-fpm-alpine3.12
 
 COPY --from=mlocati/php-extension-installer /usr/bin/install-php-extensions /usr/local/bin/
 
-RUN install-php-extensions @composer opcache xdebug pdo_mysql exif gd imagick redis zip
+RUN install-php-extensions @composer opcache pdo_mysql exif gd imagick redis zip pcov
 
 RUN apk add --no-cache nginx
 

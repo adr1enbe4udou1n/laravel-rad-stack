@@ -75,6 +75,7 @@
   import route from 'ziggy-js'
   import { useForm } from '@inertiajs/inertia-vue3'
   import { defineComponent, Ref, ref } from 'vue'
+  import { VisitOptions } from '@inertiajs/inertia'
 
   export default defineComponent({
     setup() {
@@ -102,8 +103,10 @@
           preserveScroll: true,
           onSuccess: () => closeModal(),
           onError: () => password.value?.focus(),
-          onFinish: () => form.reset(),
-        })
+          onFinish: () => {
+            form.reset()
+          },
+        } as unknown as VisitOptions)
       }
 
       return {

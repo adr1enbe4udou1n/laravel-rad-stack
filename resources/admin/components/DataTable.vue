@@ -9,7 +9,7 @@
           v-model="form.filter.q"
           type="text"
           class="w-full"
-          :placeholder="$t('admin.data-table.search')"
+          :placeholder="$t('admin.actions.search')"
           @input="onFilter"
         />
         <search-icon
@@ -94,7 +94,9 @@
           >
             <template v-if="column.searchable">
               <component
-                :is="`${getFilterFromType(column.type || 'text')}-filter`"
+                :is="`${getFilterFromType(
+                  column.filterType || column.type || 'text'
+                )}-filter`"
                 v-model="form.filter[column.field]"
                 v-bind="column.props"
                 class="max-w-48"
@@ -168,7 +170,7 @@
   import { Column } from '@admin/types/data-table'
   import route from 'ziggy-js'
   import { useForm } from '@inertiajs/inertia-vue3'
-  import { Inertia } from '@inertiajs/inertia'
+  import { Inertia, VisitOptions } from '@inertiajs/inertia'
   import { useDebounceFn } from '@vueuse/shared'
 
   import TextFilter from '@admin/components/filters/TextFilter.vue'
@@ -234,6 +236,7 @@
         return (
           {
             email: 'text',
+            switch: 'boolean',
           }[type] || type
         )
       }
@@ -264,7 +267,7 @@
       const doQuery = () => {
         form.get(location.pathname, {
           preserveState: true,
-        })
+        } as VisitOptions)
       }
 
       const onPageChange = (pager: { page: number; perPage: number }) => {

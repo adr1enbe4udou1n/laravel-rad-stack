@@ -5,13 +5,12 @@ namespace Tests\Feature;
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Hash;
-use function Pest\Laravel\actingAs;
 use function Pest\Laravel\put;
 
 uses(RefreshDatabase::class);
 
 test('password can be updated', function () {
-    actingAs($user = User::factory()->create());
+    $this->actingAs($user = User::factory()->create());
 
     put('/user/password', [
         'current_password' => 'password',
@@ -23,7 +22,7 @@ test('password can be updated', function () {
 });
 
 test('current password must be correct', function () {
-    actingAs($user = User::factory()->create());
+    $this->actingAs($user = User::factory()->create());
 
     $response = put('/user/password', [
         'current_password' => 'wrong-password',
@@ -37,7 +36,7 @@ test('current password must be correct', function () {
 });
 
 test('new passwords must match', function () {
-    actingAs($user = User::factory()->create());
+    $this->actingAs($user = User::factory()->create());
 
     $response = put('/user/password', [
         'current_password' => 'password',

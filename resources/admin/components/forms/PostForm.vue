@@ -16,7 +16,7 @@
             :error="form.errors.slug"
             source="slug"
             type="text"
-            :hint="$t('Leave empty for auto generate the link')"
+            :hint="$t('Leave empty for auto generate the link.')"
           />
         </div>
         <div class="mt-4">
@@ -32,39 +32,62 @@
             v-model="form.body"
             :error="form.errors.body"
             source="body"
+            :height="800"
           />
         </div>
       </div>
 
       <div class="xl:flex-1">
-        <div class="px-4 py-5 bg-white sm:p-6 shadow sm:rounded-md">
-          <div>
+        <div
+          class="
+            flex flex-col
+            gap-4
+            px-4
+            py-5
+            bg-white
+            sm:p-6
+            shadow
+            sm:rounded-md
+          "
+        >
+          <div v-if="post">
             <field source="status" type="select" choices="post_statuses" />
           </div>
-          <div class="mt-4">
-            <reference-input
-              v-model="form.category_id"
-              :error="form.errors.category_id"
-              source="category"
-              resource="post-categories"
+          <div>
+            <rich-select-input
+              v-model="form.user_id"
+              :choices="post?.user ? [post?.user] : []"
+              source="user"
+              resource="users"
+              searchable
+              :min-chars="3"
             />
           </div>
-          <div class="mt-4">
+          <div>
+            <date-input
+              v-model="form.published_at"
+              source="published_at"
+              :hint="
+                $t(
+                  'If future date, the post will be automatically posted at this date.'
+                )
+              "
+            />
+          </div>
+          <div>
             <switch-input v-model="form.pin" source="pin" />
           </div>
-          <div class="mt-4">
+          <div>
             <switch-input v-model="form.promote" source="promote" />
           </div>
-          <div class="mt-4">
-            <date-input v-model="form.published_at" source="published_at" />
-          </div>
-          <div class="mt-4 flex">
+          <div class="flex">
             <dropdown align="right" class="ml-auto">
               <template #trigger>
                 <base-button
                   type="button"
                   variant="success"
                   :loading="form.processing"
+                  :disabled="uploading"
                   split
                   @click="submit(true)"
                 >
@@ -78,6 +101,30 @@
                 </dropdown-link>
               </template>
             </dropdown>
+          </div>
+        </div>
+        <div class="px-4 py-5 bg-white sm:p-6 shadow sm:rounded-md mt-6">
+          <div>
+            <reference-input
+              v-model="form.category_id"
+              :error="form.errors.category_id"
+              source="category"
+              resource="post-categories"
+              allow-empty
+            />
+          </div>
+          <div class="mt-4">
+            <rich-select-input
+              v-model="form.tags"
+              :choices="post?.tags || []"
+              source="tags"
+              resource="tags"
+              multiple
+              taggable
+              searchable
+              :min-chars="3"
+              option-value="name"
+            />
           </div>
         </div>
         <div class="px-4 py-5 bg-white sm:p-6 shadow sm:rounded-md mt-6">
@@ -105,22 +152,26 @@
 
 <script lang="ts">
   import { useForm } from '@inertiajs/inertia-vue3'
-  import { defineComponent, PropType } from 'vue'
+  import { defineComponent, PropType, ref } from 'vue'
+  import { Post } from '@admin/types'
 
   export default defineComponent({
     props: {
+      post: Object as PropType<Post>,
       initialValues: {
         type: Object as PropType<{
           title?: string
           slug?: string
           summary?: string
           body?: string
+          user_id?: number
           category_id?: number
           pin?: boolean
           promote?: boolean
           published_at?: string
           meta_title?: string
           meta_description?: string
+          tags?: string[]
         }>,
         default: () => {
           return {
@@ -128,12 +179,14 @@
             slug: '',
             summary: '',
             body: '',
+            user_id: null,
             category_id: null,
             pin: false,
             promote: false,
             published_at: null,
             meta_title: null,
             meta_description: null,
+            tags: [],
           }
         },
       },
@@ -148,6 +201,7 @@
     },
     emits: ['submitted'],
     setup(props) {
+      const uploading = ref(false)
       const form = useForm(props.initialValues)
 
       const submit = (publish: boolean) => {
@@ -159,7 +213,7 @@
           .submit(props.method, props.url)
       }
 
-      return { form, submit }
+      return { form, uploading, submit }
     },
   })
 </script>

@@ -11,7 +11,12 @@
         </page-header>
       </template>
 
-      <post-form :method="method" :url="url" :initial-values="values" />
+      <post-form
+        :method="method"
+        :url="url"
+        :initial-values="values"
+        :post="post"
+      />
     </app-layout>
   </edit-context>
 </template>
@@ -27,18 +32,22 @@
       post: Object as PropType<Post>,
     },
     setup(props) {
-      const values = pick(props.post, [
-        'title',
-        'slug',
-        'summary',
-        'body',
-        'category_id',
-        'pin',
-        'promote',
-        'published_at',
-        'meta_title',
-        'meta_description',
-      ])
+      const values = {
+        ...pick(props.post, [
+          'title',
+          'slug',
+          'summary',
+          'body',
+          'user_id',
+          'category_id',
+          'pin',
+          'promote',
+          'published_at',
+          'meta_title',
+          'meta_description',
+        ]),
+        tags: props.post?.tags.map((t) => t.name) || [],
+      }
 
       const method = 'put'
       const url = route('admin.posts.update', props.post?.id)

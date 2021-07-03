@@ -22,6 +22,8 @@ return [
             'published_at' => 'Published at',
             'meta_title' => 'Meta title',
             'meta_description' => 'Meta description',
+            'featured_image' => 'Image',
+            'user' => 'Author',
         ],
     ],
 ];

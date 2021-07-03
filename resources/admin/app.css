@@ -1,5 +1,9 @@
 @import url('https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,400;0,600;0,700;1,300&display=swap');
 
+html {
+    font-size: 14px;
+}
+
 h1 {
     @apply font-semibold text-xl text-gray-800 leading-tight;
 }
@@ -9,7 +13,7 @@ input[type='text'],
 input[type='email'],
 input[type='password'],
 select {
-    @apply border-gray-300 rounded-md shadow-sm px-3 py-2;
+    @apply border-gray-300 rounded shadow-sm px-3 py-2;
 
     &.form-invalid {
         @apply border-red-500 focus: border-red-300 focus:ring-red-200;

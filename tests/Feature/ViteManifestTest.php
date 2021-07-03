@@ -26,10 +26,7 @@ test('vite directive should return correct embed call', function () {
 test('vite manifest return no scripts', function () {
     Config::set('vite.dev_server', false);
 
-    $scripts = app(LaravelViteManifest::class)->embed(
-        'test',
-        'http://localhost:3100/empty.ts'
-    );
+    $scripts = app(LaravelViteManifest::class)->embed('test', 'empty.ts', 3100);
 
     expect($scripts)->toBeEmpty();
 });
@@ -37,10 +34,7 @@ test('vite manifest return no scripts', function () {
 test('vite manifest return dev scripts', function () {
     Config::set('vite.dev_server', true);
 
-    $scripts = app(LaravelViteManifest::class)->embed(
-        'test',
-        'http://localhost:3100/app.ts'
-    );
+    $scripts = app(LaravelViteManifest::class)->embed('test', 'app.ts', 3100);
 
     expect($scripts)->toMatch('/http:\\/\\/localhost:\\d+\\/app\\.ts/i');
 });
@@ -50,10 +44,7 @@ test('vite manifest return production scripts', function () {
 
     $url = Str::replace('/', '\/', asset('dist/test/assets'));
 
-    $scripts = app(LaravelViteManifest::class)->embed(
-        'test',
-        'http://localhost:3100/app.ts'
-    );
+    $scripts = app(LaravelViteManifest::class)->embed('test', 'app.ts', 3100);
 
     expect($scripts)->toMatch("/{$url}\\/app.*\\.js/i");
     expect($scripts)->toMatch("/{$url}\\/vendor.*\\.js/i");

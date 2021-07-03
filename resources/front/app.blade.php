@@ -9,7 +9,7 @@
 
     @livewireStyles
 
-    @vite("front", "http://localhost:3100/app.ts")
+    @vite('front', 'app.ts', 3100)
 </head>
 
 <body class="antialiased">

@@ -9,10 +9,12 @@ use App\Http\Requests\Admin\UserUpdateRequest;
 use App\Http\Resources\Admin\UserResource;
 use App\Http\Responses\LoginResponse;
 use App\Models\User;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Inertia\Inertia;
 use Spatie\RouteAttributes\Attributes\Delete;
 use Spatie\RouteAttributes\Attributes\Get;
+use Spatie\RouteAttributes\Attributes\Patch;
 use Spatie\RouteAttributes\Attributes\Post;
 use Spatie\RouteAttributes\Attributes\Prefix;
 use Spatie\RouteAttributes\Attributes\Put;
@@ -66,6 +68,18 @@ class UserController extends Controller
     public function update(User $user, UserUpdateRequest $request)
     {
         $user->update($request->validated());
+
+        return redirect()->route('admin.users')->with('flash.success', __('User updated.'));
+    }
+
+    #[Patch('{user}/toggle', name: 'users.toggle', middleware: 'can:modify-user,user')]
+    public function toggle(User $user, Request $request)
+    {
+        $request->validate([
+            'active' => 'sometimes|boolean',
+        ]);
+
+        $user->update($request->only('active'));
 
         return redirect()->route('admin.users')->with('flash.success', __('User updated.'));
     }

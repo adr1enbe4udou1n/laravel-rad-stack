@@ -6,6 +6,7 @@ use App\Exports\UserExport;
 use App\Http\Resources\Admin\UserResource;
 use App\Models\User;
 use App\Support\GlobalSearchFilter;
+use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
 use Spatie\QueryBuilder\AllowedFilter;
 use Spatie\QueryBuilder\QueryBuilder;
 
@@ -31,12 +32,17 @@ class UserQuery extends BaseQuery
         return $this;
     }
 
+    public function collection(): AnonymousResourceCollection
+    {
+        return UserResource::collection($this->paginate());
+    }
+
     public function get(): array
     {
         return [
             'sort' => request()->get('sort', 'id'),
             'filter' => request()->get('filter'),
-            'users' => fn () => UserResource::collection($this->paginate()),
+            'users' => fn () => $this->collection(),
         ];
     }
 }

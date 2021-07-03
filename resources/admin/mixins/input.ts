@@ -6,6 +6,7 @@ export const inputProps = {
   label: String,
   source: String,
   error: String,
+  errors: Object,
   hint: String,
 }
 

@@ -30,6 +30,7 @@ Besides all code is heavily linted from top to bottom thanks to **PHP CS Fixer**
 - Front is empty but ready to go for full **Livewire + AlpineJS** integration. Perfect for SEO based websites. It's configured for Windi CSS and Typescript but you can easily switch to another tools.
 - Basic admin UI fully build with **[Inertia](https://inertiajs.com/) + Windi CSS + Vue 3 Typescript with composition API**. Give thanks to Inertia for get ridding of boring Vue Router boilerplate and typescript for instant IDE feedbacks !
 - Backend is fully tested by using **[Pest](https://pestphp.com/)** testing framework with **100% code coverage**, which gives you a perfect starting dev point if you want to embrace **TDD**.
+- **[GrumPHP](https://github.com/phpro/grumphp)** is preinstalled in order to automatize code formatting and testing before each commits. Use `vendor/bin/grumphp git:init` for auto register his git hooks commands.
 
 ### Why Windi CSS ?
 
@@ -74,12 +75,16 @@ Only simple basic features :
 
 ## Usage
 
+### Local
+
 Keep in mind that you must have **PHP 8.0** as minimum requirement.
 
 ```sh
 composer install
 # Prepare database and environment variables
 php artisan key:generate
+php artisan storage:link
+php artisan elfinder:publish
 php artisan migrate:fresh --seed
 php artisan serve
 
@@ -90,6 +95,33 @@ yarn && yarn dev
 Both front and admin dev HMR server will be started in parallel into different ports.
 
 Front is empty, access to admin in <http://localhost:8000/admin> and login as `admin@example.com` / `password`.
+
+#### Docker Sail
+
+Sail is ready to go for easy docker integration. You should have set `alias sail='bash vendor/bin/sail'` before run `sail` command.
+
+```sh
+cp .env.example .env
+composer install
+
+# Launch all container services as daemon
+sail up -d
+
+# Prepare backend
+sail php artisan key:generate
+sail php artisan storage:link
+sail php artisan elfinder:publish
+sail php artisan migrate:fresh --seed
+
+# Launch tests with coverage
+sail composer test
+
+# Finally launch frontend Vite HMR dev server on local
+yarn && yarn dev
+
+# If on Windows WSL, set your WSL IP host (shown from previous command)
+VITE_DEV_SERVER_URL=http://wsl.host
+```
 
 ### VSCode configuration
 

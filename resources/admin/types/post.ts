@@ -1,9 +1,13 @@
 import { Model } from './model'
+import { Tag } from './tag'
+import { User } from './user'
 
 export class Post extends Model {
   constructor(
     public id: number,
+    public featured_image: { preview_url: string; original_url: string }[],
     public category_id: number,
+    public user_id: number,
     public title: string,
     public status: string,
     public summary: string,
@@ -16,7 +20,9 @@ export class Post extends Model {
     public meta_description: string,
     public created_at: string,
     public updated_at: string,
-    public category: PostCategory
+    public category: PostCategory,
+    public user: User,
+    public tags: Tag[]
   ) {
     super(id)
   }
@@ -26,14 +32,7 @@ export class Post extends Model {
 }
 
 export class PostCategory extends Model {
-  constructor(
-    public id: number,
-    public name: string,
-    public order_column: number,
-    public slug: string,
-    public created_at: string,
-    public updated_at: string
-  ) {
+  constructor(public id: number, public name: string, public slug: string) {
     super(id)
   }
   toString() {

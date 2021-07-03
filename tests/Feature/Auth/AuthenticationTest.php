@@ -3,7 +3,6 @@
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Inertia\Testing\Assert;
-use function Pest\Laravel\actingAs;
 use function Pest\Laravel\assertAuthenticated;
 use function Pest\Laravel\assertGuest;
 use function Pest\Laravel\get;
@@ -19,7 +18,7 @@ test('admin login screen can be rendered', function () {
 });
 
 test('authenticated admin should be redirected to admin when go to login page', function () {
-    actingAs(User::factory()->admin()->create());
+    $this->actingAs(User::factory()->admin()->create());
 
     $response = get('/admin/login');
 
@@ -39,7 +38,7 @@ test('guest user should be unauthorized to do authenticated json request', funct
 });
 
 test('admin should be redirected to dashboard when intent go to admin home', function () {
-    actingAs(User::factory()->admin()->create());
+    $this->actingAs(User::factory()->admin()->create());
 
     $response = get('/admin');
 
@@ -47,7 +46,7 @@ test('admin should be redirected to dashboard when intent go to admin home', fun
 });
 
 test('admin can go to dashboard', function () {
-    actingAs($user = User::factory()->admin()->create());
+    $this->actingAs($user = User::factory()->admin()->create());
 
     $response = get('/admin/dashboard');
 
@@ -60,7 +59,7 @@ test('admin can go to dashboard', function () {
 });
 
 test('non admin cannot go to admin dashboard', function () {
-    actingAs(User::factory()->create());
+    $this->actingAs(User::factory()->create());
 
     $response = get('/admin/dashboard');
 
@@ -116,7 +115,7 @@ test('inactive users can not authenticate', function () {
 });
 
 test('users can logout', function () {
-    actingAs(User::factory()->create());
+    $this->actingAs(User::factory()->create());
 
     $response = post('/logout');
 

@@ -82,7 +82,7 @@
         },
         {
           field: 'active',
-          type: 'boolean',
+          type: 'switch',
           searchable: true,
         },
         {

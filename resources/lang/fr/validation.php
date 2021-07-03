@@ -127,6 +127,7 @@ return [
             'rule-name' => 'custom-message',
         ],
     ],
+
     'attributes' => [
         'address' => 'adresse',
         'age' => 'âge',
@@ -159,5 +160,6 @@ return [
         'username' => 'nom d\'utilisateur',
         'year' => 'année',
         'role' => 'rôle',
+        'category_id' => 'catégorie',
     ],
 ];

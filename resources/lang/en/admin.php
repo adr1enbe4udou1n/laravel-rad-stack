@@ -29,6 +29,7 @@ return [
         'move' => 'Move',
         'cancel' => 'Cancel',
         'save' => 'Save',
+        'search' => 'Search...',
         'save_and_add' => 'Save and add',
         'save_and_show' => 'Save and show',
         'impersonate' => 'Impersonate',

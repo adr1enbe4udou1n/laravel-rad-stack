@@ -10,7 +10,7 @@
         px-4
         py-2
         border border-transparent
-        rounded-l-md
+        rounded-l
         text-xs
         uppercase
         font-semibold
@@ -24,10 +24,10 @@
         {
           'btn-outlined': outlined,
           'opacity-25': loading,
-          'rounded-r-md': !split,
+          'rounded-r': !split,
         },
       ]"
-      :disabled="loading"
+      :disabled="disabled || loading"
       :href="href"
       :only="only"
       @click.stop="$emit('click')"
@@ -54,14 +54,14 @@
     <button
       v-if="split"
       type="button"
-      class="px-2 py-2 border border-transparent rounded-r-md"
+      class="px-2 py-2 border border-transparent rounded-r disabled:opacity-25"
       :class="[
         `btn-${variant}`,
         {
           'btn-outlined': outlined,
-          'opacity-25': loading,
         },
       ]"
+      :disabled="disabled || loading"
     >
       <chevron-down-icon class="h-4 w-4" />
     </button>
@@ -74,6 +74,7 @@
   export default defineComponent({
     props: {
       loading: Boolean,
+      disabled: Boolean,
       outlined: Boolean,
       href: String,
       icon: String,

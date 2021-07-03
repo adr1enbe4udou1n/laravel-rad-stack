@@ -18,7 +18,7 @@ export const referenceSetup = (
 
   const fetchList = async () => {
     const { data } = await axios.get(route(`admin.${props.resource}`))
-    choices.value = data
+    choices.value = data.data
   }
 
   watch(

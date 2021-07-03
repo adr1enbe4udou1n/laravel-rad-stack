@@ -8,18 +8,18 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Str;
 use Inertia\Testing\Assert;
 use Maatwebsite\Excel\Facades\Excel;
-use function Pest\Laravel\actingAs;
 use function Pest\Laravel\assertDatabaseHas;
 use function Pest\Laravel\assertDatabaseMissing;
 use function Pest\Laravel\delete;
 use function Pest\Laravel\get;
+use function Pest\Laravel\patch;
 use function Pest\Laravel\post;
 use function Pest\Laravel\put;
 
 uses(RefreshDatabase::class);
 
 beforeEach(function () {
-    actingAs(User::factory()->superAdmin()->create());
+    $this->actingAs(User::factory()->superAdmin()->create());
     User::addGlobalScope('admin', fn (Builder $builder) => $builder->where('role', '!=', RoleEnum::super_admin()));
 });
 
@@ -212,6 +212,22 @@ test('admin cannot update user with invalid data', function () {
 
     $response->assertStatus(302);
     $response->assertSessionHasErrors(['name']);
+});
+
+test('admin can toggle non active user to active', function () {
+    $user = User::factory()->create([
+        'active' => false,
+    ]);
+
+    $response = patch("/admin/users/{$user->id}/toggle", [
+        'active' => true,
+    ]);
+
+    $response->assertStatus(302);
+    $response->assertSessionDoesntHaveErrors();
+    assertDatabaseHas('users', [
+        'active' => true,
+    ]);
 });
 
 test('admin can delete user', function () {

@@ -1,44 +1,12 @@
 <template>
-  <label class="flex items-center cursor-pointer">
-    <!-- toggle -->
-    <div class="relative">
-      <!-- input -->
-      <input
-        type="checkbox"
-        class="sr-only"
-        :checked="modelValue"
-        @change="change"
-      />
-      <!-- line -->
-      <div class="bg-toggle block bg-gray-400 w-10 h-6 rounded-full"></div>
-      <!-- dot -->
-      <div
-        class="
-          dot
-          absolute
-          left-1
-          top-1
-          bg-white
-          w-4
-          h-4
-          rounded-full
-          transition
-          transform
-        "
-      ></div>
-    </div>
-    <!-- label -->
-    <div class="ml-2 text-gray-700 text-sm font-medium">
-      {{ getLabel }}
-    </div>
-  </label>
+  <switch-toggle v-model="value" :label="getLabel" />
   <input-error :message="error" class="mt-2" />
   <input-hint :message="hint" class="mt-2" />
 </template>
 
 <script lang="ts">
   import { inputProps, inputSetup } from '@admin/mixins/input'
-  import { defineComponent } from 'vue'
+  import { computed, defineComponent } from 'vue'
 
   export default defineComponent({
     props: {
@@ -49,21 +17,12 @@
     setup(props, { emit }) {
       const initial = inputSetup(props)
 
-      const change = (e: Event) => {
-        emit('update:modelValue', (e.target as HTMLInputElement).checked)
-      }
+      const value = computed({
+        get: () => props.modelValue,
+        set: (val) => emit('update:modelValue', val),
+      })
 
-      return { ...initial, change }
+      return { ...initial, value }
     },
   })
 </script>
-
-<style lang="postcss" scoped>
-  input:checked ~ .dot {
-    @apply translate-x-4;
-  }
-
-  input:checked ~ .bg-toggle {
-    @apply bg-primary-500;
-  }
-</style>

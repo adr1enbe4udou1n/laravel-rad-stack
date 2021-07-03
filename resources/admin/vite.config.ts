@@ -42,6 +42,7 @@ export default defineConfig({
       'date-fns',
       'qs',
       'lodash/pick',
+      'lodash/trimEnd',
       'lodash/truncate',
       '@vueuse/core',
       '@vueuse/shared',
@@ -50,6 +51,7 @@ export default defineConfig({
       '@tinymce/tinymce-vue',
       'flatpickr',
       'flatpickr/dist/l10n/fr.js',
+      '@vueform/multiselect',
     ],
   },
 })

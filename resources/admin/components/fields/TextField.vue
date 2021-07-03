@@ -1,5 +1,5 @@
 <template>
-  <span @click.stop>{{ getText }}</span>
+  <span>{{ getText }}</span>
 </template>
 
 <script lang="ts">

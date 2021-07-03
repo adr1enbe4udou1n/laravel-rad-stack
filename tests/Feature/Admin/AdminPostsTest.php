@@ -8,22 +8,25 @@ use App\Models\PostCategory;
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Carbon;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 use Inertia\Testing\Assert;
-use function Pest\Laravel\actingAs;
 use function Pest\Laravel\artisan;
 use function Pest\Laravel\assertDatabaseHas;
 use function Pest\Laravel\assertDatabaseMissing;
 use function Pest\Laravel\delete;
 use function Pest\Laravel\get;
+use function Pest\Laravel\getJson;
+use function Pest\Laravel\patch;
 use function Pest\Laravel\post;
 use function Pest\Laravel\put;
 use function PHPUnit\Framework\assertCount;
+use Spatie\Tags\Tag;
 
 uses(RefreshDatabase::class);
 
 beforeEach(function () {
-    actingAs(User::factory()->superAdmin()->create());
+    $this->actingAs(User::factory()->superAdmin()->create());
 });
 
 test('admin can list posts', function () {
@@ -50,6 +53,23 @@ test('admin can list posts', function () {
     );
 });
 
+test('admin can get post json', function () {
+    Post::factory()->create([
+        'title' => 'The post title',
+    ]);
+
+    $response = getJson('/admin/posts');
+
+    $response->assertStatus(200);
+    $response->assertJson([
+        'data' => [
+            [
+                'title' => 'The post title',
+            ],
+        ],
+    ]);
+});
+
 test('admin can get ordered post categories json', function () {
     PostCategory::factory()->createMany([
         [
@@ -68,11 +88,42 @@ test('admin can get ordered post categories json', function () {
 
     $response->assertStatus(200);
     $response->assertJson([
+        'data' => [
+            [
+                'name' => 'Category 2',
+            ],
+            [
+                'name' => 'Category 1',
+            ],
+        ],
+    ]);
+});
+
+test('admin can get ordered tags json', function () {
+    Tag::factory()->createMany([
         [
-            'name' => 'Category 2',
+            'name' => 'Tag 1',
         ],
         [
-            'name' => 'Category 1',
+            'name' => 'Tag 2',
+        ],
+    ]);
+
+    /** @var Tag */
+    $category = Tag::query()->first();
+    $category->swapOrderWithModel(Tag::query()->skip(1)->first());
+
+    $response = get('/admin/tags');
+
+    $response->assertStatus(200);
+    $response->assertJson([
+        'data' => [
+            [
+                'name' => 'Tag 2',
+            ],
+            [
+                'name' => 'Tag 1',
+            ],
         ],
     ]);
 });
@@ -148,6 +199,7 @@ test('admin can filter posts', function (array $filter, int $total) {
     [['status' => 'draft'], 1],
     [['pin' => '1', 'promote' => '1'], 1],
     [['pin' => '1', 'promote' => '0'], 0],
+    [['user' => 'admin'], 0],
     [['published_at' => Carbon::make('2020-12-01')->format('Y-m-d').','.Carbon::make('2021-02-01')->format('Y-m-d')], 1],
 ]);
 
@@ -172,8 +224,14 @@ test('admin can render post create page', function () {
 });
 
 test('admin can render post edit page', function () {
-    /** @var Post */
+    /* @var Post */
+    Storage::fake('media');
+
     $post = Post::factory()->create();
+    $post->addMedia(database_path('media/placeholder.jpg'))
+        ->preservingOriginal()
+        ->toMediaCollection('featured-image')
+    ;
 
     $response = get("/admin/posts/{$post->id}/edit");
 
@@ -222,7 +280,6 @@ test('admin can store post', function (array $data, array $expected) {
         'status' => 'published',
         'pin' => true,
         'promote' => true,
-        'published_at' => Carbon::now()->second(0),
     ],
 ], [
     [
@@ -311,6 +368,22 @@ test('admin cannot update post with invalid data', function (array $data, array 
     $response->assertStatus(302);
     $response->assertSessionHasErrors($expected);
 })->with('invalid_posts');
+
+test('admin can toggle post', function (string $attribute) {
+    $post = Post::factory()->create([
+        $attribute => false,
+    ]);
+
+    $response = patch("/admin/posts/{$post->id}/toggle", [
+        $attribute => true,
+    ]);
+
+    $response->assertStatus(302);
+    $response->assertSessionDoesntHaveErrors();
+    assertDatabaseHas('posts', [
+        $attribute => true,
+    ]);
+})->with(['pin', 'promote']);
 
 test('admin can delete post', function () {
     $post = Post::factory()->create([

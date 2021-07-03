@@ -1,6 +1,11 @@
 <template>
   <label class="flex items-center">
-    <input type="checkbox" :checked="modelValue" @change="change" />
+    <input
+      v-bind="$attrs"
+      type="checkbox"
+      :checked="modelValue"
+      @change="change"
+    />
     <span class="ml-2 text-sm text-gray-600">{{ getLabel }}</span>
   </label>
   <input-error :message="error" class="mt-2" />

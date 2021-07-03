@@ -4,8 +4,10 @@ namespace App\Http\Requests\Admin;
 
 use App\Enums\PostStatusEnum;
 use App\Models\PostCategory;
+use App\Models\User;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Support\Carbon;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\Rule;
 use Spatie\Enum\Laravel\Rules\EnumRule;
 
@@ -33,6 +35,7 @@ class PostStoreRequest extends FormRequest
             'slug' => ['nullable'],
             'status' => new EnumRule(PostStatusEnum::class),
             'category_id' => ['required', Rule::exists(PostCategory::class, 'id')],
+            'user_id' => ['required', Rule::exists(User::class, 'id')],
             'summary' => ['nullable'],
             'body' => ['nullable'],
             'published_at' => ['nullable', 'date'],
@@ -40,11 +43,24 @@ class PostStoreRequest extends FormRequest
             'promote' => ['boolean'],
             'meta_title' => ['nullable'],
             'meta_description' => ['nullable'],
+            'tags' => ['array'],
         ];
     }
 
     public function prepareForValidation()
     {
+        if (! $this->user_id) {
+            $this->merge([
+                'user_id' => Auth::id(),
+            ]);
+        }
+
+        if (! $this->tags) {
+            $this->merge([
+                'tags' => [],
+            ]);
+        }
+
         $status = PostStatusEnum::draft();
         $publishedAt = $this->published_at;
 

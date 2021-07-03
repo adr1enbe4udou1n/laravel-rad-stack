@@ -30,7 +30,6 @@ steps:
   - local-php-security-checker
   - composer format -- --dry-run
   - composer analyse
-  - export XDEBUG_MODE=coverage
   - sleep 10 # Wait for MySQL service starting
   - composer test
   depends_on:

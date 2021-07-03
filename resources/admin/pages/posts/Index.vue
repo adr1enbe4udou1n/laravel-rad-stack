@@ -54,6 +54,18 @@
           sortable: true,
         },
         {
+          field: 'featured_image',
+          type: 'image',
+          props: {
+            canPreview: true,
+          },
+        },
+        {
+          field: 'title',
+          sortable: true,
+          searchable: true,
+        },
+        {
           field: 'status',
           type: 'select',
           props: {
@@ -71,11 +83,6 @@
           searchable: true,
         },
         {
-          field: 'title',
-          sortable: true,
-          searchable: true,
-        },
-        {
           field: 'summary',
           type: 'text',
           props: { truncate: 60 },
@@ -83,13 +90,20 @@
         },
         {
           field: 'pin',
-          type: 'boolean',
+          type: 'switch',
           searchable: true,
         },
         {
           field: 'promote',
-          type: 'boolean',
+          type: 'switch',
           searchable: true,
+        },
+        {
+          field: 'user',
+          type: 'reference',
+          props: { text: 'name', resource: 'users', link: 'show' },
+          searchable: true,
+          filterType: 'text',
         },
         {
           field: 'published_at',

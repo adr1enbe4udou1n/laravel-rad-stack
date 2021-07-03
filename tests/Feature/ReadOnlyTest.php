@@ -3,7 +3,6 @@
 use App\Enums\RoleEnum;
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use function Pest\Laravel\actingAs;
 use function Pest\Laravel\assertDatabaseHas;
 use function Pest\Laravel\assertDatabaseMissing;
 use function Pest\Laravel\assertGuest;
@@ -16,7 +15,7 @@ beforeEach(function () {
 });
 
 test('admin cannot create new user when read only active', function () {
-    actingAs(User::factory()->admin()->create());
+    $this->actingAs(User::factory()->admin()->create());
 
     $response = post('/admin/users', [
         'name' => 'example',
@@ -34,7 +33,7 @@ test('admin cannot create new user when read only active', function () {
 });
 
 test('admin can still logout when read only active', function () {
-    actingAs(User::factory()->admin()->create());
+    $this->actingAs(User::factory()->admin()->create());
 
     $response = post('/logout');
 
@@ -43,7 +42,7 @@ test('admin can still logout when read only active', function () {
 });
 
 test('super admin can create new user when read only active', function () {
-    actingAs(User::factory()->superAdmin()->create());
+    $this->actingAs(User::factory()->superAdmin()->create());
 
     $response = post('/admin/users', [
         'name' => 'example',

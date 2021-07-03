@@ -1,4 +1,3 @@
-import { Inertia } from '@inertiajs/inertia'
 import { usePage } from '@inertiajs/inertia-vue3'
 import { computed, ExtractPropTypes } from 'vue'
 import { inputProps, inputSetup } from './input'
@@ -35,7 +34,7 @@ export const getOptionsFromChoices = (
   }
 
   if (typeof choices === 'string') {
-    choices = (usePage<Inertia.PageProps>().props.value.enums as any)[choices]
+    choices = (usePage().props.value.enums as any)[choices]
   }
 
   return Object.keys(choices).map((key) => {

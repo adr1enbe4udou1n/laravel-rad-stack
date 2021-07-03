@@ -8,9 +8,11 @@ use App\Http\Requests\Admin\PostStoreRequest;
 use App\Http\Requests\Admin\PostUpdateRequest;
 use App\Http\Resources\Admin\PostResource;
 use App\Models\Post;
+use Illuminate\Http\Request;
 use Inertia\Inertia;
 use Spatie\RouteAttributes\Attributes\Delete;
 use Spatie\RouteAttributes\Attributes\Get;
+use Spatie\RouteAttributes\Attributes\Patch;
 use Spatie\RouteAttributes\Attributes\Post as HttpPost;
 use Spatie\RouteAttributes\Attributes\Prefix;
 use Spatie\RouteAttributes\Attributes\Put;
@@ -36,14 +38,16 @@ class PostController extends Controller
     public function edit(Post $post)
     {
         return Inertia::render('posts/Edit', [
-            'post' => PostResource::make($post),
+            'post' => PostResource::make($post->load('category', 'media', 'tags', 'user')),
         ]);
     }
 
     #[HttpPost('/', name: 'posts.store')]
     public function store(PostStoreRequest $request)
     {
-        Post::create($request->validated());
+        $post = Post::create($request->validated());
+
+        $post->syncTags($request->tags);
 
         return redirect()->route('admin.posts')->with('flash.success', __('Post created.'));
     }
@@ -53,7 +57,22 @@ class PostController extends Controller
     {
         $post->update($request->validated());
 
+        $post->syncTags($request->tags);
+
         return redirect()->route('admin.posts')->with('flash.success', __('Post updated.'));
+    }
+
+    #[Patch('{post}/toggle', name: 'posts.toggle')]
+    public function toggle(Post $post, Request $request)
+    {
+        $request->validate([
+            'pin' => 'sometimes|boolean',
+            'promote' => 'sometimes|boolean',
+        ]);
+
+        $post->update($request->only('pin', 'promote'));
+
+        return redirect()->route('admin.posts')->with('flash.success', __('User updated.'));
     }
 
     #[Delete('{post}', name: 'posts.destroy')]

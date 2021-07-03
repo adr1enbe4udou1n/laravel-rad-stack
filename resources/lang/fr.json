@@ -709,7 +709,9 @@
     "Zip / Postal Code": "Code postal",
     "Åland Islands": "Les îles d'Åland",
     "Not registered yet?": "Non encore inscrit(e) ?",
+    "Content Managment": "Gestion du contenu",
     "Access Managment": "Gestion des accès",
+    "Posts": "Articles",
     "Users": "Utilisateurs",
     "Impersonate disabled for this user.": "Usurpation désactivée pour cet utilisateur",
     "User created.": "Utilisateur ajouté.",
@@ -722,7 +724,14 @@
     "Impersonate": "Usurper",
     "You are connected as :name, you can comeback to you own account from profile menu": "Vous êtes connecté en tant que :name, vous pouvez à tout moment revenir à votre propre compte depuis le menu de profil.",
     "Application is on read only mode.": "Application en mode lecture seule.",
+    "File Manager": "Gestionnaire de fichier",
     "Publish": "Publier",
     "Save as draft": "Sauvegarder en tant que brouillon",
-    "Leave empty for auto generate the link.": "Laisser vide pour autogénérer le lien."
+    "Leave empty for auto generate the link.": "Laisser vide pour autogénérer le lien.",
+    "Drag file here": "Déposer le fichier ici",
+    "Drop file to upload": "Glisser le fichier pour transférer",
+    "Select or drag a file": "Sélectionner ou glisser-déposer un fichier",
+    "Select or drag files": "Sélectionner ou glisser-déposer des fichiers",
+    "If future date, the post will be automatically posted at this date.": "Si date future, l'article sera automatiquement publiée à cette date.",
+    "Search :query": "Rechercher le terme \":query\""
 }

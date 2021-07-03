@@ -10,13 +10,13 @@ class LaravelViteManifest
 {
     private $manifestCache = [];
 
-    public function embed(string $name, string $devUrl): string
+    public function embed(string $name, string $entry, int $port): string
     {
         if (Config::get('vite.dev_server')) {
-            return $this->jsImports($devUrl);
+            return $this->jsImports(
+                Str::of(Config::get('vite.dev_server_url'))->trim('/').":{$port}/{$entry}"
+            );
         }
-
-        $entry = Str::of(parse_url($devUrl, PHP_URL_PATH))->trim('/');
 
         if ($assets = $this->productionAssets($name, $entry)) {
             return $this->jsImports($assets)

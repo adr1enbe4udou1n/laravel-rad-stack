@@ -8,4 +8,5 @@ export interface Column {
   searchable?: boolean
   type?: string
   props?: any
+  filterType?: string
 }

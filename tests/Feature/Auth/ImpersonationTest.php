@@ -3,7 +3,6 @@
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Inertia\Testing\Assert;
-use function Pest\Laravel\actingAs;
 use function Pest\Laravel\get;
 use function Pest\Laravel\post;
 use function Pest\Laravel\withSession;
@@ -11,7 +10,7 @@ use function Pest\Laravel\withSession;
 uses(RefreshDatabase::class);
 
 test('admin can impersonate other admin', function () {
-    actingAs(User::factory()->admin()->create());
+    $this->actingAs(User::factory()->admin()->create());
     $user = User::factory()->admin()->create();
 
     $response = post("/admin/users/{$user->id}/impersonate");
@@ -21,7 +20,7 @@ test('admin can impersonate other admin', function () {
 });
 
 test('admin can impersonate user', function () {
-    actingAs(User::factory()->admin()->create());
+    $this->actingAs(User::factory()->admin()->create());
     $user = User::factory()->create();
 
     $response = post("/admin/users/{$user->id}/impersonate");
@@ -31,7 +30,7 @@ test('admin can impersonate user', function () {
 });
 
 test('inertia page return impersonated user when impersonate', function () {
-    actingAs(User::factory()->superAdmin()->create());
+    $this->actingAs(User::factory()->superAdmin()->create());
     $user = User::factory()->admin()->create();
 
     withSession(['impersonate' => $user->id]);
@@ -47,7 +46,7 @@ test('inertia page return impersonated user when impersonate', function () {
 });
 
 test('user can stop impersonate', function () {
-    actingAs(User::factory()->superAdmin()->create());
+    $this->actingAs(User::factory()->superAdmin()->create());
     $user = User::factory()->admin()->create();
 
     withSession(['impersonate' => $user->id]);
@@ -59,7 +58,7 @@ test('user can stop impersonate', function () {
 });
 
 test('user cannot impersonate himself', function () {
-    actingAs($user = User::factory()->create());
+    $this->actingAs($user = User::factory()->create());
 
     $response = post("/admin/users/{$user->id}/impersonate");
 
@@ -67,7 +66,7 @@ test('user cannot impersonate himself', function () {
 });
 
 test('non admin user cannot impersonate', function () {
-    actingAs(User::factory()->create());
+    $this->actingAs(User::factory()->create());
     $user = User::factory()->create();
 
     $response = post("/admin/users/{$user->id}/impersonate");
@@ -76,7 +75,7 @@ test('non admin user cannot impersonate', function () {
 });
 
 test('admin user cannot impersonate super admin user', function () {
-    actingAs(User::factory()->admin()->create());
+    $this->actingAs(User::factory()->admin()->create());
     $user = User::factory()->superAdmin()->create();
 
     $response = post("/admin/users/{$user->id}/impersonate");

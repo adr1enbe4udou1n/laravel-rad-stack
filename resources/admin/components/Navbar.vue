@@ -1,27 +1,39 @@
 <template>
   <nav class="bg-white sm:border-b sm:border-gray-100">
     <!-- Primary Navigation Menu -->
-    <div class="px-4 sm:px-6 lg:px-8 bg-primary-900 sm:bg-transparent">
+    <div class="px-4 sm:px-6 lg:px-8 bg-primary sm:bg-transparent">
       <div class="flex justify-between h-16">
         <div class="flex">
           <!-- Logo -->
           <div class="flex-shrink-0 flex items-center sm:hidden">
             <inertia-link :href="route('admin.dashboard')">
-              <app-logo class="block h-9 w-auto fill-white" />
+              <app-logo class="w-12 h-12" primary="#BBB" secondary="#FFF" />
             </inertia-link>
           </div>
 
           <!-- Navigation Links -->
-          <div class="hidden space-x-8 sm:-my-px sm:flex">
-            <nav-link
-              v-for="(link, i) in headerNav"
-              :key="i"
-              :href="link.href"
-              :active="link.active()"
-              :icon="link.icon"
-            >
-              {{ link.text }}
-            </nav-link>
+          <div class="hidden sm:-my-px sm:flex sm:items-center">
+            <div class="relative">
+              <input
+                ref="globalSearchInput"
+                v-model="globalSearch"
+                type="text"
+                class="w-96"
+                :placeholder="$t('admin.actions.search')"
+              />
+              <search-icon
+                class="
+                  h-5
+                  w-5
+                  absolute
+                  top-1/2
+                  right-4
+                  transform
+                  -translate-y-1/2
+                  opacity-50
+                "
+              />
+            </div>
           </div>
         </div>
 
@@ -164,13 +176,16 @@
 
 <script lang="ts">
   import route from 'ziggy-js'
-  import { NavLink, mainNav, headerNav, isLink } from '@admin/_nav'
-  import { defineComponent, ref } from 'vue'
-  import { Inertia } from '@inertiajs/inertia'
+  import { NavLink, mainNav, isLink } from '@admin/_nav'
+  import { defineComponent, onMounted, Ref, ref, watch } from 'vue'
+  import { Inertia, VisitOptions } from '@inertiajs/inertia'
+  import { usePage } from '@inertiajs/inertia-vue3'
 
   export default defineComponent({
     setup() {
       const showingNavigationDropdown = ref(false)
+      const globalSearch = ref(usePage().props.value.query)
+      const globalSearchInput: Ref<HTMLInputElement | null> = ref(null)
 
       const logout = () => {
         Inertia.post(route('logout'))
@@ -180,12 +195,27 @@
         Inertia.post(route('admin.users.stop-impersonate'))
       }
 
+      watch(
+        () => globalSearch.value,
+        (val) =>
+          Inertia.get(route('admin.search', val), {}, {
+            preserveState: true,
+          } as VisitOptions)
+      )
+
+      onMounted(() => {
+        if (route().current('admin.search')) {
+          globalSearchInput.value?.focus()
+        }
+      })
+
       return {
         showingNavigationDropdown,
+        globalSearch,
+        globalSearchInput,
         logout,
         stopImpersonate,
         mainNav: mainNav.filter((l) => isLink(l)) as NavLink[],
-        headerNav,
       }
     },
   })

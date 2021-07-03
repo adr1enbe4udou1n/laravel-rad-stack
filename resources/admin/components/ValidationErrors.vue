@@ -9,13 +9,10 @@
 <script lang="ts">
   import { defineComponent, computed } from 'vue'
   import { usePage } from '@inertiajs/inertia-vue3'
-  import { Inertia } from '@inertiajs/inertia'
 
   export default defineComponent({
     setup() {
-      const errors = computed(
-        () => usePage<Inertia.PageProps>().props.value.errors
-      )
+      const errors = computed(() => usePage().props.value.errors)
       const hasErrors = computed(() => Object.keys(errors.value).length > 0)
 
       return {

@@ -10,7 +10,6 @@
 <script lang="ts">
   import { usePage } from '@inertiajs/inertia-vue3'
   import { computed, defineComponent } from 'vue'
-  import { Inertia } from '@inertiajs/inertia'
   import { enumVariants } from '@admin/types/enums'
 
   export default defineComponent({
@@ -29,7 +28,7 @@
         let options = props.choices
 
         if (typeof options === 'string') {
-          options = (usePage<Inertia.PageProps>().props.value.enums as any)[
+          options = (usePage().props.value.enums as any)[
             props.choices as string
           ]
         }
