@@ -6,12 +6,13 @@ COPY config config/
 COPY database database/
 COPY public public/
 COPY resources resources/
+COPY storage storage/
 COPY vendor vendor/
 COPY artisan composer.json composer.lock ./
 
-RUN mkdir storage && chown -R www-data:www-data bootstrap/cache storage
 RUN php artisan storage:link
 RUN php artisan elfinder:publish
+RUN chown -R www-data:www-data bootstrap/cache storage
 
 EXPOSE 80
 
