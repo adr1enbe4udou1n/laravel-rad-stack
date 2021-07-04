@@ -12,6 +12,7 @@ use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 use Inertia\Testing\Assert;
 use function Pest\Laravel\artisan;
+use function Pest\Laravel\assertDatabaseCount;
 use function Pest\Laravel\assertDatabaseHas;
 use function Pest\Laravel\assertDatabaseMissing;
 use function Pest\Laravel\delete;
@@ -397,6 +398,18 @@ test('admin can delete post', function () {
     assertDatabaseMissing('posts', [
         'title' => 'My deleted post',
     ]);
+});
+
+test('admin can delete multiple posts', function () {
+    $users = Post::factory(5)->create();
+
+    $response = delete('/admin/posts/bulk', [
+        'ids' => $users->map(fn (Post $post) => $post->id),
+    ]);
+
+    $response->assertStatus(302);
+    $response->assertSessionDoesntHaveErrors();
+    assertDatabaseCount('posts', 0);
 });
 
 test('scheduled posts are published when current time overlaps post publication date', function () {

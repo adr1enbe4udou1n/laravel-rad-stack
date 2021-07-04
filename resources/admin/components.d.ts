@@ -23,6 +23,7 @@ declare module 'vue' {
     DateField: typeof import('./components/fields/DateField.vue')['default']
     DateFilter: typeof import('./components/filters/DateFilter.vue')['default']
     DateInput: typeof import('./components/inputs/DateInput.vue')['default']
+    DeleteBulkButton: typeof import('./components/buttons/DeleteBulkButton.vue')['default']
     DeleteButton: typeof import('./components/buttons/DeleteButton.vue')['default']
     DeleteUserForm: typeof import('./components/profile/DeleteUserForm.vue')['default']
     DialogModal: typeof import('./components/DialogModal.vue')['default']

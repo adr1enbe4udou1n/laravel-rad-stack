@@ -20,6 +20,9 @@
         <template #actions>
           <export-button />
         </template>
+        <template #bulk-actions="{ selected }">
+          <delete-bulk-button :selected="selected" />
+        </template>
         <template #field:row-action="{ row }">
           <div class="flex gap-2 ml-auto">
             <show-button hide-label :only="['action', 'user']" />

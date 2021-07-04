@@ -72,7 +72,18 @@ class PostController extends Controller
 
         $post->update($request->only('pin', 'promote'));
 
-        return redirect()->route('admin.posts')->with('flash.success', __('User updated.'));
+        return redirect()->route('admin.posts')->with('flash.success', __('Post updated.'));
+    }
+
+    #[Delete('bulk', name: 'posts.bulk.destroy')]
+    public function bulkDestroy(Request $request)
+    {
+        $count = Post::query()->findMany($request->input('ids'))
+            ->each(fn (Post $post) => $post->delete())
+            ->count()
+        ;
+
+        return redirect()->route('admin.posts')->with('flash.success', __(':count posts deleted.', ['count' => $count]));
     }
 
     #[Delete('{post}', name: 'posts.destroy')]

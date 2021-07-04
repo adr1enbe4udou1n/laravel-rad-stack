@@ -8,6 +8,7 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Str;
 use Inertia\Testing\Assert;
 use Maatwebsite\Excel\Facades\Excel;
+use function Pest\Laravel\assertDatabaseCount;
 use function Pest\Laravel\assertDatabaseHas;
 use function Pest\Laravel\assertDatabaseMissing;
 use function Pest\Laravel\delete;
@@ -242,4 +243,16 @@ test('admin can delete user', function () {
     assertDatabaseMissing('users', [
         'email' => 'user@example.com',
     ]);
+});
+
+test('admin can delete multiple users', function () {
+    $users = User::factory(5)->create();
+
+    $response = delete('/admin/users/bulk', [
+        'ids' => $users->map(fn (User $user) => $user->id),
+    ]);
+
+    $response->assertStatus(302);
+    $response->assertSessionDoesntHaveErrors();
+    assertDatabaseCount('users', 1);
 });

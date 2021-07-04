@@ -27,7 +27,21 @@
       </div>
     </div>
     <div class="ml-auto flex items-center gap-2">
-      <slot name="actions" />
+      <div
+        v-if="hasSelectedItems && !!$slots['bulk-actions']"
+        class="flex flex-row items-center"
+      >
+        <span class="mr-4">
+          {{
+            $t('admin.data-table.selected', {
+              args: { count: selected.length },
+            })
+          }}
+        </span>
+
+        <slot name="bulk-actions" :selected="selected" />
+      </div>
+      <slot v-else name="actions" />
     </div>
   </div>
   <div
@@ -46,6 +60,12 @@
     >
       <thead>
         <tr class="text-left">
+          <th
+            v-if="!!$slots['bulk-actions']"
+            class="px-6 pt-6 pb-4 border-b text-center"
+          >
+            <input :checked="selectAll" type="checkbox" @change="onSelectAll" />
+          </th>
           <th
             v-for="column in getColumns"
             :key="column.field"
@@ -83,6 +103,7 @@
           </th>
         </tr>
         <tr v-if="hasFilter" class="text-left">
+          <th v-if="!!$slots['bulk-actions']"></th>
           <th
             v-for="column in getColumns"
             :key="column.field"
@@ -110,10 +131,13 @@
         <data-table-row
           v-for="item in source.data"
           :key="item.id"
+          :model-value="isItemSelected(item.id)"
+          :can-select="!!$slots['bulk-actions']"
           class="hover:bg-gray-100 focus-within:bg-gray-100"
           :class="{ 'cursor-pointer': rowClick }"
           :columns="getColumns"
           :item="item"
+          @input="toggleSelectedItem(item.id)"
           @click="onRowClick(item.id)"
         >
           <template
@@ -163,6 +187,7 @@
     inject,
     PropType,
     provide,
+    Ref,
     ref,
     watch,
   } from 'vue'
@@ -210,7 +235,35 @@
     setup(props) {
       const sortBy = ref('id')
       const sortDesc = ref(false)
+      const selectAll = ref(false)
+      const selected: Ref<string[] | number[]> = ref([])
       const resource = inject<string>('resource')
+
+      const hasSelectedItems = computed(() => {
+        return selected.value.length > 0
+      })
+
+      const isItemSelected = (id: string | number) => {
+        return selected.value.includes(id as never)
+      }
+
+      const toggleSelectedItem = (id: string | number) => {
+        if (isItemSelected(id)) {
+          selectAll.value = false
+          return selected.value.splice(selected.value.indexOf(id as never), 1)
+        }
+        return selected.value.push(id as never)
+      }
+
+      const onSelectAll = () => {
+        if (selectAll.value) {
+          selectAll.value = false
+          selected.value = []
+          return
+        }
+        selectAll.value = true
+        selected.value = props.source.data.map((model) => model.id)
+      }
 
       watch(
         () => props.sort,
@@ -265,6 +318,8 @@
       provide('filter', form.filter)
 
       const doQuery = () => {
+        selectAll.value = false
+
         form.get(location.pathname, {
           preserveState: true,
         } as VisitOptions)
@@ -315,6 +370,12 @@
         onRowClick,
         onSort,
         hasFilter,
+        selectAll,
+        onSelectAll,
+        selected,
+        hasSelectedItems,
+        isItemSelected,
+        toggleSelectedItem,
       }
     },
   })

@@ -84,6 +84,18 @@ class UserController extends Controller
         return redirect()->route('admin.users')->with('flash.success', __('User updated.'));
     }
 
+    #[Delete('bulk', name: 'users.bulk.destroy')]
+    public function bulkDestroy(Request $request)
+    {
+        $count = User::query()->findMany($request->input('ids'))
+            ->filter(fn (User $user) => Auth::user()->can('modify-user', $user))
+            ->each(fn (User $user) => $user->delete())
+            ->count()
+        ;
+
+        return redirect()->route('admin.users')->with('flash.success', __(':count users deleted.', ['count' => $count]));
+    }
+
     #[Delete('{user}', name: 'users.destroy', middleware: 'can:modify-user,user')]
     public function destroy(User $user)
     {

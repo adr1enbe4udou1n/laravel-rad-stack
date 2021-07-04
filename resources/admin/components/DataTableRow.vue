@@ -1,5 +1,13 @@
 <template>
   <tr>
+    <td v-if="canSelect" class="px-6 py-4 border-t text-center">
+      <input
+        :checked="modelValue"
+        type="checkbox"
+        @change="change"
+        @click.stop
+      />
+    </td>
     <td
       v-for="column in columns"
       :key="column.field"
@@ -59,14 +67,23 @@
       FileField,
     },
     props: {
+      modelValue: Boolean,
+      canSelect: Boolean,
       columns: Array as PropType<Column[]>,
       item: {
         type: Object as PropType<{ [key: string]: any }>,
         required: true,
       },
     },
-    setup(props) {
+    emits: ['update:modelValue'],
+    setup(props, { emit }) {
       provide('item', props.item)
+
+      const change = (e: Event) => {
+        emit('update:modelValue', (e.target as HTMLInputElement).checked)
+      }
+
+      return { change }
     },
   })
 </script>
