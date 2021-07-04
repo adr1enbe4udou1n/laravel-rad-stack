@@ -1,6 +1,6 @@
 <template>
   <tr>
-    <td v-if="canSelect" class="px-6 py-4 border-t text-center">
+    <td v-if="canSelect" class="px-4 py-4 border-t text-center">
       <input
         :checked="modelValue"
         type="checkbox"

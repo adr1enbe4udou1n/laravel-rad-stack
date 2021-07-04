@@ -62,7 +62,7 @@
         <tr class="text-left">
           <th
             v-if="!!$slots['bulk-actions']"
-            class="px-6 pt-6 pb-4 border-b text-center"
+            class="px-4 pt-6 pb-4 border-b text-center"
           >
             <input :checked="selectAll" type="checkbox" @change="onSelectAll" />
           </th>
