@@ -3,6 +3,7 @@
     <td v-if="canSelect" class="px-4 py-4 border-t text-center">
       <input
         :checked="modelValue"
+        class="w-6 h-6"
         type="checkbox"
         @change="change"
         @click.stop

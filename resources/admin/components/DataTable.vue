@@ -64,7 +64,12 @@
             v-if="!!$slots['bulk-actions']"
             class="px-4 pt-6 pb-4 border-b text-center"
           >
-            <input :checked="selectAll" type="checkbox" @change="onSelectAll" />
+            <input
+              :checked="selectAll"
+              type="checkbox"
+              class="w-6 h-6"
+              @change="onSelectAll"
+            />
           </th>
           <th
             v-for="column in getColumns"
@@ -151,7 +156,11 @@
         <tr v-if="source.data.length === 0">
           <td
             class="border-t px-6 py-4 text-center"
-            :colspan="getColumns.length"
+            :colspan="
+              !!$slots['bulk-actions']
+                ? getColumns.length + 1
+                : getColumns.length
+            "
           >
             {{ $t('admin.data-table.empty') }}
           </td>

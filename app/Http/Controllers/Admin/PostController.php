@@ -75,7 +75,15 @@ class PostController extends Controller
         return redirect()->route('admin.posts')->with('flash.success', __('Post updated.'));
     }
 
-    #[Delete('bulk', name: 'posts.bulk.destroy')]
+    #[Delete('{post}', name: 'posts.destroy')]
+    public function destroy(Post $post)
+    {
+        $post->delete();
+
+        return redirect()->route('admin.posts')->with('flash.success', __('Post deleted.'));
+    }
+
+    #[Delete('/', name: 'posts.bulk.destroy')]
     public function bulkDestroy(Request $request)
     {
         $count = Post::query()->findMany($request->input('ids'))
@@ -84,13 +92,5 @@ class PostController extends Controller
         ;
 
         return redirect()->route('admin.posts')->with('flash.success', __(':count posts deleted.', ['count' => $count]));
-    }
-
-    #[Delete('{post}', name: 'posts.destroy')]
-    public function destroy(Post $post)
-    {
-        $post->delete();
-
-        return redirect()->route('admin.posts')->with('flash.success', __('Post deleted.'));
     }
 }

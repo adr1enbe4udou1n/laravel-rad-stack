@@ -248,7 +248,7 @@ test('admin can delete user', function () {
 test('admin can delete multiple users', function () {
     $users = User::factory(5)->create();
 
-    $response = delete('/admin/users/bulk', [
+    $response = delete('/admin/users', [
         'ids' => $users->map(fn (User $user) => $user->id),
     ]);
 

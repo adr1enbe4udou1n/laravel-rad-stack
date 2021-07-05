@@ -403,7 +403,7 @@ test('admin can delete post', function () {
 test('admin can delete multiple posts', function () {
     $users = Post::factory(5)->create();
 
-    $response = delete('/admin/posts/bulk', [
+    $response = delete('/admin/posts', [
         'ids' => $users->map(fn (Post $post) => $post->id),
     ]);
 

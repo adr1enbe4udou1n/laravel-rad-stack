@@ -84,7 +84,15 @@ class UserController extends Controller
         return redirect()->route('admin.users')->with('flash.success', __('User updated.'));
     }
 
-    #[Delete('bulk', name: 'users.bulk.destroy')]
+    #[Delete('{user}', name: 'users.destroy', middleware: 'can:modify-user,user')]
+    public function destroy(User $user)
+    {
+        $user->delete();
+
+        return redirect()->route('admin.users')->with('flash.success', __('User deleted.'));
+    }
+
+    #[Delete('/', name: 'users.bulk.destroy')]
     public function bulkDestroy(Request $request)
     {
         $count = User::query()->findMany($request->input('ids'))
@@ -94,14 +102,6 @@ class UserController extends Controller
         ;
 
         return redirect()->route('admin.users')->with('flash.success', __(':count users deleted.', ['count' => $count]));
-    }
-
-    #[Delete('{user}', name: 'users.destroy', middleware: 'can:modify-user,user')]
-    public function destroy(User $user)
-    {
-        $user->delete();
-
-        return redirect()->route('admin.users')->with('flash.success', __('User deleted.'));
     }
 
     #[Post('{user}/impersonate', name: 'users.impersonate')]
