@@ -120,7 +120,7 @@ sail composer test
 yarn && yarn dev
 
 # If on Windows WSL, set your WSL IP host (shown from previous command)
-VITE_DEV_SERVER_URL=http://wsl.host
+VITE_DEV_SERVER_HOST=wsl.host
 ```
 
 ### VSCode configuration
