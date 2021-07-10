@@ -47,6 +47,8 @@
           'meta_description',
         ]),
         tags: props.post?.tags.map((t) => t.name) || [],
+        featured_image_file: null,
+        featured_image_delete: false,
       }
 
       const method = 'put'

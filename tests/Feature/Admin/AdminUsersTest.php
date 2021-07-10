@@ -164,8 +164,12 @@ test('admin can store user', function () {
         'role' => RoleEnum::user(),
     ]);
 
-    $response->assertStatus(302);
-    $response->assertSessionDoesntHaveErrors();
+    $response
+        ->assertStatus(302)
+        ->assertSessionDoesntHaveErrors()
+        ->assertRedirect('/admin/users')
+    ;
+
     assertDatabaseHas('users', [
         'name' => 'example',
         'email' => 'user@example.com',
@@ -179,8 +183,10 @@ test('admin cannot store user with invalid data', function () {
         'email' => 'user@example.com',
     ]);
 
-    $response->assertStatus(302);
-    $response->assertSessionHasErrors(['name']);
+    $response
+        ->assertStatus(302)
+        ->assertSessionHasErrors(['name'])
+    ;
 });
 
 test('admin can update user', function () {
@@ -194,8 +200,12 @@ test('admin can update user', function () {
         'role' => RoleEnum::user(),
     ]);
 
-    $response->assertStatus(302);
-    $response->assertSessionDoesntHaveErrors();
+    $response
+        ->assertStatus(302)
+        ->assertSessionDoesntHaveErrors()
+        ->assertRedirect('/admin/users')
+    ;
+
     assertDatabaseHas('users', [
         'name' => 'example',
         'email' => 'user@example.com',
@@ -211,8 +221,10 @@ test('admin cannot update user with invalid data', function () {
         'email' => 'user@example.com',
     ]);
 
-    $response->assertStatus(302);
-    $response->assertSessionHasErrors(['name']);
+    $response
+        ->assertStatus(302)
+        ->assertSessionHasErrors(['name'])
+    ;
 });
 
 test('admin can toggle non active user to active', function () {
@@ -224,8 +236,12 @@ test('admin can toggle non active user to active', function () {
         'active' => true,
     ]);
 
-    $response->assertStatus(302);
-    $response->assertSessionDoesntHaveErrors();
+    $response
+        ->assertStatus(302)
+        ->assertSessionDoesntHaveErrors()
+        ->assertRedirect('/admin/users')
+    ;
+
     assertDatabaseHas('users', [
         'active' => true,
     ]);
@@ -238,8 +254,12 @@ test('admin can delete user', function () {
 
     $response = delete("/admin/users/{$user->id}");
 
-    $response->assertStatus(302);
-    $response->assertSessionDoesntHaveErrors();
+    $response
+        ->assertStatus(302)
+        ->assertSessionDoesntHaveErrors()
+        ->assertRedirect('/admin/users')
+    ;
+
     assertDatabaseMissing('users', [
         'email' => 'user@example.com',
     ]);
@@ -252,7 +272,11 @@ test('admin can delete multiple users', function () {
         'ids' => $users->map(fn (User $user) => $user->id),
     ]);
 
-    $response->assertStatus(302);
-    $response->assertSessionDoesntHaveErrors();
+    $response
+        ->assertStatus(302)
+        ->assertSessionDoesntHaveErrors()
+        ->assertRedirect('/admin/users')
+    ;
+
     assertDatabaseCount('users', 1);
 });

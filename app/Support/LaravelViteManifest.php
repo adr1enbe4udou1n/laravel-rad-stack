@@ -4,7 +4,6 @@ namespace App\Support;
 
 use Config;
 use Illuminate\Support\Facades\File;
-use Illuminate\Support\Str;
 
 class LaravelViteManifest
 {
@@ -13,8 +12,10 @@ class LaravelViteManifest
     public function embed(string $name, string $entry, int $port): string
     {
         if (Config::get('vite.dev_server')) {
+            $host = Config::get('vite.dev_server_host');
+
             return $this->jsImports(
-                Str::of(Config::get('vite.dev_server_url'))->trim('/').":{$port}/{$entry}"
+                "http://{$host}:{$port}/{$entry}"
             );
         }
 

@@ -37,6 +37,7 @@ declare module 'vue' {
     ExportButton: typeof import('./components/buttons/ExportButton.vue')['default']
     Field: typeof import('./components/Field.vue')['default']
     FileField: typeof import('./components/fields/FileField.vue')['default']
+    FileInput: typeof import('./components/inputs/FileInput.vue')['default']
     FlashMessages: typeof import('./components/FlashMessages.vue')['default']
     FlatpickrInputWrapper: typeof import('./components/FlatpickrInputWrapper.vue')['default']
     FormSection: typeof import('./components/FormSection.vue')['default']

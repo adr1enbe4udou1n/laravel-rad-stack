@@ -49,6 +49,12 @@ class PostController extends Controller
 
         $post->syncTags($request->tags);
 
+        if ($request->featured_image_file) {
+            $post->addMediaFromRequest('featured_image_file')
+                ->toMediaCollection('featured-image')
+            ;
+        }
+
         return redirect()->route('admin.posts')->with('flash.success', __('Post created.'));
     }
 
@@ -58,6 +64,16 @@ class PostController extends Controller
         $post->update($request->validated());
 
         $post->syncTags($request->tags);
+
+        if ($request->featured_image_delete) {
+            $post->clearMediaCollection('featured-image');
+        }
+
+        if ($request->featured_image_file) {
+            $post->addMediaFromRequest('featured_image_file')
+                ->toMediaCollection('featured-image')
+            ;
+        }
 
         return redirect()->route('admin.posts')->with('flash.success', __('Post updated.'));
     }

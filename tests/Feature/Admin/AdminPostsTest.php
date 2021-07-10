@@ -7,6 +7,7 @@ use App\Models\Post;
 use App\Models\PostCategory;
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
@@ -225,9 +226,9 @@ test('admin can render post create page', function () {
 });
 
 test('admin can render post edit page', function () {
-    /* @var Post */
     Storage::fake('media');
 
+    /* @var Post */
     $post = Post::factory()->create();
     $post->addMedia(database_path('media/placeholder.jpg'))
         ->preservingOriginal()
@@ -251,8 +252,11 @@ test('admin can store post', function (array $data, array $expected) {
         'category_id' => $category->id,
     ]);
 
-    $response->assertStatus(302);
-    $response->assertSessionDoesntHaveErrors();
+    $response
+        ->assertStatus(302)
+        ->assertSessionDoesntHaveErrors()
+        ->assertRedirect('/admin/posts')
+    ;
 
     assertDatabaseHas('posts', $expected);
 })->with([[
@@ -296,6 +300,29 @@ test('admin can store post', function (array $data, array $expected) {
     ],
 ]]);
 
+test('admin can store post with image', function () {
+    Storage::fake('media');
+    $category = PostCategory::factory()->create();
+
+    $response = post('/admin/posts', [
+        'category_id' => $category->id,
+        'title' => 'My new post',
+        'featured_image_file' => UploadedFile::fake()->image(
+            'placeholder.jpg'
+        ),
+    ]);
+
+    $response
+        ->assertStatus(302)
+        ->assertSessionDoesntHaveErrors()
+        ->assertRedirect('/admin/posts')
+    ;
+
+    assertDatabaseHas('media', [
+        'file_name' => 'placeholder.jpg',
+    ]);
+});
+
 test('admin cannot store post with invalid data', function (array $data, array $expected) {
     $category = PostCategory::factory()->create();
 
@@ -303,8 +330,10 @@ test('admin cannot store post with invalid data', function (array $data, array $
         'category_id' => $category->id,
     ]);
 
-    $response->assertStatus(302);
-    $response->assertSessionHasErrors($expected);
+    $response
+        ->assertStatus(302)
+        ->assertSessionHasErrors($expected)
+    ;
 })->with('invalid_posts');
 
 test('admin can update post', function (array $initial, array $data, array $expected) {
@@ -317,8 +346,11 @@ test('admin can update post', function (array $initial, array $data, array $expe
         'category_id' => $post->category->id,
     ]);
 
-    $response->assertStatus(302);
-    $response->assertSessionDoesntHaveErrors();
+    $response
+        ->assertStatus(302)
+        ->assertSessionDoesntHaveErrors()
+        ->assertRedirect('/admin/posts')
+    ;
 
     assertDatabaseHas('posts', $expected);
 })->with([[
@@ -355,6 +387,62 @@ test('admin can update post', function (array $initial, array $data, array $expe
     ],
 ]]);
 
+test('admin can update post with image', function () {
+    Storage::fake('media');
+
+    $post = Post::factory()
+        ->for(PostCategory::factory(), 'category')
+        ->create()
+    ;
+
+    $response = put("/admin/posts/{$post->id}", [
+        'category_id' => $post->category->id,
+        'title' => $post->title,
+        'featured_image_file' => UploadedFile::fake()->image(
+            'placeholder.jpg'
+        ),
+    ]);
+
+    $response
+        ->assertStatus(302)
+        ->assertSessionDoesntHaveErrors()
+        ->assertRedirect('/admin/posts')
+    ;
+
+    assertDatabaseHas('media', [
+        'file_name' => 'placeholder.jpg',
+    ]);
+});
+
+test('admin can delete image of post', function () {
+    Storage::fake('media');
+
+    /** @var Post */
+    $post = Post::factory()
+        ->for(PostCategory::factory(), 'category')
+        ->create()
+    ;
+
+    $post->addMedia(database_path('media/placeholder.jpg'))
+        ->preservingOriginal()
+        ->toMediaCollection('featured-image')
+    ;
+
+    $response = put("/admin/posts/{$post->id}", [
+        'category_id' => $post->category->id,
+        'title' => 'My updated title',
+        'featured_image_delete' => true,
+    ]);
+
+    $response
+        ->assertStatus(302)
+        ->assertSessionDoesntHaveErrors()
+        ->assertRedirect('/admin/posts')
+    ;
+
+    assertDatabaseCount('media', 0);
+});
+
 test('admin cannot update post with invalid data', function (array $data, array $expected) {
     $post = Post::factory()
         ->draft()
@@ -366,8 +454,10 @@ test('admin cannot update post with invalid data', function (array $data, array 
         'category_id' => $post->category->id,
     ]);
 
-    $response->assertStatus(302);
-    $response->assertSessionHasErrors($expected);
+    $response
+        ->assertStatus(302)
+        ->assertSessionHasErrors($expected)
+    ;
 })->with('invalid_posts');
 
 test('admin can toggle post', function (string $attribute) {
@@ -379,8 +469,12 @@ test('admin can toggle post', function (string $attribute) {
         $attribute => true,
     ]);
 
-    $response->assertStatus(302);
-    $response->assertSessionDoesntHaveErrors();
+    $response
+        ->assertStatus(302)
+        ->assertSessionDoesntHaveErrors()
+        ->assertRedirect('/admin/posts')
+    ;
+
     assertDatabaseHas('posts', [
         $attribute => true,
     ]);
@@ -393,8 +487,12 @@ test('admin can delete post', function () {
 
     $response = delete("/admin/posts/{$post->id}");
 
-    $response->assertStatus(302);
-    $response->assertSessionDoesntHaveErrors();
+    $response
+        ->assertStatus(302)
+        ->assertSessionDoesntHaveErrors()
+        ->assertRedirect('/admin/posts')
+    ;
+
     assertDatabaseMissing('posts', [
         'title' => 'My deleted post',
     ]);
@@ -407,8 +505,12 @@ test('admin can delete multiple posts', function () {
         'ids' => $users->map(fn (Post $post) => $post->id),
     ]);
 
-    $response->assertStatus(302);
-    $response->assertSessionDoesntHaveErrors();
+    $response
+        ->assertStatus(302)
+        ->assertSessionDoesntHaveErrors()
+        ->assertRedirect('/admin/posts')
+    ;
+
     assertDatabaseCount('posts', 0);
 });
 
@@ -426,7 +528,7 @@ test('scheduled posts are published when current time overlaps post publication 
         'published_at' => (new Carbon())->subDay(1),
     ]);
 
-    artisan(PublishScheduledPosts::class);
+    artisan(PublishScheduledPosts::class)->run();
 
     assertCount(1, Post::draft()->get());
     assertCount(1, Post::scheduled()->get());

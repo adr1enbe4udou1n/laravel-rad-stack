@@ -6,6 +6,7 @@ use App\Enums\PostStatusEnum;
 use App\Models\PostCategory;
 use App\Models\User;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Support\Arr;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\Rule;
@@ -44,6 +45,8 @@ class PostStoreRequest extends FormRequest
             'meta_title' => ['nullable'],
             'meta_description' => ['nullable'],
             'tags' => ['array'],
+            'featured_image_file' => ['nullable', 'image'],
+            'featured_image_delete' => ['boolean'],
         ];
     }
 
@@ -81,5 +84,15 @@ class PostStoreRequest extends FormRequest
             'status' => $status,
             'published_at' => $publishedAt,
         ]);
+    }
+
+    /**
+     * Get the validated data from the request.
+     *
+     * @return array
+     */
+    public function validated()
+    {
+        return Arr::except($this->validator->validated(), ['featured_image_file', 'featured_image_delete']);
     }
 }

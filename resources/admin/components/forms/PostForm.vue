@@ -105,6 +105,23 @@
         </div>
         <div class="px-4 py-5 bg-white sm:p-6 shadow sm:rounded-md mt-6">
           <div>
+            <div class="flex">
+              <image-field
+                v-if="post?.featured_image.length"
+                :value="post?.featured_image"
+                class="mr-4"
+              />
+              <div>
+                <file-input
+                  v-model:delete="form.featured_image_delete"
+                  source="featured_image"
+                  :can-delete="!!post?.featured_image.length"
+                  @upload="onUpload"
+                />
+              </div>
+            </div>
+          </div>
+          <div class="mt-4">
             <reference-input
               v-model="form.category_id"
               :error="form.errors.category_id"
@@ -172,6 +189,8 @@
           meta_title?: string
           meta_description?: string
           tags?: string[]
+          featured_image_file?: File | null
+          featured_image_delete?: boolean
         }>,
         default: () => {
           return {
@@ -187,6 +206,8 @@
             meta_title: null,
             meta_description: null,
             tags: [],
+            featured_image_file: null,
+            featured_image_delete: false,
           }
         },
       },
@@ -204,16 +225,19 @@
       const uploading = ref(false)
       const form = useForm(props.initialValues)
 
+      const onUpload = (file: File) => (form.featured_image_file = file)
+
       const submit = (publish: boolean) => {
         form
           .transform((data) => ({
             ...data,
+            _method: props.method,
             publish,
           }))
-          .submit(props.method, props.url)
+          .post(props.url)
       }
 
-      return { form, uploading, submit }
+      return { form, uploading, onUpload, submit }
     },
   })
 </script>
