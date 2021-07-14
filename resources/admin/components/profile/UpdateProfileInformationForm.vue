@@ -48,7 +48,6 @@
   import { useForm } from '@inertiajs/inertia-vue3'
   import { defineComponent, PropType } from 'vue'
   import { Profile } from '@admin/types'
-  import { VisitOptions } from '@inertiajs/inertia'
 
   export default defineComponent({
     props: {
@@ -67,7 +66,7 @@
         form.put(route('user-profile-information.update'), {
           errorBag: 'updateProfileInformation',
           preserveScroll: true,
-        } as VisitOptions)
+        })
       }
 
       return { form, submit }

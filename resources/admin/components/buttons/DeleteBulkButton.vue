@@ -37,7 +37,6 @@
 </template>
 
 <script lang="ts">
-  import { VisitOptions } from '@inertiajs/inertia'
   import { useForm } from '@inertiajs/inertia-vue3'
   import { transChoice } from 'matice'
   import { computed, defineComponent, inject, ref } from 'vue'
@@ -68,7 +67,7 @@
         form.delete(route(`admin.${resource}.bulk.destroy`), {
           preserveState: false,
           onSuccess: () => closeModal(),
-        } as unknown as VisitOptions)
+        })
       }
 
       const args = computed(() => {

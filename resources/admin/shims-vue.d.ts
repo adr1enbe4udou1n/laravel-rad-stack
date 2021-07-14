@@ -1,5 +1,5 @@
 import { Profile, EnumTypes } from '@admin/types'
-import { ErrorBag, Errors } from '@inertiajs/inertia'
+import { ErrorBag, Errors, Page, PageProps } from '@inertiajs/inertia'
 
 declare module '@inertiajs/inertia' {
   interface PageProps {
@@ -9,6 +9,11 @@ declare module '@inertiajs/inertia' {
     flash: { [key: string]: string }
     errors: Errors & ErrorBag
     enums: EnumTypes
-    [key: string]: unknown
+  }
+}
+
+declare module '@vue/runtime-core' {
+  interface ComponentCustomProperties {
+    $page: Page<PageProps>
   }
 }

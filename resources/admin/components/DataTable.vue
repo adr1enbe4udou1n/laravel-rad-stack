@@ -204,7 +204,7 @@
   import { Column } from '@admin/types/data-table'
   import route from 'ziggy-js'
   import { useForm } from '@inertiajs/inertia-vue3'
-  import { Inertia, VisitOptions } from '@inertiajs/inertia'
+  import { Inertia } from '@inertiajs/inertia'
   import { useDebounceFn } from '@vueuse/shared'
 
   import TextFilter from '@admin/components/filters/TextFilter.vue'
@@ -331,7 +331,7 @@
 
         form.get(location.pathname, {
           preserveState: true,
-        } as VisitOptions)
+        })
       }
 
       const onPageChange = (pager: { page: number; perPage: number }) => {

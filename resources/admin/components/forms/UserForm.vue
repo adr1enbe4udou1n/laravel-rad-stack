@@ -48,7 +48,6 @@
 </template>
 
 <script lang="ts">
-  import { VisitOptions } from '@inertiajs/inertia'
   import { useForm } from '@inertiajs/inertia-vue3'
   import { defineComponent, PropType } from 'vue'
 
@@ -88,7 +87,7 @@
       const submit = () => {
         form.submit(props.method, props.url, {
           preserveState: true,
-        } as VisitOptions)
+        })
       }
 
       return { form, submit }

@@ -5,10 +5,7 @@ import 'virtual:windi.css'
 import './app.css'
 
 import { createApp, h } from 'vue'
-import {
-  App as InertiaApp,
-  plugin as InertiaPlugin,
-} from '@inertiajs/inertia-vue3'
+import { createInertiaApp, Link } from '@inertiajs/inertia-vue3'
 import { InertiaProgress } from '@inertiajs/progress'
 
 import Route from './plugins/route'
@@ -19,24 +16,23 @@ import HeroIcons from './plugins/hero-icons'
 const el = document.getElementById('app')
 
 if (el) {
-  const app = createApp({
-    render: () =>
-      h(InertiaApp, {
-        initialPage: JSON.parse(el.dataset.page as string),
-        resolveComponent: (name) => {
-          const pages = import.meta.globEager(`./pages/**/*`)
+  createInertiaApp({
+    resolve: (name) => {
+      const pages = import.meta.globEager(`./pages/**/*`)
 
-          return pages[`./pages/${name}.vue`].default
-        },
-      }),
+      return pages[`./pages/${name}.vue`].default
+    },
+    setup({ el, app, props, plugin }) {
+      createApp({ render: () => h(app, props) })
+        .use(plugin)
+        .use(Route)
+        .use(Translations)
+        .use(DateFns)
+        .use(HeroIcons)
+        .component('InertiaLink', Link)
+        .mount(el)
+    },
   })
-    .use(Route)
-    .use(Translations)
-    .use(DateFns)
-    .use(InertiaPlugin)
-    .use(HeroIcons)
-
-  app.mount(el)
 
   InertiaProgress.init({ color: '#4B5563' })
 }

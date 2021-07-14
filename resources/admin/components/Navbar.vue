@@ -178,7 +178,7 @@
   import route from 'ziggy-js'
   import { NavLink, mainNav, isLink } from '@admin/_nav'
   import { defineComponent, onMounted, Ref, ref, watch } from 'vue'
-  import { Inertia, VisitOptions } from '@inertiajs/inertia'
+  import { Inertia } from '@inertiajs/inertia'
   import { usePage } from '@inertiajs/inertia-vue3'
 
   export default defineComponent({
@@ -198,9 +198,13 @@
       watch(
         () => globalSearch.value,
         (val) =>
-          Inertia.get(route('admin.search', val), {}, {
-            preserveState: true,
-          } as VisitOptions)
+          Inertia.get(
+            route('admin.search', val as string),
+            {},
+            {
+              preserveState: true,
+            }
+          )
       )
 
       onMounted(() => {

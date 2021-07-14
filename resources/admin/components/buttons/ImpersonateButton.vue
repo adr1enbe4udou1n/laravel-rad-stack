@@ -13,7 +13,6 @@
 
 <script lang="ts">
   import { Model } from '@admin/types'
-  import { VisitOptions } from '@inertiajs/inertia'
   import { useForm } from '@inertiajs/inertia-vue3'
   import { defineComponent, inject } from 'vue'
   import route from 'ziggy-js'
@@ -31,7 +30,7 @@
       const submit = () => {
         form.post(route(`admin.${resource}.impersonate`, item?.id), {
           preserveScroll: true,
-        } as unknown as VisitOptions)
+        })
       }
 
       return {

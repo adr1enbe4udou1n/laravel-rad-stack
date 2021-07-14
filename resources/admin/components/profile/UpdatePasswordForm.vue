@@ -66,7 +66,6 @@
   import route from 'ziggy-js'
   import { useForm } from '@inertiajs/inertia-vue3'
   import { defineComponent, Ref, ref } from 'vue'
-  import { VisitOptions } from '@inertiajs/inertia'
 
   export default defineComponent({
     setup() {
@@ -97,7 +96,7 @@
               current_password.value?.focus()
             }
           },
-        } as unknown as VisitOptions)
+        })
       }
 
       return { form, submit, password, current_password }

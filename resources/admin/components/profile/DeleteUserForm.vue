@@ -75,7 +75,6 @@
   import route from 'ziggy-js'
   import { useForm } from '@inertiajs/inertia-vue3'
   import { defineComponent, Ref, ref } from 'vue'
-  import { VisitOptions } from '@inertiajs/inertia'
 
   export default defineComponent({
     setup() {
@@ -106,7 +105,7 @@
           onFinish: () => {
             form.reset()
           },
-        } as unknown as VisitOptions)
+        })
       }
 
       return {

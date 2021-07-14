@@ -64,7 +64,6 @@
   import route from 'ziggy-js'
   import { useForm } from '@inertiajs/inertia-vue3'
   import { defineComponent } from 'vue'
-  import { VisitOptions } from '@inertiajs/inertia'
 
   export default defineComponent({
     setup() {
@@ -80,7 +79,7 @@
       const submit = () => {
         form.post(route('register'), {
           onFinish: () => form.reset('password', 'password_confirmation'),
-        } as unknown as VisitOptions)
+        })
       }
 
       return { form, submit }

@@ -15,8 +15,8 @@
     :filter-results="!asyncSearch"
     :delay="200"
   >
-    <template #singlelabel="{ value }">
-      <slot name="singlelabel" :value="value"></slot>
+    <template #singlelabel="props">
+      <slot name="singlelabel" :value="props.value"></slot>
     </template>
 
     <template #option="{ option }">
