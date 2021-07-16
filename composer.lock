@@ -1432,26 +1432,26 @@
         },
         {
             "name": "intervention/image",
-            "version": "2.5.1",
+            "version": "2.6.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Intervention/image.git",
-                "reference": "abbf18d5ab8367f96b3205ca3c89fb2fa598c69e"
+                "reference": "a2d7238069bb01322f9c2a661449955434fec9c6"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Intervention/image/zipball/abbf18d5ab8367f96b3205ca3c89fb2fa598c69e",
-                "reference": "abbf18d5ab8367f96b3205ca3c89fb2fa598c69e",
+                "url": "https://api.github.com/repos/Intervention/image/zipball/a2d7238069bb01322f9c2a661449955434fec9c6",
+                "reference": "a2d7238069bb01322f9c2a661449955434fec9c6",
                 "shasum": ""
             },
             "require": {
                 "ext-fileinfo": "*",
-                "guzzlehttp/psr7": "~1.1",
+                "guzzlehttp/psr7": "~1.1 || ^2.0",
                 "php": ">=5.4.0"
             },
             "require-dev": {
                 "mockery/mockery": "~0.9.2",
-                "phpunit/phpunit": "^4.8 || ^5.7"
+                "phpunit/phpunit": "^4.8 || ^5.7 || ^7.5.15"
             },
             "suggest": {
                 "ext-gd": "to use GD library based image processing.",
@@ -1500,9 +1500,19 @@
             ],
             "support": {
                 "issues": "https://github.com/Intervention/image/issues",
-                "source": "https://github.com/Intervention/image/tree/master"
+                "source": "https://github.com/Intervention/image/tree/2.6.0"
             },
-            "time": "2019-11-02T09:15:47+00:00"
+            "funding": [
+                {
+                    "url": "https://www.paypal.me/interventionphp",
+                    "type": "custom"
+                },
+                {
+                    "url": "https://github.com/Intervention",
+                    "type": "github"
+                }
+            ],
+            "time": "2021-07-06T13:35:54+00:00"
         },
         {
             "name": "itsgoingd/clockwork",
@@ -5453,16 +5463,16 @@
         },
         {
             "name": "spatie/laravel-translatable",
-            "version": "5.0.0",
+            "version": "5.0.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/spatie/laravel-translatable.git",
-                "reference": "dee1a11a7bff406976337d4cae66f53816637e73"
+                "reference": "c1c201ff3ddff767ab53da2faf78ba141518ae69"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/spatie/laravel-translatable/zipball/dee1a11a7bff406976337d4cae66f53816637e73",
-                "reference": "dee1a11a7bff406976337d4cae66f53816637e73",
+                "url": "https://api.github.com/repos/spatie/laravel-translatable/zipball/c1c201ff3ddff767ab53da2faf78ba141518ae69",
+                "reference": "c1c201ff3ddff767ab53da2faf78ba141518ae69",
                 "shasum": ""
             },
             "require": {
@@ -5524,7 +5534,7 @@
             ],
             "support": {
                 "issues": "https://github.com/spatie/laravel-translatable/issues",
-                "source": "https://github.com/spatie/laravel-translatable/tree/5.0.0"
+                "source": "https://github.com/spatie/laravel-translatable/tree/5.0.1"
             },
             "funding": [
                 {
@@ -5532,7 +5542,7 @@
                     "type": "custom"
                 }
             ],
-            "time": "2021-03-26T16:54:50+00:00"
+            "time": "2021-07-15T10:30:08+00:00"
         },
         {
             "name": "spatie/temporary-directory",
@@ -10292,16 +10302,16 @@
         },
         {
             "name": "laravel/sail",
-            "version": "v1.8.5",
+            "version": "v1.8.6",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laravel/sail.git",
-                "reference": "cab38edc00804700518e110df2677ef34c3dbb2e"
+                "reference": "51ecfe0f048f8f8e6c5617e02a1f67ca22817c98"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel/sail/zipball/cab38edc00804700518e110df2677ef34c3dbb2e",
-                "reference": "cab38edc00804700518e110df2677ef34c3dbb2e",
+                "url": "https://api.github.com/repos/laravel/sail/zipball/51ecfe0f048f8f8e6c5617e02a1f67ca22817c98",
+                "reference": "51ecfe0f048f8f8e6c5617e02a1f67ca22817c98",
                 "shasum": ""
             },
             "require": {
@@ -10348,7 +10358,7 @@
                 "issues": "https://github.com/laravel/sail/issues",
                 "source": "https://github.com/laravel/sail"
             },
-            "time": "2021-07-13T14:20:58+00:00"
+            "time": "2021-07-15T07:35:41+00:00"
         },
         {
             "name": "myclabs/deep-copy",
