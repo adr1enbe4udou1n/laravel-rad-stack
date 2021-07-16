@@ -73,6 +73,7 @@ steps:
   image: appleboy/drone-ssh
   settings:
     host: front.okami101.io
+    port: 2222
     username: okami
     key:
       from_secret: swarm_ssh_key
