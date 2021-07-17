@@ -12,7 +12,7 @@ steps:
   settings:
     restore: true
     mount:
-    - ./node_modules
+    - ./.pnpm-store
     - ./vendor
 
 - name: backend
@@ -38,7 +38,9 @@ steps:
 - name: frontend
   image: node:14-alpine
   commands:
-  - yarn && yarn lint && yarn build
+  - curl -f https://get.pnpm.io/v6.7.js | node - add --global pnpm@6
+  - pnpm config set store-dir .pnpm-store
+  - pnpm i && pnpm lint && pnpm build
   depends_on:
   - restore-cache
 
@@ -50,7 +52,7 @@ steps:
   settings:
     rebuild: true
     mount:
-    - ./node_modules
+    - ./.pnpm-store
     - ./vendor
   depends_on:
   - frontend

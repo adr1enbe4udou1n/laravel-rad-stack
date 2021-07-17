@@ -89,7 +89,7 @@ php artisan migrate:fresh --seed
 php artisan serve
 
 # Finally launch frontend Vite HMR dev server
-yarn && yarn dev
+pnpm i && pnpm dev
 ```
 
 Both front and admin dev HMR server will be started in parallel into different ports.
@@ -117,7 +117,7 @@ sail php artisan migrate:fresh --seed
 sail composer test
 
 # Finally launch frontend Vite HMR dev server on local
-yarn && yarn dev
+pnpm && pnpm dev
 
 # If on Windows WSL, set your WSL IP host (shown from previous command)
 VITE_DEV_SERVER_HOST=wsl.host
