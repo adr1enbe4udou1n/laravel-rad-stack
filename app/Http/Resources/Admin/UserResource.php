@@ -22,7 +22,7 @@ class UserResource extends JsonResource
      */
     public function toArray($request)
     {
-        return parent::toArray($request) + [
+        return $this->resource->toArray() + [
             'can_be_updated' => Auth::user()->canUpdate($this->resource),
             'can_be_impersonated' => Auth::user()->canImpersonate($this->resource),
         ];
