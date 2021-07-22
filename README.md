@@ -116,8 +116,9 @@ sail php artisan migrate:fresh --seed
 # Launch tests with coverage
 sail composer test
 
-# Finally launch frontend Vite HMR dev server on local
-pnpm && pnpm dev
+# Finally launch frontend Vite HMR dev server on local with [PNPM](https://pnpm.io/fr/)
+pnpm i
+pnpm dev
 
 # If on Windows WSL, set your WSL IP host (shown from previous command)
 VITE_DEV_SERVER_HOST=wsl.host
