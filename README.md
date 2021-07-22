@@ -89,7 +89,8 @@ php artisan migrate:fresh --seed
 php artisan serve
 
 # Finally launch frontend Vite HMR dev server
-pnpm i && pnpm dev
+pnpm i
+pnpm dev
 ```
 
 Both front and admin dev HMR server will be started in parallel into different ports.
