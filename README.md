@@ -145,9 +145,9 @@ composer analyse # PHP static analysis
 # Use custom env.testing file if needed for next line
 composer test # Launch backend tests suite with console coverage report, and fail if less than 90% (adapt for your own needs)
 
-yarn lint --fix # TS & Vue files auto format
-yarn vue-tsc --noEmit # Full TS & Vue templates compiling report
-yarn test:unit # Launch client side unit testing suite
+pnpm lint --fix # TS & Vue files auto format
+pnpm vue-tsc --noEmit # Full TS & Vue templates compiling report
+pnpm test:unit # Launch client side unit testing suite
 ```
 
 #### TDD ready
