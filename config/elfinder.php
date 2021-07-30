@@ -28,6 +28,8 @@ return [
     'disks' => [
         'files' => [
             'alias' => 'Local storage',
+            'glideURL' => '/glide/files',
+            'glideKey' => env('GLIDE_KEY'),
         ],
     ],
 
