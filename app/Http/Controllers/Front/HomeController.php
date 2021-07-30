@@ -10,6 +10,6 @@ class HomeController extends Controller
     #[Get('/', name: 'home')]
     public function index()
     {
-        return view('front/app');
+        return view('front::app');
     }
 }

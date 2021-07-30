@@ -4,6 +4,7 @@ namespace App\Providers;
 
 use App\Http\Controllers\AdminAuthController;
 use App\Http\Controllers\DestroyUserController;
+use App\Http\Controllers\ImageController;
 use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvider;
 use Illuminate\Routing\Router;
 use Illuminate\Support\Facades\Route;
@@ -116,5 +117,7 @@ class RouteServiceProvider extends ServiceProvider
                 }
             )
         ;
+
+        Route::get('glide/{path}', [ImageController::class, 'glide'])->where('path', '.+');
     }
 }

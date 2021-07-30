@@ -55,6 +55,7 @@ Only simple basic features :
 - [Laravel Excel](https://laravel-excel.com/) as perfect solution for data table Excel export.
 - [Spatie Laravel Enum](https://github.com/spatie/laravel-enum) for proper enum support.
 - [Spatie Query Builder](https://github.com/spatie/laravel-query-builder) as nice Eloquent builder for API REST resources browsing, totally bridged inside above DataTable component.
+- [Glide](https://glide.thephpleague.com/) for dynamic image resizing.
 
 ## Dev tools for high QA
 
