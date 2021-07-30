@@ -13,7 +13,7 @@
         v-for="post in posts.data"
         :key="post.id"
         class="flex w-[calc(30%)] overflow-hidden rounded"
-        :href="route('admin.posts.edit', post.id)"
+        :href="route('admin.posts.edit', { id: post.id })"
       >
         <div
           v-if="post.featured_image[0].preview_url"

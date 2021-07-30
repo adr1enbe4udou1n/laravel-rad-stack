@@ -52,7 +52,7 @@
       }
 
       const method = 'put'
-      const url = route('admin.posts.update', props.post?.id)
+      const url = route('admin.posts.update', { id: props.post!.id })
 
       return { url, method, values }
     },

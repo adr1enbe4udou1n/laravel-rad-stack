@@ -199,7 +199,7 @@
         () => globalSearch.value,
         (val) =>
           Inertia.get(
-            route('admin.search', val as string),
+            route('admin.search', { query: val }),
             {},
             {
               preserveState: true,

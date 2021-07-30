@@ -1,8 +1,9 @@
 <template>
   <base-button
+    v-if="item"
     icon="pencil"
     variant="info"
-    :href="route(`admin.${resource}.edit`, item?.id)"
+    :href="route(`admin.${resource}.edit`, { id: item.id })"
     :hide-label="hideLabel"
     :only="only"
   >

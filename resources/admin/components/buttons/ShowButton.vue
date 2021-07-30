@@ -1,7 +1,8 @@
 <template>
   <base-button
+    v-if="item"
     icon="eye"
-    :href="route(`admin.${resource}.show`, item?.id)"
+    :href="route(`admin.${resource}.show`, { id: item.id })"
     variant="success"
     :hide-label="hideLabel"
     :only="only"

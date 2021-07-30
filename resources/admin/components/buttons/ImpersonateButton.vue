@@ -28,7 +28,7 @@
       const form = useForm({})
 
       const submit = () => {
-        form.post(route(`admin.${resource}.impersonate`, item?.id), {
+        form.post(route(`admin.${resource}.impersonate`, { id: item!.id }), {
           preserveScroll: true,
         })
       }

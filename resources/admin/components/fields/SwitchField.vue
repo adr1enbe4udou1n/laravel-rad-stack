@@ -26,7 +26,7 @@
       const modelValue = computed({
         get: () => props.value,
         set: (val) => {
-          Inertia.patch(route(`admin.${resource}.toggle`, item?.id), {
+          Inertia.patch(route(`admin.${resource}.toggle`, { id: item!.id }), {
             [props.field]: val,
           })
         },

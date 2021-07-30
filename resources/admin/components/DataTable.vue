@@ -342,7 +342,7 @@
 
       const onRowClick = (id: number) => {
         if (props.rowClick && resource) {
-          Inertia.get(route(`admin.${resource}.${props.rowClick}`, id))
+          Inertia.get(route(`admin.${resource}.${props.rowClick}`, { id }))
         }
       }
 
