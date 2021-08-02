@@ -32,7 +32,7 @@ abstract class BaseQuery
         }
 
         if (request()->get('export')) {
-            $fileName = Str::lower(trans_choice("crud.{$this->resource}.name", 10));
+            $fileName = Str::slug(trans_choice("crud.{$this->resource}.name", 10));
             $date = date('Ymd-His');
 
             return Excel::download($this->export, "export-{$fileName}-{$date}.xlsx");
