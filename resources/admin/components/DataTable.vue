@@ -90,7 +90,7 @@
               class="inline-flex items-center font-bold"
             >
               <span :class="{ 'order-2': column.numeric }">
-                {{ $ta(column.field) }}
+                {{ column.label || $ta(column.field) }}
               </span>
               <component
                 :is="`${sortDesc ? 'arrow-down' : 'arrow-up'}-icon`"
@@ -103,7 +103,7 @@
               />
             </div>
             <span v-else>
-              {{ $ta(column.field) }}
+              {{ column.label || $ta(column.field) }}
             </span>
           </th>
         </tr>
@@ -142,7 +142,7 @@
           :class="{ 'cursor-pointer': rowClick }"
           :columns="getColumns"
           :item="item"
-          @input="toggleSelectedItem(item.id)"
+          @select="toggleSelectedItem(item.id)"
           @click="onRowClick(item.id)"
         >
           <template

@@ -24,17 +24,17 @@
         <slot
           :name="`field:${column.field}`"
           :row="item"
-          :value="item[column.field]"
+          :value="getValue(column)"
         >
           <component
             :is="`${column.type}-field`"
-            v-if="column.type && item[column.field] !== null"
+            v-if="column.type && hasValue(column)"
             :field="column.field"
-            :value="item[column.field]"
+            :value="getValue(column)"
             v-bind="column.props"
           />
           <span v-else>
-            {{ item[column.field] }}
+            {{ getValue(column) }}
           </span>
         </slot>
       </div>
@@ -54,6 +54,7 @@
   import ImageField from '@admin/components/fields/ImageField.vue'
   import FileField from '@admin/components/fields/FileField.vue'
   import { Column } from '@admin/types/data-table'
+  import get from 'lodash/get'
 
   export default defineComponent({
     components: {
@@ -76,15 +77,23 @@
         required: true,
       },
     },
-    emits: ['update:modelValue'],
+    emits: ['select'],
     setup(props, { emit }) {
       provide('item', props.item)
 
-      const change = (e: Event) => {
-        emit('update:modelValue', (e.target as HTMLInputElement).checked)
+      const getValue = (c: Column) => {
+        return get(props.item, c.source || c.field)
       }
 
-      return { change }
+      const hasValue = (c: Column) => {
+        return getValue(c) !== undefined && getValue(c) !== null
+      }
+
+      const change = (e: Event) => {
+        emit('select', (e.target as HTMLInputElement).checked)
+      }
+
+      return { change, hasValue, getValue }
     },
   })
 </script>

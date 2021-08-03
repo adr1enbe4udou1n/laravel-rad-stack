@@ -1,7 +1,7 @@
 <template>
   <label class="font-medium text-sm text-gray-700">{{ $ta(source) }}</label>
   <div>
-    <template v-if="value">
+    <template v-if="value !== null && value !== undefined">
       <component
         :is="`${type}-field`"
         v-if="type"
@@ -20,6 +20,7 @@
   import BooleanField from '@admin/components/fields/BooleanField.vue'
   import DateField from '@admin/components/fields/DateField.vue'
   import SelectField from '@admin/components/fields/SelectField.vue'
+  import get from 'lodash/get'
 
   export default defineComponent({
     components: {
@@ -39,7 +40,7 @@
       const item = inject<any>('item')
 
       return {
-        value: item ? item[props.source] : null,
+        value: item ? get(item, props.source) : null,
       }
     },
   })

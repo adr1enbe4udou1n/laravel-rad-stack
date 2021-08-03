@@ -1,5 +1,5 @@
 <template>
-  <select-input v-model="value" v-bind="$props" :choices="choices" />
+  <select-input v-model="value" v-bind="props" :choices="choices" />
 </template>
 
 <script lang="ts">
@@ -33,7 +33,7 @@
 
       const reference = referenceSetup(props, { emit })
 
-      return { ...initial, ...reference }
+      return { ...initial, ...reference, props }
     },
   })
 </script>
