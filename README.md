@@ -10,7 +10,7 @@ This modern monolith web starter kit, with only few features and separate front 
 
 > Check [online demo 🌐](https://laravel-rad-stack.okami101.io) (read only mode)
 
-While developing new ✨, reduce your ⏲ testing inside your browser thanks to **PHP Stan** 🧐 (static analysis tool) and **watchable tests suite written on Pest** ✅, a pleasant testing framework focused on simplicity. This boilerplate includes backend tests with 💯 coverage. **IDE helper for Laravel** 🐕‍🦺 is integrated. Finally **Clockwork** ⏱ is proposed as your perfect companion for advanced debugging & profiling.
+While developing new ✨, reduce your ⏲ testing inside your browser thanks to **PHP Stan** 🧐 (static analysis tool) and **watchable tests suite written on Pest** ✅, a pleasant testing framework focused on simplicity. This boilerplate includes backend tests with high coverage. **IDE helper for Laravel** 🐕‍🦺 is integrated. Finally **Clockwork** ⏱ is proposed as your perfect companion for advanced debugging & profiling.
 
 On frontend side you'll be covered with **typescript instant feedbacks** 🚸. Typescript is fully integrated to **Vue 3** by usage of **composition API** as well as **[Vue TSC](https://github.com/johnsoncodehk/vue-tsc)** (from Volar plugin) for full TS support inside Vue templates. **Jest** is integrated for client side testing if needed, ideal for unit testing your Vue components.
 
@@ -29,7 +29,7 @@ Besides all code is heavily linted from top to bottom thanks to **PHP CS Fixer**
 - **[Windi CSS](https://windicss.org/)** as main CSS framework for both front and admin parts.
 - Front is empty but ready to go for full **Livewire + AlpineJS** integration. Perfect for SEO based websites. It's configured for Windi CSS and Typescript but you can easily switch to another tools.
 - Basic admin UI fully build with **[Inertia](https://inertiajs.com/) + Windi CSS + Vue 3 Typescript with composition API**. Give thanks to Inertia for get ridding of boring Vue Router boilerplate and typescript for instant IDE feedbacks !
-- Backend is fully tested by using **[Pest](https://pestphp.com/)** testing framework with **100% code coverage**, which gives you a perfect starting dev point if you want to embrace **TDD**.
+- Backend is tested by using **[Pest](https://pestphp.com/)** testing framework, which gives you a perfect starting dev point if you want to embrace **TDD**.
 - **[GrumPHP](https://github.com/phpro/grumphp)** is preinstalled in order to automatize code formatting and testing before each commits. Use `vendor/bin/grumphp git:init` for auto register his git hooks commands.
 
 ### Why Windi CSS ?
@@ -155,7 +155,7 @@ pnpm test:unit # Launch client side unit testing suite
 
 #### TDD ready
 
-This project has 💯 code coverage and is ready to use within [Spatie PHPUnit Watcher](https://github.com/spatie/phpunit-watcher), which is perfect for **TDD** ! Just use `composer test:watch` command.
+This project is ready to use within [Spatie PHPUnit Watcher](https://github.com/spatie/phpunit-watcher), which is perfect for **TDD** ! Just use `composer test:watch` command.
 
 ## License
 

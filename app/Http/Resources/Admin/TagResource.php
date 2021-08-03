@@ -10,7 +10,7 @@ use Spatie\Tags\Tag;
  */
 class TagResource extends JsonResource
 {
-    public static $wrap = null;
+    public static $wrap;
 
     /**
      * Transform the resource into an array.

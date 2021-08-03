@@ -11,7 +11,7 @@ use Illuminate\Support\Facades\Auth;
  */
 class UserResource extends JsonResource
 {
-    public static $wrap = null;
+    public static $wrap;
 
     /**
      * Transform the resource into an array.
