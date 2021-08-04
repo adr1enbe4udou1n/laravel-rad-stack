@@ -77,7 +77,20 @@ class Post extends Model implements HasMedia
     use InteractsWithMedia;
     use Searchable;
 
-    protected $guarded = [];
+    protected $fillable = [
+        'title',
+        'slug',
+        'status',
+        'category_id',
+        'user_id',
+        'summary',
+        'body',
+        'published_at',
+        'pin',
+        'promote',
+        'meta_title',
+        'meta_description',
+    ];
 
     /**
      * The attributes that should be cast to native types.

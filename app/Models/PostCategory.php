@@ -43,7 +43,10 @@ class PostCategory extends Model implements Sortable
     use HasSlug;
     use SortableTrait;
 
-    protected $guarded = [];
+    protected $fillable = [
+        'name',
+        'slug',
+    ];
 
     protected $hidden = [
         'order_column',

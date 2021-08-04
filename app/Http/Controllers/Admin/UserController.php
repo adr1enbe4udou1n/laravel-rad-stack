@@ -59,7 +59,7 @@ class UserController extends Controller
     #[Post('/', name: 'users.store')]
     public function store(UserStoreRequest $request)
     {
-        User::create($request->validated());
+        User::create($request->all());
 
         return redirect()->route('admin.users')->with('flash.success', __('User created.'));
     }
@@ -67,7 +67,7 @@ class UserController extends Controller
     #[Put('{user}', name: 'users.update', middleware: 'can:modify-user,user')]
     public function update(User $user, UserUpdateRequest $request)
     {
-        $user->update($request->validated());
+        $user->update($request->all());
 
         return redirect()->route('admin.users')->with('flash.success', __('User updated.'));
     }

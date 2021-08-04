@@ -45,7 +45,7 @@ class PostController extends Controller
     #[HttpPost('/', name: 'posts.store')]
     public function store(PostStoreRequest $request)
     {
-        $post = Post::create($request->validated());
+        $post = Post::create($request->all());
 
         $post->syncTags($request->tags);
 
@@ -61,7 +61,7 @@ class PostController extends Controller
     #[Put('{post}', name: 'posts.update')]
     public function update(Post $post, PostUpdateRequest $request)
     {
-        $post->update($request->validated());
+        $post->update($request->all());
 
         $post->syncTags($request->tags);
 
