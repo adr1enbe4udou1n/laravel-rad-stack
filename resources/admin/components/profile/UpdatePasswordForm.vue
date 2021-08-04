@@ -1,5 +1,5 @@
 <template>
-  <form-section @submitted="submit">
+  <form-section :form="form" @submit="submit">
     <template #title> {{ $t('Update Password') }} </template>
 
     <template #description>
@@ -20,7 +20,6 @@
           type="password"
           required
           autocomplete="current-password"
-          :error="form.errors.current_password"
         />
       </div>
 
@@ -33,7 +32,6 @@
           type="password"
           required
           autocomplete="new-password"
-          :error="form.errors.password"
         />
       </div>
 
@@ -45,7 +43,6 @@
           type="password"
           required
           autocomplete="new-password"
-          :error="form.errors.password_confirmation"
         />
       </div>
     </template>

@@ -8,7 +8,7 @@
     >
       <input
         type="radio"
-        :name="source"
+        :name="getName"
         :value="option.value"
         class="checked:bg-primary-500 mr-2"
         :checked="modelValue === option.value"
@@ -17,7 +17,7 @@
       {{ option.text }}
     </label>
   </div>
-  <input-error :message="error" class="mt-2" />
+  <input-error :message="getError" class="mt-2" />
   <input-hint :message="hint" class="mt-2" />
 </template>
 

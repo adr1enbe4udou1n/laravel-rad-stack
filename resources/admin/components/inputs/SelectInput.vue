@@ -3,8 +3,9 @@
   <select
     v-bind="$attrs"
     :id="id"
+    :name="getName"
     class="block w-full"
-    :class="{ 'form-invalid': !!error }"
+    :class="{ 'form-invalid': hasError }"
     :multiple="multiple"
     @input="onInput"
   >
@@ -17,7 +18,7 @@
       {{ option.text }}
     </option>
   </select>
-  <input-error :message="error" class="mt-2" />
+  <input-error :message="getError" class="mt-2" />
   <input-hint :message="hint" class="mt-2" />
 </template>
 

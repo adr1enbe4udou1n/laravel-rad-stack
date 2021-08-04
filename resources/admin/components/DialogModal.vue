@@ -5,7 +5,7 @@
     :closeable="closeable"
     @close="$emit('close')"
   >
-    <form @submit.prevent="$emit('submit')">
+    <base-form :form="form" @submit="$emit('submit')">
       <div class="px-6 py-4">
         <div class="text-lg">
           <slot name="title"></slot>
@@ -19,15 +19,17 @@
       <div class="px-6 py-4 bg-gray-100 text-right">
         <slot name="footer"></slot>
       </div>
-    </form>
+    </base-form>
   </modal>
 </template>
 
 <script lang="ts">
+  import { InertiaForm } from '@inertiajs/inertia-vue3'
   import { defineComponent } from 'vue'
 
   export default defineComponent({
     props: {
+      form: Object as InertiaForm<any>,
       show: {
         type: Boolean,
         default: false,

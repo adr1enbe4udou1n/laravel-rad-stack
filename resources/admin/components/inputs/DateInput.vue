@@ -4,11 +4,11 @@
     v-bind="$attrs"
     :id="id"
     class="block w-full"
-    :class="{ 'form-invalid': !!error }"
+    :class="{ 'form-invalid': hasError }"
     :options="config"
     :model-value="modelValue"
   />
-  <input-error :message="error" class="mt-2" />
+  <input-error :message="getError" class="mt-2" />
   <input-hint :message="hint" class="mt-2" />
 </template>
 

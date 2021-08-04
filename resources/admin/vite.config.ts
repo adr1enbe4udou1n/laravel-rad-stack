@@ -47,6 +47,7 @@ export default defineConfig({
       'lodash/truncate',
       'lodash/get',
       'lodash/truncate',
+      'lodash/last',
       '@vueuse/core',
       '@vueuse/shared',
       '@heroicons/vue/solid',

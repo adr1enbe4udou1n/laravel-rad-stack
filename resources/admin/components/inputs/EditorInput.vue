@@ -1,7 +1,13 @@
 <template>
   <input-label :for="id" class="mb-1" :value="getLabel" />
-  <editor :id="id" v-model="value" api-key="no-api-key" :init="init"></editor>
-  <input-error :message="error" class="mt-2" />
+  <editor
+    :id="id"
+    v-model="value"
+    api-key="1h193nv0nhtkgi8wi1wuep8rnz2bgtuwhidwspabwimf8ztv"
+    :init="init"
+    class="hidden"
+  ></editor>
+  <input-error :message="getError" class="mt-2" />
   <input-hint :message="hint" class="mt-2" />
 </template>
 

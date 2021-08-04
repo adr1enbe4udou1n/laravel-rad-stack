@@ -1,6 +1,6 @@
 <template>
-  <switch-toggle v-model="value" :label="getLabel" />
-  <input-error :message="error" class="mt-2" />
+  <switch-toggle v-model="value" :label="getLabel" :name="getName" />
+  <input-error :message="getError" class="mt-2" />
   <input-hint :message="hint" class="mt-2" />
 </template>
 

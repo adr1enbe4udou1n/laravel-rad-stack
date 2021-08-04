@@ -10,6 +10,7 @@ declare module 'vue' {
     AppLogo: typeof import('./components/AppLogo.vue')['default']
     AuthLayout: typeof import('./layouts/AuthLayout.vue')['default']
     BaseButton: typeof import('./components/BaseButton.vue')['default']
+    BaseForm: typeof import('./components/BaseForm.vue')['default']
     BooleanField: typeof import('./components/fields/BooleanField.vue')['default']
     BooleanFilter: typeof import('./components/filters/BooleanFilter.vue')['default']
     CheckboxGroupInput: typeof import('./components/inputs/CheckboxGroupInput.vue')['default']

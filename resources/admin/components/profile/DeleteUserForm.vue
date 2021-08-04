@@ -28,6 +28,7 @@
 
       <!-- Delete Account Confirmation Modal -->
       <dialog-modal
+        :form="form"
         :show="confirmingUserDeletion"
         @close="closeModal"
         @submit="submit"
@@ -45,7 +46,6 @@
             <text-input
               ref="password"
               v-model="form.password"
-              :error="form.errors.password"
               type="password"
               :placeholder="$t('Password')"
             />

@@ -1,39 +1,23 @@
 <template>
-  <form>
+  <base-form :form="form">
     <div class="flex flex-col xl:flex-row gap-6">
       <div class="xl:w-3/4 px-4 py-5 bg-white sm:p-6 shadow sm:rounded-md">
         <div>
-          <text-input
-            v-model="form.title"
-            :error="form.errors.title"
-            source="title"
-            type="text"
-          />
+          <text-input v-model="form.title" source="title" type="text" />
         </div>
         <div class="mt-4">
           <text-input
             v-model="form.slug"
-            :error="form.errors.slug"
             source="slug"
             type="text"
             :hint="$t('Leave empty for auto generate the link.')"
           />
         </div>
         <div class="mt-4">
-          <text-input
-            v-model="form.summary"
-            :error="form.errors.summary"
-            source="summary"
-            multiline
-          />
+          <text-input v-model="form.summary" source="summary" multiline />
         </div>
         <div class="mt-4">
-          <editor-input
-            v-model="form.body"
-            :error="form.errors.body"
-            source="body"
-            :height="800"
-          />
+          <editor-input v-model="form.body" source="body" :height="800" />
         </div>
       </div>
 
@@ -124,7 +108,6 @@
           <div class="mt-4">
             <reference-input
               v-model="form.category_id"
-              :error="form.errors.category_id"
               source="category"
               resource="post-categories"
               allow-empty
@@ -148,7 +131,6 @@
           <div>
             <text-input
               v-model="form.meta_title"
-              :error="form.errors.meta_title"
               source="meta_title"
               type="text"
             />
@@ -156,7 +138,6 @@
           <div class="mt-4">
             <text-input
               v-model="form.meta_description"
-              :error="form.errors.meta_description"
               source="meta_description"
               multiline
             />
@@ -164,7 +145,7 @@
         </div>
       </div>
     </div>
-  </form>
+  </base-form>
 </template>
 
 <script lang="ts">

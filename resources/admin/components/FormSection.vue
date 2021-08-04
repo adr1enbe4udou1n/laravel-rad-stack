@@ -9,7 +9,7 @@
     </section-title>
 
     <div class="mt-5 md:mt-0 md:col-span-2">
-      <form @submit.prevent="$emit('submitted')">
+      <base-form :form="form" @submit="$emit('submit')">
         <div
           class="px-4 py-5 bg-white sm:p-6 shadow"
           :class="
@@ -38,16 +38,20 @@
         >
           <slot name="actions"></slot>
         </div>
-      </form>
+      </base-form>
     </div>
   </div>
 </template>
 
 <script lang="ts">
+  import { InertiaForm } from '@inertiajs/inertia-vue3'
   import { computed, defineComponent } from 'vue'
 
   export default defineComponent({
-    emits: ['submitted'],
+    props: {
+      form: Object as InertiaForm<any>,
+    },
+    emits: ['submit'],
     setup(props, { slots }) {
       const hasActions = computed(() => !!slots.actions)
 

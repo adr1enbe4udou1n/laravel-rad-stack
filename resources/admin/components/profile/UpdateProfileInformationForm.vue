@@ -1,5 +1,5 @@
 <template>
-  <form-section @submitted="submit">
+  <form-section :form="form" @submit="submit">
     <template #title> {{ $t('Profile Information') }} </template>
 
     <template #description>
@@ -11,7 +11,6 @@
       <div class="col-span-6 sm:col-span-4">
         <text-input
           v-model="form.name"
-          :error="form.errors.name"
           :label="$t('Name')"
           type="text"
           required
@@ -23,7 +22,6 @@
       <div class="col-span-6 sm:col-span-4">
         <text-input
           v-model="form.email"
-          :error="form.errors.email"
           :label="$t('Email')"
           type="text"
           required

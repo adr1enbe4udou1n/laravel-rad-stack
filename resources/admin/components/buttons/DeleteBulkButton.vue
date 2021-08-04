@@ -10,7 +10,12 @@
   </base-button>
 
   <!-- Delete Account Confirmation Modal -->
-  <dialog-modal :show="confirming" @close="closeModal" @submit="submit">
+  <dialog-modal
+    :form="form"
+    :show="confirming"
+    @close="closeModal"
+    @submit="submit"
+  >
     <template #title>
       {{ $t('admin.confirm.delete_many_title', { args }) }}
     </template>

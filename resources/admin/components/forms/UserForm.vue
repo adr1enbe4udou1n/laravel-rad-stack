@@ -1,28 +1,13 @@
 <template>
-  <form @submit.prevent="submit">
+  <base-form :form="form" @submit="submit">
     <div>
-      <text-input
-        v-model="form.name"
-        :error="form.errors.name"
-        source="name"
-        type="text"
-      />
+      <text-input v-model="form.name" source="name" type="text" />
     </div>
     <div class="mt-4">
-      <text-input
-        v-model="form.email"
-        :error="form.errors.email"
-        source="email"
-        type="email"
-      />
+      <text-input v-model="form.email" source="email" type="email" />
     </div>
     <div class="mt-4">
-      <text-input
-        v-model="form.password"
-        :error="form.errors.password"
-        source="password"
-        type="password"
-      />
+      <text-input v-model="form.password" source="password" type="password" />
     </div>
     <div class="mt-4">
       <switch-input v-model="form.active" source="active" />
@@ -30,7 +15,6 @@
     <div class="mt-4">
       <radio-group-input
         v-model="form.role"
-        :error="form.errors.role"
         source="role"
         choices="roles"
         stacked
@@ -44,7 +28,7 @@
         <slot name="actions" />
       </div>
     </div>
-  </form>
+  </base-form>
 </template>
 
 <script lang="ts">
