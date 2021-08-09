@@ -31,8 +31,8 @@
                 itemText ? element[itemText] : element
               }}</span>
             </DisclosureButton>
-            <div class="flex items-center gap-4 px-6">
-              <button v-if="editable" type="button" @click="deletePanel(index)">
+            <div v-if="editable" class="flex items-center gap-4 px-6">
+              <button type="button" @click="deletePanel(index)">
                 <trash-icon class="w-5 h-5 text-red-500" />
               </button>
               <span class="handle cursor-move">
