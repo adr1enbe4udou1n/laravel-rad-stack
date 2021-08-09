@@ -21,7 +21,7 @@ specifiers:
   '@vue/compiler-sfc': ^3.1.5
   '@vue/eslint-config-typescript': ^7.0.0
   '@vue/runtime-core': ^3.1.5
-  '@vueform/multiselect': ^2.1.1
+  '@vueform/multiselect': 2.1.0
   '@vueuse/core': ^5.3.0
   '@vueuse/shared': ^5.3.0
   '@windicss/plugin-scrollbar': ^1.2.3
@@ -76,7 +76,7 @@ devDependencies:
   '@vue/compiler-sfc': 3.1.5_vue@3.1.5
   '@vue/eslint-config-typescript': 7.0.0_0d83bbc686ecc92ce0e305c19138e388
   '@vue/runtime-core': 3.1.5
-  '@vueform/multiselect': 2.1.1
+  '@vueform/multiselect': 2.1.0
   '@vueuse/core': 5.3.0_vue@3.1.5
   '@vueuse/shared': 5.3.0_vue@3.1.5
   '@windicss/plugin-scrollbar': 1.2.3
@@ -1465,8 +1465,8 @@ packages:
       vue: 3.1.5
     dev: true
 
-  /@vueform/multiselect/2.1.1:
-    resolution: {integrity: sha512-4jioO9HtFws54kH7ZIoMQM7VwFERJmVJMt/dk1hECNdbBZfJiMqFKwEvt0UoEnoxxwk1AkFALAJNfshWYjgNGA==}
+  /@vueform/multiselect/2.1.0:
+    resolution: {integrity: sha512-wHKXdGUCrypaD50g58mwp0tNoQYdot0xUh61HO4Bb58QXIudRAHgjOJGzm7zLVLuZvOivFeJVCSPbLMDS6QqIA==}
     dev: true
 
   /@vueuse/core/5.3.0_vue@3.1.5:
