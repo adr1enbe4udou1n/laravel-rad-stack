@@ -2,7 +2,7 @@
   <div
     v-if="items.length"
     class="flex flex-col border border-gray-300 shadow rounded-md"
-    :class="{ 'mb-6': editable }"
+    :class="{ 'mb-4': editable }"
   >
     <draggable
       v-model="items"

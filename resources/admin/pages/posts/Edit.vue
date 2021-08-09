@@ -29,7 +29,10 @@
 
   export default defineComponent({
     props: {
-      post: Object as PropType<Post>,
+      post: {
+        type: Object as PropType<Post>,
+        required: true,
+      },
     },
     setup(props) {
       const values = {
@@ -52,7 +55,7 @@
       }
 
       const method = 'put'
-      const url = route('admin.posts.update', { id: props.post!.id })
+      const url = route('admin.posts.update', { id: props.post.id })
 
       return { url, method, values }
     },

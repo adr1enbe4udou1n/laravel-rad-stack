@@ -19,7 +19,10 @@
 
   export default defineComponent({
     props: {
-      user: Object as PropType<User>,
+      user: {
+        type: Object as PropType<User>,
+        required: true,
+      },
     },
     setup(props) {
       const values = {
@@ -28,7 +31,7 @@
       }
 
       const method = 'put'
-      const url = route('admin.users.update', { id: props.user!.id })
+      const url = route('admin.users.update', { id: props.user.id })
 
       return { url, method, values }
     },
