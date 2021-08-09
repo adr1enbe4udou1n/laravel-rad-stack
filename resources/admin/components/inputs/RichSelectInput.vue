@@ -3,7 +3,7 @@
   <Multiselect
     v-model="value"
     v-bind="{ ...translations }"
-    :options="asyncSearch || choices"
+    :options="asyncSearch"
     :classes="classes"
     :mode="multiple ? 'tags' : 'single'"
     :value-prop="optionValue"
@@ -52,7 +52,6 @@
       modelValue: [String, Number, Array],
       multiple: Boolean,
       taggable: Boolean,
-      choices: [Array, Object],
       resource: {
         type: String,
         required: true,
@@ -138,10 +137,6 @@
       })
 
       const asyncSearch = computed(() => {
-        if (!props.resource) {
-          return null
-        }
-
         return async (query: string) => {
           if (query) {
             const { data } = await axios.get(
@@ -149,7 +144,23 @@
             )
             return data.data
           }
-          return props.choices
+
+          if (props.taggable) {
+            return props.modelValue
+          }
+
+          const value = props.multiple
+            ? (props.modelValue as [])
+            : [props.modelValue]
+
+          if (!value.length) {
+            return []
+          }
+
+          const { data } = await axios.get(
+            `${route(`admin.${props.resource}`)}?filter[id]=${value.join(',')}`
+          )
+          return data.data
         }
       })
 
@@ -158,7 +169,13 @@
         set: (val) => emit('update:modelValue', val),
       })
 
-      return { ...initial, translations, classes, asyncSearch, value }
+      return {
+        ...initial,
+        translations,
+        classes,
+        asyncSearch,
+        value,
+      }
     },
   })
 </script>

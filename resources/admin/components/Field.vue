@@ -1,16 +1,18 @@
 <template>
-  <label class="font-medium text-sm text-gray-700">{{ $ta(source) }}</label>
   <div>
-    <template v-if="value !== null && value !== undefined">
-      <component
-        :is="`${type}-field`"
-        v-if="type"
-        :value="value"
-        v-bind="$attrs"
-      ></component>
-      <span v-else>{{ value }}</span>
-    </template>
-    <span v-else>-</span>
+    <label class="font-medium text-sm text-gray-700">{{ $ta(source) }}</label>
+    <div>
+      <template v-if="value !== null && value !== undefined">
+        <component
+          :is="`${type}-field`"
+          v-if="type"
+          :value="value"
+          v-bind="$attrs"
+        ></component>
+        <span v-else>{{ value }}</span>
+      </template>
+      <span v-else>-</span>
+    </div>
   </div>
 </template>
 

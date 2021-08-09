@@ -40,7 +40,6 @@
           <div>
             <rich-select-input
               v-model="form.user_id"
-              :choices="post?.user ? [post?.user] : []"
               source="user"
               resource="users"
               searchable
@@ -116,7 +115,6 @@
           <div class="mt-4">
             <rich-select-input
               v-model="form.tags"
-              :choices="post?.tags || []"
               source="tags"
               resource="tags"
               multiple

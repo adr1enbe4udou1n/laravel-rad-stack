@@ -11,12 +11,7 @@
         </page-header>
       </template>
 
-      <post-form
-        :method="method"
-        :url="url"
-        :initial-values="values"
-        :post="post"
-      />
+      <post-form :method="method" :url="url" :initial-values="values" />
     </app-layout>
   </edit-context>
 </template>
