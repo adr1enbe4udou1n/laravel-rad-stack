@@ -9,13 +9,13 @@
         "resolveJsonModule": true,
         "esModuleInterop": true,
         "skipLibCheck": true,
+        "noImplicitAny": false,
         "lib": ["esnext", "dom"],
         "types": ["vite/client", "@types/jest"],
         "paths": {
             "@admin/*": ["./resources/admin/*"],
             "@front/*": ["./resources/front/*"]
-        },
-        "plugins": [{ "name": "typescript-vue-plugin" }]
+        }
     },
     "include": [
         "resources/**/*.ts",

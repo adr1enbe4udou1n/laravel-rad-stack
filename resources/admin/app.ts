@@ -10,6 +10,7 @@ import { InertiaProgress } from '@inertiajs/progress'
 
 import Route from './plugins/route'
 import Translations from './plugins/translations'
+import GlobalComponents from './plugins/global-components'
 import DateFns from './plugins/date-fns'
 import HeroIcons from './plugins/hero-icons'
 
@@ -27,6 +28,7 @@ if (el) {
         .use(plugin)
         .use(Route)
         .use(Translations)
+        .use(GlobalComponents)
         .use(DateFns)
         .use(HeroIcons)
         .component('InertiaLink', Link)

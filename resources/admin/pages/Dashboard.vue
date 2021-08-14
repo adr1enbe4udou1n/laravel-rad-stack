@@ -6,15 +6,8 @@
   </app-layout>
 </template>
 
-<script lang="ts">
+<script lang="ts" setup>
   import { useTitle } from '@admin/features/helpers'
-  import { defineComponent } from 'vue'
 
-  export default defineComponent({
-    setup() {
-      const title = useTitle('Dashboard')
-
-      return { title }
-    },
-  })
+  const title = useTitle('Dashboard')
 </script>

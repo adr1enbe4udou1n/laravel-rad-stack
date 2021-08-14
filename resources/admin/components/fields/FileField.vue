@@ -13,19 +13,17 @@
   </div>
 </template>
 
-<script lang="ts">
-  import { defineComponent, PropType } from 'vue'
+<script lang="ts" setup>
+  import { PropType } from 'vue'
 
-  export default defineComponent({
-    props: {
-      value: {
-        type: [String, Object] as
-          | PropType<{ preview_url: string; original_url: string }[]>
-          | PropType<{
-              [uuid: string]: { preview_url: string; original_url: string }
-            }>,
-        required: true,
-      },
+  defineProps({
+    value: {
+      type: [String, Object] as
+        | PropType<{ preview_url: string; original_url: string }[]>
+        | PropType<{
+            [uuid: string]: { preview_url: string; original_url: string }
+          }>,
+      required: true,
     },
   })
 </script>

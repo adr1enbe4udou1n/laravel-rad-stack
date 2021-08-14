@@ -4,19 +4,10 @@
   </div>
 </template>
 
-<script lang="ts">
-  import {
-    pageWithItemProps as props,
-    pageWithItemSetup,
-  } from '@admin/mixins/pages'
-  import { defineComponent } from 'vue'
+<script lang="ts" setup>
+  import { pageWithItemProps, pageWithItemSetup } from '@admin/mixins/pages'
 
-  export default defineComponent({
-    props,
-    setup(props) {
-      const initial = pageWithItemSetup(props, 'show', 0)
+  const props = defineProps(pageWithItemProps)
 
-      return { ...initial }
-    },
-  })
+  const { getTitle } = pageWithItemSetup(props, 'show', 0)
 </script>

@@ -16,34 +16,18 @@
   </div>
 </template>
 
-<script lang="ts">
-  import { defineComponent, inject } from 'vue'
-  import EmailField from '@admin/components/fields/EmailField.vue'
-  import BooleanField from '@admin/components/fields/BooleanField.vue'
-  import DateField from '@admin/components/fields/DateField.vue'
-  import SelectField from '@admin/components/fields/SelectField.vue'
+<script lang="ts" setup>
+  import { inject } from 'vue'
   import get from 'lodash/get'
 
-  export default defineComponent({
-    components: {
-      EmailField,
-      BooleanField,
-      DateField,
-      SelectField,
-    },
-    props: {
-      source: {
-        type: String,
-        required: true,
-      },
+  const props = defineProps({
+    source: {
       type: String,
+      required: true,
     },
-    setup(props) {
-      const item = inject<any>('item')
-
-      return {
-        value: item ? get(item, props.source) : null,
-      }
-    },
+    type: String,
   })
+
+  const item = inject<any>('item', null)
+  const value = item ? get(item, props.source) : null
 </script>

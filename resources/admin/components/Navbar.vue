@@ -43,7 +43,7 @@
         >
           <!-- Settings Dropdown -->
           <div class="relative">
-            <dropdown align="right">
+            <dropdown>
               <template #trigger>
                 <span class="inline-flex rounded-md">
                   <button
@@ -134,7 +134,7 @@
     >
       <div class="pt-2 pb-3 space-y-1">
         <responsive-nav-link
-          v-for="(link, i) in mainNav"
+          v-for="(link, i) in nav"
           :key="i"
           :href="link.href"
           :active="link.active()"
@@ -174,53 +174,42 @@
   </nav>
 </template>
 
-<script lang="ts">
+<script lang="ts" setup>
   import route from 'ziggy-js'
-  import { NavLink, mainNav, isLink } from '@admin/_nav'
-  import { defineComponent, onMounted, Ref, ref, watch } from 'vue'
+  import { NavLink, isLink, mainNav } from '@admin/_nav'
+  import { onMounted, Ref, ref, watch } from 'vue'
   import { Inertia } from '@inertiajs/inertia'
   import { usePage } from '@inertiajs/inertia-vue3'
 
-  export default defineComponent({
-    setup() {
-      const showingNavigationDropdown = ref(false)
-      const globalSearch = ref(usePage().props.value.query)
-      const globalSearchInput: Ref<HTMLInputElement | null> = ref(null)
+  const showingNavigationDropdown = ref(false)
+  const globalSearch = ref(usePage().props.value.query)
+  const globalSearchInput: Ref<HTMLInputElement | null> = ref(null)
 
-      const logout = () => {
-        Inertia.post(route('logout'))
-      }
+  const logout = () => {
+    Inertia.post(route('logout'))
+  }
 
-      const stopImpersonate = () => {
-        Inertia.post(route('admin.users.stop-impersonate'))
-      }
+  const stopImpersonate = () => {
+    Inertia.post(route('admin.users.stop-impersonate'))
+  }
 
-      watch(
-        () => globalSearch.value,
-        (val) =>
-          Inertia.get(
-            route('admin.search', { query: val }),
-            {},
-            {
-              preserveState: true,
-            }
-          )
-      )
-
-      onMounted(() => {
-        if (route().current('admin.search')) {
-          globalSearchInput.value?.focus()
+  watch(
+    () => globalSearch.value,
+    (val) =>
+      Inertia.get(
+        route('admin.search', { query: val }),
+        {},
+        {
+          preserveState: true,
         }
-      })
+      )
+  )
 
-      return {
-        showingNavigationDropdown,
-        globalSearch,
-        globalSearchInput,
-        logout,
-        stopImpersonate,
-        mainNav: mainNav.filter((l) => isLink(l)) as NavLink[],
-      }
-    },
+  onMounted(() => {
+    if (route().current('admin.search')) {
+      globalSearchInput.value?.focus()
+    }
   })
+
+  const nav = mainNav.filter((l) => isLink(l)) as NavLink[]
 </script>

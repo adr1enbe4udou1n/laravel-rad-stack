@@ -1,11 +1,10 @@
 <template>
   <label class="flex items-center">
     <input
+      v-model="modelValue"
       v-bind="$attrs"
       :name="getName"
       type="checkbox"
-      :checked="modelValue"
-      @change="change"
     />
     <span class="ml-2 text-sm text-gray-600">{{ getLabel }}</span>
   </label>
@@ -13,24 +12,12 @@
   <input-hint :message="hint" class="mt-2" />
 </template>
 
-<script lang="ts">
+<script lang="ts" setup>
   import { inputProps, inputSetup } from '@admin/mixins/input'
-  import { defineComponent } from 'vue'
 
-  export default defineComponent({
-    props: {
-      ...inputProps,
-      modelValue: Boolean,
-    },
-    emits: ['update:modelValue'],
-    setup(props, { emit }) {
-      const initial = inputSetup(props)
-
-      const change = (e: Event) => {
-        emit('update:modelValue', (e.target as HTMLInputElement).checked)
-      }
-
-      return { ...initial, change }
-    },
+  const props = defineProps({
+    ...inputProps,
   })
+
+  const { getLabel, getName, modelValue, getError } = inputSetup(props)
 </script>

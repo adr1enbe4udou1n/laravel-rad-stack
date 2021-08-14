@@ -21,13 +21,9 @@
   </component>
 </template>
 
-<script lang="ts">
-  import { defineComponent } from 'vue'
-
-  export default defineComponent({
-    props: {
-      href: String,
-      icon: String,
-    },
+<script lang="ts" setup>
+  defineProps({
+    href: String,
+    icon: String,
   })
 </script>

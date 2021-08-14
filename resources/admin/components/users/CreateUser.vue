@@ -6,16 +6,9 @@
   </create-context>
 </template>
 
-<script lang="ts">
-  import { defineComponent } from 'vue'
+<script lang="ts" setup>
   import route from 'ziggy-js'
 
-  export default defineComponent({
-    setup() {
-      const method = 'post'
-      const url = route('admin.users.store')
-
-      return { method, url }
-    },
-  })
+  const method = 'post'
+  const url = route('admin.users.store')
 </script>

@@ -12,35 +12,28 @@
   <input-hint :message="hint" class="mt-2" />
 </template>
 
-<script lang="ts">
-  import { computed, defineComponent, PropType } from 'vue'
+<script lang="ts" setup>
+  import { computed, PropType } from 'vue'
   import { inputProps, inputSetup } from '@admin/mixins/input'
   import { Options } from 'flatpickr/dist/types/options'
 
-  export default defineComponent({
-    props: {
-      ...inputProps,
-      modelValue: [String, Number, Date],
-      options: Object as PropType<Options>,
-    },
-    emits: ['update:modelValue'],
-    setup(props, { emit }) {
-      const initial = inputSetup(props)
+  const props = defineProps({
+    ...inputProps,
+    options: Object as PropType<Options>,
+  })
 
-      const config = computed((): Options => {
-        const config: Options = props.options || {
-          enableTime: true,
-          dateFormat: 'Y-m-d H:i',
-        }
-        if (!config.onChange) {
-          config.onChange = (dates: Date[]) => {
-            emit('update:modelValue', dates[0])
-          }
-        }
-        return config
-      })
+  const { getLabel, modelValue, getError, hasError, id } = inputSetup(props)
 
-      return { ...initial, config }
-    },
+  const config = computed((): Options => {
+    const config: Options = props.options || {
+      enableTime: true,
+      dateFormat: 'Y-m-d H:i',
+    }
+    if (!config.onChange) {
+      config.onChange = (dates: Date[]) => {
+        modelValue.value = dates[0]
+      }
+    }
+    return config
   })
 </script>

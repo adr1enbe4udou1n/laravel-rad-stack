@@ -6,19 +6,10 @@
   </div>
 </template>
 
-<script lang="ts">
-  import { defineComponent, computed } from 'vue'
+<script lang="ts" setup>
+  import { computed } from 'vue'
   import { usePage } from '@inertiajs/inertia-vue3'
 
-  export default defineComponent({
-    setup() {
-      const errors = computed(() => usePage().props.value.errors)
-      const hasErrors = computed(() => Object.keys(errors.value).length > 0)
-
-      return {
-        errors,
-        hasErrors,
-      }
-    },
-  })
+  const errors = computed(() => usePage().props.value.errors)
+  const hasErrors = computed(() => Object.keys(errors.value).length > 0)
 </script>

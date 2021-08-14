@@ -22,7 +22,7 @@ export function useModelToString(
       {
         users: (model: User) => model.name,
         posts: (model: Post) => model.title,
-      } as { [key: string]: (model: any) => string }
+      } as { [key: string]: (model) => string }
     )[resource](model)
   }
 }

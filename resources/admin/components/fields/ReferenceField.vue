@@ -13,18 +13,14 @@
   </inertia-link>
 </template>
 
-<script lang="ts">
-  import { defineComponent } from 'vue'
-
-  export default defineComponent({
-    props: {
-      value: {
-        type: Object,
-        required: true,
-      },
-      text: String,
-      resource: String,
-      link: String,
+<script lang="ts" setup>
+  defineProps({
+    value: {
+      type: Object,
+      required: true,
     },
+    text: String,
+    resource: String,
+    link: String,
   })
 </script>

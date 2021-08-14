@@ -12,7 +12,7 @@ export const referenceProps = {
 
 export const referenceSetup = (
   props: Readonly<ExtractPropTypes<typeof referenceProps>>,
-  ctx: { emit: (event: 'update:modelValue', ...args: any[]) => void }
+  emit: (event: 'update:modelValue', ...args: any[]) => void
 ) => {
   const choices = ref([])
 
@@ -29,7 +29,7 @@ export const referenceSetup = (
 
   const value = computed({
     get: () => props.modelValue,
-    set: (val) => ctx.emit('update:modelValue', val),
+    set: (val) => emit('update:modelValue', val),
   })
 
   return { choices, value }

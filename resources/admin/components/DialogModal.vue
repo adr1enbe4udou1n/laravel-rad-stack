@@ -5,7 +5,13 @@
     :closeable="closeable"
     @close="$emit('close')"
   >
-    <base-form :form="form" @submit="$emit('submit')">
+    <base-form
+      v-slot="{ processing }"
+      :method="method"
+      :url="url"
+      :options="options"
+      :data="data"
+    >
       <div class="px-6 py-4">
         <div class="text-lg">
           <slot name="title"></slot>
@@ -17,32 +23,39 @@
       </div>
 
       <div class="px-6 py-4 bg-gray-100 text-right">
-        <slot name="footer"></slot>
+        <slot name="footer" :processing="processing"></slot>
       </div>
     </base-form>
   </modal>
 </template>
 
-<script lang="ts">
-  import { InertiaForm } from '@inertiajs/inertia-vue3'
-  import { defineComponent } from 'vue'
+<script lang="ts" setup>
+  import {} from 'vue'
 
-  export default defineComponent({
-    props: {
-      form: Object as InertiaForm<any>,
-      show: {
-        type: Boolean,
-        default: false,
-      },
-      maxWidth: {
-        type: String,
-        default: '2xl',
-      },
-      closeable: {
-        type: Boolean,
-        default: true,
-      },
+  defineProps({
+    method: {
+      type: String,
+      required: true,
     },
-    emits: ['close', 'submit'],
+    url: {
+      type: String,
+      required: true,
+    },
+    options: Object,
+    data: Object,
+    show: {
+      type: Boolean,
+      default: false,
+    },
+    maxWidth: {
+      type: String,
+      default: '2xl',
+    },
+    closeable: {
+      type: Boolean,
+      default: true,
+    },
   })
+
+  defineEmits(['close'])
 </script>

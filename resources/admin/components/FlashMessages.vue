@@ -56,48 +56,42 @@
   </div>
 </template>
 
-<script lang="ts">
-  import { computed, defineComponent, ref, watch } from 'vue'
+<script lang="ts" setup>
+  import { computed, ref, watch } from 'vue'
   import { usePage } from '@inertiajs/inertia-vue3'
 
-  export default defineComponent({
-    setup() {
-      const show = ref(true)
+  const show = ref(true)
 
-      const flash = computed((): any => {
-        return usePage().props.value.flash
-      })
-
-      const style = computed(() => {
-        return flash.value?.danger
-          ? 'danger'
-          : flash.value?.warning
-          ? 'warning'
-          : 'success'
-      })
-
-      const icon = computed(() => {
-        const v: 'success' | 'warning' | 'danger' = style.value
-
-        return {
-          success: 'check-circle',
-          warning: 'exclamation',
-          danger: 'x-circle',
-        }[v]
-      })
-
-      const message = computed(() => {
-        return flash.value[style.value]
-      })
-
-      watch(
-        () => usePage().props.value.flash,
-        () => {
-          show.value = true
-        }
-      )
-
-      return { show, style, message, icon }
-    },
+  const flash = computed(() => {
+    return usePage().props.value.flash
   })
+
+  const style = computed(() => {
+    return flash.value?.danger
+      ? 'danger'
+      : flash.value?.warning
+      ? 'warning'
+      : 'success'
+  })
+
+  const icon = computed(() => {
+    const v: 'success' | 'warning' | 'danger' = style.value
+
+    return {
+      success: 'check-circle',
+      warning: 'exclamation',
+      danger: 'x-circle',
+    }[v]
+  })
+
+  const message = computed(() => {
+    return flash.value[style.value]
+  })
+
+  watch(
+    () => usePage().props.value.flash,
+    () => {
+      show.value = true
+    }
+  )
 </script>

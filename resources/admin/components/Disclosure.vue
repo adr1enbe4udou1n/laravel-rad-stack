@@ -67,56 +67,45 @@
   </button>
 </template>
 
-<script lang="ts">
+<script lang="ts" setup>
   import {
     Disclosure,
     DisclosureButton,
     DisclosurePanel,
   } from '@headlessui/vue'
-  import { computed, defineComponent, PropType } from 'vue'
-  import draggable from 'vuedraggable'
+  import { PropType, computed } from 'vue'
 
-  export default defineComponent({
-    components: {
-      Disclosure,
-      DisclosureButton,
-      DisclosurePanel,
-      draggable,
+  const props = defineProps({
+    modelValue: Array as PropType<{ [key: string]: string }[]>,
+    label: String,
+    group: String,
+    itemText: String,
+    itemKey: {
+      type: String,
+      default: 'id',
     },
-    props: {
-      modelValue: Array as PropType<{ [key: string]: string }[]>,
-      label: String,
-      group: String,
-      itemText: String,
-      itemKey: {
-        type: String,
-        default: 'id',
-      },
-      editable: Boolean,
-      newItem: Object,
-    },
-    emits: ['update:modelValue'],
-    setup(props, { emit }) {
-      const deletePanel = (index: number) => {
-        emit(
-          'update:modelValue',
-          (props.modelValue || []).filter((v, i) => i !== index)
-        )
-      }
+    editable: Boolean,
+    newItem: Object,
+  })
 
-      const addPanel = () => {
-        emit('update:modelValue', [
-          ...(props.modelValue || []),
-          { ...props.newItem },
-        ])
-      }
+  const emit = defineEmits(['update:modelValue'])
 
-      const items = computed({
-        get: () => props.modelValue || [],
-        set: (val: any) => emit('update:modelValue', val),
-      })
+  const deletePanel = (index: number) => {
+    emit(
+      'update:modelValue',
+      (props.modelValue || []).filter((v, i) => i !== index)
+    )
+  }
 
-      return { addPanel, deletePanel, items }
-    },
+  const addPanel = () => {
+    emit('update:modelValue', [
+      ...(props.modelValue || []),
+      { ...props.newItem },
+    ])
+  }
+
+  const items = computed({
+    get: () => props.modelValue || [],
+    set: (val) => emit('update:modelValue', val),
   })
 </script>

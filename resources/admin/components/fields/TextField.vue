@@ -2,27 +2,23 @@
   <span>{{ getText }}</span>
 </template>
 
-<script lang="ts">
-  import { computed, defineComponent } from 'vue'
+<script lang="ts" setup>
+  import { computed } from 'vue'
   import truncate from 'lodash/truncate'
 
-  export default defineComponent({
-    props: {
-      value: {
-        type: String,
-        required: true,
-      },
-      truncate: Number,
+  const props = defineProps({
+    value: {
+      type: String,
+      required: true,
     },
-    setup(props) {
-      const getText = computed(() => {
-        return props.truncate
-          ? truncate(props.value, {
-              length: props.truncate,
-            })
-          : props.value
-      })
-      return { getText }
-    },
+    truncate: Number,
+  })
+
+  const getText = computed(() => {
+    return props.truncate
+      ? truncate(props.value, {
+          length: props.truncate,
+        })
+      : props.value
   })
 </script>

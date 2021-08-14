@@ -1,5 +1,6 @@
 <template>
   <base-button
+    v-if="item"
     type="button"
     icon="trash"
     variant="danger"
@@ -11,10 +12,15 @@
 
   <!-- Delete Account Confirmation Modal -->
   <dialog-modal
-    :form="form"
+    v-if="item"
+    method="delete"
+    :url="route(`admin.${resource}.destroy`, { id: item.id })"
+    :options="{
+      preserveScroll: true,
+      onSuccess: () => closeModal(),
+    }"
     :show="confirming"
     @close="closeModal"
-    @submit="submit"
   >
     <template #title>
       {{ $t('admin.confirm.delete_title', { args }) }}
@@ -24,7 +30,7 @@
       {{ $t('admin.confirm.delete_message', { args }) }}
     </template>
 
-    <template #footer>
+    <template #footer="{ processing }">
       <base-button outlined type="button" @click="closeModal">
         {{ $t('Cancel') }}
       </base-button>
@@ -33,7 +39,7 @@
         variant="danger"
         type="submit"
         class="ml-2"
-        :loading="form.processing"
+        :loading="processing"
       >
         {{ $t('Delete') }}
       </base-button>
@@ -41,53 +47,30 @@
   </dialog-modal>
 </template>
 
-<script lang="ts">
+<script lang="ts" setup>
   import { useModelToString } from '@admin/features/helpers'
   import { Model } from '@admin/types'
-  import { useForm } from '@inertiajs/inertia-vue3'
   import { transChoice } from 'matice'
-  import { defineComponent, inject, ref } from 'vue'
-  import route from 'ziggy-js'
+  import { inject, ref } from 'vue'
 
-  export default defineComponent({
-    props: {
-      hideLabel: Boolean,
-    },
-    setup() {
-      const resource = inject<string>('resource')
-      const item = inject<Model>('item')
-      const confirming = ref(false)
-
-      const form = useForm({})
-
-      const confirm = () => {
-        confirming.value = true
-      }
-
-      const closeModal = () => {
-        confirming.value = false
-      }
-
-      const submit = () => {
-        form.delete(route(`admin.${resource}.destroy`, { id: item!.id }), {
-          preserveScroll: true,
-          onSuccess: () => closeModal(),
-        })
-      }
-
-      return {
-        resource,
-        item,
-        confirming,
-        form,
-        confirm,
-        closeModal,
-        submit,
-        args: {
-          resource: transChoice(`crud.${resource}.name`, 0).toLowerCase(),
-          label: useModelToString(resource, item),
-        },
-      }
-    },
+  defineProps({
+    hideLabel: Boolean,
   })
+
+  const resource = inject<string>('resource')
+  const item = inject<Model>('item')
+  const confirming = ref(false)
+
+  const confirm = () => {
+    confirming.value = true
+  }
+
+  const closeModal = () => {
+    confirming.value = false
+  }
+
+  const args = {
+    resource: transChoice(`crud.${resource}.name`, 0).toLowerCase(),
+    label: useModelToString(resource, item),
+  }
 </script>

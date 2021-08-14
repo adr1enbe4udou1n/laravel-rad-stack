@@ -68,40 +68,34 @@
   </span>
 </template>
 
-<script lang="ts">
-  import { computed, defineComponent } from 'vue'
+<script lang="ts" setup>
+  import { computed, useSlots } from 'vue'
 
-  export default defineComponent({
-    props: {
-      loading: Boolean,
-      disabled: Boolean,
-      outlined: Boolean,
-      href: String,
-      icon: String,
-      hideLabel: Boolean,
-      split: Boolean,
-      tag: {
-        type: String,
-        default: 'inertia-link',
-      },
-      variant: {
-        type: String,
-        default: 'primary',
-        validator: (v: string) =>
-          ['primary', 'success', 'danger', 'warning', 'info', 'dark'].includes(
-            v
-          ),
-      },
-      only: Array,
+  const props = defineProps({
+    loading: Boolean,
+    disabled: Boolean,
+    outlined: Boolean,
+    href: String,
+    icon: String,
+    hideLabel: Boolean,
+    split: Boolean,
+    tag: {
+      type: String,
+      default: 'inertia-link',
     },
-    emits: ['click'],
-    setup(props, { slots }) {
-      const hasLabel = computed(() => {
-        return !props.hideLabel && !!slots.default
-      })
+    variant: {
+      type: String,
+      default: 'primary',
+      validator: (v: string) =>
+        ['primary', 'success', 'danger', 'warning', 'info', 'dark'].includes(v),
+    },
+    only: Array,
+  })
 
-      return { hasLabel }
-    },
+  defineEmits(['click'])
+
+  const hasLabel = computed(() => {
+    return !props.hideLabel && !!useSlots().default
   })
 </script>
 

@@ -18,13 +18,13 @@
       <div
         v-show="open"
         class="absolute z-50 mt-2 rounded-md shadow-lg"
-        :class="[`w-${width}`, [align]]"
+        :class="wrapperClasses"
         style="display: none"
         @click="open = false"
       >
         <div
           class="rounded-md ring-1 ring-black ring-opacity-5"
-          :class="contentClasses"
+          :class="linkClasses"
         >
           <slot name="content"></slot>
         </div>
@@ -33,41 +33,30 @@
   </div>
 </template>
 
-<script lang="ts">
-  import { onMounted, onUnmounted, ref, defineComponent } from 'vue'
+<script lang="ts" setup>
+  import { onMounted, onUnmounted, ref } from 'vue'
 
-  export default defineComponent({
-    props: {
-      align: {
-        type: String,
-        default: 'right',
-      },
-      width: {
-        type: Number,
-        default: 48,
-      },
-      contentClasses: {
-        type: Array,
-        default: () => ['py-1', 'bg-white'],
-      },
+  defineProps({
+    wrapperClasses: {
+      type: [String, Array],
+      default: () => ['w-48', 'right'],
     },
-    setup() {
-      let open = ref(false)
-
-      const closeOnEscape = (e: KeyboardEvent) => {
-        if (open.value && e.key === 'Escape') {
-          open.value = false
-        }
-      }
-
-      onMounted(() => document.addEventListener('keydown', closeOnEscape))
-      onUnmounted(() => document.removeEventListener('keydown', closeOnEscape))
-
-      return {
-        open,
-      }
+    linkClasses: {
+      type: [String, Array],
+      default: () => ['py-1', 'bg-white'],
     },
   })
+
+  let open = ref(false)
+
+  const closeOnEscape = (e: KeyboardEvent) => {
+    if (open.value && e.key === 'Escape') {
+      open.value = false
+    }
+  }
+
+  onMounted(() => document.addEventListener('keydown', closeOnEscape))
+  onUnmounted(() => document.removeEventListener('keydown', closeOnEscape))
 </script>
 
 <style lang="postcss" scoped>

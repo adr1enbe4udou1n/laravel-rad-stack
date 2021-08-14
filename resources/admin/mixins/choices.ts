@@ -23,12 +23,12 @@ export interface Option {
 }
 
 export const getOptionsFromChoices = (
-  choices: any,
+  choices,
   optionText: string,
   optionValue: string
 ) => {
   if (Array.isArray(choices)) {
-    return choices.map((o: any) => {
+    return choices.map((o) => {
       return { value: o[optionValue], text: o[optionText] }
     })
   }

@@ -1,7 +1,7 @@
 <template>
   <edit-context v-slot="{ title }" resource="users" :item="user">
     <app-aside :title="title">
-      <user-form :method="method" :url="url" :initial-values="values">
+      <user-form :method="method" :url="url">
         <template #actions>
           <impersonate-button hide-label />
           <delete-button hide-label />
@@ -11,29 +11,18 @@
   </edit-context>
 </template>
 
-<script lang="ts">
+<script lang="ts" setup>
   import { User } from '@admin/types'
-  import { defineComponent, PropType } from 'vue'
-  import pick from 'lodash/pick'
+  import { PropType } from 'vue'
   import route from 'ziggy-js'
 
-  export default defineComponent({
-    props: {
-      user: {
-        type: Object as PropType<User>,
-        required: true,
-      },
-    },
-    setup(props) {
-      const values = {
-        ...pick(props.user, ['name', 'email', 'active', 'role']),
-        password: '',
-      }
-
-      const method = 'put'
-      const url = route('admin.users.update', { id: props.user.id })
-
-      return { url, method, values }
+  const props = defineProps({
+    user: {
+      type: Object as PropType<User>,
+      required: true,
     },
   })
+
+  const method = 'put'
+  const url = route('admin.users.update', { id: props.user.id })
 </script>

@@ -12,10 +12,8 @@
   </div>
 </template>
 
-<script lang="ts">
-  import { defineComponent } from 'vue'
-
-  export default defineComponent({
-    props: { on: Boolean },
+<script lang="ts" setup>
+  defineProps({
+    on: Boolean,
   })
 </script>

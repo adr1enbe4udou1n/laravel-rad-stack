@@ -31,13 +31,14 @@
   </show-context>
 </template>
 
-<script lang="ts">
+<script lang="ts" setup>
   import { User } from '@admin/types'
-  import { defineComponent, PropType } from 'vue'
+  import { PropType } from 'vue'
 
-  export default defineComponent({
-    props: {
-      user: Object as PropType<User>,
+  defineProps({
+    user: {
+      type: Object as PropType<User>,
+      required: true,
     },
   })
 </script>

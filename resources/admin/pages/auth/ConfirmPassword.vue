@@ -10,11 +10,14 @@
 
     <validation-errors class="mb-4" />
 
-    <form @submit.prevent="submit">
+    <base-form
+      v-slot="{ processing }"
+      method="post"
+      :url="route('password.confirm')"
+    >
       <div>
         <text-input
-          v-model="form.password"
-          :label="$t('Password')"
+          source="password"
           type="password"
           required
           autocomplete="current-password"
@@ -23,35 +26,16 @@
       </div>
 
       <div class="mt-4">
-        <base-button type="submit" class="w-full" :loading="form.processing">
+        <base-button type="submit" class="w-full" :loading="processing">
           {{ $t('Confirm') }}
         </base-button>
       </div>
-    </form>
+    </base-form>
   </auth-layout>
 </template>
 
-<script lang="ts">
+<script lang="ts" setup>
   import { useTitle } from '@admin/features/helpers'
-  import route from 'ziggy-js'
-  import { useForm } from '@inertiajs/inertia-vue3'
-  import { defineComponent } from 'vue'
 
-  export default defineComponent({
-    setup() {
-      useTitle('Confirm Password')
-
-      const form = useForm({
-        password: '',
-      })
-
-      const submit = () => {
-        form.post(route('password.confirm'), {
-          onFinish: () => form.reset(),
-        })
-      }
-
-      return { form, submit }
-    },
-  })
+  useTitle('Confirm Password')
 </script>

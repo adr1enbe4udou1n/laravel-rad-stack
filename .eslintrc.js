@@ -21,5 +21,6 @@ module.exports = {
     '@typescript-eslint/no-non-null-assertion': 'off',
     'vue/require-default-prop': 'off',
     'vue/no-v-html': 'off',
+    'no-undef': 'off',
   },
 }

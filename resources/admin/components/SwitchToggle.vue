@@ -4,6 +4,7 @@
     <div class="relative">
       <!-- input -->
       <input
+        v-bind="$attrs"
         type="checkbox"
         class="sr-only"
         :checked="modelValue"
@@ -34,23 +35,19 @@
   </label>
 </template>
 
-<script lang="ts">
-  import { defineComponent } from 'vue'
+<script lang="ts" setup>
+  import {} from 'vue'
 
-  export default defineComponent({
-    props: {
-      modelValue: Boolean,
-      label: String,
-    },
-    emits: ['update:modelValue'],
-    setup(props, { emit }) {
-      const change = (e: Event) => {
-        emit('update:modelValue', (e.target as HTMLInputElement).checked)
-      }
-
-      return { change }
-    },
+  defineProps({
+    modelValue: Boolean,
+    label: String,
   })
+
+  const emit = defineEmits(['update:modelValue'])
+
+  const change = (e: Event) => {
+    emit('update:modelValue', (e.target as HTMLInputElement).checked)
+  }
 </script>
 
 <style lang="postcss" scoped>

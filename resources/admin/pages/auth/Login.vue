@@ -6,21 +6,24 @@
 
     <validation-errors class="mb-4" />
 
-    <form @submit.prevent="submit">
+    <base-form
+      v-slot="{ processing }"
+      method="post"
+      :url="route('login')"
+      :transform="
+        (data) => ({
+          ...data,
+          remember: data.remember ? 'on' : '',
+        })
+      "
+    >
       <div>
-        <text-input
-          v-model="form.email"
-          :label="$t('Email')"
-          type="email"
-          required
-          autofocus
-        />
+        <text-input source="email" type="email" required autofocus />
       </div>
 
       <div class="mt-4">
         <text-input
-          v-model="form.password"
-          :label="$t('Password')"
+          source="password"
           type="password"
           required
           autocomplete="current-password"
@@ -36,11 +39,7 @@
       </div>
 
       <div class="mt-4">
-        <checkbox-input
-          v-model="form.remember"
-          name="remember"
-          :label="$t('Remember me')"
-        />
+        <checkbox-input source="remember" name="remember" />
       </div>
 
       <div class="flex items-center justify-end mt-4">
@@ -52,44 +51,21 @@
           {{ $t('Not registered yet?') }}
         </inertia-link>
 
-        <base-button type="submit" class="ml-4" :loading="form.processing">
+        <base-button type="submit" class="ml-4" :loading="processing">
           {{ $t('Log in') }}
         </base-button>
       </div>
-    </form>
+    </base-form>
   </auth-layout>
 </template>
 
-<script lang="ts">
+<script lang="ts" setup>
   import { useTitle } from '@admin/features/helpers'
-  import route from 'ziggy-js'
-  import { useForm } from '@inertiajs/inertia-vue3'
-  import { defineComponent } from 'vue'
 
-  export default defineComponent({
-    props: {
-      canRegister: Boolean,
-      status: String,
-    },
-    setup() {
-      useTitle('Login')
-
-      const form = useForm({
-        email: 'admin@example.com',
-        password: 'password',
-        remember: false,
-      })
-
-      const submit = () => {
-        form
-          .transform((data) => ({
-            ...data,
-            remember: data.remember ? 'on' : '',
-          }))
-          .post(route('login'))
-      }
-
-      return { form, submit }
-    },
+  defineProps({
+    canRegister: Boolean,
+    status: String,
   })
+
+  useTitle('Login')
 </script>

@@ -36,39 +36,32 @@
   </div>
 </template>
 
-<script lang="ts">
-  import { defineComponent, PropType } from 'vue'
+<script lang="ts" setup>
+  import { PropType } from 'vue'
   import { Model, PaginatedData } from '@admin/types'
 
-  export default defineComponent({
-    props: {
-      source: {
-        type: Object as PropType<PaginatedData<Model>>,
-        required: true,
-      },
-      hideFooter: Boolean,
-      perPageOptions: {
-        type: Array as PropType<number[]>,
-        default: () => [5, 10, 15, 30, 50, 100],
-      },
+  const props = defineProps({
+    source: {
+      type: Object as PropType<PaginatedData<Model>>,
+      required: true,
     },
-    emits: ['change'],
-    setup(props, { emit }) {
-      const onPageChange = (page: number) => {
-        emit('change', { page, perPage: props.source.meta.per_page })
-      }
-
-      const onPerPageChange = (e: Event) => {
-        emit('change', {
-          page: 1,
-          perPage: parseInt((e.target as HTMLInputElement).value, 10),
-        })
-      }
-
-      return {
-        onPageChange,
-        onPerPageChange,
-      }
+    hideFooter: Boolean,
+    perPageOptions: {
+      type: Array as PropType<number[]>,
+      default: () => [5, 10, 15, 30, 50, 100],
     },
   })
+
+  const emit = defineEmits(['change'])
+
+  const onPageChange = (page: number) => {
+    emit('change', { page, perPage: props.source.meta.per_page })
+  }
+
+  const onPerPageChange = (e: Event) => {
+    emit('change', {
+      page: 1,
+      perPage: parseInt((e.target as HTMLInputElement).value, 10),
+    })
+  }
 </script>

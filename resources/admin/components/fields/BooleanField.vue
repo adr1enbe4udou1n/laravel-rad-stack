@@ -8,15 +8,11 @@
   </span>
 </template>
 
-<script lang="ts">
-  import { defineComponent } from 'vue'
-
-  export default defineComponent({
-    props: {
-      value: {
-        type: Boolean,
-        required: true,
-      },
+<script lang="ts" setup>
+  defineProps({
+    value: {
+      type: Boolean,
+      required: true,
     },
   })
 </script>

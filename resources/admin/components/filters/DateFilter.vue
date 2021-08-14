@@ -5,33 +5,29 @@
   />
 </template>
 
-<script lang="ts">
-  import { computed, defineComponent } from 'vue'
+<script lang="ts" setup>
+  import { computed } from 'vue'
   import { format } from 'date-fns'
   import { Options } from 'flatpickr/dist/types/options'
 
-  export default defineComponent({
-    props: {
-      modelValue: String,
-    },
-    emits: ['update:modelValue'],
-    setup(props, { emit }) {
-      const config = computed((): Options => {
-        return {
-          dateFormat: 'Y-m-d',
-          mode: 'range',
-          onChange: (dates: Date[]) => {
-            emit(
-              'update:modelValue',
-              dates.length === 2
-                ? dates.map((d) => format(d, 'yyyy-MM-dd')).join(',')
-                : null
-            )
-          },
-        }
-      })
+  defineProps({
+    modelValue: String,
+  })
 
-      return { config }
-    },
+  const emit = defineEmits(['update:modelValue'])
+
+  const config = computed((): Options => {
+    return {
+      dateFormat: 'Y-m-d',
+      mode: 'range',
+      onChange: (dates: Date[]) => {
+        emit(
+          'update:modelValue',
+          dates.length === 2
+            ? dates.map((d) => format(d, 'yyyy-MM-dd')).join(',')
+            : null
+        )
+      },
+    }
   })
 </script>

@@ -1,5 +1,12 @@
 <template>
-  <form-section :form="form" @submit="submit">
+  <form-section
+    method="put"
+    :url="route('user-password.update')"
+    :options="{
+      errorBag: 'updatePassword',
+      preserveScroll: true,
+    }"
+  >
     <template #title> {{ $t('Update Password') }} </template>
 
     <template #description>
@@ -13,10 +20,7 @@
     <template #form>
       <div class="col-span-6 sm:col-span-4">
         <text-input
-          id="current_password"
-          ref="current_password"
-          v-model="form.current_password"
-          :label="$t('Current Password')"
+          source="current_password"
           type="password"
           required
           autocomplete="current-password"
@@ -25,10 +29,7 @@
 
       <div class="col-span-6 sm:col-span-4">
         <text-input
-          id="password"
-          ref="password"
-          v-model="form.password"
-          :label="$t('New Password')"
+          source="password"
           type="password"
           required
           autocomplete="new-password"
@@ -37,9 +38,7 @@
 
       <div class="col-span-6 sm:col-span-4">
         <text-input
-          id="password_confirmation"
-          v-model="form.password_confirmation"
-          :label="$t('Confirm Password')"
+          source="password_confirmation"
           type="password"
           required
           autocomplete="new-password"
@@ -47,56 +46,14 @@
       </div>
     </template>
 
-    <template #actions>
-      <action-message :on="form.recentlySuccessful" class="mr-3">
+    <template #actions="{ processing, recentlySuccessful }">
+      <action-message :on="recentlySuccessful" class="mr-3">
         {{ $t('Saved.') }}
       </action-message>
 
-      <base-button type="submit" :loading="form.processing">
+      <base-button type="submit" :loading="processing">
         {{ $t('Save') }}
       </base-button>
     </template>
   </form-section>
 </template>
-
-<script lang="ts">
-  import route from 'ziggy-js'
-  import { useForm } from '@inertiajs/inertia-vue3'
-  import { defineComponent, Ref, ref } from 'vue'
-
-  export default defineComponent({
-    setup() {
-      const password: Ref<HTMLInputElement | null> = ref(null)
-      const current_password: Ref<HTMLInputElement | null> = ref(null)
-
-      const form = useForm({
-        current_password: '',
-        password: '',
-        password_confirmation: '',
-      })
-
-      const submit = () => {
-        form.put(route('user-password.update'), {
-          errorBag: 'updatePassword',
-          preserveScroll: true,
-          onSuccess: () => {
-            form.reset()
-          },
-          onError: () => {
-            if (form.errors.password) {
-              form.reset('password', 'password_confirmation')
-              password.value?.focus()
-            }
-
-            if (form.errors.current_password) {
-              form.reset('current_password')
-              current_password.value?.focus()
-            }
-          },
-        })
-      }
-
-      return { form, submit, password, current_password }
-    },
-  })
-</script>

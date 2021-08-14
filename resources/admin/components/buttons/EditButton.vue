@@ -11,23 +11,15 @@
   </base-button>
 </template>
 
-<script lang="ts">
+<script lang="ts" setup>
   import { Model } from '@admin/types'
-  import { defineComponent, inject } from 'vue'
+  import { inject } from 'vue'
 
-  export default defineComponent({
-    props: {
-      only: Array,
-      hideLabel: Boolean,
-    },
-    setup() {
-      const resource = inject<string>('resource')
-      const item = inject<Model>('item')
-
-      return {
-        resource,
-        item,
-      }
-    },
+  defineProps({
+    only: Array,
+    hideLabel: Boolean,
   })
+
+  const resource = inject<string>('resource')
+  const item = inject<Model>('item')
 </script>

@@ -14,20 +14,13 @@
   </base-button>
 </template>
 
-<script lang="ts">
-  import { defineComponent, inject } from 'vue'
+<script lang="ts" setup>
+  import { inject } from 'vue'
 
-  export default defineComponent({
-    props: {
-      only: Array,
-      hideLabel: Boolean,
-    },
-    setup() {
-      const resource = inject<string>('resource')
-
-      return {
-        resource,
-      }
-    },
+  defineProps({
+    only: Array,
+    hideLabel: Boolean,
   })
+
+  const resource = inject<string>('resource')
 </script>

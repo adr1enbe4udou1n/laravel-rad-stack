@@ -33,6 +33,8 @@ import {
   ArrowLeftIcon,
   ArrowRightIcon,
   ArrowUpIcon,
+  SwitchHorizontalIcon,
+  SwitchVerticalIcon,
   FilterIcon,
   DownloadIcon,
   SearchIcon,
@@ -88,6 +90,8 @@ export default {
     app.component('ArrowRightIcon', ArrowRightIcon)
     app.component('ArrowUpIcon', ArrowUpIcon)
     app.component('DownloadIcon', DownloadIcon)
+    app.component('SwitchHorizontalIcon', SwitchHorizontalIcon)
+    app.component('SwitchVerticalIcon', SwitchVerticalIcon)
     app.component('FilterIcon', FilterIcon)
     app.component('SearchIcon', SearchIcon)
     app.component('TagIcon', TagIcon)

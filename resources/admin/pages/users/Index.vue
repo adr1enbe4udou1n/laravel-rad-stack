@@ -42,89 +42,84 @@
 
       <template v-if="action !== 'list'" #aside>
         <create-user v-if="action === 'create'" />
-        <show-user v-if="action === 'show'" :user="user" />
-        <edit-user v-if="action === 'edit'" :user="user" />
+        <show-user v-if="user && action === 'show'" :user="user" />
+        <edit-user v-if="user && action === 'edit'" :user="user" />
       </template>
     </app-layout>
   </list-context>
 </template>
 
-<script lang="ts">
-  import { defineComponent, PropType } from 'vue'
+<script lang="ts" setup>
+  import { PropType } from 'vue'
   import { PaginatedData, User } from '@admin/types'
   import { Column } from '@admin/types/data-table'
 
-  export default defineComponent({
-    props: {
-      action: String,
-      users: {
-        type: Object as PropType<PaginatedData<User>>,
-        required: true,
-      },
-      user: Object as PropType<User>,
-      sort: String,
-      filter: Object,
+  defineProps({
+    action: String,
+    users: {
+      type: Object as PropType<PaginatedData<User>>,
+      required: true,
     },
-    setup() {
-      const columns: (string | Column)[] = [
-        {
-          field: 'id',
-          width: 40,
-          numeric: true,
-          sortable: true,
-        },
-        {
-          field: 'name',
-          sortable: true,
-          searchable: true,
-        },
-        {
-          field: 'email',
-          searchable: true,
-          type: 'email',
-        },
-        {
-          field: 'active',
-          type: 'switch',
-          searchable: true,
-        },
-        {
-          field: 'role',
-          type: 'select',
-          props: { choices: 'roles' },
-          searchable: true,
-        },
-        {
-          field: 'last_login_at',
-          type: 'date',
-          props: { format: 'dd/MM/yyyy HH:mm:ss' },
-          sortable: true,
-          centered: true,
-        },
-        {
-          field: 'created_at',
-          type: 'date',
-          sortable: true,
-          centered: true,
-        },
-        {
-          field: 'updated_at',
-          type: 'date',
-          sortable: true,
-          centered: true,
-        },
-        'row-action',
-      ]
-
-      const canBeUpdated = (item: any) => {
-        return (item as User).can_be_updated
-      }
-
-      const canBeImpersonated = (item: any) => {
-        return (item as User).can_be_impersonated
-      }
-
-      return { columns, canBeUpdated, canBeImpersonated }
-    },
+    user: Object as PropType<User>,
+    sort: String,
+    filter: Object,
   })
+
+  const columns: (string | Column)[] = [
+    {
+      field: 'id',
+      width: 40,
+      numeric: true,
+      sortable: true,
+    },
+    {
+      field: 'name',
+      sortable: true,
+      searchable: true,
+    },
+    {
+      field: 'email',
+      searchable: true,
+      type: 'email',
+    },
+    {
+      field: 'active',
+      type: 'switch',
+      searchable: true,
+    },
+    {
+      field: 'role',
+      type: 'select',
+      props: { choices: 'roles' },
+      searchable: true,
+    },
+    {
+      field: 'last_login_at',
+      type: 'date',
+      props: { format: 'dd/MM/yyyy HH:mm:ss' },
+      sortable: true,
+      centered: true,
+    },
+    {
+      field: 'created_at',
+      type: 'date',
+      sortable: true,
+      centered: true,
+    },
+    {
+      field: 'updated_at',
+      type: 'date',
+      sortable: true,
+      centered: true,
+    },
+    'row-action',
+  ]
+
+  const canBeUpdated = (item) => {
+    return (item as User).can_be_updated
+  }
+
+  const canBeImpersonated = (item) => {
+    return (item as User).can_be_impersonated
+  }
 </script>

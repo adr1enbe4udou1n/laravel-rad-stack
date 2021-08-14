@@ -1,5 +1,5 @@
 <template>
-  <edit-context v-slot="{ title }" resource="posts" :item="post">
+  <edit-context v-slot="{ title }" resource="posts" :item="getPost">
     <app-layout>
       <template #header>
         <page-header>
@@ -11,48 +11,28 @@
         </page-header>
       </template>
 
-      <post-form :method="method" :url="url" :initial-values="values" />
+      <post-form :method="method" :url="url" />
     </app-layout>
   </edit-context>
 </template>
 
-<script lang="ts">
-  import { defineComponent, PropType } from 'vue'
+<script lang="ts" setup>
+  import { computed, PropType } from 'vue'
   import { Post } from '@admin/types'
-  import pick from 'lodash/pick'
   import route from 'ziggy-js'
 
-  export default defineComponent({
-    props: {
-      post: {
-        type: Object as PropType<Post>,
-        required: true,
-      },
-    },
-    setup(props) {
-      const values = {
-        ...pick(props.post, [
-          'title',
-          'slug',
-          'summary',
-          'body',
-          'user_id',
-          'category_id',
-          'pin',
-          'promote',
-          'published_at',
-          'meta_title',
-          'meta_description',
-        ]),
-        tags: props.post?.tags.map((t) => t.name) || [],
-        featured_image_file: null,
-        featured_image_delete: false,
-      }
-
-      const method = 'put'
-      const url = route('admin.posts.update', { id: props.post.id })
-
-      return { url, method, values }
+  const props = defineProps({
+    post: {
+      type: Object as PropType<Post>,
+      required: true,
     },
   })
+
+  const getPost = computed(() => ({
+    ...props.post,
+    tags: props.post?.tags.map((t) => t.name) || [],
+  }))
+
+  const method = 'put'
+  const url = route('admin.posts.update', { id: props.post.id })
 </script>

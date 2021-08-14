@@ -21,30 +21,29 @@
   </label>
 </template>
 
-<script lang="ts">
-  import { defineComponent } from 'vue'
+<script lang="ts" setup>
+  import {} from 'vue'
   import { inputProps, inputSetup } from '@admin/mixins/input'
-  export default defineComponent({
-    props: {
-      ...inputProps,
-      delete: Boolean,
-      multiple: Boolean,
-      canDelete: Boolean,
-    },
-    emits: ['upload', 'update:delete'],
-    setup(props, { emit }) {
-      const initial = inputSetup(props)
-      const onChange = (e: Event) => {
-        emit('update:delete', (e.target as HTMLInputElement).checked)
-      }
-      const onFileChange = (e: Event & { dataTransfer?: DataTransfer }) => {
-        const files =
-          (e.target as HTMLInputElement).files || e.dataTransfer?.files
-        if (files?.length) {
-          emit('upload', props.multiple ? files : files[0])
-        }
-      }
-      return { ...initial, onChange, onFileChange }
-    },
+
+  const props = defineProps({
+    ...inputProps,
+    delete: Boolean,
+    multiple: Boolean,
+    canDelete: Boolean,
   })
+
+  const emit = defineEmits(['upload', 'update:delete'])
+
+  const { getLabel, getError, hasError, id, getName } = inputSetup(props)
+
+  const onChange = (e: Event) => {
+    emit('update:delete', (e.target as HTMLInputElement).checked)
+  }
+
+  const onFileChange = (e: Event & { dataTransfer?: DataTransfer }) => {
+    const files = (e.target as HTMLInputElement).files || e.dataTransfer?.files
+    if (files?.length) {
+      emit('upload', props.multiple ? files : files[0])
+    }
+  }
 </script>

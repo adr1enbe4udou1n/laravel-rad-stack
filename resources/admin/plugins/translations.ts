@@ -3,7 +3,7 @@ import { App, inject } from 'vue'
 import { __, transChoice, trans } from 'matice'
 
 export const transAttribute = (field: string) => {
-  const resource = inject<string>('resource')
+  const resource = inject<string | null>('resource', null)
 
   if (resource) {
     try {

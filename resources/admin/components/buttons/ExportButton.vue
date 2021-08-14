@@ -10,31 +10,22 @@
   </base-button>
 </template>
 
-<script lang="ts">
-  import { computed, defineComponent, inject } from 'vue'
+<script lang="ts" setup>
+  import { computed, inject } from 'vue'
   import route from 'ziggy-js'
   import qs from 'qs'
 
-  export default defineComponent({
-    props: {
-      hideLabel: Boolean,
-    },
-    setup() {
-      const resource = inject<string>('resource')
-      const filter = inject<{ [key: string]: string }>('filter')
+  defineProps({
+    hideLabel: Boolean,
+  })
 
-      const exportUrl = computed((): string => {
-        return `${route(`admin.${resource}`)}?${qs.stringify({
-          filter,
-          export: true,
-        })}`
-      })
+  const resource = inject<string>('resource')
+  const filter = inject<{ [key: string]: string }>('filter')
 
-      return {
-        resource,
-        filter,
-        exportUrl,
-      }
-    },
+  const exportUrl = computed((): string => {
+    return `${route(`admin.${resource}`)}?${qs.stringify({
+      filter,
+      export: true,
+    })}`
   })
 </script>

@@ -9,7 +9,13 @@
     </section-title>
 
     <div class="mt-5 md:mt-0 md:col-span-2">
-      <base-form :form="form" @submit="$emit('submit')">
+      <base-form
+        v-slot="{ processing, recentlySuccessful }"
+        :method="method"
+        :url="url"
+        :options="options"
+        :item="item"
+      >
         <div
           class="px-4 py-5 bg-white sm:p-6 shadow"
           :class="
@@ -36,26 +42,32 @@
             sm:rounded-bl-md sm:rounded-br-md
           "
         >
-          <slot name="actions"></slot>
+          <slot
+            name="actions"
+            :processing="processing"
+            :recently-successful="recentlySuccessful"
+          ></slot>
         </div>
       </base-form>
     </div>
   </div>
 </template>
 
-<script lang="ts">
-  import { InertiaForm } from '@inertiajs/inertia-vue3'
-  import { computed, defineComponent } from 'vue'
+<script lang="ts" setup>
+  import { computed, useSlots } from 'vue'
 
-  export default defineComponent({
-    props: {
-      form: Object as InertiaForm<any>,
+  defineProps({
+    method: {
+      type: String,
+      required: true,
     },
-    emits: ['submit'],
-    setup(props, { slots }) {
-      const hasActions = computed(() => !!slots.actions)
-
-      return { hasActions }
+    url: {
+      type: String,
+      required: true,
     },
+    options: Object,
+    item: Object,
   })
+
+  const hasActions = computed(() => !!useSlots().actions)
 </script>

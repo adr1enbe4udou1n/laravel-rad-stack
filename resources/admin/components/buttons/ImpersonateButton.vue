@@ -11,34 +11,24 @@
   </base-button>
 </template>
 
-<script lang="ts">
+<script lang="ts" setup>
   import { Model } from '@admin/types'
   import { useForm } from '@inertiajs/inertia-vue3'
-  import { defineComponent, inject } from 'vue'
+  import { inject } from 'vue'
   import route from 'ziggy-js'
 
-  export default defineComponent({
-    props: {
-      hideLabel: Boolean,
-    },
-    setup() {
-      const resource = inject<string>('resource')
-      const item = inject<Model>('item')
-
-      const form = useForm({})
-
-      const submit = () => {
-        form.post(route(`admin.${resource}.impersonate`, { id: item!.id }), {
-          preserveScroll: true,
-        })
-      }
-
-      return {
-        resource,
-        item,
-        submit,
-        form,
-      }
-    },
+  defineProps({
+    hideLabel: Boolean,
   })
+
+  const resource = inject<string>('resource')
+  const item = inject<Model>('item')
+
+  const form = useForm({})
+
+  const submit = () => {
+    form.post(route(`admin.${resource}.impersonate`, { id: item!.id }), {
+      preserveScroll: true,
+    })
+  }
 </script>

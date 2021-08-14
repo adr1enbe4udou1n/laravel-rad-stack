@@ -5,51 +5,45 @@
     v-bind="$attrs"
     :id="id"
     ref="input"
+    v-model="modelValue"
     :name="getName"
     class="block w-full"
     :class="{ 'form-invalid': hasError }"
-    :value="modelValue"
-    @input="onInput"
   />
   <input
     v-else
     v-bind="$attrs"
     :id="id"
     ref="input"
+    v-model="modelValue"
     :name="getName"
     class="block w-full"
     :class="{ 'form-invalid': hasError }"
-    :value="modelValue"
-    @input="onInput"
   />
   <input-error :message="getError" class="mt-2" />
   <input-hint :message="hint" class="mt-2" />
 </template>
 
-<script lang="ts">
-  import { defineComponent, Ref, ref } from 'vue'
+<script lang="ts" setup>
+  import { Ref, ref } from 'vue'
   import { inputProps, inputSetup } from '@admin/mixins/input'
 
-  export default defineComponent({
-    props: {
-      ...inputProps,
-      modelValue: String,
-      multiline: Boolean,
-    },
-    emits: ['update:modelValue'],
-    setup(props, { emit }) {
-      const input: Ref<HTMLInputElement | null> = ref(null)
-      const initial = inputSetup(props)
-
-      const focus = () => {
-        input.value?.focus()
-      }
-
-      const onInput = (e: Event) => {
-        emit('update:modelValue', (e.target as HTMLInputElement).value)
-      }
-
-      return { ...initial, focus, input, onInput }
+  const props = defineProps({
+    ...inputProps,
+    multiline: Boolean,
+    defaultValue: {
+      type: String,
+      default: '',
     },
   })
+
+  const input: Ref<HTMLInputElement | null> = ref(null)
+  const { getLabel, modelValue, getError, hasError, id, getName } =
+    inputSetup(props)
+
+  const focus = () => {
+    input.value?.focus()
+  }
+
+  defineExpose({ focus })
 </script>

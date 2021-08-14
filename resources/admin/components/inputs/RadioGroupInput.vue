@@ -21,25 +21,19 @@
   <input-hint :message="hint" class="mt-2" />
 </template>
 
-<script lang="ts">
+<script lang="ts" setup>
   import { choicesProps, choicesSetup } from '@admin/mixins/choices'
-  import { defineComponent } from 'vue'
 
-  export default defineComponent({
-    props: {
-      ...choicesProps,
-      modelValue: String,
-      stacked: Boolean,
-    },
-    emits: ['update:modelValue'],
-    setup(props, { emit }) {
-      const initial = choicesSetup(props)
-
-      const onInput = (e: Event) => {
-        emit('update:modelValue', (e.target as HTMLInputElement).value)
-      }
-
-      return { ...initial, onInput }
-    },
+  const props = defineProps({
+    ...choicesProps,
+    modelValue: String,
+    stacked: Boolean,
   })
+
+  const { getLabel, modelValue, getError, getName, getChoices } =
+    choicesSetup(props)
+
+  const onInput = (e: Event) => {
+    modelValue.value = (e.target as HTMLInputElement).value
+  }
 </script>

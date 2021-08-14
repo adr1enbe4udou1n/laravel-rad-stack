@@ -2,11 +2,10 @@
   <auth-layout>
     <validation-errors class="mb-4" />
 
-    <form @submit.prevent="submit">
+    <base-form v-slot="{ processing }" method="post" :url="route('register')">
       <div>
         <text-input
-          v-model="form.name"
-          :label="$t('Name')"
+          source="name"
           type="text"
           required
           autofocus
@@ -15,18 +14,12 @@
       </div>
 
       <div class="mt-4">
-        <text-input
-          v-model="form.email"
-          :label="$t('Email')"
-          type="email"
-          required
-        />
+        <text-input source="email" type="email" required />
       </div>
 
       <div class="mt-4">
         <text-input
-          v-model="form.password"
-          :label="$t('Password')"
+          source="password"
           type="password"
           required
           autocomplete="new-password"
@@ -35,8 +28,7 @@
 
       <div class="mt-4">
         <text-input
-          v-model="form.password_confirmation"
-          :label="$t('Confirm Password')"
+          source="password_confirmation"
           type="password"
           required
           autocomplete="new-password"
@@ -51,38 +43,16 @@
           {{ $t('Already registered?') }}
         </inertia-link>
 
-        <base-button type="submit" class="ml-4" :loading="form.processing">
+        <base-button type="submit" class="ml-4" :loading="processing">
           {{ $t('Register') }}
         </base-button>
       </div>
-    </form>
+    </base-form>
   </auth-layout>
 </template>
 
-<script lang="ts">
+<script lang="ts" setup>
   import { useTitle } from '@admin/features/helpers'
-  import route from 'ziggy-js'
-  import { useForm } from '@inertiajs/inertia-vue3'
-  import { defineComponent } from 'vue'
 
-  export default defineComponent({
-    setup() {
-      useTitle('Register')
-
-      const form = useForm({
-        name: '',
-        email: '',
-        password: '',
-        password_confirmation: '',
-      })
-
-      const submit = () => {
-        form.post(route('register'), {
-          onFinish: () => form.reset('password', 'password_confirmation'),
-        })
-      }
-
-      return { form, submit }
-    },
-  })
+  useTitle('Register')
 </script>

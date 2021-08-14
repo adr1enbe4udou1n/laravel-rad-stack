@@ -148,9 +148,9 @@
           <template
             v-for="column in getColumns"
             :key="column.field"
-            #[`field:${column.field}`]="props"
+            #[`field:${column.field}`]="columnProps"
           >
-            <slot :name="`field:${column.field}`" v-bind="props" />
+            <slot :name="`field:${column.field}`" v-bind="columnProps" />
           </template>
         </data-table-row>
         <tr v-if="source.data.length === 0">
@@ -189,17 +189,8 @@
   />
 </template>
 
-<script lang="ts">
-  import {
-    computed,
-    defineComponent,
-    inject,
-    PropType,
-    provide,
-    Ref,
-    ref,
-    watch,
-  } from 'vue'
+<script lang="ts" setup>
+  import { computed, inject, PropType, provide, Ref, ref, watch } from 'vue'
   import { Model, PaginatedData } from '@admin/types'
   import { Column } from '@admin/types/data-table'
   import route from 'ziggy-js'
@@ -207,185 +198,150 @@
   import { Inertia } from '@inertiajs/inertia'
   import { useDebounceFn } from '@vueuse/shared'
 
-  import TextFilter from '@admin/components/filters/TextFilter.vue'
-  import SelectFilter from '@admin/components/filters/SelectFilter.vue'
-  import BooleanFilter from '@admin/components/filters/BooleanFilter.vue'
-  import ReferenceFilter from '@admin/components/filters/ReferenceFilter.vue'
-  import DateFilter from '@admin/components/filters/DateFilter.vue'
-
-  export default defineComponent({
-    components: {
-      TextFilter,
-      SelectFilter,
-      BooleanFilter,
-      ReferenceFilter,
-      DateFilter,
+  const props = defineProps({
+    source: {
+      type: Object as PropType<PaginatedData<Model>>,
+      required: true,
     },
-    props: {
-      source: {
-        type: Object as PropType<PaginatedData<Model>>,
-        required: true,
-      },
-      columns: {
-        type: Array as PropType<(string | Column)[]>,
-        required: true,
-      },
-      filter: Object as PropType<{ [key: string]: string }>,
-      sort: String,
-      rowClick: String,
-      disableSearch: Boolean,
-      hideHeader: Boolean,
-      hideFooter: Boolean,
-      perPageOptions: {
-        type: Array as PropType<number[]>,
-        default: () => [5, 10, 15, 30, 50, 100],
-      },
+    columns: {
+      type: Array as PropType<(string | Column)[]>,
+      required: true,
     },
-    setup(props) {
-      const sortBy = ref('id')
-      const sortDesc = ref(false)
-      const selectAll = ref(false)
-      const selected: Ref<string[] | number[]> = ref([])
-      const resource = inject<string>('resource')
+    filter: Object as PropType<{ [key: string]: string }>,
+    sort: String,
+    rowClick: String,
+    disableSearch: Boolean,
+    hideHeader: Boolean,
+    hideFooter: Boolean,
+    perPageOptions: {
+      type: Array as PropType<number[]>,
+      default: () => [5, 10, 15, 30, 50, 100],
+    },
+  })
 
-      const hasSelectedItems = computed(() => {
-        return selected.value.length > 0
-      })
+  const sortBy = ref('id')
+  const sortDesc = ref(false)
+  const selectAll = ref(false)
+  const selected: Ref<string[] | number[]> = ref([])
+  const resource = inject<string>('resource')
 
-      const isItemSelected = (id: string | number) => {
-        return selected.value.includes(id as never)
+  const hasSelectedItems = computed(() => {
+    return selected.value.length > 0
+  })
+
+  const isItemSelected = (id: string | number) => {
+    return selected.value.includes(id as never)
+  }
+
+  const toggleSelectedItem = (id: string | number) => {
+    if (isItemSelected(id)) {
+      selectAll.value = false
+      return selected.value.splice(selected.value.indexOf(id as never), 1)
+    }
+    return selected.value.push(id as never)
+  }
+
+  const onSelectAll = () => {
+    if (selectAll.value) {
+      selectAll.value = false
+      selected.value = []
+      return
+    }
+    selectAll.value = true
+    selected.value = props.source.data.map((model) => model.id)
+  }
+
+  watch(
+    () => props.sort,
+    (val) => {
+      if (!val) return
+
+      if (val.startsWith('-')) {
+        sortBy.value = val.substring(1)
+        sortDesc.value = true
+        return
       }
+      sortBy.value = val
+      sortDesc.value = false
+    },
+    { immediate: true }
+  )
 
-      const toggleSelectedItem = (id: string | number) => {
-        if (isItemSelected(id)) {
-          selectAll.value = false
-          return selected.value.splice(selected.value.indexOf(id as never), 1)
-        }
-        return selected.value.push(id as never)
-      }
+  const getColumns = computed((): Column[] =>
+    props.columns.map((c) => (typeof c === 'string' ? { field: c } : c))
+  )
 
-      const onSelectAll = () => {
-        if (selectAll.value) {
-          selectAll.value = false
-          selected.value = []
-          return
-        }
-        selectAll.value = true
-        selected.value = props.source.data.map((model) => model.id)
-      }
+  const getFilterFromType = (type: string) => {
+    return (
+      {
+        email: 'text',
+        switch: 'boolean',
+      }[type] || type
+    )
+  }
 
-      watch(
-        () => props.sort,
-        (val) => {
-          if (!val) return
-
-          if (val.startsWith('-')) {
-            sortBy.value = val.substring(1)
-            sortDesc.value = true
-            return
-          }
-          sortBy.value = val
-          sortDesc.value = false
+  const getDefaultFilter = () => {
+    return getColumns.value
+      .filter((c) => c.searchable)
+      .reduce(
+        (acc, column) => {
+          return { ...acc, [column.field]: '' }
         },
-        { immediate: true }
+        props.disableSearch ? {} : ({ q: '' } as { [key: string]: string })
       )
+  }
 
-      const getColumns = computed((): Column[] =>
-        props.columns.map((c) => (typeof c === 'string' ? { field: c } : c))
-      )
-
-      const getFilterFromType = (type: string) => {
-        return (
-          {
-            email: 'text',
-            switch: 'boolean',
-          }[type] || type
-        )
-      }
-
-      const getDefaultFilter = () => {
-        return getColumns.value
-          .filter((c) => c.searchable)
-          .reduce(
-            (acc, column) => {
-              return { ...acc, [column.field]: '' }
-            },
-            props.disableSearch ? {} : ({ q: '' } as { [key: string]: string })
-          )
-      }
-
-      const form = useForm({
-        page: props.source.meta.current_page,
-        perPage: props.source.meta.per_page,
-        sort: props.sort,
-        filter: {
-          ...getDefaultFilter(),
-          ...props.filter,
-        },
-      })
-
-      provide('filter', form.filter)
-
-      const doQuery = () => {
-        selectAll.value = false
-
-        form.get(location.pathname, {
-          preserveState: true,
-        })
-      }
-
-      const onPageChange = (pager: { page: number; perPage: number }) => {
-        form.page = pager.page
-        form.perPage = pager.perPage
-        doQuery()
-      }
-
-      const onRowClick = (id: number) => {
-        if (props.rowClick && resource) {
-          Inertia.get(route(`admin.${resource}.${props.rowClick}`, { id }))
-        }
-      }
-
-      const onSort = (column: Column) => {
-        if (!column.sortable) return
-
-        let prefix = ''
-
-        if (column.field === sortBy.value && !sortDesc.value) {
-          prefix = '-'
-        }
-
-        form.sort = `${prefix}${column.field}`
-        doQuery()
-      }
-
-      const onFilter = useDebounceFn(() => {
-        form.page = 1
-        doQuery()
-      })
-
-      const hasFilter = computed(() => {
-        return getColumns.value.filter((c) => c.searchable).length
-      })
-
-      return {
-        sortBy,
-        sortDesc,
-        onFilter,
-        getFilterFromType,
-        form,
-        getColumns,
-        onPageChange,
-        onRowClick,
-        onSort,
-        hasFilter,
-        selectAll,
-        onSelectAll,
-        selected,
-        hasSelectedItems,
-        isItemSelected,
-        toggleSelectedItem,
-      }
+  const form = useForm({
+    page: props.source.meta.current_page,
+    perPage: props.source.meta.per_page,
+    sort: props.sort,
+    filter: {
+      ...getDefaultFilter(),
+      ...props.filter,
     },
+  })
+
+  provide('filter', form.filter)
+
+  const doQuery = () => {
+    selectAll.value = false
+
+    form.get(location.pathname, {
+      preserveState: true,
+    })
+  }
+
+  const onPageChange = (pager: { page: number; perPage: number }) => {
+    form.page = pager.page
+    form.perPage = pager.perPage
+    doQuery()
+  }
+
+  const onRowClick = (id: number) => {
+    if (props.rowClick && resource) {
+      Inertia.get(route(`admin.${resource}.${props.rowClick}`, { id }))
+    }
+  }
+
+  const onSort = (column: Column) => {
+    if (!column.sortable) return
+
+    let prefix = ''
+
+    if (column.field === sortBy.value && !sortDesc.value) {
+      prefix = '-'
+    }
+
+    form.sort = `${prefix}${column.field}`
+    doQuery()
+  }
+
+  const onFilter = useDebounceFn(() => {
+    form.page = 1
+    doQuery()
+  })
+
+  const hasFilter = computed(() => {
+    return getColumns.value.filter((c) => c.searchable).length
   })
 </script>

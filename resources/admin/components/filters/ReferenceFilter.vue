@@ -7,31 +7,26 @@
   />
 </template>
 
-<script lang="ts">
+<script lang="ts" setup>
   import { referenceSetup } from '@admin/mixins/reference'
-  import { defineComponent } from 'vue'
+  import {} from 'vue'
 
-  export default defineComponent({
-    props: {
-      modelValue: String,
-      resource: {
-        type: String,
-        required: true,
-      },
-      optionText: {
-        type: String,
-        default: 'name',
-      },
-      optionValue: {
-        type: String,
-        default: 'id',
-      },
+  const props = defineProps({
+    modelValue: String,
+    resource: {
+      type: String,
+      required: true,
     },
-    emits: ['update:modelValue'],
-    setup(props, { emit }) {
-      const reference = referenceSetup(props, { emit })
-
-      return { ...reference }
+    optionText: {
+      type: String,
+      default: 'name',
+    },
+    optionValue: {
+      type: String,
+      default: 'id',
     },
   })
+
+  const emit = defineEmits(['update:modelValue'])
+  const { value, choices } = referenceSetup(props, emit)
 </script>

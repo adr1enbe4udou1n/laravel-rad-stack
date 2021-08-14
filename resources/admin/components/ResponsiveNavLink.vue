@@ -21,14 +21,10 @@
   </div>
 </template>
 
-<script lang="ts">
-  import { defineComponent } from 'vue'
-
-  export default defineComponent({
-    props: {
-      active: Boolean,
-      href: String,
-    },
+<script lang="ts" setup>
+  defineProps({
+    active: Boolean,
+    href: String,
   })
 </script>
 

@@ -12,45 +12,41 @@
   </select>
 </template>
 
-<script lang="ts">
+<script lang="ts" setup>
   import { getOptionsFromChoices, Option } from '@admin/mixins/choices'
-  import { computed, defineComponent } from 'vue'
+  import { computed } from 'vue'
 
-  export default defineComponent({
-    props: {
-      modelValue: [String, Number, Array],
-      choices: [Array, Object, String],
-      optionText: {
-        type: String,
-        default: 'text',
-      },
-      optionValue: {
-        type: String,
-        default: 'value',
-      },
-      multiple: Boolean,
+  const props = defineProps({
+    modelValue: [String, Number, Array],
+    choices: [Array, Object, String],
+    optionText: {
+      type: String,
+      default: 'text',
     },
-    emits: ['update:modelValue'],
-    setup(props, { emit }) {
-      const getChoices = computed((): Option[] => {
-        return getOptionsFromChoices(
-          props.choices,
-          props.optionText,
-          props.optionValue
-        )
-      })
-
-      const onFilter = (e: Event) => {
-        emit('update:modelValue', (e.target as HTMLInputElement).value)
-      }
-
-      const isSelected = (option: Option) => {
-        return props.multiple
-          ? ((props.modelValue as string[]) || []).includes(option.value)
-          : props.modelValue === option.value
-      }
-
-      return { getChoices, onFilter, isSelected }
+    optionValue: {
+      type: String,
+      default: 'value',
     },
+    multiple: Boolean,
   })
+
+  const getChoices = computed((): Option[] => {
+    return getOptionsFromChoices(
+      props.choices,
+      props.optionText,
+      props.optionValue
+    )
+  })
+
+  const onFilter = (e: Event) => {
+    emit('update:modelValue', (e.target as HTMLInputElement).value)
+  }
+
+  const isSelected = (option: Option) => {
+    return props.multiple
+      ? ((props.modelValue as string[]) || []).includes(option.value)
+      : props.modelValue === option.value
+  }
+
+  const emit = defineEmits(['update:modelValue'])
 </script>

@@ -28,10 +28,15 @@
 
       <!-- Delete Account Confirmation Modal -->
       <dialog-modal
-        :form="form"
+        method="delete"
+        :url="route('current-user.destroy')"
+        :options="{
+          errorBag: 'updatePassword',
+          preserveScroll: true,
+          onSuccess: () => closeModal(),
+        }"
         :show="confirmingUserDeletion"
         @close="closeModal"
-        @submit="submit"
       >
         <template #title> {{ $t('Delete Account') }} </template>
 
@@ -44,15 +49,14 @@
 
           <div class="mt-4 w-3/4">
             <text-input
-              ref="password"
-              v-model="form.password"
+              source="password"
               type="password"
               :placeholder="$t('Password')"
             />
           </div>
         </template>
 
-        <template #footer>
+        <template #footer="{ processing }">
           <base-button outlined type="button" @click="closeModal">
             {{ $t('Cancel') }}
           </base-button>
@@ -61,7 +65,7 @@
             variant="danger"
             type="submit"
             class="ml-2"
-            :loading="form.processing"
+            :loading="processing"
           >
             {{ $t('Delete Account') }}
           </base-button>
@@ -71,51 +75,19 @@
   </action-section>
 </template>
 
-<script lang="ts">
-  import route from 'ziggy-js'
-  import { useForm } from '@inertiajs/inertia-vue3'
-  import { defineComponent, Ref, ref } from 'vue'
+<script lang="ts" setup>
+  import { Ref, ref } from 'vue'
 
-  export default defineComponent({
-    setup() {
-      const password: Ref<HTMLInputElement | null> = ref(null)
-      const confirmingUserDeletion = ref(false)
+  const password: Ref<HTMLInputElement | null> = ref(null)
+  const confirmingUserDeletion = ref(false)
 
-      const form = useForm({
-        password: '',
-      })
+  const confirmUserDeletion = () => {
+    confirmingUserDeletion.value = true
 
-      const confirmUserDeletion = () => {
-        confirmingUserDeletion.value = true
+    setTimeout(() => password.value?.focus(), 250)
+  }
 
-        setTimeout(() => password.value?.focus(), 250)
-      }
-
-      const closeModal = () => {
-        confirmingUserDeletion.value = false
-
-        form.reset()
-      }
-
-      const submit = () => {
-        form.delete(route('current-user.destroy'), {
-          preserveScroll: true,
-          onSuccess: () => closeModal(),
-          onError: () => password.value?.focus(),
-          onFinish: () => {
-            form.reset()
-          },
-        })
-      }
-
-      return {
-        form,
-        submit,
-        password,
-        confirmUserDeletion,
-        confirmingUserDeletion,
-        closeModal,
-      }
-    },
-  })
+  const closeModal = () => {
+    confirmingUserDeletion.value = false
+  }
 </script>

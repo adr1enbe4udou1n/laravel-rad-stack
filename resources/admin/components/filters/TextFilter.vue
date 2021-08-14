@@ -2,20 +2,16 @@
   <input :value="modelValue" type="text" @input="onFilter" />
 </template>
 
-<script lang="ts">
-  import { defineComponent } from 'vue'
+<script lang="ts" setup>
+  import {} from 'vue'
 
-  export default defineComponent({
-    props: {
-      modelValue: String,
-    },
-    emits: ['update:modelValue'],
-    setup(props, { emit }) {
-      const onFilter = (e: Event) => {
-        emit('update:modelValue', (e.target as HTMLInputElement).value)
-      }
-
-      return { onFilter }
-    },
+  defineProps({
+    modelValue: String,
   })
+
+  const emit = defineEmits(['update:modelValue'])
+
+  const onFilter = (e: Event) => {
+    emit('update:modelValue', (e.target as HTMLInputElement).value)
+  }
 </script>

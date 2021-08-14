@@ -42,30 +42,25 @@
   </app-layout>
 </template>
 
-<script lang="ts">
+<script lang="ts" setup>
   import { useTitle } from '@admin/features/helpers'
   import { PaginatedData, Post } from '@admin/types'
-  import { computed, defineComponent, PropType } from 'vue'
+  import { computed, PropType } from 'vue'
 
-  export default defineComponent({
-    props: {
-      query: {
-        type: String,
-        required: true,
-      },
-      posts: {
-        type: Object as PropType<PaginatedData<Post>>,
-        required: true,
-      },
+  const props = defineProps({
+    query: {
+      type: String,
+      required: true,
     },
-    setup(props) {
-      const title = computed(() => {
-        return useTitle('Search :query', {
-          args: { query: props.query },
-        })
-      })
+    posts: {
+      type: Object as PropType<PaginatedData<Post>>,
+      required: true,
+    },
+  })
 
-      return { title }
-    },
+  const title = computed(() => {
+    return useTitle('Search :query', {
+      args: { query: props.query },
+    })
   })
 </script>

@@ -25,19 +25,12 @@
   </div>
 </template>
 
-<script lang="ts">
-  import { defineComponent, inject } from 'vue'
+<script lang="ts" setup>
+  import { inject } from 'vue'
 
-  export default defineComponent({
-    props: {
-      title: String,
-    },
-    setup() {
-      const resource = inject<string>('resource')
-
-      return {
-        resource,
-      }
-    },
+  defineProps({
+    title: String,
   })
+
+  const resource = inject<string>('resource')
 </script>

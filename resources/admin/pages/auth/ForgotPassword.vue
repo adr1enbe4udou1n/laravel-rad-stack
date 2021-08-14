@@ -14,52 +14,34 @@
 
     <validation-errors class="mb-4" />
 
-    <form @submit.prevent="submit">
+    <base-form
+      v-slot="{ processing }"
+      method="post"
+      :url="route('password.email')"
+    >
       <div>
-        <text-input
-          v-model="form.email"
-          :label="$t('Email')"
-          type="email"
-          required
-          autofocus
-        />
+        <text-input source="email" type="email" required autofocus />
       </div>
 
       <div class="mt-4">
         <base-button
           type="submit"
           class="w-full text-center"
-          :loading="form.processing"
+          :loading="processing"
         >
           {{ $t('Email Password Reset Link') }}
         </base-button>
       </div>
-    </form>
+    </base-form>
   </auth-layout>
 </template>
 
-<script lang="ts">
+<script lang="ts" setup>
   import { useTitle } from '@admin/features/helpers'
-  import route from 'ziggy-js'
-  import { useForm } from '@inertiajs/inertia-vue3'
-  import { defineComponent } from 'vue'
 
-  export default defineComponent({
-    props: {
-      status: String,
-    },
-    setup() {
-      useTitle('Email Password Reset Link')
-
-      const form = useForm({
-        email: '',
-      })
-
-      const submit = () => {
-        form.post(route('password.email'))
-      }
-
-      return { form, submit }
-    },
+  defineProps({
+    status: String,
   })
+
+  useTitle('Email Password Reset Link')
 </script>

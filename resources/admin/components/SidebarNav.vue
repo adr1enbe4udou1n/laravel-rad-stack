@@ -25,15 +25,8 @@
   </div>
 </template>
 
-<script lang="ts">
+<script lang="ts" setup>
   import { mainNav, isTitle, isLink } from '@admin/_nav'
-  import { defineComponent } from 'vue'
-
-  export default defineComponent({
-    setup() {
-      return { mainNav, isTitle, isLink }
-    },
-  })
 </script>
 
 <style lang="postcss" scoped>

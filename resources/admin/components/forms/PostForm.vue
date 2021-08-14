@@ -1,23 +1,28 @@
 <template>
-  <base-form :form="form">
+  <base-form
+    ref="form"
+    v-slot="{ processing }"
+    :method="method"
+    :url="url"
+    disable-submit
+  >
     <div class="flex flex-col xl:flex-row gap-6">
       <div class="xl:w-3/4 px-4 py-5 bg-white sm:p-6 shadow sm:rounded-md">
         <div>
-          <text-input v-model="form.title" source="title" type="text" />
+          <text-input source="title" type="text" />
         </div>
         <div class="mt-4">
           <text-input
-            v-model="form.slug"
             source="slug"
             type="text"
             :hint="$t('Leave empty for auto generate the link.')"
           />
         </div>
         <div class="mt-4">
-          <text-input v-model="form.summary" source="summary" multiline />
+          <text-input source="summary" multiline />
         </div>
         <div class="mt-4">
-          <editor-input v-model="form.body" source="body" :height="800" />
+          <editor-input source="body" :height="800" />
         </div>
       </div>
 
@@ -34,13 +39,12 @@
             sm:rounded-md
           "
         >
-          <div v-if="post">
+          <div>
             <field source="status" type="select" choices="post_statuses" />
           </div>
           <div>
             <rich-select-input
-              v-model="form.user_id"
-              source="user"
+              source="user_id"
               resource="users"
               searchable
               :min-chars="3"
@@ -48,7 +52,6 @@
           </div>
           <div>
             <date-input
-              v-model="form.published_at"
               source="published_at"
               :hint="
                 $t(
@@ -58,18 +61,18 @@
             />
           </div>
           <div>
-            <switch-input v-model="form.pin" source="pin" />
+            <switch-input source="pin" />
           </div>
           <div>
-            <switch-input v-model="form.promote" source="promote" />
+            <switch-input source="promote" />
           </div>
           <div class="flex">
-            <dropdown align="right" class="ml-auto">
+            <dropdown class="ml-auto" wrapper-classes="w-72 right">
               <template #trigger>
                 <base-button
                   type="button"
                   variant="success"
-                  :loading="form.processing"
+                  :loading="processing"
                   :disabled="uploading"
                   split
                   @click="submit(true)"
@@ -96,7 +99,6 @@
               />
               <div>
                 <file-input
-                  v-model:delete="form.featured_image_delete"
                   source="featured_image"
                   :can-delete="!!post?.featured_image.length"
                   @upload="onUpload"
@@ -106,15 +108,13 @@
           </div>
           <div class="mt-4">
             <reference-input
-              v-model="form.category_id"
-              source="category"
+              source="category_id"
               resource="post-categories"
               allow-empty
             />
           </div>
           <div class="mt-4">
             <rich-select-input
-              v-model="form.tags"
               source="tags"
               resource="tags"
               multiple
@@ -127,18 +127,10 @@
         </div>
         <div class="px-4 py-5 bg-white sm:p-6 shadow sm:rounded-md mt-6">
           <div>
-            <text-input
-              v-model="form.meta_title"
-              source="meta_title"
-              type="text"
-            />
+            <text-input source="meta_title" type="text" />
           </div>
           <div class="mt-4">
-            <text-input
-              v-model="form.meta_description"
-              source="meta_description"
-              multiline
-            />
+            <text-input source="meta_description" multiline />
           </div>
         </div>
       </div>
@@ -146,77 +138,32 @@
   </base-form>
 </template>
 
-<script lang="ts">
-  import { useForm } from '@inertiajs/inertia-vue3'
-  import { defineComponent, PropType, ref } from 'vue'
+<script lang="ts" setup>
+  import { PropType, Ref, ref } from 'vue'
   import { Post } from '@admin/types'
 
-  export default defineComponent({
-    props: {
-      post: Object as PropType<Post>,
-      initialValues: {
-        type: Object as PropType<{
-          title?: string
-          slug?: string
-          summary?: string
-          body?: string
-          user_id?: number
-          category_id?: number
-          pin?: boolean
-          promote?: boolean
-          published_at?: string
-          meta_title?: string
-          meta_description?: string
-          tags?: string[]
-          featured_image_file?: File | null
-          featured_image_delete?: boolean
-        }>,
-        default: () => {
-          return {
-            title: '',
-            slug: '',
-            summary: '',
-            body: '',
-            user_id: null,
-            category_id: null,
-            pin: false,
-            promote: false,
-            published_at: null,
-            meta_title: null,
-            meta_description: null,
-            tags: [],
-            featured_image_file: null,
-            featured_image_delete: false,
-          }
-        },
-      },
-      method: {
-        type: String,
-        required: true,
-      },
-      url: {
-        type: String,
-        required: true,
-      },
+  defineProps({
+    post: Object as PropType<Post>,
+    method: {
+      type: String,
+      required: true,
     },
-    emits: ['submitted'],
-    setup(props) {
-      const uploading = ref(false)
-      const form = useForm(props.initialValues)
-
-      const onUpload = (file: File) => (form.featured_image_file = file)
-
-      const submit = (publish: boolean) => {
-        form
-          .transform((data) => ({
-            ...data,
-            _method: props.method,
-            publish,
-          }))
-          .post(props.url)
-      }
-
-      return { form, uploading, onUpload, submit }
+    url: {
+      type: String,
+      required: true,
     },
   })
+
+  const form: Ref<HTMLElement | null | any> = ref(null)
+  const uploading = ref(false)
+
+  const onUpload = (value: boolean) => {
+    uploading.value = value
+  }
+
+  const submit = (publish: boolean) => {
+    if (form.value) {
+      form.value.submit({ publish })
+    }
+  }
 </script>
