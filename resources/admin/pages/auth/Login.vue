@@ -18,7 +18,13 @@
       "
     >
       <div>
-        <text-input source="email" type="email" required autofocus />
+        <text-input
+          source="email"
+          type="email"
+          required
+          autofocus
+          default-value="admin@example.com"
+        />
       </div>
 
       <div class="mt-4">
@@ -27,6 +33,7 @@
           type="password"
           required
           autocomplete="current-password"
+          default-value="password"
         />
         <div class="flex mt-2">
           <inertia-link
