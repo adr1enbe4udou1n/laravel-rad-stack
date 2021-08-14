@@ -228,7 +228,7 @@ test('admin can render post create page', function () {
 test('admin can render post edit page', function () {
     Storage::fake('media');
 
-    /* @var Post */
+    /** @var Post */
     $post = Post::factory()->create();
     $post->addMedia(database_path('media/placeholder.jpg'))
         ->preservingOriginal()

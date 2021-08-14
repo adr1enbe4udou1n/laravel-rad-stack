@@ -4,7 +4,7 @@ specifiers:
   '@headlessui/vue': ^1.4.0
   '@heroicons/vue': ^1.0.3
   '@inertiajs/inertia': ^0.10.1
-  '@inertiajs/inertia-vue3': ^0.5.2
+  '@inertiajs/inertia-vue3': 0.5.1
   '@inertiajs/progress': ^0.2.6
   '@testing-library/vue': ^6.5.0
   '@tinymce/tinymce-vue': ^4.0.4
@@ -58,7 +58,7 @@ devDependencies:
   '@headlessui/vue': 1.4.0_vue@3.2.2
   '@heroicons/vue': 1.0.3_vue@3.2.2
   '@inertiajs/inertia': 0.10.1
-  '@inertiajs/inertia-vue3': 0.5.2_e3920af99588a2f01ceb259ca066b1ef
+  '@inertiajs/inertia-vue3': 0.5.1_e3920af99588a2f01ceb259ca066b1ef
   '@inertiajs/progress': 0.2.6_@inertiajs+inertia@0.10.1
   '@testing-library/vue': 6.5.0_df3f769d1ea316852686577c1510cc0d
   '@tinymce/tinymce-vue': 4.0.4_vue@3.2.2
@@ -560,8 +560,8 @@ packages:
     resolution: {integrity: sha512-trnsAYxU3xnS1gPHPyU961coFyLkh4gAD/0zQ5mymY4yOZ+CYvsPqUbOFSw0aDM4y0tV7tiFxL/1XfXPNC6IPg==}
     dev: true
 
-  /@inertiajs/inertia-vue3/0.5.2_e3920af99588a2f01ceb259ca066b1ef:
-    resolution: {integrity: sha512-X9TiXTP4oVQ3bs4/yZz6O3vTTJ1f4W5EimhU9U/uUUfyU3IeWFk6yjNzkCb4D3FllMfKfX+inKIugQV1vb8asA==}
+  /@inertiajs/inertia-vue3/0.5.1_e3920af99588a2f01ceb259ca066b1ef:
+    resolution: {integrity: sha512-tZrgBXSftDfWgxihCquXcI/WSmegMTYVZx2KJYsGZt+/mzZtTXwOlzWU56iPFEc7NO7G3QUw5yvBbUk2hZQyUg==}
     peerDependencies:
       '@inertiajs/inertia': ^0.10.0
       vue: ^3.0.0

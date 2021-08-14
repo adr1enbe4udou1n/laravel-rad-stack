@@ -81,14 +81,6 @@
       searchable: true,
     },
     {
-      field: 'universe',
-      type: 'select',
-      props: {
-        choices: 'universes',
-      },
-      searchable: true,
-    },
-    {
       field: 'category',
       type: 'reference',
       props: {

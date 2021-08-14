@@ -1,6 +1,6 @@
 <template>
   <show-context v-slot="{ title }" resource="users" :item="user">
-    <app-aside :title="title">
+    <app-aside :title="title" class="w-96">
       <div class="flex flex-col gap-4">
         <div>
           <field source="name" />
