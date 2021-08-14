@@ -25,6 +25,6 @@ class Media extends \Spatie\MediaLibrary\MediaCollections\Models\Media
 
         $urlBuilder = UrlBuilderFactory::create('/glide/', config('glide.key'));
 
-        return $urlBuilder->getUrl(ltrim($url, '/storage'), $this->glide);
+        return $urlBuilder->getUrl(ltrim($url, '/storage/media'), $this->glide);
     }
 }
