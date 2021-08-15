@@ -2,8 +2,14 @@
   <base-form
     ref="form"
     v-slot="{ processing }"
-    :method="method"
+    method="post"
     :url="url"
+    :transform="
+      (data) => ({
+        ...data,
+        _method: method,
+      })
+    "
     disable-submit
   >
     <div class="flex flex-col xl:flex-row gap-6">
@@ -73,7 +79,6 @@
                   type="button"
                   variant="success"
                   :loading="processing"
-                  :disabled="uploading"
                   split
                   @click="submit(true)"
                 >
@@ -91,20 +96,12 @@
         </div>
         <div class="px-4 py-5 bg-white sm:p-6 shadow sm:rounded-md mt-6">
           <div>
-            <div class="flex">
-              <image-field
-                v-if="post?.featured_image.length"
-                :value="post?.featured_image"
-                class="mr-4"
-              />
-              <div>
-                <file-input
-                  source="featured_image"
-                  :can-delete="!!post?.featured_image.length"
-                  @upload="onUpload"
-                />
-              </div>
-            </div>
+            <file-input
+              source="featured_image"
+              target-source="featured_image_file"
+              delete-source="featured_image_delete"
+              preview
+            />
           </div>
           <div class="mt-4">
             <reference-input
@@ -122,6 +119,7 @@
               searchable
               :min-chars="3"
               option-value="name"
+              :getter="(post) => post.tags.map((t) => t.name)"
             />
           </div>
         </div>
@@ -139,11 +137,9 @@
 </template>
 
 <script lang="ts" setup>
-  import { PropType, Ref, ref } from 'vue'
-  import { Post } from '@admin/types'
+  import { Ref, ref } from 'vue'
 
   defineProps({
-    post: Object as PropType<Post>,
     method: {
       type: String,
       required: true,
@@ -155,11 +151,6 @@
   })
 
   const form: Ref<HTMLElement | null | any> = ref(null)
-  const uploading = ref(false)
-
-  const onUpload = (value: boolean) => {
-    uploading.value = value
-  }
 
   const submit = (publish: boolean) => {
     if (form.value) {

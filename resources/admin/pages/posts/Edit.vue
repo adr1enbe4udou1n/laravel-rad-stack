@@ -1,5 +1,5 @@
 <template>
-  <edit-context v-slot="{ title }" resource="posts" :item="getPost">
+  <edit-context v-slot="{ title }" resource="posts" :item="post">
     <app-layout>
       <template #header>
         <page-header>
@@ -17,7 +17,7 @@
 </template>
 
 <script lang="ts" setup>
-  import { computed, PropType } from 'vue'
+  import { PropType } from 'vue'
   import { Post } from '@admin/types'
   import route from 'ziggy-js'
 
@@ -27,11 +27,6 @@
       required: true,
     },
   })
-
-  const getPost = computed(() => ({
-    ...props.post,
-    tags: props.post?.tags.map((t) => t.name) || [],
-  }))
 
   const method = 'put'
   const url = route('admin.posts.update', { id: props.post.id })
