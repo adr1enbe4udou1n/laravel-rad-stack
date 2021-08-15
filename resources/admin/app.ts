@@ -14,27 +14,23 @@ import GlobalComponents from './plugins/global-components'
 import DateFns from './plugins/date-fns'
 import HeroIcons from './plugins/hero-icons'
 
-const el = document.getElementById('app')
+createInertiaApp({
+  resolve: (name) => {
+    const pages = import.meta.globEager(`./pages/**/*`)
 
-if (el) {
-  createInertiaApp({
-    resolve: (name) => {
-      const pages = import.meta.globEager(`./pages/**/*`)
+    return pages[`./pages/${name}.vue`].default
+  },
+  setup({ el, app, props, plugin }) {
+    createApp({ render: () => h(app, props) })
+      .use(plugin)
+      .use(Route)
+      .use(Translations)
+      .use(GlobalComponents)
+      .use(DateFns)
+      .use(HeroIcons)
+      .component('InertiaLink', Link)
+      .mount(el)
+  },
+})
 
-      return pages[`./pages/${name}.vue`].default
-    },
-    setup({ el, app, props, plugin }) {
-      createApp({ render: () => h(app, props) })
-        .use(plugin)
-        .use(Route)
-        .use(Translations)
-        .use(GlobalComponents)
-        .use(DateFns)
-        .use(HeroIcons)
-        .component('InertiaLink', Link)
-        .mount(el)
-    },
-  })
-
-  InertiaProgress.init({ color: '#4B5563' })
-}
+InertiaProgress.init({ color: '#4B5563' })
