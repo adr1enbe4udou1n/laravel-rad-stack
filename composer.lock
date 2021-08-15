@@ -5641,16 +5641,16 @@
         },
         {
             "name": "spatie/laravel-route-attributes",
-            "version": "1.4.2",
+            "version": "1.5.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/spatie/laravel-route-attributes.git",
-                "reference": "0cb35d95e07bcae3e82ea9fbf79fbd1dbb587c52"
+                "reference": "79d74e8c17a060542b466c30dab9fcd6a4ff0799"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/spatie/laravel-route-attributes/zipball/0cb35d95e07bcae3e82ea9fbf79fbd1dbb587c52",
-                "reference": "0cb35d95e07bcae3e82ea9fbf79fbd1dbb587c52",
+                "url": "https://api.github.com/repos/spatie/laravel-route-attributes/zipball/79d74e8c17a060542b466c30dab9fcd6a4ff0799",
+                "reference": "79d74e8c17a060542b466c30dab9fcd6a4ff0799",
                 "shasum": ""
             },
             "require": {
@@ -5697,7 +5697,7 @@
             ],
             "support": {
                 "issues": "https://github.com/spatie/laravel-route-attributes/issues",
-                "source": "https://github.com/spatie/laravel-route-attributes/tree/1.4.2"
+                "source": "https://github.com/spatie/laravel-route-attributes/tree/1.5.0"
             },
             "funding": [
                 {
@@ -5709,7 +5709,7 @@
                     "type": "other"
                 }
             ],
-            "time": "2021-07-05T17:44:11+00:00"
+            "time": "2021-08-15T09:56:02+00:00"
         },
         {
             "name": "spatie/laravel-sluggable",
