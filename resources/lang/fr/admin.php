@@ -16,6 +16,8 @@ return [
         'password' => 'Mot de passe',
         'active' => 'Actif',
         'remember' => 'Se souvenir',
+        'current_password' => 'Mot de passe actuel',
+        'password_confirmation' => 'Confirmation du mot de passe',
         'created_at' => 'Créé le',
         'updated_at' => 'Mis à jour le',
     ],

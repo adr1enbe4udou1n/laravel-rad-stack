@@ -16,6 +16,8 @@ return [
         'password' => 'Password',
         'active' => 'Active',
         'remember' => 'Remember',
+        'current_password' => 'Current password',
+        'password_confirmation' => 'Password confirmation',
         'created_at' => 'Create at',
         'updated_at' => 'Update at',
     ],
