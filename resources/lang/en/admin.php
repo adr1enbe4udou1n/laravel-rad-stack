@@ -15,6 +15,7 @@ return [
         'email' => 'Email',
         'password' => 'Password',
         'active' => 'Active',
+        'remember' => 'Remember',
         'created_at' => 'Create at',
         'updated_at' => 'Update at',
     ],

@@ -30,12 +30,12 @@ export const inputSetup = (
     return props.label
   })
 
-  const getName = computed(() => {
-    return props.source
-  })
-
   const getTargetSource = computed(() => {
     return props.targetSource || props.source!
+  })
+
+  const getName = computed(() => {
+    return getTargetSource.value
   })
 
   const getErrors = computed(() => {
@@ -57,7 +57,7 @@ export const inputSetup = (
     if (!form || !form.initial) return props.modelValue
     return props.getter
       ? props.getter(form.initial)
-      : get(form.initial, props.source!)
+      : get(form.initial, getTargetSource.value)
   })
 
   const formValue = computed({

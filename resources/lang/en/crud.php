@@ -24,6 +24,7 @@ return [
             'meta_description' => 'Meta description',
             'featured_image' => 'Image',
             'user' => 'Author',
+            'tags' => 'Etiquettes',
         ],
     ],
 ];
