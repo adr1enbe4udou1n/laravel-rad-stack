@@ -1,7 +1,7 @@
 <template>
   <base-form v-slot="{ processing }" :method="method" :url="url">
     <div>
-      <text-input model-value="sdf" source="name" type="text" />
+      <text-input source="name" type="text" />
     </div>
     <div class="mt-4">
       <text-input source="email" type="email" />
