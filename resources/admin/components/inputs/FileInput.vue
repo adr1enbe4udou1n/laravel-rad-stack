@@ -38,6 +38,7 @@
 
   const props = defineProps({
     ...inputProps,
+    fileSource: String,
     deleteSource: String,
     delete: Boolean,
     multiple: Boolean,
@@ -46,16 +47,8 @@
 
   const emit = defineEmits(['update:modelValue'])
 
-  const {
-    getLabel,
-    getError,
-    hasError,
-    id,
-    getName,
-    getInitialValue,
-    getTargetSource,
-    form,
-  } = inputSetup(props, emit)
+  const { getLabel, getError, hasError, id, getName, getInitialValue, form } =
+    inputSetup(props, emit)
 
   const hasFile = computed(() => {
     return !isEmpty(getInitialValue.value)
@@ -68,7 +61,7 @@
   const onFileChange = (e: Event & { dataTransfer?: DataTransfer }) => {
     const files = (e.target as HTMLInputElement).files || e.dataTransfer?.files
     if (files?.length) {
-      set(form!.data, getTargetSource.value, props.multiple ? files : files[0])
+      set(form!.data, props.fileSource!, props.multiple ? files : files[0])
     }
   }
 </script>

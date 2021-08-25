@@ -50,8 +50,8 @@
           </div>
           <div>
             <rich-select-input
-              source="user"
-              target-source="user_id"
+              source="user_id"
+              label-key="user"
               resource="users"
               searchable
               :min-chars="3"
@@ -99,15 +99,15 @@
           <div>
             <file-input
               source="featured_image"
-              target-source="featured_image_file"
+              file-source="featured_image_file"
               delete-source="featured_image_delete"
               preview
             />
           </div>
           <div class="mt-4">
             <reference-input
-              source="category"
-              target-source="category_id"
+              source="category_id"
+              label-key="category"
               resource="post-categories"
               allow-empty
             />

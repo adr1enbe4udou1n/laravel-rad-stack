@@ -7,6 +7,7 @@ import { computed, ExtractPropTypes, inject, watch } from 'vue'
 
 export const inputProps = {
   label: String,
+  labelKey: String,
   source: {
     type: String,
     required: true,
@@ -24,18 +25,16 @@ export const inputSetup = (
   const form = inject<null | { initial; data; errors }>('form', null)
 
   const getLabel = computed(() => {
-    if (props.source) {
-      return transAttribute(last<string>(props.source.split('.')) || '')
+    if (!props.label) {
+      return transAttribute(
+        last<string>((props.labelKey || props.source!).split('.')) || ''
+      )
     }
     return props.label
   })
 
-  const getTargetSource = computed(() => {
-    return props.targetSource || props.source!
-  })
-
   const getName = computed(() => {
-    return getTargetSource.value
+    return props.source
   })
 
   const getErrors = computed(() => {
@@ -43,8 +42,8 @@ export const inputSetup = (
   })
 
   const getError = computed(() => {
-    if (form!.errors && form!.errors[getTargetSource.value]) {
-      return form!.errors[getTargetSource.value]
+    if (form!.errors && form!.errors[props.source!]) {
+      return form!.errors[props.source!]
     }
     return ''
   })
@@ -57,19 +56,19 @@ export const inputSetup = (
     if (!form || !form.initial) return props.modelValue
     return props.getter
       ? props.getter(form.initial)
-      : get(form.initial, getTargetSource.value)
+      : get(form.initial, props.source!)
   })
 
   const formValue = computed({
-    get: () => get(form!.data, getTargetSource.value),
+    get: () => get(form!.data, props.source!),
     set: (val) => {
-      set(form!.data, getTargetSource.value, val)
+      set(form!.data, props.source!, val)
       emit('update:modelValue', val)
     },
   })
 
   if (form && 'modelValue' in props) {
-    set(form.data, getTargetSource.value, getInitialValue.value)
+    set(form.data, props.source!, getInitialValue.value)
     emit('update:modelValue', getInitialValue.value)
 
     watch(
@@ -88,7 +87,6 @@ export const inputSetup = (
     getError,
     getErrors,
     getInitialValue,
-    getTargetSource,
     formValue,
     form,
   }
