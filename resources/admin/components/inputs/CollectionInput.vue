@@ -1,7 +1,7 @@
 <template>
   <input-label class="mb-1" :value="getLabel" />
   <disclosure
-    v-model="modelValue"
+    v-model="formValue"
     :item-text="itemText"
     editable
     :new-item="newItem"
@@ -18,13 +18,12 @@
 
   const props = defineProps({
     ...inputProps,
-    defaultValue: {
-      type: Array,
-      default: () => [],
-    },
+    modelValue: Array,
     itemText: String,
     newItem: Object,
   })
 
-  const { getLabel, modelValue } = inputSetup(props)
+  const emit = defineEmits(['update:modelValue'])
+
+  const { getLabel, formValue } = inputSetup(props, emit)
 </script>

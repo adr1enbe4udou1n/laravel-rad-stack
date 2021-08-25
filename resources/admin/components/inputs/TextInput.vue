@@ -5,7 +5,7 @@
     v-bind="$attrs"
     :id="id"
     ref="input"
-    v-model="modelValue"
+    v-model="formValue"
     :name="getName"
     class="block w-full"
     :class="{ 'form-invalid': hasError }"
@@ -15,7 +15,7 @@
     v-bind="$attrs"
     :id="id"
     ref="input"
-    v-model="modelValue"
+    v-model="formValue"
     :name="getName"
     class="block w-full"
     :class="{ 'form-invalid': hasError }"
@@ -30,16 +30,17 @@
 
   const props = defineProps({
     ...inputProps,
+    modelValue: String,
     multiline: Boolean,
-    defaultValue: {
-      type: String,
-      default: '',
-    },
   })
 
+  const emit = defineEmits(['update:modelValue'])
+
   const input: Ref<HTMLInputElement | null> = ref(null)
-  const { getLabel, modelValue, getError, hasError, id, getName } =
-    inputSetup(props)
+  const { getLabel, formValue, getError, hasError, id, getName } = inputSetup(
+    props,
+    emit
+  )
 
   const focus = () => {
     input.value?.focus()

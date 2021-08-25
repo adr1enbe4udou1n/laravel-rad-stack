@@ -43,9 +43,10 @@ export const getOptionsFromChoices = (
 }
 
 export const choicesSetup = (
-  props: Readonly<ExtractPropTypes<typeof choicesProps>>
+  props: Readonly<ExtractPropTypes<typeof choicesProps> & { modelValue?: any }>,
+  emit: (event: 'update:modelValue', ...args: any[]) => void
 ) => {
-  const initial = inputSetup(props)
+  const initial = inputSetup(props, emit)
 
   const getChoices = computed((): Option[] => {
     let options = getOptionsFromChoices(

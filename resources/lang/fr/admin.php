@@ -20,6 +20,7 @@ return [
         'title' => 'Titre',
         'description' => 'Description',
         'tags' => 'Etiquettes',
+        'remember' => 'Se souvenir',
     ],
     'actions' => [
         'list' => 'Liste',

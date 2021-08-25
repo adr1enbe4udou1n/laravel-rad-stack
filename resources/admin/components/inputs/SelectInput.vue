@@ -3,7 +3,7 @@
   <select
     v-bind="$attrs"
     :id="id"
-    v-model="modelValue"
+    v-model="formValue"
     :name="getName"
     class="block w-full"
     :class="{ 'form-invalid': hasError }"
@@ -26,9 +26,12 @@
 
   const props = defineProps({
     ...choicesProps,
+    modelValue: [String, Number, Array],
     multiple: Boolean,
   })
 
-  const { getLabel, modelValue, getError, id, getName, getChoices, hasError } =
-    choicesSetup(props)
+  const emit = defineEmits(['update:modelValue'])
+
+  const { getLabel, formValue, getError, id, getName, getChoices, hasError } =
+    choicesSetup(props, emit)
 </script>

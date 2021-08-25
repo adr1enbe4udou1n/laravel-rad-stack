@@ -1,7 +1,7 @@
 <template>
   <input-label class="mb-1">{{ getLabel }}</input-label>
   <Multiselect
-    v-model="modelValue"
+    v-model="formValue"
     v-bind="{ ...translations }"
     :options="asyncSearch"
     :classes="classes"
@@ -48,6 +48,7 @@
 
   const props = defineProps({
     ...inputProps,
+    modelValue: [String, Number, Array],
     multiple: Boolean,
     taggable: Boolean,
     resource: {
@@ -67,7 +68,9 @@
     placeholder: String,
   })
 
-  const { getLabel, modelValue, getError } = inputSetup(props)
+  const emit = defineEmits(['update:modelValue'])
+
+  const { getLabel, formValue, getError } = inputSetup(props, emit)
 
   const translations = computed(() => {
     return getLocale() === 'fr' ? French : {}
@@ -143,12 +146,10 @@
       }
 
       if (props.taggable) {
-        return modelValue.value
+        return formValue.value
       }
 
-      const value = props.multiple
-        ? (modelValue.value as [])
-        : [modelValue.value]
+      const value = props.multiple ? (formValue.value as []) : [formValue.value]
 
       if (isEmpty(value)) {
         return []

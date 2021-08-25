@@ -1,5 +1,5 @@
 <template>
-  <select-input v-model="modelValue" v-bind="props" :choices="choices" />
+  <select-input v-model="formValue" v-bind="props" :choices="choices" />
 </template>
 
 <script lang="ts" setup>
@@ -9,6 +9,7 @@
 
   const props = defineProps({
     ...inputProps,
+    modelValue: [String, Number, Array],
     multiple: Boolean,
     resource: {
       type: String,
@@ -26,8 +27,9 @@
     emptyText: String,
   })
 
-  const { modelValue } = inputSetup(props)
-
   const emit = defineEmits(['update:modelValue'])
+
+  const { formValue } = inputSetup(props, emit)
+
   const { choices } = referenceSetup(props, emit)
 </script>

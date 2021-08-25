@@ -1,7 +1,7 @@
 <template>
   <base-form v-slot="{ processing }" :method="method" :url="url">
     <div>
-      <text-input source="name" type="text" />
+      <text-input model-value="sdf" source="name" type="text" />
     </div>
     <div class="mt-4">
       <text-input source="email" type="email" />
@@ -10,7 +10,7 @@
       <text-input source="password" type="password" />
     </div>
     <div class="mt-4">
-      <switch-input source="active" :default-value="true" />
+      <switch-input source="active" :model-value="true" />
     </div>
     <div class="mt-4">
       <radio-group-input source="role" choices="roles" stacked />

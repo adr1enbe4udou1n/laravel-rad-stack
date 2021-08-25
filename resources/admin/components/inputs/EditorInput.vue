@@ -2,8 +2,8 @@
   <input-label :for="id" class="mb-1" :value="getLabel" />
   <editor
     :id="id"
-    v-model="modelValue"
-    api-key="1h193nv0nhtkgi8wi1wuep8rnz2bgtuwhidwspabwimf8ztv"
+    v-model="formValue"
+    api-key="no-api-key"
     :init="init"
     class="hidden"
   ></editor>
@@ -22,6 +22,7 @@
 
   const props = defineProps({
     ...inputProps,
+    modelValue: String,
     height: {
       type: Number,
       default: 500,
@@ -33,7 +34,9 @@
     toolbar: String,
   })
 
-  const { getLabel, modelValue, getError, id } = inputSetup(props)
+  const emit = defineEmits(['update:modelValue'])
+
+  const { getLabel, formValue, getError, id } = inputSetup(props, emit)
 
   const init = computed(() => {
     return {

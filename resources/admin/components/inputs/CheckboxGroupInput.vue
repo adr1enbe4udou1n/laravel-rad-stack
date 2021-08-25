@@ -11,7 +11,7 @@
         :name="getName"
         :value="option.value"
         class="checked:bg-primary-500 mr-2"
-        :checked="modelValue?.includes(option.value)"
+        :checked="formValue?.includes(option.value)"
         @input="onInput"
       />
       {{ option.text }}
@@ -26,19 +26,24 @@
 
   const props = defineProps({
     ...choicesProps,
+    modelValue: Array,
     stacked: Boolean,
   })
 
-  const { getLabel, getChoices, getName, modelValue, getError } =
-    choicesSetup(props)
+  const emit = defineEmits(['update:modelValue'])
+
+  const { getLabel, getChoices, getName, formValue, getError } = choicesSetup(
+    props,
+    emit
+  )
 
   const onInput = (e: Event) => {
     const { checked, value } = e.target as HTMLInputElement
 
     if (checked) {
-      modelValue.value = [...(modelValue.value || []), value]
+      formValue.value = [...(formValue.value || []), value]
     }
 
-    modelValue.value = modelValue.value?.filter((v) => v !== value)
+    formValue.value = formValue.value?.filter((v) => v !== value)
   }
 </script>

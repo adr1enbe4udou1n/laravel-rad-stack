@@ -6,7 +6,7 @@
     class="block w-full"
     :class="{ 'form-invalid': hasError }"
     :options="config"
-    :model-value="modelValue"
+    :model-value="formValue"
   />
   <input-error :message="getError" class="mt-2" />
   <input-hint :message="hint" class="mt-2" />
@@ -19,10 +19,16 @@
 
   const props = defineProps({
     ...inputProps,
+    modelValue: [String, Date],
     options: Object as PropType<Options>,
   })
 
-  const { getLabel, modelValue, getError, hasError, id } = inputSetup(props)
+  const emit = defineEmits(['update:modelValue'])
+
+  const { getLabel, formValue, getError, hasError, id } = inputSetup(
+    props,
+    emit
+  )
 
   const config = computed((): Options => {
     const config: Options = props.options || {
@@ -31,7 +37,7 @@
     }
     if (!config.onChange) {
       config.onChange = (dates: Date[]) => {
-        modelValue.value = dates[0]
+        formValue.value = dates[0]
       }
     }
     return config

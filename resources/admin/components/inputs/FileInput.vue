@@ -44,6 +44,8 @@
     preview: Boolean,
   })
 
+  const emit = defineEmits(['update:modelValue'])
+
   const {
     getLabel,
     getError,
@@ -53,7 +55,7 @@
     getInitialValue,
     getTargetSource,
     form,
-  } = inputSetup(props, false)
+  } = inputSetup(props, emit)
 
   const hasFile = computed(() => {
     return !isEmpty(getInitialValue.value)

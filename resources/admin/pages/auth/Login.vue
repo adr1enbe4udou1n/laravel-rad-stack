@@ -23,7 +23,7 @@
           type="email"
           required
           autofocus
-          default-value="admin@example.com"
+          model-value="admin@example.com"
         />
       </div>
 
@@ -33,7 +33,7 @@
           type="password"
           required
           autocomplete="current-password"
-          default-value="password"
+          model-value="password"
         />
         <div class="flex mt-2">
           <inertia-link

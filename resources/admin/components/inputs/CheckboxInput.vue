@@ -1,7 +1,7 @@
 <template>
   <label class="flex items-center">
     <input
-      v-model="modelValue"
+      v-model="formValue"
       v-bind="$attrs"
       :name="getName"
       type="checkbox"
@@ -17,7 +17,13 @@
 
   const props = defineProps({
     ...inputProps,
+    modelValue: {
+      type: Boolean,
+      default: false,
+    },
   })
 
-  const { getLabel, getName, modelValue, getError } = inputSetup(props)
+  const emit = defineEmits(['update:modelValue'])
+
+  const { getLabel, getName, formValue, getError } = inputSetup(props, emit)
 </script>

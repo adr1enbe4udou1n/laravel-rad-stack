@@ -3,7 +3,7 @@ import { transAttribute } from '@admin/plugins/translations'
 import last from 'lodash/last'
 import get from 'lodash/get'
 import set from 'lodash/set'
-import { computed, ExtractPropTypes, inject } from 'vue'
+import { computed, ExtractPropTypes, inject, watch } from 'vue'
 
 export const inputProps = {
   label: String,
@@ -13,13 +13,12 @@ export const inputProps = {
   },
   targetSource: String,
   hint: String,
-  defaultValue: [String, Number, Array, Object],
   getter: Function,
 }
 
 export const inputSetup = (
-  props: Readonly<ExtractPropTypes<typeof inputProps>>,
-  setValue = true
+  props: Readonly<ExtractPropTypes<typeof inputProps> & { modelValue?: any }>,
+  emit: (event: 'update:modelValue', ...args: any[]) => void
 ) => {
   const id = useUniqueId()
   const form = inject<null | { initial; data; errors }>('form', null)
@@ -55,20 +54,31 @@ export const inputSetup = (
   })
 
   const getInitialValue = computed(() => {
-    if (!form || !form.initial) return props.defaultValue
+    if (!form || !form.initial) return props.modelValue
     return props.getter
       ? props.getter(form.initial)
       : get(form.initial, props.source!)
   })
 
-  if (form && setValue) {
-    set(form.data, getTargetSource.value, getInitialValue.value)
-  }
-
-  const modelValue = computed({
+  const formValue = computed({
     get: () => get(form!.data, getTargetSource.value),
-    set: (val) => set(form!.data, getTargetSource.value, val),
+    set: (val) => {
+      set(form!.data, getTargetSource.value, val)
+      emit('update:modelValue', val)
+    },
   })
+
+  if (form && 'modelValue' in props) {
+    set(form.data, getTargetSource.value, getInitialValue.value)
+    emit('update:modelValue', getInitialValue.value)
+
+    watch(
+      () => props.modelValue,
+      (val) => {
+        formValue.value = val
+      }
+    )
+  }
 
   return {
     id,
@@ -79,7 +89,7 @@ export const inputSetup = (
     getErrors,
     getInitialValue,
     getTargetSource,
-    modelValue,
+    formValue,
     form,
   }
 }
