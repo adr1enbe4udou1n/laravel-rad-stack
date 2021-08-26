@@ -16,7 +16,7 @@ export default defineConfig({
   plugins: [
     vue(),
     components({
-      dirs: ['components', 'layouts'],
+      dirs: ['base', 'components', 'layouts'],
       globalComponentsDeclaration: true,
     }),
     windicss({
