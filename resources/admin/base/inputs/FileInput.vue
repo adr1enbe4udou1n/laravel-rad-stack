@@ -10,7 +10,6 @@
       <input
         v-bind="$attrs"
         :id="id"
-        ref="input"
         :name="getName"
         class="block w-full"
         :class="{ 'form-invalid': hasError }"
