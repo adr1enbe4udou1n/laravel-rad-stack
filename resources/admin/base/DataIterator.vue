@@ -30,7 +30,7 @@
         :current-page="source.meta.current_page"
         :per-page="source.meta.per_page"
         :total="source.meta.total"
-        @change="onPageChange"
+        @page-change="onPageChange"
       />
     </div>
   </div>
@@ -52,14 +52,14 @@
     },
   })
 
-  const emit = defineEmits(['change'])
+  const emit = defineEmits(['page-change'])
 
-  const onPageChange = (page: number) => {
-    emit('change', { page, perPage: props.source.meta.per_page })
+  const onPageChange = (page: string) => {
+    emit('page-change', { page, perPage: props.source.meta.per_page })
   }
 
   const onPerPageChange = (e: Event) => {
-    emit('change', {
+    emit('page-change', {
       page: 1,
       perPage: parseInt((e.target as HTMLInputElement).value, 10),
     })

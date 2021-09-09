@@ -80,7 +80,7 @@
     },
   })
 
-  const emit = defineEmits(['change'])
+  const emit = defineEmits(['page-change'])
 
   const pages = computed(() => {
     let page = props.perPage
@@ -155,7 +155,7 @@
   )
 
   const changePage = (page: number) => {
-    emit('change', page)
+    emit('page-change', page)
   }
 </script>
 

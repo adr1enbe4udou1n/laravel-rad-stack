@@ -185,7 +185,7 @@
     :source="source"
     :hide-footer="hideFooter"
     :per-page-options="perPageOptions"
-    @change="onPageChange"
+    @page-change="onPageChange"
   />
 </template>
 
