@@ -1,6 +1,6 @@
 import { defineConfig } from 'vite'
 import vue from '@vitejs/plugin-vue'
-import components from 'vite-plugin-components'
+import components from 'unplugin-vue-components/vite'
 import baseConfig from '../vite.config'
 import windicss from 'vite-plugin-windicss'
 
@@ -17,7 +17,7 @@ export default defineConfig({
     vue(),
     components({
       dirs: ['base', 'components', 'layouts'],
-      globalComponentsDeclaration: true,
+      dts: true,
     }),
     windicss({
       config: '../../windi.config.ts',
