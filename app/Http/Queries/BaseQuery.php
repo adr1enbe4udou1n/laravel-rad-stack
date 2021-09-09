@@ -11,7 +11,7 @@ use Spatie\QueryBuilder\QueryBuilder;
 
 abstract class BaseQuery
 {
-    protected Builder | QueryBuilder $query;
+    protected Builder|QueryBuilder $query;
     protected $export;
     protected string $resource;
     protected int $perPage = 15;

@@ -13,7 +13,7 @@ use Spatie\QueryBuilder\QueryBuilder;
 
 class UserExport implements FromQuery, WithHeadings, WithMapping, ShouldAutoSize
 {
-    private Builder | QueryBuilder $query;
+    private Builder|QueryBuilder $query;
 
     public function __construct($query)
     {

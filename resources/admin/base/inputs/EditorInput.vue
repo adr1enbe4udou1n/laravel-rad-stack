@@ -69,7 +69,7 @@
           )
 
           success(data.location)
-        } catch (e) {
+        } catch (e: any) {
           failure('HTTP Error: ' + e.status)
         }
       },
