@@ -54,7 +54,7 @@
 
   const emit = defineEmits(['page-change'])
 
-  const onPageChange = (page: string) => {
+  const onPageChange = (page: number) => {
     emit('page-change', { page, perPage: props.source.meta.per_page })
   }
 
