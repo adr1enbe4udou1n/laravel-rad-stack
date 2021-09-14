@@ -38,7 +38,7 @@ test('invalid glide image path return 404', function () {
 });
 
 test('existing glide image return image', function () {
-    Storage::fake('media');
+    Storage::fake('public');
 
     /** @var Post */
     $post = Post::factory()->create();
@@ -46,7 +46,7 @@ test('existing glide image return image', function () {
     /** @var Media */
     $media = $post->addMedia(database_path('media/placeholder.jpg'))
         ->preservingOriginal()
-        ->toMediaCollection('featured-image')
+        ->toMediaCollection('featured-image', 'public')
     ;
 
     $response = get(

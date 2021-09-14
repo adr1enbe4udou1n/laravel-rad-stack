@@ -27,7 +27,7 @@ class ImageController extends Controller
 
         $server = ServerFactory::create([
             'response' => new SymfonyResponseFactory(),
-            'source' => Storage::disk('media')->getDriver(),
+            'source' => Storage::disk('public')->getDriver(),
             'cache' => storage_path('glide'),
             'driver' => config('glide.driver'),
         ]);
