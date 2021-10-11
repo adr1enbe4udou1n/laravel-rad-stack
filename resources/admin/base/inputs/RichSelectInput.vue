@@ -139,7 +139,7 @@
   const asyncSearch = computed(() => {
     return async (query: string) => {
       if (query) {
-        const { data } = await axios.get(
+        const { data } = await axios.get<{ data: any }>(
           `${route(`admin.${props.resource}`)}?filter[q]=${query}`
         )
         return data.data
@@ -155,7 +155,7 @@
         return []
       }
 
-      const { data } = await axios.get(
+      const { data } = await axios.get<{ data: any }>(
         `${route(`admin.${props.resource}`)}?filter[id]=${value.join(',')}`
       )
       return data.data

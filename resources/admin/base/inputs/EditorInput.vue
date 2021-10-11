@@ -63,10 +63,10 @@
         try {
           let formData = new FormData()
           formData.append('file', blobInfo.blob(), blobInfo.filename())
-          let { data } = await axios.post<{ location: string }>(
-            route('admin.upload'),
-            formData
-          )
+          let { data } = await axios.post<
+            FormData,
+            { data: { location: string } }
+          >(route('admin.upload'), formData)
 
           success(data.location)
         } catch (e: any) {
